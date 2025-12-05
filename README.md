@@ -175,3 +175,33 @@ Gimkitは4択クイズ形式のため、単語の意味理解には効果的で�
 - **単語セットの検索**: カテゴリやタグで単語セットを探す
 - **いいね・ブックマーク**: 気に入った単語セットを保存
 
+## 使用する技術スタック
+
+### 開発環境
+- Ruby: 3.1.4
+- Ruby on Rails: 7.1.x
+- PostgreSQL: 15.x
+- Redis: 7.2
+- Docker Compose
+
+### フロントエンド
+- HTML/CSS/JavaScript
+- Hotwire (Turbo + Stimulus)
+
+### バックエンド
+- Ruby on Rails 7.1.x
+  - ActionCable: 出題・解答のリアルタイム同期(WebSocket)
+  - Active Record: ORM
+
+### 主要なGem
+- `sorcery` (0.16.3): ユーザー認証
+- `redis` (5.3.0): ActionCableのバックエンド
+- Hotwire関連:
+  - `turbo-rails` (2.0.x): Turbo
+  - `stimulus-rails` (1.3.x): Stimulus
+
+### インフラ・デプロイ
+- **開発環境**: Docker Compose
+- **本番環境**: Render
+  - PostgreSQL (データベース)
+  - Redis (ActionCable)
