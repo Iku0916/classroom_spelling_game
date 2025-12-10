@@ -262,3 +262,9 @@ Gimkitは4択クイズ形式のため、単語の意味理解には効果的で�
 - **本番環境**: Render
  - PostgreSQL (データベース)
  - Redis (ActionCable)
+
+
+## 画面遷移図
+
+Figmaリンク: https://www.figma.com/design/d4Vw6WwzAUt5smYt8GRwJv/classroom_spelling_game?node-id=0-1&t=uoGWpn7thXe80Wx9-1
+
