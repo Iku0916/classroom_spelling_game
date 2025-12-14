@@ -268,3 +268,6 @@ Gimkitは4択クイズ形式のため、単語の意味理解には効果的で�
 
 Figmaリンク: https://www.figma.com/design/d4Vw6WwzAUt5smYt8GRwJv/classroom_spelling_game?node-id=0-1&t=uoGWpn7thXe80Wx9-1
 
+## ER図
+
+[![Image from Gyazo](https://i.gyazo.com/9292e602a1fae04a5e90b345fdc73f51.png)](https://gyazo.com/9292e602a1fae04a5e90b345fdc73f51)
