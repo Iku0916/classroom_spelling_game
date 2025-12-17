@@ -10,8 +10,75 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 0) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_17_040845) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "game_rooms", force: :cascade do |t|
+    t.string "game_code"
+    t.integer "status"
+    t.datetime "started_at"
+    t.datetime "finished_at"
+    t.integer "time_limit"
+    t.bigint "user_id", null: false
+    t.bigint "word_kit_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_game_rooms_on_user_id"
+    t.index ["word_kit_id"], name: "index_game_rooms_on_word_kit_id"
+  end
+
+  create_table "guests", force: :cascade do |t|
+    t.string "session_token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "participants", force: :cascade do |t|
+    t.string "nickname", null: false
+    t.integer "score", default: 0
+    t.boolean "is_ready"
+    t.bigint "game_room_id", null: false
+    t.bigint "guest_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_room_id"], name: "index_participants_on_game_room_id"
+    t.index ["guest_id"], name: "index_participants_on_guest_id"
+    t.index ["user_id"], name: "index_participants_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "crypted_password", null: false
+    t.string "salt"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "word_cards", force: :cascade do |t|
+    t.string "english_word"
+    t.string "japanese_translation"
+    t.bigint "word_kit_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["word_kit_id"], name: "index_word_cards_on_word_kit_id"
+  end
+
+  create_table "word_kits", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_word_kits_on_user_id"
+  end
+
+  add_foreign_key "game_rooms", "users"
+  add_foreign_key "game_rooms", "word_kits"
+  add_foreign_key "participants", "game_rooms"
+  add_foreign_key "participants", "guests"
+  add_foreign_key "participants", "users"
+  add_foreign_key "word_cards", "word_kits"
+  add_foreign_key "word_kits", "users"
 end
