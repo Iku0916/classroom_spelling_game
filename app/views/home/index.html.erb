@@ -1,2 +1,15 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<%= render "shared/header" %>
+
+<h1>トップページ</h1>
+  <ul>
+    <li>
+      <%= link_to 'ゲームを開く', '#' %>
+    </li>
+    <li>
+      <%= link_to 'ゲームキットを作る', '#' %>
+    </li>
+    <li>
+      <%= link_to 'ゲームに参加する', '#' %>
+    </li>
+  </ul>
+
