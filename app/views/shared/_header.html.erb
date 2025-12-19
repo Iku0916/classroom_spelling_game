@@ -1,7 +1,6 @@
 <header>
   <h1>サイトロゴ</h1>
   <div class='menu_group'>
-      <%= link_to '新規登録', '#' %>
-      <%= link_to 'ログイン', '#' %>
+    <%= link_to 'ログアウト', logout_path, data: { turbo_method: :delete } %>
   </div>
 </header>
