@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   delete 'logout', to: 'user_sessions#destroy'
   get 'signup', to: 'users#new'
   post 'signup', to: 'users#create'
+  resource :word_kits, only: [:new, :create]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
