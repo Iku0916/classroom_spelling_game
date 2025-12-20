@@ -1,0 +1,13 @@
+<h1>詳細画面</h1>
+
+<%= @word_kit.name %>
+
+<ul>
+<% @word_kit.word_cards.each do |card| %>
+  <li>
+    <%= card.english_word %>
+    <%= card.japanese_translation %>
+    <%= link_to '削除', word_kit_path(@word_kit), method: :delete, data: { confirm: "削除しますか？"} %>
+  </li>
+<% end %>
+</ul>

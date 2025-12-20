@@ -1,0 +1,30 @@
+<h1>ゲームカード追加</h1>
+
+<p>英単語と日本語を入力してください</p>
+
+<p>現在 <%= @word_kit.word_cards.count %> 枚のカードがあります</p>
+
+<% if @word_card.errors.any? %>
+  <div class="errors">
+    <ul>
+      <% @word_card.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+  <%= form_with model: [@word_kit, @word_card], data: { turbo: false } do |f| %>
+    <div>
+      <%= f.label :english_word, "英単語"%>
+      <%= f.text_field :english_word %>
+    </div>
+
+     <div>
+      <%= f.label :japanese_translation, "日本語"%>
+      <%= f.text_field :japanese_translation %>
+    </div>
+
+    <%= f.submit "カードを追加する" %>
+    <%= f.submit "完成！", name: 'finished'%>
+  <% end %>
