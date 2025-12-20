@@ -2,7 +2,7 @@
 
 <p>ゲームキット名</p>
 
-  <%= form_with model: @word_kit do |f| %>
+  <%= form_with model: @word_kit, data: { turbo: false } do |f| %>
     <div>
       <%= f.label :name %>
       <%= f.text_field :name%>
