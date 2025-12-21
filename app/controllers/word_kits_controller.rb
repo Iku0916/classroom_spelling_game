@@ -34,6 +34,20 @@ class WordKitsController < ApplicationController
     @word_cards = @word_kit.word_cards 
   end
 
+  def edit
+     @word_kit = WordKit.find(params[:id])
+     @word_cards = @word_kit.word_cards
+  end
+
+  def update
+    @word_kit = WordKit.find(params[:id])
+    if @word_kit.update(word_kit_params)
+      redirect_to word_kit_path(@word_kit)
+    else
+      render :edit
+    end
+  end
+
   private
 
   def word_kit_params
