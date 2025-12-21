@@ -1,11 +1,20 @@
 <h1>ゲームキット一覧</h1>
 
-<ul>
-<% @word_kits.each do |kit| %>
-  <li>
-    <%= kit.name %>
-    <%= link_to '削除', word_kit_path(kit), data: { turbo_method: :delete, confirm: "削除しますか？" } %>
-    <%= link_to '編集', edit_word_kit_path(kit) %>
-  </li>
-<% end %>
-</ul>
+<div data-controller="modal">
+  <ul>
+    <% @word_kits.each do |kit| %>
+      <li>
+        <%= kit.name %>
+        <%= link_to '削除', word_kit_path(kit), data: { turbo_method: :delete, confirm: "削除しますか？" } %>
+        <%= link_to '編集', edit_word_kit_path(kit) %>
+        
+        <button data-action="click->modal#open">
+          このゲームで遊ぶ！
+        </button>
+      </li>
+    <% end %>
+  </ul>
+  <div>
+    <%= render "shared/timer_modal" %>
+  </div>
+</div>

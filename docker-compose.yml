@@ -1,7 +1,7 @@
 services:
   web:
     build: .
-    command: rails s -b 0.0.0.0 -e development
+    command: rails s -b 0.0.0.0
     volumes:
       - .:/app
     ports:

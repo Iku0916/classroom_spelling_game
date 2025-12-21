@@ -1,0 +1,23 @@
+<div
+  class="hidden" data-modal-target="container">
+
+  <div class="modal-content">
+    <p>ゲーム時間を設定してください</p>
+
+    <%= form_with model: @game_room, url: game_room_path(@game_room), method: :patch do |f| %>
+      <div>
+        <label>
+          <%= f.label :time_limit, "ゲーム時間" %>
+          <%= f.number_field :time_limit, min: 1, max: 60, value: 5 %>
+        </label>
+      </div>
+
+      <div>
+        <%= f.submit "決定" %>
+        <button type="button" data-action="click->modal#close">
+          キャンセル
+        </button>
+      </div>
+    <% end %>
+  </div>
+</div>
