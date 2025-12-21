@@ -18,3 +18,15 @@
  *= require top_page
 */
 
+.hidden { display: none; }
+
+.modal-content {
+  background: white;
+  border: 1px solid black;
+  padding: 20px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
