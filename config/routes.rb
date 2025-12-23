@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   resources :word_kits, only: [:new, :create, :show, :index, :destroy, :edit, :update] do
     resources :word_cards, only: [:new, :create, :index, :destroy, :edit, :update]
   end
-
+  resources :game_rooms, only: [:update, :index, :create, :show] do
+    member do
+      patch :start
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
