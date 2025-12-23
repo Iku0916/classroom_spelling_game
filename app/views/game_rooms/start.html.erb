@@ -1,0 +1,7 @@
+<h1>ゲームコード</h1>
+<p><%= @game_room.game_code %></p>
+
+<h2>残り時間</h2>
+<p id="timer"><%= @game_room.time_limit %></p>
+
+<%= link_to 'ゲーム終了！', root_path %>
