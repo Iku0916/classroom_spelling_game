@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :game_rooms, only: [:update, :index, :create, :show] do
     member do
       patch :start
+      patch :finish
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

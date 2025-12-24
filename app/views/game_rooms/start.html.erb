@@ -2,6 +2,6 @@
 <p><%= @game_room.game_code %></p>
 
 <h2>残り時間</h2>
-<p id="timer"><%= @game_room.time_limit %></p>
+<p id="timer" data-controller="timer" data-timer-target="timer" data-time-limit="<%= @game_room.time_limit * 60 %>"></p>
 
-<%= link_to 'ゲーム終了！', root_path %>
+<%= button_to "ゲーム終了！", finish_game_room_path(@game_room), method: :patch %>
