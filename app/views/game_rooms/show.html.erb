@@ -2,7 +2,7 @@
 <%= @game_room.game_code %>
 <P>を入力してください</p>
 
-<%= form_with url: start_game_room_path(@game_room),method: :patch, data: { turbo: false } do |f| %>
+<%= form_with url: start_game_room_path(@game_room), method: :patch, data: { turbo: false } do |f| %>
   <div>
     <%= f.label :time_limit, 'ゲーム時間' %>
     <%= f.number_field :time_limit, min: 1, max: 60, value: 5 %>
