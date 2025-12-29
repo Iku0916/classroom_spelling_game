@@ -46,6 +46,12 @@ class GameRoomsController < ApplicationController
   def waiting
   end
 
+  def finish
+    @game_room = GameRoom.find(params[:id])
+    @game_room.update(status: 'finished')
+    redirect_to root_path
+  end
+
   private
 
   def game_room_params
