@@ -8,12 +8,14 @@ Rails.application.routes.draw do
   delete 'logout', to: 'user_sessions#destroy'
   get 'signup', to: 'users#new'
   post 'signup', to: 'users#create'
+  resources :participants, only: [:new, :create]
   resources :word_kits, only: [:new, :create, :show, :index, :destroy, :edit, :update] do
     resources :word_cards, only: [:new, :create, :index, :destroy, :edit, :update]
   end
   resources :game_rooms, only: [:update, :index, :create, :show] do
     member do
       patch :start
+      get :waiting
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
