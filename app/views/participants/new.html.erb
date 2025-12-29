@@ -1,0 +1,13 @@
+<h1>ゲーム参加</h1>
+
+  <%= form_with url: participants_path, method: :post, local: true do |f| %>
+    <p>ゲームコード</p>
+    <%= f.label :game_code %>
+    <%= f.text_field :game_code %>
+
+    <p>ニックネーム</p>
+    <%= f.label :nickname %>
+    <%= f.text_field :nickname %>
+
+    <%= f.submit '参加' %>
+  <% end %>

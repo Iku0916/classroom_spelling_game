@@ -27,13 +27,23 @@ class GameRoomsController < ApplicationController
     end
   end
 
+  # def start
+  #   @game_room = GameRoom.find(params[:id])
+  #   if @game_room.update(status: 'playing', time_limit: params[:time_limit])
+  #     redirect_to game_room_path(@game_room)
+  #   else
+  #     redirect_to waiting_game_room_path(@game_room)
+  #   end
+  # end
   def start
     @game_room = GameRoom.find(params[:id])
-    @game_room.update(
-      status: 'playing', 
-      time_limit: params[:time_limit]
-    )
-    render :start
+    puts "=== START ACTION ==="
+    puts @game_room.inspect
+    @game_room.update(status: 'playing', time_limit: params[:time_limit])
+    redirect_to game_room_path(@game_room)
+  end
+
+  def waiting
   end
 
   def finish
