@@ -1,4 +1,8 @@
 import { application } from "./application"
-import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
+import HelloController from "./hello_controller"
+import ModalController from "./modal_controller"
+import TimerController from "./timer_controller"
 
-eagerLoadControllersFrom("controllers", application)
+application.register("hello", HelloController)
+application.register("modal", ModalController)
+application.register("timer", TimerController)

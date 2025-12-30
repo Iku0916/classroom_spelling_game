@@ -27,20 +27,17 @@ class GameRoomsController < ApplicationController
     end
   end
 
-  # def start
-  #   @game_room = GameRoom.find(params[:id])
-  #   if @game_room.update(status: 'playing', time_limit: params[:time_limit])
-  #     redirect_to game_room_path(@game_room)
-  #   else
-  #     redirect_to waiting_game_room_path(@game_room)
-  #   end
-  # end
   def start
     @game_room = GameRoom.find(params[:id])
-    puts "=== START ACTION ==="
-    puts @game_room.inspect
-    @game_room.update(status: 'playing', time_limit: params[:time_limit])
-    redirect_to game_room_path(@game_room)
+    if @game_room.update(status: 'playing', time_limit: params[:time_limit])
+      if @game_room.participants.where(is_ready: true).exists?
+        redirect_to game_room_answer_path(@game_room, @answer)
+      else
+        redirect_to game_room_path(@game_room), alert: '準備完了の参加者がいません'
+      end
+    else
+      render :show
+    end
   end
 
   def waiting
@@ -50,6 +47,10 @@ class GameRoomsController < ApplicationController
     @game_room = GameRoom.find(params[:id])
     @game_room.update(status: 'finished')
     redirect_to root_path
+  end
+
+  def answer
+    user_answer = params[:answer]
   end
 
   private
