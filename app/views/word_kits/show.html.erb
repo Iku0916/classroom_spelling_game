@@ -1,0 +1,6 @@
+<%= form_with url: answer_game_room_path(@game_room), method: :post do |f| %>
+  <%= f.label :answer %>
+  <%= f.text_field :answer %>
+
+  <%= f.submit '解答' %>
+<% end %>
