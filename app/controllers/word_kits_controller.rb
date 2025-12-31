@@ -34,6 +34,10 @@ class WordKitsController < ApplicationController
     @word_kit = @game_room.word_kit
     @questions = @word_kit.word_cards
 
+    Rails.logger.debug "=== Game Room Debug ==="
+    Rails.logger.debug "Questions count: #{@questions.count}"
+    Rails.logger.debug "Questions: #{@questions.inspect}"
+
     session[:question_index] ||= 0
     @current_index = session[:question_index]
     @current_question = @questions[@current_index]

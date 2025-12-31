@@ -1,8 +1,19 @@
-<p><%= @current_question.japanese_translation %></p>
+<div data-controller="game"
+     data-game-questions='<%= @questions.map { |q| {english_word: q.english_word, japanese_translation: q.japanese_translation} }.to_json.html_safe %>'>
+  
+  <p data-game-target="question"></p>
 
-<%= form_with url: answer_game_room_path(@game_room), method: :post do |f| %>
-  <%= f.label :answer %>
-  <%= f.text_field :answer %>
-
-  <%= f.submit '解答' %>
-<% end %>
+  <div>
+    <label for="answer-input">解答</label>
+    <input type="text" 
+           id="answer-input"
+           data-game-target="answer"
+           data-action="keydown.enter->game#submitAnswer">
+    <button type="button" 
+            data-action="click->game#submitAnswer">
+      解答
+    </button>
+  </div>
+  
+  <p data-game-target="feedback"></p>
+</div>

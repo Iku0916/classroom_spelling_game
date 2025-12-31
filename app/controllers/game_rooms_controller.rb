@@ -11,9 +11,7 @@ class GameRoomsController < ApplicationController
   end
 
   def show
-    @game_room = GameRoom.find(params[:game_room_id])
-    @word_kit = @game_room.word_kit
-    @questions = @word_kit.word_cards
+    @game_room = GameRoom.find(params[:id])
   end
 
   def update
