@@ -30,9 +30,13 @@ class WordKitsController < ApplicationController
   end
 
   def show
-    @word_kit = WordKit.find(params[:id])
-    @word_cards = @word_kit.word_cards
     @game_room = GameRoom.find(params[:game_room_id])
+    @word_kit = @game_room.word_kit
+    @questions = @word_kit.word_cards
+
+    session[:question_index] ||= 0
+    @current_index = session[:question_index]
+    @current_question = @questions[@current_index]
   end
 
   def edit
