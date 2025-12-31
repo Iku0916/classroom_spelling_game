@@ -1,9 +1,5 @@
 class GameRoomsController < ApplicationController
 
-  def index
-    @game_room = GameRoom.all
-  end
-
   def create
     @game_room = current_user.game_rooms.create!(
       game_code: SecureRandom.alphanumeric(6),
@@ -29,18 +25,28 @@ class GameRoomsController < ApplicationController
 
   def start
     @game_room = GameRoom.find(params[:id])
-    if @game_room.update(status: 'playing', time_limit: params[:time_limit])
-      if @game_room.participants.where(is_ready: true).exists?
-        redirect_to game_room_answer_path(@game_room, @answer)
-      else
-        redirect_to game_room_path(@game_room), alert: '準備完了の参加者がいません'
-      end
+    if request.patch?
+      @game_room.update(status: 'playing', time_limit: params[:time_limit])
+      @game_room.participants.where(is_ready: true).exists?
+      word_kit = @game_room.word_kit 
+        Rails.logger.debug "=== ブロードキャスト実行 ==="
+        ActionCable.server.broadcast("game_room_#{@game_room.id}", 
+        {
+          type: "game_start",
+          message: "ゲームが始まりました",
+          redirect_url: word_kit_path(@game_room.word_kit, game_room_id: @game_room.id)
+        }
+        )
+      Rails.logger.debug "=== ブロードキャスト完了 ==="
+      redirect_to start_game_room_path(@game_room)
+    elsif request.get?
     else
-      render :show
+      redirect_to game_room_path(@game_room), alert: '準備完了の参加者がいません'
     end
   end
 
   def waiting
+    @game_room = GameRoom.find(params[:id])
   end
 
   def finish
@@ -50,7 +56,7 @@ class GameRoomsController < ApplicationController
   end
 
   def answer
-    user_answer = params[:answer]
+    @answer = params[:answer]
   end
 
   private

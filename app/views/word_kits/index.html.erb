@@ -1,6 +1,5 @@
 <h1>ゲームキット一覧</h1>
 
-<div data-controller="modal">
   <ul>
     <% @word_kits.each do |kit| %>
       <li>
@@ -8,8 +7,7 @@
         <%= link_to '削除', word_kit_path(kit), data: { turbo_method: :delete, confirm: "削除しますか？" } %>
         <%= link_to '編集', edit_word_kit_path(kit) %>
         
-        <%= link_to 'このゲームで遊ぶ！', game_rooms_path(word_kit_id: kit.id), data: { turbo_method: :post } %>
+        <%= button_to 'このゲームで遊ぶ！', game_rooms_path(word_kit_id: kit.id), method: :post %>
       </li>
     <% end %>
   </ul>
-</div>
