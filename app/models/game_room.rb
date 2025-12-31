@@ -1,5 +1,6 @@
 class GameRoom < ApplicationRecord
-  has_many :participants
+  has_many :participants, dependent: :destroy
+  has_many :guests, through: :participants
   belongs_to :user
   belongs_to :word_kit
 

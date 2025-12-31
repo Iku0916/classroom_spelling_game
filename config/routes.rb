@@ -12,9 +12,10 @@ Rails.application.routes.draw do
   resources :word_kits, only: [:new, :create, :show, :index, :destroy, :edit, :update] do
     resources :word_cards, only: [:new, :create, :index, :destroy, :edit, :update]
   end
-  resources :game_rooms, only: [:update, :index, :create, :show] do
+  resources :game_rooms, only: [:update, :create, :show] do
     member do
       patch :start
+      get :start
       get :waiting
       patch :finish
       post :answer

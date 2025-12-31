@@ -31,7 +31,8 @@ class WordKitsController < ApplicationController
 
   def show
     @word_kit = WordKit.find(params[:id])
-    @word_cards = @word_kit.word_cards 
+    @word_cards = @word_kit.word_cards
+    @game_room = GameRoom.find(params[:game_room_id])
   end
 
   def edit
