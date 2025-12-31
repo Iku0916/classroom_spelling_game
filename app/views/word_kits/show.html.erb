@@ -1,3 +1,5 @@
+<p><%= @current_question.japanese_translation %></p>
+
 <%= form_with url: answer_game_room_path(@game_room), method: :post do |f| %>
   <%= f.label :answer %>
   <%= f.text_field :answer %>

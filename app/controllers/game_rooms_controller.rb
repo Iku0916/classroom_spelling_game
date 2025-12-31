@@ -11,7 +11,9 @@ class GameRoomsController < ApplicationController
   end
 
   def show
-    @game_room = GameRoom.find(params[:id])
+    @game_room = GameRoom.find(params[:game_room_id])
+    @word_kit = @game_room.word_kit
+    @questions = @word_kit.word_cards
   end
 
   def update
@@ -40,6 +42,7 @@ class GameRoomsController < ApplicationController
       Rails.logger.debug "=== ブロードキャスト完了 ==="
       redirect_to start_game_room_path(@game_room)
     elsif request.get?
+      @questions = @game_room.word_kit.word_cards
     else
       redirect_to game_room_path(@game_room), alert: '準備完了の参加者がいません'
     end
