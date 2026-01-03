@@ -1,6 +1,10 @@
-<div data-controller="game"
-     data-game-questions='<%= @questions.map { |q| {english_word: q.english_word, japanese_translation: q.japanese_translation} }.to_json.html_safe %>'>
-  
+<div
+  data-controller="game"
+  data-game-questions-value="<%= @questions.map { |q|
+    { english_word: q.english_word, japanese_translation: q.japanese_translation }
+  }.to_json %>"
+>
+
   <p data-game-target="question"></p>
 
   <div>
@@ -14,6 +18,12 @@
       解答
     </button>
   </div>
-  
-  <p data-game-target="feedback"></p>
+
+  <div>
+    <p data-game-target="feedback"></p>
+  </div>
+</div>
+
+<div data-controller="score">
+  得点：<span data-score-target="value">0</span>
 </div>
