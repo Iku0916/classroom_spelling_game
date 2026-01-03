@@ -2,50 +2,53 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["question", "answer", "feedback"]
+  static values = {
+    questions: Array
+  }
 
   connect() {
-    console.log("Game controller connected!") // デバッグ用
+    console.log("connected element:", this.element)
+    console.log("questionsValue:", this.questionsValue)
+
+    this.questions = this.questionsValue
     this.index = 0
-    this.questions = JSON.parse(this.element.dataset.gameQuestions)
-    console.log("Questions:", this.questions) // デバッグ用
+
     this.showQuestion()
   }
 
   showQuestion() {
     const current = this.questions[this.index]
+
     this.questionTarget.textContent = current.japanese_translation
     this.answerTarget.value = ""
     this.feedbackTarget.textContent = ""
   }
 
   submitAnswer(event) {
-    console.log("submitAnswer called!") // デバッグ用
-    
-    // Enterキーの場合のみpreventDefaultが必要
-    if (event.type === "keydown") {
-      event.preventDefault()
-    }
-    
+    if (event.type === "keydown") event.preventDefault()
+
     const userAnswer = this.answerTarget.value.trim()
     const current = this.questions[this.index]
 
-    if(userAnswer === current.english_word) {
-      this.feedbackTarget.textContent = "正解!🎉"
+    const scoreController =
+      this.application.getControllerForElementAndIdentifier(
+        document.querySelector('[data-controller="score"]'),
+        "score"
+      )
+
+    if (userAnswer.toLowerCase() === current.english_word.toLowerCase()) {
+      this.feedbackTarget.textContent = "正解！🎉 +1ポイント"
       this.feedbackTarget.style.color = "green"
+      scoreController.add()
     } else {
-      this.feedbackTarget.textContent = `不正解… 正解は: ${current.english_word}`
+      this.feedbackTarget.textContent =
+        `ざんねん…😢 -1ポイント 正解は: ${current.english_word}`
       this.feedbackTarget.style.color = "red"
+      scoreController.subtract()
     }
 
-    // 次の問題に進む
-    this.index++
-    if(this.index >= this.questions.length) {
-      this.index = 0
-    }
+    this.index = (this.index + 1) % this.questions.length
 
-    // 1.5秒後に次の問題に切り替え
-    setTimeout(() => {
-      this.showQuestion()
-    }, 1500)
+    setTimeout(() => this.showQuestion(), 1500)
   }
 }
