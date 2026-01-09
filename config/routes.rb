@@ -8,17 +8,27 @@ Rails.application.routes.draw do
   delete 'logout', to: 'user_sessions#destroy'
   get 'signup', to: 'users#new'
   post 'signup', to: 'users#create'
-  resources :participants, only: [:new, :create]
+  resources :participants, only: [:new, :create] do
+    member do
+      get :personal_result
+    end
+  end
   resources :word_kits, only: [:new, :create, :show, :index, :destroy, :edit, :update] do
     resources :word_cards, only: [:new, :create, :index, :destroy, :edit, :update]
   end
-  resources :game_rooms, only: [:update, :create, :show] do
+  resources :game_rooms, only: [:create, :show, :update] do
     member do
+      get :waiting
       patch :start
       get :start
-      get :waiting
-      patch :finish
-      post :answer
+      post :join
+    end
+    resource :game_play, only: [:show, :update] do
+        post :answer
+        patch :update_score
+        post :finish
+        get :overall_result
+        get :personal_result
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

@@ -6,12 +6,18 @@ class Participant < ApplicationRecord
   validates :nickname, presence: true
   validate :either_user_or_guest_present
 
+  before_validation :set_default_nuckname, on: :create
+
   def player
     user || guest
   end
   
   def player_type
     user.present? ? 'User' : 'Guest'
+  end
+
+  def host?
+    user_id.present? && game_room.host_user_id == user_id
   end
   
   private
@@ -23,4 +29,16 @@ class Participant < ApplicationRecord
       errors.add(:base, 'UserとGuestの両方を指定することはできません')
     end
   end
-end
+
+  def set_default_nuckname
+    return if nickname.present?
+
+    self.nickname = if user
+                     user.name || "プレイヤー#{user.id}"
+                   elsif guest
+                      "ゲスト#{guest.id}"
+                   else
+                      "名無しさん"
+                   end
+    end
+  end

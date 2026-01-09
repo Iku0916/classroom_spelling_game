@@ -1,0 +1,47 @@
+<div 
+  data-controller="game timer"
+  data-game-room-id="<%= @game_room.id %>"
+  data-timer-game-room-id-value="<%= @game_room.id %>"
+  data-timer-time-limit-value="<%= @game_room.time_limit %>"
+  data-timer-started-at-value="<%= @game_room.started_at.iso8601 if @game_room.started_at %>"
+  data-timer-is-host-value="<%= @is_host ? 'true' : 'false' %>"
+  data-timer-participant-id-value="<%= @participant&.id %>"
+  data-game-questions-value="<%= @questions.to_json %>"
+  data-is-host="<%= @is_host.to_s %>"
+  data-participant-id="<%= @participant&.id %>">
+
+  <h2>残り時間</h2>
+  <p data-timer-target="display">--:--</p>
+
+    <p data-game-target="question"></p>
+
+    <div>
+      <label for="answer-input">解答</label>
+      <input type="text" 
+            id="answer-input"
+            data-game-target="answer"
+            data-action="keydown.enter->game#submitAnswer">
+      <button type="button" 
+              data-action="click->game#submitAnswer">
+        解答
+      </button>
+    </div>
+
+    <div>
+      <p data-game-target="feedback"></p>
+    </div>
+
+  <div data-controller="score">
+    得点：<span data-score-target="value">0</span>
+  </div>
+</div>
+
+<!-- デバッグ用（確認後削除） -->
+<div style="background: lightyellow; padding: 10px; margin: 10px; border: 2px solid orange;">
+  <h3>🐛 デバッグ情報</h3>
+  <p><strong>current_user:</strong> <%= current_user&.id %></p>
+  <p><strong>host_user:</strong> <%= @game_room.host_user&.id %></p>
+  <p><strong>@is_host:</strong> <%= @is_host.inspect %> (型: <%= @is_host.class %>)</p>
+  <p><strong>@participant:</strong> <%= @participant&.id %></p>
+  <p><strong>文字列化後:</strong> "<%= @is_host.to_s %>"</p>
+</div>
