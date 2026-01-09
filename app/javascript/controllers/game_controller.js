@@ -19,7 +19,7 @@ export default class extends Controller {
   showQuestion() {
     const current = this.questions[this.index]
 
-    this.questionTarget.textContent = current.japanese_translation
+    this.questionTarget.textContent = current.correct_answer
     this.answerTarget.value = ""
     this.feedbackTarget.textContent = ""
   }
@@ -36,13 +36,13 @@ export default class extends Controller {
         "score"
       )
 
-    if (userAnswer.toLowerCase() === current.english_word.toLowerCase()) {
+    if (userAnswer.toLowerCase() === current.word.toLowerCase()) {
       this.feedbackTarget.textContent = "正解！🎉 +1ポイント"
       this.feedbackTarget.style.color = "green"
       scoreController.add()
     } else {
       this.feedbackTarget.textContent =
-        `ざんねん…😢 -1ポイント 正解は: ${current.english_word}`
+        `ざんねん…😢 -1ポイント 正解は: ${current.word}`
       this.feedbackTarget.style.color = "red"
       scoreController.subtract()
     }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_12_18_012340) do
+ActiveRecord::Schema[7.1].define(version: 2026_01_08_015644) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,11 +20,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_18_012340) do
     t.datetime "started_at"
     t.datetime "finished_at"
     t.integer "time_limit"
-    t.bigint "user_id", null: false
     t.bigint "word_kit_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_game_rooms_on_user_id"
+    t.bigint "host_user_id"
+    t.index ["host_user_id"], name: "index_game_rooms_on_host_user_id"
     t.index ["word_kit_id"], name: "index_game_rooms_on_word_kit_id"
   end
 
@@ -37,7 +37,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_18_012340) do
   create_table "participants", force: :cascade do |t|
     t.string "nickname", null: false
     t.integer "score", default: 0
-    t.boolean "is_ready"
+    t.boolean "is_ready", default: false, null: false
     t.bigint "game_room_id", null: false
     t.bigint "guest_id"
     t.bigint "user_id"
@@ -75,7 +75,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_18_012340) do
     t.index ["user_id"], name: "index_word_kits_on_user_id"
   end
 
-  add_foreign_key "game_rooms", "users"
+  add_foreign_key "game_rooms", "users", column: "host_user_id"
   add_foreign_key "game_rooms", "word_kits"
   add_foreign_key "participants", "game_rooms"
   add_foreign_key "participants", "guests"

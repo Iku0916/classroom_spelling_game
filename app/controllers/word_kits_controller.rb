@@ -2,7 +2,7 @@ class WordKitsController < ApplicationController
   before_action :require_login
 
   def index
-    @word_kits = WordKit.all
+    @word_kits = current_user.word_kits.order(created_at: :desc)
   end
 
   def new
@@ -20,7 +20,7 @@ class WordKitsController < ApplicationController
   end
 
   def destroy
-    @word_kit = WordKit.find(params[:id])
+    @word_kit = current_user.word_kits.find(params[:id])
 
     if @word_kit.destroy
       redirect_to word_kits_path, notice: "ゲームキットを削除しました"
@@ -44,12 +44,12 @@ class WordKitsController < ApplicationController
   end
 
   def edit
-     @word_kit = WordKit.find(params[:id])
+     @word_kit = current_user.word_kits.find(params[:id])
      @word_cards = @word_kit.word_cards
   end
 
   def update
-    @word_kit = WordKit.find(params[:id])
+    @word_kit = current_user.word_kits.find(params[:id])
     if @word_kit.update(word_kit_params)
       redirect_to word_kit_path(@word_kit)
     else

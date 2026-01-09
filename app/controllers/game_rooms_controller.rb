@@ -1,13 +1,52 @@
 class GameRoomsController < ApplicationController
 
   def create
-    @game_room = current_user.game_rooms.create!(
+    @game_room = GameRoom.new(
+      host_user: current_user,
       game_code: SecureRandom.alphanumeric(6),
       status: :waiting,
-      time_limit: 5,
+      time_limit: 300,
       word_kit_id: params[:word_kit_id]
     )
-    redirect_to game_room_path(@game_room)
+
+    # デバッグ用のログを追加
+    Rails.logger.debug "===== GameRoom Attributes ====="
+    Rails.logger.debug "@game_room.attributes: #{@game_room.attributes.inspect}"
+    Rails.logger.debug "@game_room.valid?: #{@game_room.valid?}"
+    
+    unless @game_room.valid?
+      Rails.logger.debug "===== Validation Errors ====="
+      Rails.logger.debug "@game_room.errors.full_messages: #{@game_room.errors.full_messages}"
+    end
+
+    if @game_room.save
+      @game_room.participants.create!(
+      user_id: current_user&.id,
+      )
+      redirect_to game_room_path(@game_room), notice: 'ゲームルームを作成しました'
+    else
+      Rails.logger.debug "===== Save Failed ====="
+      Rails.logger.debug "@game_room.errors: #{@game_room.errors.full_messages}"
+      flash[:alert] = 'ゲームルームの作成に失敗しました'
+      redirect_to word_kits_path
+    end
+  end
+
+  def join
+    @game_room = GameRoom.find(params[:id])
+
+    participant = @game_room.participants.build(
+    user_id: current_user&.id,
+    guest_id: current_guest&.id,
+    nickname: params[:nickname] || current_user&.name || 'ゲスト',
+    is_ready: false
+  )
+  
+    if participant.save
+      redirect_to waiting_game_room_path(@game_room), notice: '参加しました!'
+    else
+      redirect_to game_room_path(@game_room), alert: '参加に失敗しました'
+    end
   end
 
   def show
@@ -25,39 +64,48 @@ class GameRoomsController < ApplicationController
 
   def start
     @game_room = GameRoom.find(params[:id])
+    
     if request.patch?
-      @game_room.update(status: 'playing', time_limit: params[:time_limit])
-      @game_room.participants.where(is_ready: true).exists?
-      word_kit = @game_room.word_kit 
+
+      # ゲーム時間を秒→分に
+      time_limit_in_minutes = params[:time_limit].to_i
+      time_limit_in_seconds = time_limit_in_minutes * 60
+
+      # ゲーム開始処理
+      @game_room.update(status: 'playing', time_limit: time_limit_in_seconds, started_at: Time.current)
+      
+      # 準備完了している参加者がいるかチェック
+      if @game_room.participants.where(is_ready: true).exists?
+        word_kit = @game_room.word_kit 
+        
         Rails.logger.debug "=== ブロードキャスト実行 ==="
-        ActionCable.server.broadcast("game_room_#{@game_room.id}", 
-        {
-          type: "game_start",
-          message: "ゲームが始まりました",
-          redirect_url: word_kit_path(@game_room.word_kit, game_room_id: @game_room.id)
-        }
+        # 参加者には game_plays#show へのリダイレクトURLを送る
+        ActionCable.server.broadcast(
+        "game_channel_#{@game_room.id}", 
+          {
+            type: "game_start",
+            message: "ゲームが始まりました",
+            redirect_url: game_room_game_play_path(@game_room)
+          }
         )
-      Rails.logger.debug "=== ブロードキャスト完了 ==="
-      redirect_to start_game_room_path(@game_room)
+        Rails.logger.debug "=== ブロードキャスト完了 ==="
+        
+        # ホスト自身は start (GET) にリダイレクト
+        redirect_to start_game_room_path(@game_room), status: :see_other
+      else
+        # 参加者がいない場合
+        redirect_to game_room_path(@game_room), alert: '準備完了の参加者がいません'
+      end
+      
     elsif request.get?
+      # ホストのゲーム画面表示
       @questions = @game_room.word_kit.word_cards
-    else
-      redirect_to game_room_path(@game_room), alert: '準備完了の参加者がいません'
+      # start.html.erb が表示される
     end
   end
 
   def waiting
     @game_room = GameRoom.find(params[:id])
-  end
-
-  def finish
-    @game_room = GameRoom.find(params[:id])
-    @game_room.update(status: 'finished')
-    redirect_to root_path
-  end
-
-  def answer
-    @answer = params[:answer]
   end
 
   private
