@@ -12,6 +12,7 @@ export default class extends Controller {
 
     this.questions = this.questionsValue
     this.index = 0
+    this.isLocked = false
 
     this.showQuestion()
   }
@@ -25,6 +26,8 @@ export default class extends Controller {
   }
 
   submitAnswer(event) {
+    if (this.isLocked) return
+    if (event.type === "keydown" && event.key !== "Enter") return
     if (event.type === "keydown") event.preventDefault()
 
     const userAnswer = this.answerTarget.value.trim()
@@ -36,19 +39,32 @@ export default class extends Controller {
         "score"
       )
 
+    if (this.waitingForNext) {
+      this.waitingForNext = false
+      this.index = (this.index + 1) % this.questions.length
+      this.showQuestion()
+      return
+    }
+
     if (userAnswer.toLowerCase() === current.word.toLowerCase()) {
       this.feedbackTarget.textContent = "正解！🎉 +1ポイント"
       this.feedbackTarget.style.color = "green"
       scoreController.add()
+
+      this.waitingForNext = true
     } else {
       this.feedbackTarget.textContent =
         `ざんねん…😢 -1ポイント 正解は: ${current.word}`
       this.feedbackTarget.style.color = "red"
       scoreController.subtract()
+
+      this.isLocked = true
+
+      setTimeout(() => {
+        this.index = (this.index + 1) % this.questions.length
+        this.showQuestion()
+        this.isLocked = false
+      }, 3000)
     }
-
-    this.index = (this.index + 1) % this.questions.length
-
-    setTimeout(() => this.showQuestion(), 1500)
   }
 }
