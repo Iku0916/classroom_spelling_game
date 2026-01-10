@@ -1,6 +1,8 @@
+<% content_for :title, "結果発表 | VocaBoom!" %>
 <h1>結果発表！</h1>
 
 
-<%= link_to "トップに戻る", root_path %>
+<%= link_to "トップに戻る", finish_game_room_path(@game_room), 
+    data: { turbo_method: :delete } %>
 
 <h2>最終的にここは全体のランキング発表の側！ホストがリダイレクトする場所！</h2>
