@@ -5,12 +5,12 @@
 <%= form_with model: [ @word_kit, @word_card ] do |f| %>
 
   <div>
-    <%= f.label :english_word %>
+    <p>英単語</p>
     <%= f.text_field :english_word %>
   </div>
 
   <div>
-    <%= f.label :japanese_translation %>
+    <p>意味</p>
     <%= f.text_field :japanese_translation %>
   </div>
   <%= f.submit "更新" %>
