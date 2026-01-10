@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       patch :start
       get :start
       post :join
+      delete :finish
     end
     resource :game_play, only: [:show, :update] do
         post :answer

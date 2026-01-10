@@ -108,6 +108,12 @@ class GameRoomsController < ApplicationController
     @game_room = GameRoom.find(params[:id])
   end
 
+  def finish
+    @game_room = GameRoom.find(params[:id])
+    @game_room.destroy!
+    redirect_to root_path, success: 'ゲームを終了しました'
+  end
+
   private
 
   def game_room_params

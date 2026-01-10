@@ -63,7 +63,7 @@ class GamePlaysController < ApplicationController
   # 結果表示
   def overall_result
     Rails.logger.info "=== overall_result 開始 ==="
-    
+
     if @is_host
     # ホスト用: 全体結果を表示
       @participants = @game_room.participants.includes(:user, :guest).order(score: :desc)
