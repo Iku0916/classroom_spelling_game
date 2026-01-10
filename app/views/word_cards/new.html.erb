@@ -1,5 +1,8 @@
 <% content_for :title, "ゲームキット新規作成 | VocaBoom!" %>
 
+<div data-controller="word-cards-preview"
+     data-word-cards-preview-target="liveCards">
+
 <h1>ゲームカード追加</h1>
 
 <p>英単語と日本語を入力してください</p>
@@ -30,3 +33,12 @@
     <%= f.submit "カードを追加する" %>
     <%= f.submit "完成！", name: 'finished'%>
   <% end %>
+
+  <div id="live-cards" data-word-cards-preview-target="liveCards">
+    <% @word_kit.word_cards.each do |card| %>
+      <div class="card">
+        <p><strong><%= card.english_word %></strong> - <%= card.japanese_translation %></p>
+      </div>
+    <% end %>
+  </div>
+</div>
