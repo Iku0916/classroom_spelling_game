@@ -125,7 +125,28 @@ export default class extends Controller {
     console.log('this.isHostValue === "true":', this.isHostValue === 'true');
     console.log('this.participantIdValue:', this.participantIdValue);
     console.log('===================');
+
+    const scoreElement = document.querySelector('[data-controller~="score"]')
+    let finalScore = 0
+
+    if (scoreElement) {
+      const scoreController = this.application.getControllerForElementAndIdentifier(
+        scoreElement,
+        "score"
+      )
+      
+      if (scoreController && scoreController.score !== undefined) {
+        finalScore = scoreController.score  // ★ score コントローラーから取得
+        console.log('📊 score コントローラーから取得したスコア:', finalScore)
+      } else {
+        console.log('⚠️ score コントローラーが見つかりません')
+      }
+    } else {
+      console.log('⚠️ score コントローラーの要素が見つかりません')
+    }
     
+    console.log('📊 最終スコア:', finalScore)
+
     if (this.isHostValue === 'true') {
       // ホストの場合
       console.log('🎮 ホストとして全員のスコア保存とゲーム終了を実行...');
@@ -134,15 +155,16 @@ export default class extends Controller {
     } else {
       // 参加者の場合
       console.log('👤 参加者としてスコアを保存...');
-      await this.saveScore();
+      await this.saveScore(finalScore);
       
       console.log('👤 ActionCable の通知を待機中...');
       // ActionCableの通知を待つ（received() メソッドで処理）
     }
   }
 
-  async saveScore() {
+  async saveScore(score) {
     console.log("💾 スコアを保存中...")
+    console.log('📊 保存するスコア:', score)
     
     const token = document.querySelector('meta[name="csrf-token"]')?.content
     
@@ -154,12 +176,20 @@ export default class extends Controller {
           "Content-Type": "application/json",
           "Accept": "application/json"
         },
-        body: JSON.stringify({ score: this.score })
+        body: JSON.stringify({ score: score })
       })
+      
+      console.log('📡 送信したデータ:', JSON.stringify({ score: score }))
 
       if (response.ok) {
         const data = await response.json()
-        console.log("✅ スコア保存成功", data)
+        console.log("✅ スコア保送成功", data)
+        
+        this.scoreSaved = true
+        
+        if (this.gameFinished) {
+          this.redirectToResult()
+        }
       } else {
         console.error("❌ スコア保存失敗", response.status)
       }

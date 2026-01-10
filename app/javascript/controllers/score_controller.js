@@ -5,6 +5,8 @@ export default class extends Controller {
 
   connect() {
     this.score = 0
+    this.scoreSaved = false
+    this.gameFinished = false
     this.render()
   }
 
