@@ -12,3 +12,8 @@ header {
   padding: 10px;
   margin-left: auto;
 }
+
+.site-logo img {
+  height: 100px;
+  width: auto;
+}

@@ -6,8 +6,7 @@
 
   <%= form_with model: @word_kit, data: { turbo: false } do |f| %>
     <div>
-      <%= f.label :name %>
-      <%= f.text_field :name%>
+      <%= f.text_field :name %>
     </div>
     <%= f.submit "ゲームキットを作る" %>
   <% end %>
