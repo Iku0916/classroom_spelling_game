@@ -30,6 +30,11 @@ class WordKitsController < ApplicationController
   end
 
   def show
+    @word_kit = current_user.word_kits.find(params[:id])
+    @questions = @word_kit.word_cards
+  end
+
+  def play
     @game_room = GameRoom.find(params[:game_room_id])
     @word_kit = @game_room.word_kit
     @questions = @word_kit.word_cards
@@ -46,20 +51,25 @@ class WordKitsController < ApplicationController
   def edit
      @word_kit = current_user.word_kits.find(params[:id])
      @word_cards = @word_kit.word_cards
+     @word_card = @word_kit.word_cards.build
   end
 
   def update
     @word_kit = current_user.word_kits.find(params[:id])
+
     if @word_kit.update(word_kit_params)
-      redirect_to word_kit_path(@word_kit)
+      redirect_to word_kits_path, notice: '更新しました'
     else
-      render :edit
+      redirect_to word_kits_path, alert: '変更はありませんでした'
     end
   end
 
   private
 
   def word_kit_params
-    params.require(:word_kit).permit(:name)
+    params.require(:word_kit).permit(
+      :name,
+      word_cards_attributes: [:id, :english_word, :japanese_translation, :_destroy]
+    )
   end
 end

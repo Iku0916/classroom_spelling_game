@@ -1,0 +1,12 @@
+<% content_for :title, "ゲームキット詳細 | VocaBoom!" %>
+
+<h1><%= @word_kit.name %></h1>
+
+<ul>
+  <% @questions.each do |card| %>
+    <li><%= card.english_word %> - <%= card.japanese_translation %></li>
+  <% end %>
+</ul>
+
+<%= link_to "編集", edit_word_kit_path(@word_kit) %>
+<%= link_to "一覧へ戻る", word_kits_path %>

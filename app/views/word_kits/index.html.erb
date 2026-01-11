@@ -8,6 +8,7 @@
         <%= kit.name %>
         <%= link_to '削除', word_kit_path(kit), data: { turbo_method: :delete, confirm: "削除しますか？" } %>
         <%= link_to '編集', edit_word_kit_path(kit) %>
+        <%= link_to "詳細", word_kit_path(kit) %>
         
         <%= button_to 'このゲームで遊ぶ！', game_rooms_path(word_kit_id: kit.id), method: :post, data: { turbo: false } %>
       </li>
