@@ -1,0 +1,68 @@
+.menu-container { position: relative; }
+
+.hamburger-btn {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  font-size: 2rem;
+  z-index: 50;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.menu-overlay {
+  display: none; /* 最初は非表示 */
+  position: fixed;
+  inset: 0; /* top,right,bottom,left 0 */
+  background: rgba(0,0,0,0.5);
+  z-index: 40;
+}
+
+.menu-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 16rem; /* 64pxじゃなく16rem */
+  height: 100%;
+  background: white;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+  transform: translateX(100%); /* 初期は右に隠す */
+  transition: transform 0.3s ease;
+  z-index: 50;
+}
+
+.menu-panel.open { transform: translateX(0); }
+.menu-overlay.open { display: block; }
+
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+.close-btn {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.menu-list {
+  padding: 1rem;
+  list-style: none;
+}
+.menu-list li {
+  margin-bottom: 1rem;
+}
+.menu-link {
+  text-decoration: none;
+  color: #333;
+}
+.menu-link:hover {
+  color: #1e90ff; /* hover時青 */
+}
+.menu-user {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
