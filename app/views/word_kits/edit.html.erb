@@ -2,22 +2,41 @@
 
 <h1>キット編集</h1>
 
-<%= form_with model: @word_kit do |f| %>
+<%= form_with model: @word_kit, local: true, data: { turbo: false } do |f| %>
+
   <div>
+    <h3>キット名</h3>
     <%= f.text_field :name %>
   </div>
-  <%= f.submit "更新" %>
-<% end %>
 
-<ul>
-<% @word_kit.word_cards.each do |card| %>
-  <li>
-    <%= card.english_word %>
-    <%= card.japanese_translation %>
-    <%= link_to '削除', word_kit_word_card_path(@word_kit, card), data: { turbo_method: :delete } %>
-    <%= link_to '編集', edit_word_kit_word_card_path(@word_kit, card) %>
-  </li>
-<% end %>
-</ul>
+  <hr>
 
-<%= link_to 'ゲームキット一覧画面へ', word_kits_path %>
+  <h3>登録済みの単語</h3>
+
+  <div id="existing-cards" data-nested-cards-target="container">
+    <%= f.fields_for :word_cards do |card_form| %>
+      <div class="card-row">
+        <%= card_form.hidden_field :id %>
+
+        <%= card_form.text_field :english_word, placeholder: "英単語" %>
+        <%= card_form.text_field :japanese_translation, placeholder: "日本語" %>
+
+        <label>
+          削除
+          <%= card_form.check_box :_destroy %>
+        </label>
+      </div>
+    <% end %>
+  </div>
+
+  <hr>
+
+  <button type="button" data-action="nested-cards#add">
+    ＋ 単語を追加
+  </button>
+
+  <hr>
+
+  <%= f.submit "更新！" %>
+
+<% end %>
