@@ -7,6 +7,7 @@ import ScoreController from "./score_controller"
 import WordCardsPreviewController from "./word_cards_preview_controller"
 import NestedCardsController from "./nested_cards_controller"
 import MenuController from "./menu_controller"
+import WordInputController from "./word_input_controller"
 
 application.register("hello", HelloController)
 application.register("modal", ModalController)
@@ -16,3 +17,4 @@ application.register("score", ScoreController)
 application.register("word-cards-preview", WordCardsPreviewController)
 application.register("nested-cards", NestedCardsController)
 application.register("menu", MenuController)
+application.register("word-input", WordInputController)

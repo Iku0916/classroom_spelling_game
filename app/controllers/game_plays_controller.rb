@@ -27,6 +27,8 @@ class GamePlaysController < ApplicationController
       }
     end
     
+    @current_question = @questions.first
+
     Rails.logger.info "📊 問題データ: #{@questions.inspect}"
   end
 

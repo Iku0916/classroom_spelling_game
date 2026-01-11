@@ -1,4 +1,5 @@
 <% content_for :title, "ゲームに参加する | VocaBoom!" %>
+
 <div 
   data-controller="game timer"
   data-game-room-id="<%= @game_room.id %>"
@@ -14,39 +15,30 @@
   <h2>残り時間</h2>
   <p data-timer-target="display">--:--</p>
 
-  <p data-game-target="question"></p>
+  <% if @current_question %>
+    <div data-controller="word-input">
+      <% @current_question[:word].chars.each_with_index do |char, index| %>
+        <input type="text" maxlength="1"
+               class="letter-input"
+               data-word-input-target="letter"
+               data-index="<%= index %>">
+      <% end %>
+    </div>
 
-  <div data-controller="word-input">
-    <% @current_question.english_word.chars.each_with_index do |char, index| %>
-      <input type="text" maxlength="1"
-            class="letter-input"
-            data-word-input-target="letter"
-            data-index="<%= index %>">
-    <% end %>
-  </div>
+    <p data-game-target="question">
+      <%= @current_question[:correct_answer] %>
+    </p>
+  <% else %>
+    <p>問題がまだありません</p>
+  <% end %>
 
   <div>
-    <button type="button" 
-            data-action="click->game#submitAnswer">
-      解答
-    </button>
+    <button type="button" data-action="click->game#submitAnswer">解答</button>
   </div>
 
-    <div>
-      <p data-game-target="feedback"></p>
-    </div>
+  <p data-game-target="feedback"></p>
 
   <div data-controller="score">
     得点：<span data-score-target="value">0</span>
   </div>
-</div>
-
-<!-- デバッグ用（確認後削除） -->
-<div style="background: lightyellow; padding: 10px; margin: 10px; border: 2px solid orange;">
-  <h3>🐛 デバッグ情報</h3>
-  <p><strong>current_user:</strong> <%= current_user&.id %></p>
-  <p><strong>host_user:</strong> <%= @game_room.host_user&.id %></p>
-  <p><strong>@is_host:</strong> <%= @is_host.inspect %> (型: <%= @is_host.class %>)</p>
-  <p><strong>@participant:</strong> <%= @participant&.id %></p>
-  <p><strong>文字列化後:</strong> "<%= @is_host.to_s %>"</p>
 </div>
