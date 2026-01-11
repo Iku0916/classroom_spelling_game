@@ -9,7 +9,7 @@
 
     <p>ニックネーム</p>
     <%= f.label :nickname %>
-    <%= f.text_field :nickname %>
+    <%= f.text_field :nickname, required: true, value: current_user ? current_user.name : "" %>
 
     <%= f.submit '参加' %>
   <% end %>
