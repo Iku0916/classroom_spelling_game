@@ -68,7 +68,7 @@ class GamePlaysController < ApplicationController
     # ホスト用: 全体結果を表示
       @participants = @game_room.participants.includes(:user, :guest).order(score: :desc)
       @total_questions = @game_room.word_kit.word_cards.count
-      
+      @top_players = @participants.order(score: :desc).limit(3)
       Rails.logger.info "ホスト用の全体結果表示"
       render :overall_result
     else

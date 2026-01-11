@@ -1,5 +1,8 @@
 <header>
-  <h1>サイトロゴ</h1>
+  <%= link_to root_path, class: "site-logo" do %>
+    <%= image_tag "vocaboom_site_logo.png", alt: "VocaBoom!" %>
+  <% end %>
+
   <div class='menu_group'>
       <%= link_to '新規登録', signup_path %>
       <%= link_to 'ログイン', login_path %>
