@@ -1,0 +1,25 @@
+<div data-controller="menu" class="menu-container">
+
+  <button data-action="click->menu#open" class="hamburger-btn">
+    ☰
+  </button>
+
+  <div data-menu-target="overlay"
+       data-action="click->menu#close"
+       class="menu-overlay"></div>
+
+  <nav data-menu-target="panel" class="menu-panel">
+    <div class="menu-header">
+      <span>メニュー</span>
+      <button data-action="click->menu#close" class="close-btn">×</button>
+    </div>
+    <ul class="menu-list">
+      <li class="menu-user">こんにちは <%= current_user ? current_user.name : "ゲストさん" %></li>
+      <li><%= link_to "ゲームを開く", word_kits_path, class: "menu-link" %></li>
+      <li><%= link_to "ゲームキットを作る", new_word_kit_path, class: "menu-link" %></li>
+      <li><%= link_to "ゲームに参加する", new_participant_path, class: "menu-link" %></li>
+      <li><%= link_to 'トップページ', root_path, class: "menu-link" %></li>
+      <li><%= link_to 'ログアウト', logout_path, data: { turbo_method: :delete }, class: "menu-link" %></li>
+    </ul>
+  </nav>
+</div>

@@ -4,7 +4,6 @@
   <% end %>
 
   <div class='menu_group'>
-    <%= link_to 'ログアウト', logout_path, data: { turbo_method: :delete } %>
-    <%= link_to 'トップ', root_path %>
+    <%= render 'shared/hamburger_menu' %>
   </div>
 </header>

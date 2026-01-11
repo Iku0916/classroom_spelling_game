@@ -14,19 +14,23 @@
   <h2>残り時間</h2>
   <p data-timer-target="display">--:--</p>
 
-    <p data-game-target="question"></p>
+  <p data-game-target="question"></p>
 
-    <div>
-      <label for="answer-input">解答</label>
-      <input type="text" 
-            id="answer-input"
-            data-game-target="answer"
-            data-action="keydown.enter->game#submitAnswer">
-      <button type="button" 
-              data-action="click->game#submitAnswer">
-        解答
-      </button>
-    </div>
+  <div data-controller="word-input">
+    <% @current_question.english_word.chars.each_with_index do |char, index| %>
+      <input type="text" maxlength="1"
+            class="letter-input"
+            data-word-input-target="letter"
+            data-index="<%= index %>">
+    <% end %>
+  </div>
+
+  <div>
+    <button type="button" 
+            data-action="click->game#submitAnswer">
+      解答
+    </button>
+  </div>
 
     <div>
       <p data-game-target="feedback"></p>
