@@ -42,3 +42,113 @@
   font-size: 20px;
   font-weight: bold;
 }
+
+/* 1. ページ全体のコンテナ（一覧画面の余白と合わせる） */
+.edit-page-container {
+  max-width: 1000px; /* .kit-listと同じ幅 */
+  margin: 130px auto 40px; /* .word-kit-indexと同じmargin-top */
+  font-family: 'Zen Maru Gothic', sans-serif; /* フォントを統一 */
+  padding: 0 20px;
+}
+
+/* 2. 編集エリア本体（.kit-cardと同じスタイル） */
+.edit-card-body {
+  background: white;
+  border-radius: 24px; /* .kit-cardと統一 */
+  padding: 40px;       /* 編集画面なので少しゆったり */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* 影を統一 */
+}
+
+/* 3. 見出し（.kit-titleと共通の色・重み） */
+.edit-section-title {
+  color: #2c3e50;
+  font-weight: bold;
+  margin-bottom: 16px;
+  font-size: 20px;
+  display: block;
+}
+
+/* 4. 入力フィールド（サイトの雰囲気に合わせる） */
+.input-field {
+  width: 100%;
+  padding: 14px 20px;
+  border: 2px solid #f0f0f0;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 16px;
+  background-color: #f9f9fb;
+  box-sizing: border-box;
+  transition: all 0.3s;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #7B5CD6; /* VocaBoomカラー */
+  background-color: #fff;
+}
+
+/* 5. 単語行（.kit-actionsのような並びを意識） */
+.card-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+/* 6. ボタン（VocaBoomらしい色と丸み） */
+.btn-update {
+  background-color: #7B5CD6;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 16px 40px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #5a3eb3;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.btn-add-word {
+  background: none;
+  border: 2px dashed #7B5CD6;
+  color: #7B5CD6;
+  border-radius: 12px;
+  padding: 10px;
+  width: 100%;
+  margin: 10px 0 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* チェックされたら、中身を隠して高さをギュッと縮める */
+.card-row:has(input[type="checkbox"]:checked) {
+  background-color: #ffeaea;
+  border: 1px dashed #e74c3c;
+  opacity: 0.5;
+  height: 40px; /* 狭くする */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* チェックされた行の入力欄は完全に消す */
+.card-row:has(input[type="checkbox"]:checked) .input-field {
+  display: none;
+}
+
+/* 「削除」のラベルだけ「復活」に見えるようにする */
+.card-row:has(input[type="checkbox"]:checked) .delete-label span {
+  display: none; /* 元の「削除」テキストを隠す */
+}
+.card-row:has(input[type="checkbox"]:checked) .delete-label::after {
+  content: "キャンセル（元に戻す）";
+  font-size: 14px;
+  color: #333;
+  text-decoration: underline;
+}

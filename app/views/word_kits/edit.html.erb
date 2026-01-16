@@ -1,42 +1,35 @@
-<% content_for :title, "ゲームキット編集 | VocaBoom!" %>
+<div class="edit-page-container">
+  <h1 class="word-kit-index">キット編集</h1>
 
-<h1>キット編集</h1>
-
-<%= form_with model: @word_kit, local: true, data: { turbo: false } do |f| %>
-
-  <div>
-    <h3>キット名</h3>
-    <%= f.text_field :name %>
-  </div>
-
-  <hr>
-
-  <h3>登録済みの単語</h3>
-
-  <div id="existing-cards" data-nested-cards-target="container">
-    <%= f.fields_for :word_cards do |card_form| %>
-      <div class="card-row">
-        <%= card_form.hidden_field :id %>
-
-        <%= card_form.text_field :english_word, placeholder: "英単語" %>
-        <%= card_form.text_field :japanese_translation, placeholder: "日本語" %>
-
-        <label>
-          削除
-          <%= card_form.check_box :_destroy %>
-        </label>
+  <div class="edit-card-body" data-controller="nested-cards">
+    <%= form_with model: @word_kit, local: true do |f| %>
+      
+      <div style="margin-bottom: 30px;">
+        <label class="edit-section-title">キット名</label>
+        <%= f.text_field :name, class: "input-field" %>
       </div>
+
+      <label class="edit-section-title">登録済みの単語</label>
+      <div id="existing-cards" data-nested-cards-target="container">
+        <%= f.fields_for :word_cards do |card_form| %>
+          <div class="card-row">
+            <%= card_form.hidden_field :id %>
+            <%= card_form.text_field :english_word, placeholder: "英単語", class: "input-field" %>
+            <%= card_form.text_field :japanese_translation, placeholder: "日本語", class: "input-field" %>
+            
+            <label style="color: #e74c3c; font-size: 12px; min-width: 40px; text-align: center;">
+              削除<br>
+              <%= card_form.check_box :_destroy %>
+            </label>
+          </div>
+        <% end %>
+      </div>
+
+      <button type="button" class="btn-add-word" data-action="nested-cards#add">
+        ＋ 新しい単語を追加
+      </button>
+
+      <%= f.submit "更新！", class: "btn-update" %>
     <% end %>
   </div>
-
-  <hr>
-
-  <button type="button" data-action="nested-cards#add">
-    ＋ 単語を追加
-  </button>
-
-  <hr>
-
-  <%= f.submit "更新！" %>
-
-<% end %>
+</div>

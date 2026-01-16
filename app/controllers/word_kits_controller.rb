@@ -50,8 +50,6 @@ class WordKitsController < ApplicationController
 
   def edit
      @word_kit = current_user.word_kits.find(params[:id])
-     @word_cards = @word_kit.word_cards
-     @word_card = @word_kit.word_cards.build
   end
 
   def update
