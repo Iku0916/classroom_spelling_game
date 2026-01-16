@@ -1,8 +1,24 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  background-image: url("/assets/background.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 header {
   display: flex;
   width: 100%;
   height: 100px;
-  background-color: darkgrey;
+  background-color: #7B5CD6;
+  box-shadow:
+    0 4px 0 rgba(0, 0, 0, 0.2),
+    0 10px 20px rgba(0, 0, 0, 0.25);
   align-items: center;
 }
 
@@ -16,4 +32,46 @@ header {
 .site-logo img {
   height: 100px;
   width: auto;
+}
+
+.title-logo {
+  width: 1000px;
+  margin: 0 auto;
+  margin-top: -120px;
+  display: block;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));
+}
+
+.main-buttons {
+  display: flex;
+  margin-top: -120px;
+  justify-content: center;
+  gap: 24px; /* ボタン同士の間 */
+  list-style: none;
+  padding: 0;
+  position: relative;
+  z-index: 10;
+}
+
+.main-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 240px;
+  padding: 22px 40px;
+  background: #ffffff;
+
+  color: #7B5CD6;
+  border-radius: 20px;
+
+  font-weight: bold;
+  font-size: bold;
+  text-decoration: none;
+  box-shadow:
+    0 4px 0 rgba(0, 0, 0, 0.2),
+    0 10px 20px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s ease;
+  position: relative;
+  z-index: 10;
 }
