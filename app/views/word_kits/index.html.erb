@@ -1,16 +1,17 @@
 <% content_for :title, "ゲームキット一覧| VocaBoom!" %>
 
-<h1>ゲームキット一覧</h1>
+<h1 class="word-kit-index">ゲームキット一覧</h1>
 
-  <ul>
+  <ul class="kit-list">
     <% @word_kits.each do |kit| %>
-      <li>
-        <%= kit.name %>
-        <%= link_to '削除', word_kit_path(kit), data: { turbo_method: :delete, confirm: "削除しますか？" } %>
-        <%= link_to '編集', edit_word_kit_path(kit) %>
-        <%= link_to "詳細", word_kit_path(kit) %>
-        
-        <%= button_to 'このゲームで遊ぶ！', game_rooms_path(word_kit_id: kit.id), method: :post, data: { turbo: false } %>
+      <li class="kit-card">
+        <div class="kit-title"><%= kit.name %></div>
+        <div class="kit-actions">
+          <%= link_to '編集', edit_word_kit_path(kit), class: "main-button small" %>
+          <%= link_to "詳細", word_kit_path(kit), class: "main-button small" %>
+          <%= link_to '削除', word_kit_path(kit), data: { turbo_method: :delete, confirm: "削除しますか？" }, class: "main-button small danger" %>
+        <%= button_to 'このゲームで遊ぶ！', game_rooms_path(word_kit_id: kit.id), method: :post, data: { turbo: false }, class: "main-button play" %>
+        </div>
       </li>
     <% end %>
   </ul>

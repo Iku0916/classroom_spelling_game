@@ -30,3 +30,16 @@
   transform: translate(-50%, -50%);
   z-index: 9999;
 }
+
+.main-button.small {
+  padding: 12px 20px;
+  font-size: 14px;
+}
+
+.main-button.play {
+  font-weight: bold;
+}
+
+.main-button.danger {
+  color: #ff4d4d;
+}
