@@ -1,8 +1,22 @@
 <% content_for :title, "ゲームを開く | VocaBoom!" %>
 
+<div id="game-room-data" data-game-room-id="<%= @game_room.id %>"></div>
+
 <h1>ゲームコード</h1>
 <%= @game_room.game_code %>
 <P>を入力してください</p>
+
+<div>
+  <p>参加人数: <span id="participants-count"><%= @game_room.participants.count %></span>人</p>
+  
+  <ul id="participants-items">
+    <% @game_room.participants.each do |participant| %>
+      <li data-participant-id="<%= participant.id %>">
+        <%= participant.nickname %>
+      </li>
+    <% end %>
+  </ul>
+</div>
 
 <%= form_with url: start_game_room_path(@game_room), method: :patch, data: { turbo: false } do |f| %>
   <div>

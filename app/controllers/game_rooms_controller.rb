@@ -43,6 +43,20 @@ class GameRoomsController < ApplicationController
   )
   
     if participant.save
+      Rails.logger.info "✅ 参加者保存成功: #{participant.nickname}"
+
+      ActionCable.server.broadcast(
+        "game_room_#{@game_room.id}",
+        {
+          type: 'participant_joined',
+          participant:{
+            id: participant.id,
+            nickname: participant.nickname,
+            is_ready: participant.is_ready
+          },
+          participants_count: @game_room.participants.count
+        }
+      )
       redirect_to waiting_game_room_path(@game_room), notice: '参加しました!'
     else
       redirect_to game_room_path(@game_room), alert: '参加に失敗しました'

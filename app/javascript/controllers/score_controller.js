@@ -4,6 +4,7 @@ export default class extends Controller {
   static targets = ["value"]
 
   connect() {
+    console.log("✅ score コントローラー接続成功") 
     this.score = 0
     this.scoreSaved = false
     this.gameFinished = false
@@ -22,5 +23,9 @@ export default class extends Controller {
 
   render() {
     this.valueTarget.textContent = this.score
+  }
+
+  getScore() {
+    return this.score
   }
 }
