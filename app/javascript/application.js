@@ -2,4 +2,6 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 
+import "./channels/consumer"
 import "./channels/game_channel"
+import "./game_room"

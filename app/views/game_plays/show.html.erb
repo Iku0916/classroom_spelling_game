@@ -1,7 +1,7 @@
 <% content_for :title, "ゲームに参加する | VocaBoom!" %>
 
 <div 
-  data-controller="game timer"
+  data-controller="game timer score"
   data-game-room-id="<%= @game_room.id %>"
   data-timer-game-room-id-value="<%= @game_room.id %>"
   data-timer-time-limit-value="<%= @game_room.time_limit %>"
@@ -38,7 +38,7 @@
 
   <p data-game-target="feedback"></p>
 
-  <div data-controller="score">
+  <div>
     得点：<span data-score-target="value">0</span>
   </div>
 </div>

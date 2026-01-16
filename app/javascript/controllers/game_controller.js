@@ -81,7 +81,7 @@ export default class extends Controller {
     const current = this.questions[this.index]
 
     const scoreController = this.application.getControllerForElementAndIdentifier(
-      document.querySelector('[data-controller="score"]'),
+      this.element,
       "score"
     )
 

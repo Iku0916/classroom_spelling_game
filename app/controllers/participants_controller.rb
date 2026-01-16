@@ -38,6 +38,19 @@ class ParticipantsController < ApplicationController
 
     if @participant.save
       Rails.logger.info "✅ 参加者を作成: #{@participant.inspect}"
+      ActionCable.server.broadcast(
+        "game_channel_#{@game_room.id}",
+        {
+          type: 'participant_joined',
+          participant: {
+            id: @participant.id,
+            nickname: @participant.nickname
+          },
+          participants_count: @game_room.participants.count
+        }
+      )
+      Rails.logger.info "📡 ホスト側にブロードキャスト: game_channel_#{@game_room.id}"
+
       redirect_to waiting_game_room_path(@game_room), notice: "ゲームに参加しました"
     else
       Rails.logger.error "❌ 参加者作成失敗: #{@participant.errors.full_messages}"
