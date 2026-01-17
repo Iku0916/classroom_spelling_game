@@ -243,3 +243,14 @@
   border-bottom: none; /* ボックス化するので線は不要かも */
   margin-bottom: 8px;
 }
+
+/* card-row 内の入力フィールドを均等に広げる */
+.card-row .input-field {
+  flex: 1;
+}
+
+/* プレースホルダーの色を少し優しくする（新規作成時に分かりやすい） */
+.input-field::placeholder {
+  color: #bbb;
+  font-size: 0.9rem;
+}

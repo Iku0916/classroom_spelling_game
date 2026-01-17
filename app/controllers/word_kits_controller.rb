@@ -7,13 +7,14 @@ class WordKitsController < ApplicationController
 
   def new
     @word_kit = WordKit.new
+    @word_kit.word_cards.build
   end
 
   def create
     @word_kit = current_user.word_kits.build(word_kit_params)
 
     if @word_kit.save
-        redirect_to new_word_kit_word_card_path(@word_kit), notice: "キットを作成しました"
+        redirect_to word_kits_path, notice: "キットを作成しました"
     else
       render :new
     end
