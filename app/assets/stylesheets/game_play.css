@@ -95,3 +95,73 @@
   font-size: 1.1rem;
   color: #2c3e50;
 }
+
+/* 外枠のコンテナ */
+.play-container {
+  max-width: 900px;
+  margin: 80px auto;
+  padding: 40px;
+  text-align: center;
+  font-family: 'Zen Maru Gothic', sans-serif;
+}
+
+/* ゲームコードを小さくバッジ風に（右上に置いてもOK） */
+.code-badge {
+  display: inline-block;
+  background: #f0f0f0;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  color: #666;
+  margin-bottom: 40px;
+}
+.code-badge span {
+  color: #7B5CD6;
+  letter-spacing: 0.1em;
+}
+
+/* タイマーセクション */
+.timer-label {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #333;
+  letter-spacing: 0.1em;
+  margin-bottom: 0;
+}
+
+/* ⭐ タイマー本体（ここが主役！） */
+.timer-display {
+  font-size: 12rem; /* さらに大きく！ */
+  font-weight: 900;
+  line-height: 1;
+  margin: 20px 0;
+  color: #FF9800;
+  text-shadow: 6px 6px 0px #f0f0f0;
+  font-variant-numeric: tabular-nums; /* 数字が動いても幅がガタつかない */
+}
+
+/* アクションエリア（終了ボタン） */
+.action-section {
+  margin-top: 100px; /* ここを思い切って広げます */
+  margin-bottom: 50px;
+}
+
+/* ついでにボタンを少しマイルドにして、押しやすくする調整 */
+.finish-button {
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  border-radius: 50px;
+  font-size: 1.1rem; /* ボタンは少し控えめに */
+  font-weight: bold;
+  cursor: pointer;
+  opacity: 0.8; /* プレイ中は少し薄くしておいて… */
+  transition: all 0.3s;
+}
+
+/* ホバーした時だけパッと明るくする（誤操作防止の心理的効果） */
+.finish-button:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
