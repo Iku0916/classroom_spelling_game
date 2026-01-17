@@ -56,6 +56,9 @@ function handleParticipantJoined(data) {
     const newParticipant = document.createElement('li');
     newParticipant.dataset.participantId = data.participant.id;
     newParticipant.textContent = data.participant.nickname;
+    
+    newParticipant.classList.add('nickname-tag');
+
     participantsList.appendChild(newParticipant);
     console.log('✅ 参加者一覧に追加:', data.participant.nickname);
   }

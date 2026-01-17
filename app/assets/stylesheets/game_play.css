@@ -1,0 +1,97 @@
+/* ロビー全体のレイアウト */
+.lobby-container {
+  max-width: 800px;
+  margin: 130px auto 40px;
+  text-align: center;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  padding: 0 20px;
+}
+
+/* ① ゲームコードのドーン！という配置 */
+.code-section {
+  background: white;
+  border-radius: 30px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.lobby-title {
+  font-size: 1.5rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.game-code-display {
+  font-size: 5rem; /* かなり大きく！ */
+  font-weight: 900;
+  color: #7B5CD6;
+  letter-spacing: 0.2em;
+  margin: 10px 0;
+  text-shadow: 4px 4px 0px #f0f0f0;
+}
+
+.code-instruction {
+  color: #888;
+  font-weight: bold;
+}
+
+/* ② 参加者の「ぽんぽん」という配置 */
+.nickname-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.nickname-tag {
+  background-color: #fff;
+  border: 2px solid #7B5CD6;
+  color: #7B5CD6;
+  padding: 8px 20px;
+  border-radius: 50px; /* 丸っこいタグ */
+  font-weight: bold;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 0 #eee;
+  animation: popIn 0.3s ease-out; /* 出てくるときのアニメーション */
+}
+
+/* 参加者が増えた時のアニメーション */
+@keyframes popIn {
+  0% { transform: scale(0); opacity: 0; }
+  80% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.participants-status {
+  font-weight: bold;
+  color: #2c3e50;
+  font-size: 1.2rem;
+}
+
+/* 設定エリアの微調整 */
+.setup-form {
+  margin-top: 40px;
+  background: #f9f9fb;
+  padding: 30px;
+  border-radius: 24px;
+}
+
+.input-field.small {
+  width: 80px;        /* 1〜2桁に最適な幅 */
+  text-align: center; /* 数字を真ん中に寄せて見やすく */
+  padding: 10px;      /* 余白も少しタイトに */
+}
+
+/* 入力欄の横のラベルなども含めた微調整 */
+.time-setting {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  color: #2c3e50;
+}
