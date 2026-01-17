@@ -1,15 +1,33 @@
 <% content_for :title, "ゲームに参加する | VocaBoom!" %>
 
-<h1>ゲーム参加</h1>
+<h1 class="word-kit-index">ゲームに参加する</h1>
 
-  <%= form_with url: participants_path, method: :post, local: true do |f| %>
-    <p>ゲームコード</p>
-    <%= f.label :game_code %>
-    <%= f.text_field :game_code %>
+  <div class="edit-card-body">
 
-    <p>ニックネーム</p>
-    <%= f.label :nickname %>
-    <%= f.text_field :nickname, required: true, value: current_user ? current_user.name : "" %>
+    <%= form_with url: participants_path, method: :post, local: true, class: "setup-form" do |f| %>
+      
+      <div class="input-group">
+        <label class="edit-section-title">ゲームコード</label>
+        <%= f.text_field :game_code, 
+            class: "input-field game-code-input", 
+            placeholder: "000000", 
+            maxlength: 6 %>
+      </div>
 
-    <%= f.submit '参加' %>
-  <% end %>
+      <div class="input-group" style="margin-top: 30px;">
+        <label class="edit-section-title">ニックネーム</label>
+        <%= f.text_field :nickname, 
+            required: true, 
+            value: current_user ? current_user.name : "", 
+            class: "input-field", 
+            placeholder: "名前を入力してね" %>
+      </div>
+
+      <%= f.submit '参加する！', class: "btn-update", style: "margin-top: 40px;" %>
+    <% end %>
+
+    <div class="back-link-container">
+      <%= link_to "やっぱりやめる", root_path, class: "back-link" %>
+    </div>
+  </div>
+</div>

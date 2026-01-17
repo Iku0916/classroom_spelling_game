@@ -264,3 +264,97 @@
   border-radius: 50px;
   font-weight: bold;
 }
+
+/* ローディング全体の配置 */
+.loading-wrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 40px;
+}
+
+/* 外側の太いクルクル */
+.voca-spinner {
+  width: 100%;
+  height: 100%;
+  border: 10px solid #f0f0f0;
+  border-top: 10px solid #7B5CD6; /* Vocaパープル */
+  border-radius: 50%;
+  animation: spin 1.5s linear infinite;
+}
+
+/* 内側の細い逆回転クルクル（これを入れるとおしゃれ！） */
+.voca-spinner-inner {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 80px;
+  height: 80px;
+  border: 6px solid #f0f0f0;
+  border-bottom: 6px solid #FF9F1C; /* Vocaオレンジ */
+  border-radius: 50%;
+  animation: spin-reverse 1s linear infinite;
+}
+
+/* 待機ステータスの文字 */
+.waiting-status {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* メッセージボックス */
+.status-box {
+  background: #f9f9fb;
+  padding: 20px;
+  border-radius: 20px;
+  margin-bottom: 30px;
+}
+
+/* ドットローダーの親要素 */
+.dot-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  height: 60px;
+  margin-bottom: 20px;
+}
+
+/* ドットの共通スタイル */
+.dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  animation: poyo-poyo 1.4s infinite ease-in-out both;
+}
+
+/* 1つめ：紫 */
+.dot:nth-child(1) {
+  background-color: #7B5CD6;
+  animation-delay: -0.32s;
+}
+
+/* 2つめ：オレンジ */
+.dot:nth-child(2) {
+  background-color: #FF9F1C;
+  animation-delay: -0.16s;
+}
+
+/* 3つめ：また紫 */
+.dot:nth-child(3) {
+  background-color: #7B5CD6;
+}
+
+/* 跳ねるアニメーション */
+@keyframes poyo-poyo {
+  0%, 80%, 100% { 
+    transform: scale(0.5);
+    opacity: 0.5;
+  } 
+  40% { 
+    transform: scale(1.2); /* 少し大きくなって */
+    opacity: 1;           /* くっきりする */
+  }
+}
