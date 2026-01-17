@@ -1,12 +1,41 @@
 <% content_for :title, "ゲームキット詳細 | VocaBoom!" %>
 
-<h1><%= @word_kit.name %></h1>
+<div class="edit-page-container">
+  <div class="edit-card-body">
+    <h1 class="word-kit-index detail-title">
+      <%= @word_kit.name %>
+    </h1>
 
-<ul>
-  <% @questions.each do |card| %>
-    <li><%= card.english_word %> - <%= card.japanese_translation %></li>
-  <% end %>
-</ul>
+    <div class="edit-section-title">収録されている単語</div>
 
-<%= link_to "編集", edit_word_kit_path(@word_kit) %>
-<%= link_to "一覧へ戻る", word_kits_path %>
+    <ul class="kit-list">
+      <% @questions.each do |card| %>
+        <li class="card-row detail-row">
+          <div class="word-display-group">
+            <div class="word-box en-box">
+              <%= card.english_word %>
+            </div>
+            
+            <div class="word-divider">
+              <i class="fas fa-arrow-right"></i> <span>/</span>
+            </div>
+
+            <div class="word-box jp-box">
+              <%= card.japanese_translation %>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+
+    <div class="kit-actions detail-footer">
+      <%= link_to edit_word_kit_path(@word_kit), class: "btn-update btn-link" do %>
+        <span>編集する</span>
+      <% end %>
+    </div>
+    
+    <div class="back-link-container">
+      <%= link_to "← 一覧へ戻る", word_kits_path, class: "back-link" %>
+    </div>
+  </div>
+</div>
