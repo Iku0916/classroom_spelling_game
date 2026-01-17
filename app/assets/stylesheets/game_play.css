@@ -165,3 +165,102 @@
   opacity: 1;
   transform: scale(1.05);
 }
+
+.result-container {
+  padding-top: 120px;
+  text-align: center;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  padding-bottom: 40px;
+}
+
+.result-title {
+  font-size: 2.5rem;
+  color: #7B5CD6;
+  margin-bottom: 60px;
+}
+
+/* 表彰台全体のラップ */
+.podium-wrapper {
+  display: flex;
+  align-items: flex-end; /* 下揃えにして高さを変える */
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 50px;
+  height: 350px; /* 全体の高さを固定 */
+}
+
+/* 各順位の共通設定 */
+.podium-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 120px;
+}
+
+/* プレイヤー情報（台の上に乗る部分） */
+.player-info {
+  margin-bottom: 10px;
+  animation: bounce 2s infinite; /* ぴょこぴょこ動かす */
+}
+
+.nickname {
+  font-weight: bold;
+  font-size: 1.1rem;
+  word-break: break-all;
+}
+
+.score {
+  color: #FF9F1C; /* Vocaオレンジ */
+  font-weight: 900;
+  font-size: 1.4rem;
+}
+
+/* 表彰台の土台部分 */
+.podium-base {
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 4px 0 rgba(255,255,255,0.3);
+}
+
+.rank-num {
+  font-size: 2rem;
+  font-weight: 900;
+  color: rgba(255,255,255,0.8);
+}
+
+.crown {
+  display: block; /* 縦に並ぶように */
+  margin-bottom: 5px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); /* 少し影をつけて豪華に */
+}
+
+/* 🥇 1位：一番高く、Vocaオレンジ */
+.rank-1 { width: 150px; }
+.rank-1 .podium-base { height: 180px; background-color: #FF9F1C; }
+.rank-1 .nickname { font-size: 1.4rem; color: #E67E22; }
+
+/* 🥈 2位：二番目に高い、紫系 */
+.rank-2 .podium-base { height: 120px; background-color: #9B7CF0; }
+
+/* 🥉 3位：一番低い、ピンク/赤系 */
+.rank-3 .podium-base { height: 80px; background-color: #FF708D; }
+
+/* ぴょこぴょこアニメーション */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* 戻るボタンを可愛く */
+.back-to-top {
+  display: inline-block;
+  padding: 12px 30px;
+  background: #f0f0f0;
+  color: #666;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: bold;
+}
