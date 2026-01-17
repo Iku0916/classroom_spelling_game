@@ -1,6 +1,23 @@
 <% content_for :title, "ゲームに参加する | VocaBoom!" %>
 
-<div id='game_waiting' data-room-id="<%= @game_room.id %>">
-  <p>しばらくお待ちください</p>
-  <p>他の参加者を待っています…</p>
+<div class="lobby-container" id='game_waiting' data-room-id="<%= @game_room.id %>">
+  <div class="edit-card-body">
+    
+    <div class="dot-loader">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+    </div>
+
+    <h2 class="waiting-status">ゲームが始まるのを待っています...</h2>
+    
+    <div class="status-box">
+      <p class="lobby-title">ホストが開始ボタンを押すと<br>自動的にゲームが始まります！</p>
+    </div>
+
+    <div class="tips-section">
+      <span class="code-badge">準備はいい？ 🚀</span>
+    </div>
+
+  </div>
 </div>
