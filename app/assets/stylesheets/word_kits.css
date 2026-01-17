@@ -152,3 +152,94 @@
   color: #333;
   text-decoration: underline;
 }
+
+/* 詳細画面専用のタイトル調整 */
+.detail-title {
+  margin-top: 0;
+  margin-bottom: 30px;
+  font-size: 2.2rem; /* 一覧より少し控えめにしてバランス調整 */
+}
+
+/* リンクをボタン化するための調整 */
+.btn-link {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 戻るリンクのコンテナとスタイル */
+.back-link-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.back-link {
+  color: #7B5CD6;
+  font-weight: bold;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+  opacity: 0.8;
+}
+
+/* --- 以下、先ほど追加した詳細用スタイル --- */
+.detail-row {
+  border-bottom: 1px solid #f0f0f0;
+  padding: 15px 20px;
+  justify-content: flex-start;
+  border-radius: 12px;
+}
+
+/* 単語ペアのグループ化 */
+.word-display-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+/* 編集画面の.input-fieldに寄せたボックススタイル */
+.word-box {
+  flex: 1; /* 左右均等の幅に */
+  padding: 12px 20px;
+  border: 2px solid #f0f0f0;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 16px;
+  background-color: #f9f9fb;
+  color: #2c3e50;
+  min-height: 24px;
+  display: flex;
+  align-items: center;
+}
+
+/* 英語側を少し強調 */
+.en-box {
+  font-weight: bold;
+  color: #7B5CD6;
+  background-color: #fff; /* 英語を際立たせる */
+  border-color: #eee;
+}
+
+/* 日本語側 */
+.jp-box {
+  background-color: #f9f9fb;
+}
+
+/* 区切り線の調整 */
+.word-divider {
+  color: #ccc;
+  font-weight: bold;
+  flex-shrink: 0; /* 潰れないように */
+}
+
+/* リストアイテム自体の余白を調整 */
+.detail-row {
+  padding: 12px;
+  border-bottom: none; /* ボックス化するので線は不要かも */
+  margin-bottom: 8px;
+}
