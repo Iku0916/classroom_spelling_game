@@ -2,27 +2,37 @@
 
 <div id="game-room-data" data-game-room-id="<%= @game_room.id %>"></div>
 
-<h1>ゲームコード</h1>
-<%= @game_room.game_code %>
-<P>を入力してください</p>
-
-<div>
-  <p>参加人数: <span id="participants-count"><%= @game_room.participants.count %></span>人</p>
-  
-  <ul id="participants-items">
-    <% @game_room.participants.each do |participant| %>
-      <li data-participant-id="<%= participant.id %>">
-        <%= participant.nickname %>
-      </li>
-    <% end %>
-  </ul>
-</div>
-
-<%= form_with url: start_game_room_path(@game_room), method: :patch, data: { turbo: false } do |f| %>
-  <div>
-    <%= f.label :time_limit, 'ゲーム時間' %>
-    <%= f.number_field :time_limit, min: 1, max: 60, value: 5 %>
+<div class="lobby-container">
+  <div class="code-section">
+    <h1 class="lobby-title">ゲームコード</h1>
+    <div class="game-code-display">
+      <%= @game_room.game_code %>
+    </div>
+    <p class="code-instruction">を入力してください</p>
   </div>
 
-  <%= f.submit 'ゲーム開始！', id: "button" %>
-<% end %>
+  <div class="participants-section">
+    <p class="participants-status">
+      参加人数: <span id="participants-count"><%= @game_room.participants.count %></span>人
+    </p>
+    
+    <ul id="participants-items" class="nickname-grid">
+      <% @game_room.participants.each do |participant| %>
+        <li class="nickname-tag" data-participant-id="<%= participant.id %>">
+          <%= participant.nickname %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="setup-section">
+    <%= form_with url: start_game_room_path(@game_room), method: :patch, data: { turbo: false }, class: "setup-form" do |f| %>
+      <div class="time-setting">
+        <%= f.label :time_limit, '制限時間 (分)' %>
+        <%= f.number_field :time_limit, min: 1, max: 60, value: 5, class: "input-field small" %>
+      </div>
+
+      <%= f.submit 'ゲーム開始！', id: "button", class: "btn-update" %>
+    <% end %>
+  </div>
+</div>
