@@ -1,16 +1,30 @@
 <% content_for :title, "結果発表 | VocaBoom!" %>
 
-<h2>🏆 ランキング TOP3</h2>
+<div class="result-container">
+  <h1 class="result-title">🏆 結果発表 🏆</h1>
 
-<ol>
-  <% medals = ["🥇", "🥈", "🥉"] %>
-  <% @top_players.each_with_index do |p, i| %>
-    <li>
-      <%= medals[i] %>
-      <%= p.nickname.presence || p.user&.name || p.guest&.name || "ゲスト" %>
-      ：<%= p.score %>点
-    </li>
-  <% end %>
-</ol>
-<%= link_to "トップに戻る", finish_game_room_path(@game_room), 
-    data: { turbo_method: :delete } %>
+  <div class="podium-wrapper">
+    <% podium_order = [1, 0, 2] %> 
+    <% podium_order.each do |index| %>
+      <% p = @top_players[index] %>
+      <% if p %>
+        <div class="podium-item rank-<%= index + 1 %>">
+          <div class="player-info">
+            <span class="crown"><%= ["🥇", "🥈", "🥉"][index] %></span>
+            <div class="nickname">
+              <%= p.nickname.presence || "ゲスト" %>
+            </div>
+            <div class="score"><%= p.score %><span> pts</span></div>
+          </div>
+          <div class="podium-base">
+            <span class="rank-num"><%= index + 1 %></span>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="result-actions">
+    <%= link_to "トップに戻る", root_path, class: "back-to-top" %>
+  </div>
+</div>
