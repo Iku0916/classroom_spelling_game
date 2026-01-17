@@ -1,34 +1,33 @@
 <% content_for :title, "ゲームを開く | VocaBoom!" %>
 
-<div id="game_play" data-room-id="<%= @game_room.id %>">
+<div id="game_play" class="play-container" data-room-id="<%= @game_room.id %>">
   
-  <h1>ゲームコード</h1>
-  <p><%= @game_room.game_code %></p>
+  <div class="code-badge">
+    ゲームコード: <span><%= @game_room.game_code %></span>
+  </div>
 
-  <h2>残り時間</h2>
-    <p 
-    id="timer"
-    data-controller="timer"
-    data-timer-target="display"
-    data-timer-time-limit-value="<%= @game_room.time_limit %>"
-    data-timer-started-at-value="<%= @game_room.started_at.iso8601 if @game_room.started_at %>"
-    data-timer-game-room-id-value="<%= @game_room.id %>" 
-    data-timer-is-host-value="true"
-    data-timer-participant-id-value="<%= @participant&.id || 0 %>"
-    >
-    --:--
-  </p>
+  <div class="timer-section">
+      <h2 class="timer-label">残り時間</h2>
+      <p 
+        id="timer"
+        class="timer-display"
+        data-controller="timer"
+        data-timer-target="display"
+        data-timer-time-limit-value="<%= @game_room.time_limit %>"
+        data-timer-started-at-value="<%= @game_room.started_at.iso8601 if @game_room.started_at %>"
+        data-timer-game-room-id-value="<%= @game_room.id %>" 
+        data-timer-is-host-value="true"
+        data-timer-participant-id-value="<%= @participant&.id || 0 %>"
+      >
+        --:--
+      </p>
+    </div>
 
-  <%= button_to "ゲーム終了!", finish_game_room_game_play_path(@game_room), method: :patch %>
-
-</div>
-
-<!-- デバッグ用（確認後削除） -->
-<div style="background: lightyellow; padding: 10px; margin: 10px; border: 2px solid orange;">
-  <h3>🐛 デバッグ情報</h3>
-  <p><strong>current_user:</strong> <%= current_user&.id %></p>
-  <p><strong>host_user:</strong> <%= @game_room.host_user&.id %></p>
-  <p><strong>@is_host:</strong> <%= @is_host.inspect %> (型: <%= @is_host.class %>)</p>
-  <p><strong>@participant:</strong> <%= @participant&.id %></p>
-  <p><strong>文字列化後:</strong> "<%= @is_host.to_s %>"</p>
+    <div class="action-section">
+      <%= button_to "ゲーム終了!", finish_game_room_game_play_path(@game_room), 
+          method: :patch, 
+          class: "finish-button",
+          data: { confirm: "本当に終了しますか？" } %>
+    </div>
+  </div>
 </div>
