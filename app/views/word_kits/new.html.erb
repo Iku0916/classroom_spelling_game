@@ -1,12 +1,39 @@
 <% content_for :title, "ゲームキット新規作成 | VocaBoom!" %>
 
-<h1>ゲームキット新規作成</h1>
+<div class="edit-page-container">
+  <h1 class="word-kit-index">新規キット作成</h1>
 
-<p>ゲームキット名</p>
+  <div class="edit-card-body" data-controller="nested-cards">
+    <%= form_with model: @word_kit, local: true do |f| %>
+      
+      <div style="margin-bottom: 30px;">
+        <label class="edit-section-title">キット名</label>
+        <%= f.text_field :name, class: "input-field", placeholder: "例：1年生 Unit1" %>
+      </div>
 
-  <%= form_with model: @word_kit, data: { turbo: false } do |f| %>
-    <div>
-      <%= f.text_field :name %>
+      <label class="edit-section-title">単語を追加</label>
+      <div id="existing-cards" data-nested-cards-target="container">
+        <%= f.fields_for :word_cards do |card_form| %>
+          <div class="card-row">
+            <%= card_form.text_field :english_word, placeholder: "英単語", class: "input-field" %>
+            <%= card_form.text_field :japanese_translation, placeholder: "日本語", class: "input-field" %>
+            <label style="color: #e74c3c; font-size: 12px; min-width: 40px; text-align: center;">
+              削除<br>
+              <%= card_form.check_box :_destroy %>
+            </label>
+          </div>
+        <% end %>
+      </div>
+
+      <button type="button" class="btn-add-word" data-action="nested-cards#add">
+        ＋ 新しい単語を追加
+      </button>
+
+      <%= f.submit "キットを作成！", class: "btn-update" %>
+    <% end %>
+    
+    <div class="back-link-container">
+      <%= link_to "一覧に戻る", word_kits_path, class: "back-link" %>
     </div>
-    <%= f.submit "ゲームキットを作る" %>
-  <% end %>
+  </div>
+</div>
