@@ -14,7 +14,7 @@
       <button data-action="click->menu#close" class="close-btn">×</button>
     </div>
     <ul class="menu-list">
-      <li class="menu-user">こんにちは <%= current_user ? current_user.name : "ゲストさん" %></li>
+      <li class="menu-user">こんにちは <%= current_user ? current_user.name : "ゲスト" %>さん</li>
       <li><%= link_to "ゲームを開く", word_kits_path, class: "menu-link" %></li>
       <li><%= link_to "ゲームキットを作る", new_word_kit_path, class: "menu-link" %></li>
       <li><%= link_to "ゲームに参加する", new_participant_path, class: "menu-link" %></li>

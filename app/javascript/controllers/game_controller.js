@@ -26,7 +26,11 @@ export default class extends Controller {
     const current = this.questions[this.index]
     if (!current) return
 
-    if (this.hasFeedbackTarget) this.feedbackTarget.textContent = ""
+    if (this.hasFeedbackTarget) {
+        this.feedbackTarget.textContent = ""
+        this.feedbackTarget.className = ""
+      }
+
     if (this.hasQuestionTarget) this.questionTarget.textContent = current.correct_answer
 
     const oldWordInput = document.querySelector('[data-controller="word-input"]')
@@ -96,14 +100,16 @@ export default class extends Controller {
     if (userAnswer.toLowerCase() === current.word.toLowerCase()) {
       if (this.hasFeedbackTarget) {
         this.feedbackTarget.textContent = "正解！🎉 +1ポイント"
-        this.feedbackTarget.style.color = "green"
+        // style.color の代わりにクラスをセット
+        this.feedbackTarget.className = "feedback-display feedback-correct"
       }
       if (scoreController) scoreController.add()
       this.waitingForNext = true
     } else {
       if (this.hasFeedbackTarget) {
         this.feedbackTarget.textContent = `ざんねん…😢 -1ポイント 正解は: ${current.word}`
-        this.feedbackTarget.style.color = "red"
+        // style.color の代わりにクラスをセット
+        this.feedbackTarget.className = "feedback-display feedback-incorrect"
       }
       if (scoreController) scoreController.subtract()
       this.isLocked = true
