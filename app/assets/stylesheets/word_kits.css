@@ -1,6 +1,6 @@
 .word-kit-index {
   font-family: 'Zen Maru Gothic', sans-serif;
-  margin-top: 130px;
+  margin-top: 30px;
   text-align: center;
   color: #2c3e50;
   font-size: 2.5rem;
@@ -13,6 +13,7 @@
   list-style: none;
   max-width: 1000px;
   margin: 0 auto;
+  padding-bottom: 30px;
 }
 
 .kit-card {
@@ -46,9 +47,9 @@
 /* 1. ページ全体のコンテナ（一覧画面の余白と合わせる） */
 .edit-page-container {
   max-width: 1000px; /* .kit-listと同じ幅 */
-  margin: 130px auto 40px; /* .word-kit-indexと同じmargin-top */
+  margin: 30px auto 40px; /* .word-kit-indexと同じmargin-top */
   font-family: 'Zen Maru Gothic', sans-serif; /* フォントを統一 */
-  padding: 0 20px;
+  padding: 0 20px 50px;
 }
 
 /* 2. 編集エリア本体（.kit-cardと同じスタイル） */
