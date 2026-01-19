@@ -253,16 +253,32 @@
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
 }
+.result-actions {
+  margin-top: 50px;
+  padding-bottom: 20px;
+  text-align: center;
+}
 
-/* 戻るボタンを可愛く */
+/* トップに戻るボタン（VocaBoom!標準スタイル） */
 .back-to-top {
   display: inline-block;
-  padding: 12px 30px;
-  background: #f0f0f0;
-  color: #666;
+  padding: 16px 45px;
+  background-color: #7B5CD6; /* メインカラーの紫 */
+  color: #fff !important;    /* 文字は絶対白 */
   text-decoration: none;
-  border-radius: 50px;
   font-weight: bold;
+  font-size: 1.1rem;
+  border-radius: 50px;       /* 共通の丸み */
+  box-shadow: 0 5px 0 #5a3eb3; /* 押しボタン風の立体感 */
+  transition: all 0.2s ease;
+}
+
+/* ホバー時の動き（沈み込む演出） */
+.back-to-top:hover {
+  background-color: #8a6de0;   /* 少し明るく */
+  transform: translateY(3px);  /* 3px沈む */
+  box-shadow: 0 2px 0 #5a3eb3; /* 影を薄くして「押した感」を出す */
+  text-decoration: none;
 }
 
 /* ローディング全体の配置 */

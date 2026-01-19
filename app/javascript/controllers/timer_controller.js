@@ -198,6 +198,12 @@ export default class extends Controller {
     }
   }
 
+  confirmFinish() {
+    if (confirm("本当に終了しますか？")) {
+      this.callFinish()
+    }
+  }
+
   async callFinish() {
     console.log('🏁 ゲーム終了を通知中...')
     
@@ -218,7 +224,7 @@ export default class extends Controller {
         
         setTimeout(() => {
           window.location.href = data.redirect_url
-        }, 3000)
+        }, 2000)
       } else {
         console.error('❌ リダイレクト条件を満たしていません:', data)
         alert('ゲーム終了に失敗しました')
