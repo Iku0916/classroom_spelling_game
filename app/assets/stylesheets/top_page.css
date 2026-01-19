@@ -1,3 +1,4 @@
+/* --- 1. 基本設定（html, body） --- */
 html, body {
   height: 100%;
   margin: 0;
@@ -10,75 +11,117 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  padding-top: 100px; /* ヘッダーの高さ分、コンテンツを下げる */
 }
 
+/* --- 2. ヘッダー（共通設定を統合） --- */
 header {
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
   z-index: 1000;
-
+  height: 80px;
+  
   display: flex;
-  width: 100%;
-  height: 100px;
+  justify-content: space-between; 
+  align-items: center;
+  padding: 0 50px;
+
   background-color: #7B5CD6;
-  box-shadow:
-    0 4px 0 rgba(0, 0, 0, 0.2),
-    0 10px 20px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2); 
+  font-family: 'Zen Maru Gothic', sans-serif;
+}
+
+/* ロゴエリア */
+.site-logo {
+  display: flex;
   align-items: center;
 }
 
-.menu_group {
-  list-style: none;
-  display: flex;
-  padding: 10px;
-  margin-left: auto;
-}
-
 .site-logo img {
-  height: 100px;
+  height: 50px; /* 重複を削除し50pxに統一 */
   width: auto;
+  transition: transform 0.2s;
 }
 
+.site-logo:hover img {
+  transform: scale(1.05);
+}
+
+/* 右側メニューグループ */
+.menu_group {
+  display: flex;
+  gap: 15px;
+  list-style: none;
+  margin: 0;
+  padding-right: 30px; /* 右端に寄りすぎないよう微調整 */
+}
+
+/* 白塗りボタン（ログイン・新規登録共通） */
+.menu_group a {
+  text-decoration: none;
+  background-color: white;
+  color: #7B5CD6;
+  font-weight: 900;
+  font-size: 0.95rem;
+  padding: 10px 30px; /* 左右の余白を調整 */
+  border-radius: 50px;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.menu_group a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  background-color: #f8f8f8;
+}
+
+.menu_group a:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* --- 3. メインビジュアル関連（重複を整理） --- */
 .title-logo {
-  width: 1000px;
-  margin: 0 auto;
   display: block;
-  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));
-  margin-bottom: -100px;
+  width: 100%; 
+  max-width: 1000px; 
+  height: auto;
+  margin: -80px auto 20px; 
+  transform: translateY(-20px); 
+  object-fit: contain;
 }
 
 .main-buttons {
   display: flex;
   justify-content: center;
-  gap: 24px; /* ボタン同士の間 */
+  gap: 24px;
   list-style: none;
   margin: 0 auto;
+  transform: translateY(-150px);
   padding: 0;
   position: relative;
   z-index: 10;
-  margin-top: -40px;
 }
 
 .main-button {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-
   width: 240px;
   padding: 22px 40px;
   background: #ffffff;
-
   color: #7B5CD6;
   border-radius: 20px;
-
   font-weight: bold;
-  font-size: bold;
   text-decoration: none;
-  box-shadow:
-    0 4px 0 rgba(0, 0, 0, 0.2),
-    0 10px 20px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2), 0 10px 20px rgba(0, 0, 0, 0.25);
   transition: all 0.2s ease;
-  position: relative;
-  z-index: 10;
+}
+
+.main-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.2), 0 12px 24px rgba(0, 0, 0, 0.3);
 }
