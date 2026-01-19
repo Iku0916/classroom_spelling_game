@@ -1,8 +1,43 @@
 <% content_for :title, "結果発表 | VocaBoom!" %>
-<h1>結果発表！</h1>
 
-<div>
-  <p><%= @participant.nickname %>さんの得点:<%= @participant.score %></p>
+<div class="result-container">
+  <div class="confetti-wrapper">
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+  </div>
+
+  <h1 class="result-title">結果発表！</h1>
+
+  <div class="score-card">
+    <div class="nickname-display"><%= @participant.nickname %> さんの結果</div>
+    
+    <div class="main-score">
+      <span class="score-number"><%= @participant.score %></span>
+      <span class="score-unit">点</span>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-label">正解数</div>
+        <div class="stat-value"><%= @participant.correct_answers_count %> / <%= @total_questions_count %></div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">正答率</div>
+        <div class="stat-value">
+          <% accuracy = @total_questions_count > 0 ? (@participant.correct_answers_count.to_f / @total_questions_count * 100).round : 0 %>
+          <%= accuracy %>%
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="action-section">
+    <%= link_to "トップに戻る", root_path, class: "back-button" %>
+  </div>
 </div>
-
-<%= link_to "トップに戻る", root_path %>

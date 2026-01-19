@@ -358,3 +358,377 @@
     opacity: 1;           /* くっきりする */
   }
 }
+
+/* --- 既存のスタイルと統一 --- */
+.result-container {
+  padding-top: 80px;
+  text-align: center;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  position: relative;
+  overflow: hidden; /* クラッカーがはみ出さないように */
+  min-height: 100vh;
+}
+
+.result-title {
+  font-size: 2.5rem;
+  color: #7B5CD6;
+  margin-bottom: 30px;
+  font-weight: 900;
+}
+
+/* --- ① スコアカード（真ん中にドン！） --- */
+.score-card {
+  background: white;
+  max-width: 500px;
+  margin: 0 auto 40px;
+  padding: 40px;
+  border-radius: 40px;
+  box-shadow: 0 15px 0 #f0f0f0, 0 20px 40px rgba(0,0,0,0.1);
+  border: 4px solid #7B5CD6;
+  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.nickname-display {
+  font-size: 1.2rem;
+  color: #666;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.main-score {
+  margin: 20px 0;
+}
+
+.score-number {
+  font-size: 8rem;
+  font-weight: 900;
+  color: #FF9F1C; /* Vocaオレンジ */
+  text-shadow: 4px 4px 0px #eee;
+  line-height: 1;
+}
+
+.score-unit {
+  font-size: 2rem;
+  color: #FF9F1C;
+  font-weight: 900;
+}
+
+/* --- ③ 正答率エリア --- */
+.stats-grid {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 2px dashed #ddd;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 5px;
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #7B5CD6;
+}
+
+/* --- ② クラッカー風アニメーション --- */
+.confetti-wrapper {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 10px;
+  height: 20px;
+  background: #FFD700;
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+}
+
+/* 簡易的なクラッカーの動き（8方向に飛び散る） */
+.confetti-piece:nth-child(1) { animation: bang 1s ease-out infinite; background: #FF708D; }
+.confetti-piece:nth-child(2) { animation: bang 1.2s ease-out infinite 0.1s; background: #9B7CF0; left: 45%; }
+.confetti-piece:nth-child(3) { animation: bang 1.1s ease-out infinite 0.2s; background: #FF9F1C; left: 55%; }
+.confetti-piece:nth-child(4) { animation: bang 1.3s ease-out infinite 0.15s; background: #4DB6AC; }
+
+@keyframes bang {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+  100% { transform: translate(calc(-50% + (var(--x, 1) * 200px)), calc(-50% + (var(--y, 1) * -200px))) rotate(45deg); opacity: 0; }
+}
+/* 個別に方向をばらす（簡易設定） */
+.confetti-piece:nth-child(1) { --x: 1; --y: 1; }
+.confetti-piece:nth-child(2) { --x: -1; --y: 1; }
+.confetti-piece:nth-child(3) { --x: 0.5; --y: -1.5; }
+.confetti-piece:nth-child(4) { --x: -0.5; --y: -1.5; }
+
+/* 戻るボタンの調整 */
+.back-button {
+  display: inline-block;
+  background: #7B5CD6;
+  color: white;
+  text-decoration: none;
+  padding: 15px 60px;
+  border-radius: 50px;
+  font-weight: bold;
+  box-shadow: 0 5px 0 #5a3eb1;
+  transition: all 0.2s;
+}
+
+.back-button:hover {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #5a3eb1;
+}
+
+/* 1文字ずつの入力ボックスの並び */
+.word-input-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 30px 0;
+  flex-wrap: wrap; /* 長い単語でも折り返せるように */
+}
+
+/* 1文字ずつのボックス単体 */
+.letter-box {
+  width: 50px;
+  height: 60px;
+  font-size: 2rem;
+  font-weight: 900;
+  text-align: center;
+  text-transform: none;
+  border: 3px solid #eee;
+  border-bottom: 5px solid #ddd;
+  border-radius: 12px;
+  background-color: white;
+  color: #7B5CD6;
+  transition: all 0.2s;
+}
+
+.letter-box:focus {
+  outline: none;
+  border-color: #FF9F1C;
+  border-bottom-color: #e68a00;
+  transform: translateY(-2px);
+}
+
+/* 問題ボックスをさらに強調 */
+.question-box {
+  background: #f9f9fb;
+  border: 3px solid #7B5CD6;
+  padding: 30px;
+  border-radius: 24px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.question-label {
+  font-size: 0.9rem;
+  color: #7B5CD6;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.question-text {
+  font-size: 2.5rem; /* 最大級に大きく！ */
+  font-weight: 900;
+  color: #2c3e50;
+  margin: 0;
+}
+
+/* 控えめになったタイマー */
+.timer-section-small {
+  background: #eee;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  border-radius: 50px;
+  margin-top: 20px;
+}
+
+.timer-display-mini {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #666;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 時間が少なくなってきたら赤くする用のクラス（JSで制御する場合） */
+.timer-low {
+  color: #e74c3c;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.game-main-card {
+  display: flex;
+  flex-direction: column; /* 下から上ではなく、上から下へ！ */
+  align-items: center;
+  background: white;
+  border-radius: 30px;
+  padding: 40px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+/* 1. 問題枠：最上部に固定 */
+.question-frame {
+  order: 1; /* 明示的に1番目 */
+  width: 100%;
+  border: 4px solid #7B5CD6;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.feedback-area { order: 3; }
+.game-footer { order: 4; }
+
+/* 枠の外に余白を作る */
+.question-frame {
+  margin-bottom: 40px !important; /* 下の入力欄との距離をしっかり取る */
+}
+
+/* 入力欄を横並びに整える */
+.word-input-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+/* 親要素（カード全体） */
+.game-main-card {
+  display: flex !important;
+  flex-direction: column !important; /* 絶対に上から下！ */
+  align-items: center;
+  gap: 20px; /* 要素同士の間に自動で隙間を作る */
+}
+
+/* 1. 問題枠 */
+.question-frame {
+  width: 100%;
+  box-sizing: border-box; /* 枠線がはみ出さないように */
+}
+
+/* 2. 入力フォーム（ここが問題の中に入らないようにする） */
+.word-input-container {
+  display: flex !important;
+  flex-wrap: wrap; /* 長い単語で崩れないように */
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 60px; /* 領域を確保 */
+}
+
+/* 3. 下部の要素 */
+.game-footer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* game-main-card の中身が意図しない順序にならないよう強制する */
+.game-main-card {
+  display: flex !important;
+  flex-direction: column !important; /* HTMLの記述順（上から下）を強制 */
+  align-items: center;
+}
+
+/* 問題枠と入力フォームの間にしっかりマージンを作る */
+.question-frame {
+  width: 100% !important;
+  margin-bottom: 40px !important; /* ここで物理的に距離を取る */
+}
+
+.word-input-container {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+/* 1. 親要素の並び順を「HTMLの記述順」に完全に固定する */
+.game-main-card {
+  display: flex !important;
+  flex-direction: column !important; 
+  align-items: center !important;
+  gap: 20px !important;
+}
+
+/* 2. 問題の枠（これが一番上！） */
+.question-frame {
+  order: 1 !important; /* 強制的に1番目 */
+  width: 100% !important;
+  margin-bottom: 20px !important;
+  background-color: #fcfaff !important;
+}
+
+/* 3. 入力フォームのコンテナ（これが問題のすぐ下！） */
+.word-input-container {
+  order: 2 !important; /* 強制的に2番目 */
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  width: 100% !important;
+  margin: 20px 0 !important;
+  padding: 10px 0 !important;
+}
+
+/* 4. 入力ボックス単体（中身が透けないように白くする） */
+.letter-box {
+  background-color: white !important;
+  border: 3px solid #eee !important;
+  border-bottom: 5px solid #ddd !important;
+  z-index: 10; /* 他の要素より手前に出す */
+}
+
+/* 5. タイマーやボタンなどのフッター（一番下） */
+.game-footer {
+  order: 3 !important; /* 強制的に3番目 */
+  width: 100% !important;
+}
+
+.play-container .game-main-card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  background: white !important;
+  border-radius: 30px !important;
+  padding: 40px !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1) !important;
+  min-height: 400px;
+}
+
+/* 問題枠：何があっても一番上 */
+.play-container .question-frame {
+  width: 100% !important;
+  border: 4px solid #7B5CD6 !important;
+  border-radius: 20px !important;
+  margin-bottom: 30px !important;
+  overflow: hidden !important;
+  /* 他の要素を中に入れないための呪文 */
+  display: block !important; 
+}
+
+/* 入力欄：枠の外、かつ枠の次 */
+.play-container .word-input-container {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  width: 100% !important;
+  margin: 20px 0 40px 0 !important;
+}

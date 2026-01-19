@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["question", "feedback"]
+  static targets = ["question", "feedback", "wordInputContainer"]
   static values = {
     questions: Array
   }
@@ -34,22 +34,23 @@ export default class extends Controller {
 
     const wordInputDiv = document.createElement("div")
     wordInputDiv.setAttribute("data-controller", "word-input")
+    wordInputDiv.className = "word-input-container"
 
     current.word.split("").forEach((char, idx) => {
       const input = document.createElement("input")
       input.type = "text"
       input.maxLength = 1
-      input.className = "letter-input"
+      input.className = "letter-box"
       input.setAttribute("data-word-input-target", "letter")
       input.setAttribute("data-index", idx.toString())
       wordInputDiv.appendChild(input)
     })
 
-    const questionEl = this.hasQuestionTarget ? this.questionTarget : null
-    if (questionEl && questionEl.parentNode) {
-      questionEl.parentNode.insertBefore(wordInputDiv, questionEl)
+    if (this.hasWordInputContainerTarget) {
+      this.wordInputContainerTarget.appendChild(wordInputDiv)
     } else {
-      console.warn("question element or parent not found")
+      // もしターゲットが見つからない場合の予備（古い挙動にならないように）
+      console.warn("wordInputContainer target not found")
     }
 
     const firstInput = wordInputDiv.querySelector('input')
