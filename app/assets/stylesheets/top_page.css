@@ -37,10 +37,11 @@ header {
 .site-logo {
   display: flex;
   align-items: center;
+  margin-left: -30px;
 }
 
 .site-logo img {
-  height: 50px; /* 重複を削除し50pxに統一 */
+  height: 60px;
   width: auto;
   transition: transform 0.2s;
 }
