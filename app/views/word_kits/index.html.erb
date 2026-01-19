@@ -9,9 +9,15 @@
         <div class="kit-actions">
           <%= link_to '編集', edit_word_kit_path(kit), class: "main-button small" %>
           <%= link_to "詳細", word_kit_path(kit), class: "main-button small" %>
-          <%= link_to '削除', word_kit_path(kit), data: { turbo_method: :delete, confirm: "削除しますか？" }, class: "main-button small danger" %>
+          <%= link_to '削除', word_kit_path(kit), data: { turbo_method: :delete, turbo_confirm: "削除しますか？" }, class: "main-button small danger" %>
         <%= button_to 'このゲームで遊ぶ！', game_rooms_path(word_kit_id: kit.id), method: :post, data: { turbo: false }, class: "main-button play" %>
         </div>
       </li>
     <% end %>
   </ul>
+
+  <%= link_to new_word_kit_path, class: "kit-card new-kit-link" do %>
+      <div class="new-kit-content">
+        <p>新しいキットを作る</p>
+      </div>
+  <% end %>

@@ -44,3 +44,5 @@
 .main-button.danger {
   color: #ff4d4d;
 }
+
+@import "flash_message";

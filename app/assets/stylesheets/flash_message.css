@@ -1,0 +1,63 @@
+/* フラッシュメッセージを包む位置 */
+.flash-message-container {
+  position: fixed;
+  top: 30px; /* 少し下げて余裕を */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  width: auto;
+  min-width: 300px;
+  pointer-events: none;
+}
+
+/* メッセージ本体：ぷっくり・丸文字・ポップ */
+.flash {
+  pointer-events: auto;
+  margin-bottom: 15px;
+  padding: 18px 40px;
+  border-radius: 50px; /* カプセル型にして可愛く */
+  
+  /* フォント設定：丸ゴシックを強制 */
+  font-family: 'Zen Maru Gothic', sans-serif !important;
+  font-weight: 800; /* かなり太めに */
+  font-size: 1.1rem;
+  text-align: center;
+  
+  /* ぷっくりさせる影と縁取り */
+  box-shadow: 0 8px 0px rgba(0, 0, 0, 0.05), 0 15px 30px rgba(0, 0, 0, 0.1);
+  border: 3px solid #fff; /* 白い縁取りでポップに */
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  animation: bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: all 0.5s ease;
+}
+
+/* 成功時：VocaBoomブルー（#6d93ff） */
+.flash.notice, .flash.success {
+  background-color: #6d93ff;
+  color: white;
+  text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
+}
+
+/* エラー時：元気なコーラルレッド */
+.flash.alert, .flash.error {
+  background-color: #ff7675;
+  color: white;
+  text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
+}
+
+/* 登場アニメーション（弾むように出す） */
+@keyframes bounceIn {
+  0% { transform: scale(0.5); opacity: 0; }
+  70% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* 消える時：スッと透明に */
+.flash.fade-out {
+  opacity: 0;
+  transform: scale(0.9) translateY(-20px);
+}
