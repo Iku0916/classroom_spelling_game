@@ -3,7 +3,7 @@ class GameRoomsController < ApplicationController
   def create
     @game_room = GameRoom.new(
       host_user: current_user,
-      game_code: SecureRandom.random_number(10**6).to_s.rjust(6),
+      game_code: SecureRandom.random_number(10**6).to_s.rjust(6, "0"),
       status: :waiting,
       time_limit: 300,
       word_kit_id: params[:word_kit_id]

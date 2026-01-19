@@ -699,3 +699,40 @@
   width: 100% !important;
   margin: 20px 0 40px 0 !important;
 }
+
+/* フィードバック全体の共通設定 */
+.feedback-display {
+  display: none;
+  font-weight: 900;
+  font-size: 1.5rem;
+  padding: 15px 30px;
+  border-radius: 20px;
+  margin: 20px auto;
+  animation: popInBounce 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.feedback-correct, .feedback-incorrect {
+  display: inline-block !important;
+}
+
+/* 正解：緑ベース */
+.feedback-correct {
+  background-color: #E8F5E9;
+  color: #2E7D32;
+  border: 3px solid #4CAF50;
+  box-shadow: 0 6px 0 #388E3C;
+}
+
+/* 不正解：赤ベース */
+.feedback-incorrect {
+  background-color: #FFEBEE;
+  color: #C62828;
+  border: 3px solid #EF5350;
+  box-shadow: 0 6px 0 #D32F2F;
+}
+
+/* 出てくる時のアニメーション */
+@keyframes popInBounce {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
