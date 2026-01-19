@@ -1,7 +1,7 @@
 /* ロビー全体のレイアウト */
 .lobby-container {
   max-width: 800px;
-  margin: 130px auto 40px;
+  margin: 30px auto 40px;
   text-align: center;
   font-family: 'Zen Maru Gothic', sans-serif;
   padding: 0 20px;
@@ -99,7 +99,7 @@
 /* 外枠のコンテナ */
 .play-container {
   max-width: 900px;
-  margin: 80px auto;
+  margin: 30px auto;
   padding: 40px;
   text-align: center;
   font-family: 'Zen Maru Gothic', sans-serif;
@@ -560,8 +560,9 @@
   align-items: center;
   background: white;
   border-radius: 30px;
-  padding: 40px;
+  padding: 30px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  margin-top: -50px;
 }
 
 /* 1. 問題枠：最上部に固定 */

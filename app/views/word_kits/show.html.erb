@@ -10,14 +10,14 @@
 
     <ul class="kit-list">
       <% @questions.each do |card| %>
-        <li class="card-row detail-row">
+        <li class="detail-row">
           <div class="word-display-group">
             <div class="word-box en-box">
               <%= card.english_word %>
             </div>
             
             <div class="word-divider">
-              <i class="fas fa-arrow-right"></i> <span>/</span>
+              <i class="fas fa-arrow-right"></i>
             </div>
 
             <div class="word-box jp-box">
@@ -28,7 +28,7 @@
       <% end %>
     </ul>
 
-    <div class="kit-actions detail-footer">
+    <div class="detail-actions">
       <%= link_to edit_word_kit_path(@word_kit), class: "btn-update btn-link" do %>
         <span>編集する</span>
       <% end %>
@@ -38,4 +38,3 @@
       <%= link_to "← 一覧へ戻る", word_kits_path, class: "back-link" %>
     </div>
   </div>
-</div>
