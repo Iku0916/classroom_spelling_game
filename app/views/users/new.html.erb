@@ -1,22 +1,33 @@
-<% content_for :title, "新規登録| VocaBoom!" %>
+<% content_for :title, "新規登録 | VocaBoom!" %>
 
-<h1>新規登録</h1>
+<div class="auth-container">
+  <div class="auth-card">
+    <h1 class="auth-title">新規登録</h1>
 
-<%= form_with model: @user, url: signup_path do |f| %>
-  <div>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= form_with model: @user, url: signup_path, data: { turbo: false }, class: "auth-form" do |f| %>
+      
+      <div class="input-group">
+        <%= f.label :name, "ニックネーム" %>
+        <%= f.text_field :name, placeholder: "ボカブームくん" %>
+      </div>
+
+      <div class="input-group">
+        <%= f.label :email, "メールアドレス" %>
+        <%= f.email_field :email, placeholder: "example@vocaboom.com" %>
+      </div>
+      
+      <div class="input-group">
+        <%= f.label :password, "パスワード" %>
+        <%= f.password_field :password, placeholder: "6文字以上" %>
+      </div>
+
+      <div class="auth-actions">
+        <%= f.submit "新規登録", class: "btn-main" %>
+      </div>
+    <% end %>
+
+    <div class="auth-footer">
+      <%= link_to "すでにアカウントをお持ちの方", login_path %>
+    </div>
   </div>
-
-  <div>
-    <%= f.label :email %>
-    <%= f.email_field :email %>
-  </div>
-  
-  <div>
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-  </div>>
-
-  <%= f.submit "新規登録" %>
-<% end %>
+</div>
