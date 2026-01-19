@@ -27,7 +27,7 @@
       <%= button_to "ゲーム終了!", finish_game_room_game_play_path(@game_room), 
           method: :patch, 
           class: "finish-button",
-          data: { confirm: "本当に終了しますか？" } %>
+          data: { turbo_confirm: "本当に終了しますか？" } %>
     </div>
   </div>
 </div>

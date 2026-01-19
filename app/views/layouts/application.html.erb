@@ -11,18 +11,40 @@
   </head>
 
   <body>
-    <% if logged_in? %>
-      <%= render 'shared/header' %>
-    <% else %>
-      <%= render 'shared/before_login_header' %>
-    <% end %>
+      <% if logged_in? %>
+        <%= render 'shared/header' %>
+      <% else %>
+        <%= render 'shared/before_login_header' %>
+      <% end %>
 
-    <% flash.each do |type, message| %>
-        <div class="flash <%= type %>">
-          <%= message %>
-        </div>
-    <% end %>
+      <div class="flash-message-container">
+        <% flash.each do |type, message| %>
+          <div class="flash <%= type %>">
+            <%= message %>
+          </div>
+        <% end %>
+      </div>
 
-    <%= yield %>
-  </body>
+      <%= yield %>
+
+      <script>
+        // 共通の処理を関数にまとめる
+        const handleFlash = () => {
+          // HTMLのクラス名 "flash" を探すように修正
+          const flashMessages = document.querySelectorAll('.flash');
+          
+          flashMessages.forEach(message => {
+            setTimeout(() => {
+              message.classList.add('fade-out');
+              setTimeout(() => {
+                message.remove();
+              }, 500);
+            }, 3000);
+          });
+        };
+
+        document.addEventListener('turbo:load', handleFlash);
+        document.addEventListener('DOMContentLoaded', handleFlash);
+      </script>
+    </body>
 </html>

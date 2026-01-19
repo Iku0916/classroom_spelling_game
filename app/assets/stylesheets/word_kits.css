@@ -13,7 +13,10 @@
   list-style: none;
   max-width: 1000px;
   margin: 0 auto;
-  padding-bottom: 30px;
+  padding: 0 20px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .kit-card {
@@ -254,4 +257,54 @@
 .input-field::placeholder {
   color: #bbb;
   font-size: 0.9rem;
+}
+
+.new-kit-link {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  max-width: 400px;
+  margin: -20px auto;     /* 上下に余裕を持たせて中央配置 */
+  padding: 12px 24px;
+
+  background-color: #f9f9fb;   /* .input-fieldと同じ背景色 */
+  border: 2px dashed #7B5CD6;  /* .btn-add-wordと同じ点線スタイル */
+  border-radius: 50px;         /* .btn-updateと同じ丸み */
+  transition: all 0.3s ease;
+}
+
+.new-kit-link:hover {
+  background-color: #7B5CD6;   /* ホバーでVocaBoomカラーに */
+  border-style: solid;         /* 点線を実線に */
+  transform: translateY(-3px); /* 既存カードと同じ浮き方 */
+  box-shadow: 0 8px 20px rgba(123, 92, 214, 0.3); /* 紫系の影 */
+}
+
+/* ボタンの中身のテキスト */
+.new-kit-content p {
+  color: #7B5CD6;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: 1.1rem;           /* .btn-updateと合わせる */
+  font-weight: bold;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* プラス記号のデザイン */
+.new-kit-content p::before {
+  content: "＋";
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #7B5CD6;
+  line-height: 1;
+}
+
+/* ホバー時に中身を白くする（統一アクション） */
+.new-kit-link:hover .new-kit-content p,
+.new-kit-link:hover .new-kit-content p::before {
+  color: #ffffff;
 }
