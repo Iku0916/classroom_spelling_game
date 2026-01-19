@@ -308,3 +308,82 @@
 .new-kit-link:hover .new-kit-content p::before {
   color: #ffffff;
 }
+
+/* 1. リスト全体の幅を親に合わせる */
+.edit-page-container .kit-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 40px;
+  width: 100%;
+}
+
+/* 2. 各行の背景（グレーの枠）の幅を統一 */
+.edit-page-container .detail-row {
+  display: flex;
+  align-items: center;
+  padding: 18px 25px;
+  background: #f8f9fa;
+  border-radius: 16px;
+  margin-bottom: 15px;
+  border: 1px solid #eee;
+  width: 100%;
+  box-sizing: border-box; /* paddingで横に飛び出すのを防ぐ */
+}
+
+/* 3. 英単語・矢印・日本語の並びをピシッと揃える */
+.edit-page-container .word-display-group {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.edit-page-container .word-box {
+  flex: 1; /* 左右に同じ幅を持たせて中央を固定する */
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.edit-page-container .en-box {
+  color: #7B5CD6;
+  text-align: left;
+}
+
+.edit-page-container .jp-box {
+  color: #2c3e50;
+  text-align: right;
+}
+
+.edit-page-container .word-divider {
+  width: 60px; /* 矢印のスペースを固定 */
+  text-align: center;
+  color: #bdc3c7;
+  flex-shrink: 0;
+}
+
+/* 4. 「編集する」ボタンエリア（はみ出し防止 & 中央寄せ） */
+.edit-page-container .detail-footer {
+  width: 100%;             /* 親の幅いっぱいに広げる */
+  display: flex;           /* 中のボタンを動かせるようにする */
+  justify-content: center; /* 中のボタンを真ん中に寄せる */
+  align-items: center;
+  margin: 40px auto 20px;  /* 上下に余白を作りつつ、自身も中央へ */
+  padding: 0;              /* 余計な余白をリセット */
+}
+
+.edit-page-container .btn-link.btn-update {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  width: 100%;           
+  max-width: 400px;      /* これで適切なサイズに制限 */
+  
+  margin: 0 auto;        /* 念のため自身でも中央寄せ */
+  padding: 16px 0;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.edit-page-container .btn-link.btn-update span {
+  color: white;
+}
