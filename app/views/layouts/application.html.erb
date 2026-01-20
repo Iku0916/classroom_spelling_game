@@ -28,9 +28,8 @@
       <%= yield %>
 
       <script>
-        // 共通の処理を関数にまとめる
-        const handleFlash = () => {
-          // HTMLのクラス名 "flash" を探すように修正
+        // 1. 関数の二重定義を防ぐために、windowオブジェクトに持たせる
+        window.handleFlash = window.handleFlash || (() => {
           const flashMessages = document.querySelectorAll('.flash');
           
           flashMessages.forEach(message => {
@@ -41,10 +40,11 @@
               }, 500);
             }, 3000);
           });
-        };
+        });
 
-        document.addEventListener('turbo:load', handleFlash);
-        document.addEventListener('DOMContentLoaded', handleFlash);
+        // 2. Turboでの遷移時と初回読み込み時の両方で実行
+        document.addEventListener('turbo:load', () => window.handleFlash());
+        document.addEventListener('DOMContentLoaded', () => window.handleFlash());
       </script>
     </body>
 </html>
