@@ -16,7 +16,7 @@ class WordKitsController < ApplicationController
     if @word_kit.save
         redirect_to word_kits_path, notice: "キットを作成しました"
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -59,7 +59,7 @@ class WordKitsController < ApplicationController
     if @word_kit.update(word_kit_params)
       redirect_to word_kits_path, notice: '更新しました'
     else
-      redirect_to word_kits_path, alert: '変更はありませんでした'
+      render :edit, status: :unprocessable_entity
     end
   end
 

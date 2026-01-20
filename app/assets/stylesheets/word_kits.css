@@ -113,10 +113,15 @@
   font-weight: bold;
   cursor: pointer;
   box-shadow: 0 4px 0 #5a3eb3;
-  width: 100%;
-  margin-top: 20px;
+  
+  width: 100%;           /* 基本は親いっぱい */
+  max-width: 400px;      /* でも400px以上には大きくならない */
+  display: flex;         /* aタグ（link_to）でも崩れないように */
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;     /* 上下に余白を作りつつ、中央に寄せる */
+  text-decoration: none; /* リンクの下線を消す */
 }
-
 .btn-add-word {
   background: none;
   border: 2px dashed #7B5CD6;
@@ -266,9 +271,8 @@
   align-items: center;
   
   max-width: 400px;
-  margin: -20px auto;     /* 上下に余裕を持たせて中央配置 */
+  margin: -20px auto 60px auto;     /* 上下に余裕を持たせて中央配置 */
   padding: 12px 24px;
-
   background-color: #f9f9fb;   /* .input-fieldと同じ背景色 */
   border: 2px dashed #7B5CD6;  /* .btn-add-wordと同じ点線スタイル */
   border-radius: 50px;         /* .btn-updateと同じ丸み */
