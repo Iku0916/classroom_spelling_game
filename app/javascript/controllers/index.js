@@ -2,34 +2,6 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application"
-
-import GameButtonController from "./game_button_controller"
-application.register("game-button", GameButtonController)
-
-import GameController from "./game_controller"
-application.register("game", GameController)
-
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
-
-import MenuController from "./menu_controller"
-application.register("menu", MenuController)
-
-import ModalController from "./modal_controller"
-application.register("modal", ModalController)
-
-import NestedCardsController from "./nested_cards_controller"
-application.register("nested-cards", NestedCardsController)
-
-import ScoreController from "./score_controller"
-application.register("score", ScoreController)
-
-import TimerController from "./timer_controller"
-application.register("timer", TimerController)
-
-import WordCardsPreviewController from "./word_cards_preview_controller"
-application.register("word-cards-preview", WordCardsPreviewController)
-
-import WordInputController from "./word_input_controller"
-application.register("word-input", WordInputController)
+import { application } from "controllers/application"
+import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
+eagerLoadControllersFrom("controllers", application)
