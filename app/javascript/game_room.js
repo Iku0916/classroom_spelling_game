@@ -1,4 +1,4 @@
-import consumer from "./channels/consumer"
+import consumer from "channels/consumer"
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log('=== game_room.js 読み込み完了 ===');
