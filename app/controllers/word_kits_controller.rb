@@ -56,24 +56,17 @@ class WordKitsController < ApplicationController
   def update
     @word_kit = current_user.word_kits.find(params[:id])
 
-    # 1. フォームの値をセット（この時点ではまだ保存されない）
     @word_kit.assign_attributes(word_kit_params)
 
-    # 2. 【重要】親(Kit)または子(Cards)のいずれかに変更があるかチェック
-    # marked_for_destructionは削除チェックを入れた場合も検知します
     has_changes = @word_kit.changed? || @word_kit.word_cards.any? { |c| c.changed? || c.marked_for_destruction? }
 
     if !has_changes
-      # 変更が一切ないなら、保存せずにリダイレクト（これでデザイン崩れを回避！）
       redirect_to word_kits_path, notice: '変更はありませんでした'
-      return # ここで処理を終了させる
+      return
     end
-
-    # 3. 変更がある場合のみ保存を実行
     if @word_kit.save
       redirect_to word_kits_path, notice: '更新しました'
     else
-      # バリデーションエラー等の場合
       render :edit, status: :unprocessable_entity
     end
   end
