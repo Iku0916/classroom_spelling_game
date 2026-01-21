@@ -7,7 +7,7 @@
 <div class="play-container"
   data-turbo="false"
   data-controller="game timer score"
-  data-game-room-id="<%= @game_room.id %>"
+  data-score-game-room-id-value="<%= @game_room.id %>"
   data-timer-game-room-id-value="<%= @game_room.id %>"
   data-timer-time-limit-value="<%= @game_room.time_limit %>"
   data-timer-started-at-value="<%= @game_room.started_at.iso8601 if @game_room.started_at %>"
@@ -18,34 +18,17 @@
   data-participant-id="<%= @participant&.id %>">
 
   <div class="game-main-card">
-    <%# --- 1. 問題（ここで一旦完結させる！） --- %>
     <div class="question-frame">
-    <div class="question-header">QUESTION</div>
-    <div class="question-content">
-      <p class="question-text" data-game-target="question">
-        <%= @current_question[:correct_answer] %>
-      </p>
-    </div>
-  </div>
-
-  <%# --- 2. JavaScriptがここに入力欄を流し込むための「空き地」 --- %>
-  <div data-game-target="wordInputContainer"></div>
-    <%# ここは空っぽでOK！JSが自動で中身を入れます %>
-
-    <%# --- 2. 入力フォーム（枠の外に出す） --- %>
-    <% if @current_question %>
-      <div class="word-input-container" data-controller="word-input">
-        <% @current_question[:word].chars.each_with_index do |char, index| %>
-          <input type="text" maxlength="1"
-                 class="letter-box"
-                 data-word-input-target="letter"
-                 data-action="input->word-input#handleInput keydown->word-input#handleKeydown"
-                 data-index="<%= index %>">
-        <% end %>
+      <div class="question-header">QUESTION</div>
+      <div class="question-content">
+        <p class="question-text" data-game-target="question">
+          <%= @current_question[:correct_answer] %>
+        </p>
       </div>
-    <% end %>
+    </div>
 
-    <%# --- 3. タイマー & 操作系（控えめに下部へ） --- %>
+    <div data-game-target="wordInputContainer"></div>
+
     <div class="game-footer">
       <div class="timer-section-small">
         <span class="timer-display-mini" data-timer-target="display">--:--</span>
@@ -63,9 +46,7 @@
     </div>
   </div>
 
-  <%# スコアバッジ %>
   <div class="score-badge">
     SCORE: <span data-score-target="value" class="score-number">0</span>
   </div>
 </div>
-
