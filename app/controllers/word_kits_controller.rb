@@ -53,17 +53,21 @@ class WordKitsController < ApplicationController
      @word_kit = current_user.word_kits.find(params[:id])
   end
 
-  def update
+def update
     @word_kit = current_user.word_kits.find(params[:id])
 
-    if @word_kit.update(word_kit_params)
-      if @word_kit.saved_changes?
+    @word_kit.assign_attributes(word_kit_params)
+
+    has_changes = @word_kit.changed?
+
+    if has_changes
+      if @word_kit.save
         redirect_to word_kits_path, notice: '更新しました'
       else
-        redirect_to word_kits_path, notice: '変更はありませんでした'
+        render :edit, status: :unprocessable_entity
       end
     else
-      render :edit, status: :unprocessable_entity
+      redirect_to word_kits_path, notice: '変更はありませんでした'
     end
   end
 
