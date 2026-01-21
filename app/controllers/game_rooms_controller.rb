@@ -1,4 +1,5 @@
 class GameRoomsController < ApplicationController
+  before_action :require_login, except: [:join, :show, :waiting]
 
   def create
     @game_room = GameRoom.new(
