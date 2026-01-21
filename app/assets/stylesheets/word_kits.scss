@@ -391,3 +391,11 @@
 .edit-page-container .btn-link.btn-update span {
   color: white;
 }
+
+.field_with_errors {
+  display: contents;
+}
+
+.field_with_errors input {
+  border: 2px solid #e53e3e !important;
+}
