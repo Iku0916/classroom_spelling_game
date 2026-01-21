@@ -14,4 +14,10 @@ class ApplicationController < ActionController::Base
     @current_guest
   end
   helper_method :current_guest
+
+  private
+
+  def not_authenticated
+    redirect_to login_path, alert: "ログインしてください"
+  end
 end

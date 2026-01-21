@@ -4,5 +4,5 @@ class WordKit < ApplicationRecord
   has_many :game_rooms, dependent: :destroy
   belongs_to :user
 
-  validates :name, presence: true
+  validates :name, presence: { message: "ゲームキット名を入力してください" }
 end

@@ -3,12 +3,22 @@
 <%= image_tag "vocano_title_logo.png", alt: "Vocano!", class: "title-logo"%>
   <ul class="main-buttons">
     <li>
-      <%= link_to 'ゲームを開く', word_kits_path, class: "main-button" %>
+      <% if logged_in? %>
+        <%= link_to 'ゲームを開く', word_kits_path, class: "main-button" %>
+      <% else %>
+        <%= link_to 'ログインしてゲームを開く', login_path, class: "main-button highlight" %>
+      <% end %>
     </li>
+
     <li>
-      <%= link_to 'ゲームキットを作る', new_word_kit_path, class: "main-button" %>
+      <% if logged_in? %>
+        <%= link_to 'ゲームキットを作る', new_word_kit_path, class: "main-button" %>
+      <% else %>
+        <%= link_to 'ゲームキットを作る', login_path, class: "main-button" %>
+      <% end %>
     </li>
+
     <li>
-      <%= link_to 'ゲームに参加する', new_participant_path, class: "main-button" %>
+      <%= link_to 'ゲームに参加する', new_participant_path, class: "main-button secondary" %>
     </li>
   </ul>
