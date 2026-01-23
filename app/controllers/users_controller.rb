@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to login_path, notice: '新規登録が完了しました！'
     else
-      render new, status: unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
