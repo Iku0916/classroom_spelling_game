@@ -3,6 +3,7 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   config.hosts << "vocano-spelling-game.onrender.com"
+  config.hosts << "vocano-spelling-game-ver2.onrender.com"
   # Code is not reloaded between requests.
   config.enable_reloading = false
 
