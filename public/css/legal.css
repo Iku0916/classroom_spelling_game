@@ -1,0 +1,133 @@
+/* 1. 全体背景とフォントの設定 */
+body {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  margin: 0;
+  padding: 40px 20px;
+  
+  
+  /* ポイント：画像パスをルート（/）から指定する */
+  background-image: url("/assets/background.png"); 
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  /* 万が一画像が読み込めない時のためのバックアップ色（Vocano紫の薄い版） */
+  background-color: #f3f0ff; 
+  
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 2. メインコンテンツのカード（auth-cardに寄せたスタイル） */
+.container {
+  background-color: rgba(255, 255, 255, 0.95); /* 少しだけ透明にして背景を馴染ませる */
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 50px;
+  border-radius: 40px; /* Vocano!らしい大きな丸み */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  border: 6px solid #f0f0f0;
+  box-sizing: border-box;
+}
+
+/* 3. タイトルエリア */
+h1 {
+  color: #7B5CD6;
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 900;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
+}
+
+.date {
+  text-align: right;
+  color: #888;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 40px;
+}
+
+/* 4. 各セクションの装飾（auth-titleの雰囲気を継承） */
+h2 {
+  color: #ffffff;
+  background: #7B5CD6;
+  display: inline-block;
+  padding: 8px 25px;
+  border-radius: 15px;
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 0 #5e44a8; /* 立体的なボタン風 */
+}
+
+/* 5. 本文・リストの調整 */
+p, li {
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+ul {
+  padding-left: 20px;
+  list-style-type: none;
+}
+
+ul li::before {
+  content: "●";
+  color: #7B5CD6;
+  display: inline-block;
+  width: 1.2em;
+  margin-left: -1.2em;
+  font-size: 0.8em;
+}
+
+/* 6. お問い合わせセクション等の強調 */
+strong {
+  color: #7B5CD6;
+  font-weight: 900;
+}
+
+/* 7. 下部リンクボタン（auth-actionsのボタンに寄せたスタイル） */
+.footer-nav {
+  margin-top: 60px;
+  text-align: center;
+  border-top: 3px dashed #eee; /* 可愛い点線区切り */
+  padding-top: 30px;
+}
+
+.footer-nav a {
+  display: inline-block;
+  padding: 12px 40px;
+  background-color: #6a5acd;
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 900;
+  font-size: 1.1rem;
+  box-shadow: 0 5px 0 #483d8b;
+  transition: all 0.2s ease;
+}
+
+.footer-nav a:hover {
+  transform: translateY(-3px);
+  background-color: #7B5CD6;
+  box-shadow: 0 8px 15px rgba(106, 90, 205, 0.3);
+}
+
+.footer-nav a:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #483d8b;
+}
+
+/* スマホ対応 */
+@media (max-width: 600px) {
+  .container {
+    padding: 30px 20px;
+    border-radius: 25px;
+  }
+  h1 { font-size: 1.8rem; }
+}

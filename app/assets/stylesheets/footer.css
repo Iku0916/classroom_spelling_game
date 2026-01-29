@@ -1,0 +1,52 @@
+/* 1. フッターを「檻（コンテナ）」から解放する設定 */
+.vocano-footer {
+  display: block !important;
+  width: 100% !important;
+  margin: 50px 0 0 0 !important;
+  padding: 40px 0 !important;
+  text-align: center !important; /* これが文字を中央に寄せる */
+  clear: both !important;
+  background-color: rgba(255, 255, 255, 0.1);
+  font-family: 'Zen Maru Gothic', sans-serif;
+}
+
+/* 2. リンクを横に並べて中央に置く */
+.footer-nav {
+  display: flex !important;
+  justify-content: center !important; /* 横方向中央 */
+  align-items: center !important;
+  gap: 20px;
+  margin-bottom: 15px;
+  flex-wrap: wrap; /* スマホで折り返す */
+}
+
+/* 3. リンク自体の装飾 */
+.footer-link, 
+.footer-nav a {
+  color: #7B5CD6 !important;
+  text-decoration: none !important;
+  font-weight: 900 !important;
+  font-size: 0.95rem;
+  transition: opacity 0.2s;
+}
+
+.footer-link:hover {
+  opacity: 0.7;
+}
+
+/* 4. コピーライト */
+.copyright {
+  color: #888 !important;
+  font-size: 0.8rem;
+  margin: 0 !important;
+  display: block !important;
+  text-align: center !important;
+}
+
+/* スマホ対応 */
+@media (max-width: 480px) {
+  .footer-nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

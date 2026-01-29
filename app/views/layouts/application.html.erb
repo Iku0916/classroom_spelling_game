@@ -7,6 +7,8 @@
     <%= csp_meta_tag %>
     <link rel="icon" href="<%= asset_path('favicon.png') %>" type="image/x-icon">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", media: "all" %>
+    <%= stylesheet_link_tag "footer", media: "all" %>
     <%= javascript_importmap_tags %>
   </head>
 
@@ -26,7 +28,8 @@
       </div>
 
       <%= yield %>
-
+      
+      <%= render 'shared/footer' %>
       <script>
         // 1. 関数の二重定義を防ぐために、windowオブジェクトに持たせる
         window.handleFlash = window.handleFlash || (() => {
