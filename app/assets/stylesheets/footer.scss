@@ -1,4 +1,11 @@
 /* 1. フッターを「檻（コンテナ）」から解放する設定 */
+body {
+  background-image: asset-url("background.png"); 
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
 .vocano-footer {
   display: block !important;
   width: 100% !important;
