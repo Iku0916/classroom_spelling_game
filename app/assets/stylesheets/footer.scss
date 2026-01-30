@@ -1,6 +1,6 @@
 /* 1. フッターを「檻（コンテナ）」から解放する設定 */
 body {
-  background-image: asset-url("background.png"); 
+  background-image: url("/background.png") !important;
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
