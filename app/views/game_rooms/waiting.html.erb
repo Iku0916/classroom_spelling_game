@@ -1,16 +1,59 @@
 <% content_for :title, "ゲームに参加する | Vocano!" %>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 <div class="lobby-container" id='game_waiting' data-room-id="<%= @game_room.id %>">
   <div class="edit-card-body">
     
     <div class="dot-loader">
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
     </div>
 
     <h2 class="waiting-status">ゲームが始まるのを待っています...</h2>
-    
+
+    <div class="tutorial-slider">
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          
+          <div class="swiper-slide">
+            <div class="slide-container">
+              <span class="step-label label-purple">STEP 1</span>
+              <%= image_tag "step1.png", class: "tutorial-img", style: "width: 100%; max-width: 320px; height: auto; object-fit: contain; margin: 10px auto; display: block;" %>
+              <div class="instruction-box"><p>英単語を入力して送信！ <br> OK! or エンターキー</p></div>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="slide-container">
+              <span class="step-label label-purple">STEP 2</span>
+              <%= image_tag "step2.png", class: "tutorial-img", style: "width: 100%; max-width: 320px; height: auto; object-fit: contain; margin: 10px auto; display: block;" %>
+              <div class="instruction-box"><p>正解でポイントGET！</p></div>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="slide-container">
+              <span class="step-label label-purple">STEP 3</span>
+              <%= image_tag "step3.png", class: "tutorial-img", style: "width: 100%; max-width: 320px; height: auto; object-fit: contain; margin: 10px auto; display: block;" %>
+              <div class="instruction-box"><p>不正解はマイナス！ <br> 正しいスペルを確認しよう！</p></div>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="slide-container">
+              <span class="step-label label-purple">STEP 4</span>
+              <%= image_tag "step4.png", class: "tutorial-img", style: "width: 100%; max-width: 320px; height: auto; object-fit: contain; margin: 10px auto; display: block;" %>
+              <div class="instruction-box"><p>高得点を目指そう！</p></div>
+            </div>
+          </div>
+
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
     <div class="status-box">
       <p class="lobby-title">ホストが開始ボタンを押すと<br>自動的にゲームが始まります！</p>
     </div>
@@ -21,3 +64,28 @@
 
   </div>
 </div>
+
+<script>
+  document.addEventListener('turbo:load', function() {
+    const swiperEl = document.querySelector(".mySwiper");
+    if (!swiperEl) return;
+
+    const swiper = new Swiper(".mySwiper", {
+      // 💡 エフェクトを「slide」に変更（デフォルト）
+      effect: "slide", 
+      grabCursor: true,
+      loop: false,
+      centeredSlides: true, // 中央に配置
+      slidesPerView: 1,     // 1画面に1枚
+      spaceBetween: 20,     // スライド間の隙間
+      autoplay: { 
+        delay: 5000, 
+        disableOnInteraction: false 
+      },
+      pagination: { 
+        el: ".swiper-pagination", 
+        clickable: true 
+      },
+    });
+  });
+</script>
