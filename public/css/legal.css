@@ -6,7 +6,7 @@ body {
   
   
   /* ポイント：画像パスをルート（/）から指定する */
-  background-image: url("/assets/background.png"); 
+  background-image: url("/background.png") !important;
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
