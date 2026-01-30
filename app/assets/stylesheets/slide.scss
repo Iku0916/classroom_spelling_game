@@ -1,0 +1,68 @@
+/* 親から繋げることで、外部ライブラリに絶対に負けないように指定 */
+.lobby-container .tutorial-slider {
+  width: 90% !important; 
+  max-width: 450px;
+  height: auto !important;
+  margin: 20px auto !important;
+  padding: 0 !important;
+
+  .swiper {
+    width: 100% !important;
+    padding-bottom: 40px !important;
+  }
+
+  /* 白いカード部分 */
+  .swiper-slide {
+    background: #fff !important;
+    border-radius: 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 20px !important;
+    box-sizing: border-box !important;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05) !important;
+  }
+
+  /* 💡 STEPラベル（バッジ） */
+  .step-label {
+    display: inline-block !important;
+    padding: 6px 24px !important;
+    border-radius: 50px !important;
+    font-size: 0.85rem !important;
+    font-weight: 900 !important;
+    color: #ffffff !important;
+    margin-bottom: 15px !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15) !important;
+    text-transform: uppercase !important;
+    
+    /* 💡 ここで色を指定し、これ以降に &.label-purple などを書かない！ */
+    background: linear-gradient(135deg, #9D7BEA, #7B5CD6) !important;
+  }
+
+  /* 💡 画像（暴走防止） */
+  .tutorial-img {
+    width: 100% !important;
+    max-width: 320px !important; 
+    height: auto !important;
+    border-radius: 12px !important;
+    margin: 10px auto !important;
+    object-fit: contain !important;
+    display: block !important;
+  }
+
+  /* 💡 説明テキスト */
+  .instruction-box {
+    margin-top: 15px !important;
+    p {
+      font-size: 1.1rem !important;
+      font-weight: bold !important;
+      color: #444 !important;
+      background: #f8f5ff !important;
+      padding: 10px 20px !important;
+      border-radius: 12px !important;
+      display: inline-block !important;
+      margin: 0 !important;
+      line-height: 1.5 !important;
+    }
+  }
+}
