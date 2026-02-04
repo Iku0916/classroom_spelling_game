@@ -53,7 +53,6 @@ export default class extends Controller {
     if (this.hasWordInputContainerTarget) {
       this.wordInputContainerTarget.appendChild(wordInputDiv)
     } else {
-      // もしターゲットが見つからない場合の予備（古い挙動にならないように）
       console.warn("wordInputContainer target not found")
     }
 

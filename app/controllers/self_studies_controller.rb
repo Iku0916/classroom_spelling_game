@@ -2,6 +2,13 @@ class SelfStudiesController < ApplicationController
   def show
     @word_kit = WordKit.find_by(id: params[:id])
 
+    @questions = @word_kit.word_cards.map do |word|
+        {
+          word: word.english_word,
+          correct_answer: word.japanese_translation
+        }
+    end
+
     if @word_kit.nil?
       redirect_to word_kits_path, alert: "ゲームキットが見つかりませんでした"
       return

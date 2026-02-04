@@ -5,41 +5,34 @@
 <% end %>
 
 <div class="play-container"
-  data-turbo="false"
-  data-controller="game timer score"
-  data-game-questions-value="<%= @questions.to_json %>">
+  data-controller="self-study"
+  data-self-study-questions-value="<%= @questions.to_json %>"
+  data-self-study-time-limit-value="60"
+  data-self-study-answer-url-value="<%= answer_self_study_path(@word_kit) %>">
 
-  <div class="game-main-card">
-    <div class="question-frame">
-      <div class="question-header">QUESTION</div>
-      <div class="question-content">
-        <p class="question-text" data-game-target="question">
-          <%= @current_question[:correct_answer] %>
-        </p>
-      </div>
+  <div class="game-header">
+    <div class="timer-box">
+      TIME: <span data-self-study-target="timer">60</span>
     </div>
-
-    <div data-game-target="wordInputContainer"></div>
-
-    <div class="game-footer">
-      <div class="timer-section-small">
-        <span class="timer-display-mini" data-timer-target="display">--:--</span>
-      </div>
-      
-      <div class="submit-section">
-        <button type="button" class="btn-update" data-action="click->game#submitAnswer">
-          OK!
-        </button>
-      </div>
-    </div>
-
-    <div class="feedback-area">
-      <p class="feedback-text" data-game-target="feedback"></p>
+    <div class="score-box">
+      SCORE: <span data-self-study-target="score">0</span>
     </div>
   </div>
 
-  <div class="score-badge">
-    SCORE: <span data-score-target="value" class="score-number">0</span>
+  <div class="question-frame">
+    <div class="question-text" data-self-study-target="question">
+    </div>
   </div>
 
-  <%= button_to "学習を終了する", self_study_path(@word_kit), method: :patch, class: "btn-finish" %>
+  <div class="word-input-container" data-self-study-target="inputContainer">
+  </div>
+
+  <div class="feedback-area">
+    <p data-self-study-target="feedback"></p>
+  </div>
+
+  <%= button_to "学習を終了する", self_study_path(@word_kit), 
+      method: :patch, 
+      id: "finish-button", 
+      class: "btn-finish" %>
+</div>

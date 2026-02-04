@@ -11,6 +11,7 @@
           <%= link_to "詳細", word_kit_path(kit), class: "main-button small" %>
           <%= link_to '削除', word_kit_path(kit), data: { turbo_method: :delete, turbo_confirm: "削除しますか？" }, class: "main-button small danger" %>
         <%= button_to 'このゲームで遊ぶ！', game_rooms_path(word_kit_id: kit.id), method: :post, data: { turbo: false }, class: "main-button play" %>
+        <%= link_to 'このゲームで自習する！', self_study_path(kit), class: "main-button small" %>
         </div>
       </li>
     <% end %>
