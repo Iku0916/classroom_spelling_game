@@ -6,9 +6,10 @@
 
 <div class="play-container"
   data-controller="self-study"
+  data-self-study-time-limit-value="<%= @time_limit %>"
   data-self-study-questions-value="<%= @questions.to_json %>"
   data-self-study-time-limit-value="60"
-  data-self-study-answer-url-value="<%= answer_self_study_path(@word_kit) %>">
+  data-self-study-answer-url-value="<%= answer_word_kit_self_study_path(@word_kit) %>">
 
   <div class="game-header">
     <div class="timer-box">
@@ -31,7 +32,7 @@
     <p data-self-study-target="feedback"></p>
   </div>
 
-  <%= button_to "学習を終了する", self_study_path(@word_kit), 
+  <%= button_to "学習を終了する", word_kit_self_study_path(@word_kit), 
       method: :patch, 
       id: "finish-button", 
       class: "btn-finish" %>
