@@ -1,6 +1,12 @@
 class SelfStudiesController < ApplicationController
-  def show
-    @word_kit = WordKit.find_by(id: params[:id])
+  def new
+    @word_kit = WordKit.find(params[:word_kit_id])
+  end
+
+  def play
+    @word_kit = WordKit.find_by(id: params[:word_kit_id])
+    minutes = params[:time_limit_minutes].to_f
+    @time_limit = (minutes > 0 ? minutes : 1) * 60
 
     @questions = @word_kit.word_cards.map do |word|
         {

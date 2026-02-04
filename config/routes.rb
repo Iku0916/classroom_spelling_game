@@ -15,6 +15,14 @@ Rails.application.routes.draw do
   end
   resources :word_kits, only: [:new, :create, :show, :index, :destroy, :edit, :update] do
     resources :word_cards, only: [:new, :create, :index, :destroy, :edit, :update]
+    resource :self_study, only: [:show, :update] do
+      get :new, on: :collection
+      get :play, on: :member
+      member do
+        post :answer
+        get :result 
+      end
+    end
   end
   resources :game_rooms, only: [:create, :show, :update] do
     member do
@@ -30,12 +38,6 @@ Rails.application.routes.draw do
         post :finish
         get :overall_result
         get :personal_result
-    end
-  end
-  resources :self_studies, only: [:show, :update] do
-    member do
-      post :answer
-      get :result 
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
