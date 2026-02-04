@@ -31,11 +31,11 @@ Rails.application.routes.draw do
         get :overall_result
         get :personal_result
     end
-    resources :self_studies, only: [:show, :update] do
-      member do
-        post :answer
-        get :result 
-      end
+  end
+  resources :self_studies, only: [:show, :update] do
+    member do
+      post :answer
+      get :result 
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

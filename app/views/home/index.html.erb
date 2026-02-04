@@ -21,4 +21,12 @@
     <li>
       <%= link_to 'ゲームに参加する', new_participant_path, class: "main-button secondary" %>
     </li>
+
+    <li>
+      <% if logged_in? %>
+        <%= link_to '自習をする', word_kits_path, class: "main-button" %>
+      <% else %>
+        <%= link_to 'ログインして自習をする', login_path, class: "main-button" %>
+      <% end %>
+    </li>
   </ul>
