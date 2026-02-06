@@ -25,7 +25,7 @@ class SelfStudiesController < ApplicationController
   end
 
   def answer
-    @word_kit = WordKit.find_by(id: params[:id])
+    @word_kit = WordKit.find(params[:word_kit_id])
     @questions = @word_kit.word_cards
     
     index = session[:question_index] || 0
