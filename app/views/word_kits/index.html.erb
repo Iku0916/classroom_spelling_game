@@ -1,24 +1,30 @@
-<% content_for :title, "ゲームキット一覧| Vocano!" %>
+<% content_for :title, "ゲームキット一覧 | Vocano!" %>
 
 <h1 class="word-kit-index">ゲームキット一覧</h1>
 
+<div class="kit-container">
   <ul class="kit-list">
     <% @word_kits.each do |kit| %>
-      <li class="kit-card">
-        <div class="kit-title"><%= kit.name %></div>
-        <div class="kit-actions">
-          <%= link_to '編集', edit_word_kit_path(kit), class: "main-button small" %>
-          <%= link_to "詳細", word_kit_path(kit), class: "main-button small" %>
-          <%= link_to '削除', word_kit_path(kit), data: { turbo_method: :delete, turbo_confirm: "削除しますか？" }, class: "main-button small danger" %>
-        <%= button_to 'このゲームで遊ぶ！', game_rooms_path(word_kit_id: kit.id), method: :post, data: { turbo: false }, class: "main-button play" %>
-        <%= link_to 'このゲームで自習する！', word_kit_self_study_path(kit), class: "main-button small" %>
+      <li class="kit-card-v2">
+        <div class="kit-title-row">
+          <h2 class="kit-title"><%= kit.name %></h2>
+        </div>
+        
+        <div class="kit-action-row">
+          <%= button_to game_rooms_path(word_kit_id: kit.id), method: :post, data: { turbo: false }, class: "vocano-btn btn-play" do %>
+            <span>このゲームを開く</span>
+          <% end %>
+          
+          <%= link_to '自習する', word_kit_self_study_path(kit), class: "vocano-btn btn-study" %>
+          <%= link_to '詳細', word_kit_path(kit), class: "vocano-btn btn-sub" %>
+          <%= link_to '編集', edit_word_kit_path(kit), class: "vocano-btn btn-sub" %>
+          <%= link_to '削除', word_kit_path(kit), data: { turbo_method: :delete, turbo_confirm: "削除しますか？" }, class: "vocano-btn btn-danger" %>
         </div>
       </li>
     <% end %>
   </ul>
 
-  <%= link_to new_word_kit_path, class: "kit-card new-kit-link" do %>
-      <div class="new-kit-content">
-        <p>新しいキットを作る</p>
-      </div>
+  <%= link_to new_word_kit_path, class: "new-kit-capsule" do %>
+    <span>新しいキットを作る</span>
   <% end %>
+</div>
