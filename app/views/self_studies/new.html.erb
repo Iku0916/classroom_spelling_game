@@ -1,16 +1,26 @@
-<% content_for :title,  "自習モード | Vocano!" %>
+<% content_for :title, "自習モード | Vocano!" %>
 
-<h1>自習：<%= @word_kit.name %></h1>
+<h1 class="word-kit-index">自習：<%= @word_kit.name %></h1>
 
-<div class="setup-box">
-  <%= form_with url: play_word_kit_self_study_path(@word_kit), method: :get, local: true do |f| %>
-    <div class="field">
-      <%= f.label :time_limit, "制限時間 (分)" %><br>
-      <%= f.number_field :time_limit_minutes, value: 1, min: 1, max: 60, class: "input-time" %>
-    </div>
+<div class="self-study-setup-container">
+  <div class="setup-card">
+    
+    <%= form_with url: play_word_kit_self_study_path(@word_kit), method: :get, local: true do |f| %>
+      <div class="setup-field">
+        <%= f.label :time_limit_minutes, "制限時間" %>
+        <div class="input-wrapper">
+          <%= f.number_field :time_limit_minutes, value: 1, min: 1, max: 60, class: "vocano-input" %>
+          <span class="unit">分</span>
+        </div>
+      </div>
 
-    <div class="actions">
-      <%= f.submit "スタート！", class: "btn-start" %>
-    </div>
-  <% end %>
+      <div class="setup-actions">
+        <%= f.submit "自習をスタート！", class: "vocano-btn btn-study-start" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="back-link-container">
+    <%= link_to "一覧に戻る", word_kits_path, class: "back-link" %>
+  </div>
 </div>
