@@ -129,11 +129,11 @@ export default class extends Controller {
   }
 
   finishGame() {
-    const finishButton = document.getElementById('finish-button')
-    if (finishButton) finishButton.click()
-  }
+    const resultUrl = window.location.href.replace('/play', '/result');
+    const separator = resultUrl.includes('?') ? '&' : '?';
 
-  disconnect() {
-    clearInterval(this.interval)
+    const finalUrl = `${resultUrl}${separator}score=${this.currentScore}`;
+    
+    window.location.href = finalUrl;
   }
 }

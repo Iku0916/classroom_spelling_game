@@ -1,0 +1,19 @@
+<% content_for :title, "結果発表 | Vocano!" %>
+
+<div class="result-container">
+
+  <h1 class="result-title">結果発表！</h1>
+
+  <div class="score-card">
+    <div class="nickname-display"><%= @user.name %> さんの結果</div>
+    
+    <div class="main-score">
+      <span class="score-number"><%= @score %></span>
+      <span class="score-unit">点</span>
+    </div>
+  </div>
+
+  <div class="action-section">
+    <%= link_to "トップに戻る", root_path, class: "back-button" %>
+  </div>
+</div>

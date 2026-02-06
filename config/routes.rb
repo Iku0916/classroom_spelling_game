@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resource :self_study, only: [:show, :update] do
       get :new, on: :collection
       get :play, on: :member
+      get :result, on: :member
       member do
         post :answer
         get :result 
