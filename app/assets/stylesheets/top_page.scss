@@ -1,4 +1,3 @@
-/* --- 1. 基本設定（html, body） --- */
 html, body {
   height: 100%;
   margin: 0;
@@ -11,10 +10,9 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  padding-top: 100px; /* ヘッダーの高さ分、コンテンツを下げる */
+  padding-top: 100px;
 }
 
-/* --- 2. ヘッダー（共通設定を統合） --- */
 header {
   position: fixed;
   top: 0;
@@ -33,7 +31,6 @@ header {
   font-family: 'Zen Maru Gothic', sans-serif;
 }
 
-/* ロゴエリア */
 .site-logo {
   display: flex;
   align-items: center;
@@ -52,23 +49,21 @@ header {
   transform: scale(1.05);
 }
 
-/* 右側メニューグループ */
 .menu_group {
   display: flex;
   gap: 15px;
   list-style: none;
   margin: 0;
-  padding-right: 30px; /* 右端に寄りすぎないよう微調整 */
+  padding-right: 30px;
 }
 
-/* 白塗りボタン（ログイン・新規登録共通） */
 .menu_group a {
   text-decoration: none;
   background-color: white;
   color: #7B5CD6;
   font-weight: 900;
   font-size: 0.95rem;
-  padding: 10px 30px; /* 左右の余白を調整 */
+  padding: 10px 30px;
   border-radius: 50px;
   box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease;
@@ -86,7 +81,6 @@ header {
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
 }
 
-/* --- 3. メインビジュアル関連（重複を整理） --- */
 .title-logo {
   display: block;
   width: 100%; 
@@ -99,35 +93,68 @@ header {
           drop-shadow(0 4px 4px rgba(0, 0, 0, 0.1));
 }
 
-.main-buttons {
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  transform: translateY(-40px);
+}
+
+.button-row {
   display: flex;
   justify-content: center;
-  gap: 24px;
-  list-style: none;
-  margin: 0 auto;
-  transform: translateY(-60px);
-  padding: 0;
-  position: relative;
-  z-index: 10;
+  gap: 20px;
+  width: 100%;
 }
 
 .main-button {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 240px;
-  padding: 22px 40px;
-  background: #ffffff;
-  color: #7B5CD6;
-  border-radius: 20px;
-  font-weight: bold;
   text-decoration: none;
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2), 0 10px 20px rgba(0, 0, 0, 0.25);
+  color: white !important;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid #ffffff;
+  border-radius: 60px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), inset 0 -4px 0 rgba(0, 0, 0, 0.2);
   transition: all 0.2s ease;
+  font-family: 'Zen Maru Gothic', sans-serif;
 }
 
 .main-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.2), 0 12px 24px rgba(0, 0, 0, 0.3);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
+.row-primary .main-button {
+  width: 380px;
+  height: 85px;
+  font-size: 1.5rem;
+}
+
+.row-secondary .main-button {
+  width: 240px;
+  height: 65px;
+  font-size: 1.1rem;
+}
+
+.btn-join {
+  background: linear-gradient(to right, #69C9FF, #9285F3); /* 水色〜紫 */
+}
+
+.btn-study {
+  background: linear-gradient(to right, #FFC194, #D685B3); /* オレンジ〜ピンク */
+}
+
+.btn-create, .btn-open, .btn-community {
+  background: white !important;
+  color: #7B5CD6 !important;
+  border: 3px solid #69C9FF;
+}
+
+.row-secondary .main-button {
+  background: white !important;
+  color: #7B5CD6 !important;
+  border: 3px solid #BEEFFF; 
+}

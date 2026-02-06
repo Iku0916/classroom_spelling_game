@@ -1,32 +1,29 @@
 <% content_for :title, "トップページ | Vocano!" %>
 
 <%= image_tag "vocano_title_logo.png", alt: "Vocano!", class: "title-logo"%>
-  <ul class="main-buttons">
-    <li>
-      <% if logged_in? %>
-        <%= link_to 'ゲームを開く', word_kits_path, class: "main-button" %>
-      <% else %>
-        <%= link_to 'ログインしてゲームを開く', login_path, class: "main-button highlight" %>
-      <% end %>
-    </li>
 
-    <li>
-      <% if logged_in? %>
-        <%= link_to 'ゲームキットを作る', new_word_kit_path, class: "main-button" %>
-      <% else %>
-        <%= link_to 'ログインしてゲームキットを作る', login_path, class: "main-button" %>
-      <% end %>
-    </li>
+<div class="button-container">
+  <div class="button-row row-primary">
+    <%= link_to new_participant_path, class: "main-button btn-join" do %>
+      <span>ゲームに参戦する</span>
+      <%= image_tag "icon_join.png", class: "btn-icon" if false %> <% end %>
 
-    <li>
-      <%= link_to 'ゲームに参加する', new_participant_path, class: "main-button secondary" %>
-    </li>
+    <%= link_to (logged_in? ? word_kits_path : login_path), class: "main-button btn-study" do %>
+      <span>自習モード</span>
+    <% end %>
+  </div>
 
-    <li>
-      <% if logged_in? %>
-        <%= link_to '自習をする', word_kits_path, class: "main-button" %>
-      <% else %>
-        <%= link_to 'ログインして自習をする', login_path, class: "main-button" %>
-      <% end %>
-    </li>
-  </ul>
+  <div class="button-row row-secondary">
+    <%= link_to (logged_in? ? new_word_kit_path : login_path), class: "main-button btn-create" do %>
+      <span>キットを作る</span>
+    <% end %>
+
+    <%= link_to (logged_in? ? word_kits_path : login_path), class: "main-button btn-open" do %>
+      <span>ゲームを開く</span>
+    <% end %>
+
+    <%= link_to "#", class: "main-button btn-community" do %>
+      <span>コミュニティ</span>
+    <% end %>
+  </div>
+</div>

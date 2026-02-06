@@ -31,21 +31,38 @@ class SelfStudiesController < ApplicationController
     index = session[:question_index] || 0
     @current_question = @questions[index]
 
-  if params[:answer] == @current_question.correct_answer
-    session[:current_score] = (session[:current_score] || 0) + 1
-  end
+    if params[:answer] == @current_question.correct_answer
+      session[:current_score] = (session[:current_score] || 0) + 1
+      logger.debug "--- スコア加算！現在: #{session[:current_score]}点 ---"
+    end
 
     session[:question_index] = ((session[:question_index] || 0) + 1) % @questions.count
   end
 
   def update
-    personal_score = session[:current_score] || 0
+      @word_kit = WordKit.find(params[:word_kit_id])
+      logger.debug "--- updateアクション開始時のセッションスコア: #{session[:current_score]} ---"
+      
+      personal_score = session[:current_score] || 0
+      current_user.increment!(:total_score, personal_score)
 
-    current_user.increment!(:total_score, personal_score)
+      session[:current_score] = 0
+      session[:question_index] = 0
+
+      redirect_to result_word_kit_self_study_path(@word_kit, score: personal_score), notice: "お疲れ様！"
+    end
+
+  def result
+    @word_kit = WordKit.find(params[:word_kit_id])
+    @score = params[:score].to_i
+    @total = @word_kit.word_cards.count
+    @user = current_user
+
+    if @user && @score > 0
+      @user.increment!(:total_score, @score)
+    end
 
     session[:current_score] = 0
     session[:question_index] = 0
-
-    redirect_to result_path(score: personal_score), notice: "お疲れ様！"
   end
 end
