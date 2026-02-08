@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_02_04_011653) do
+ActiveRecord::Schema[7.1].define(version: 2026_02_08_062931) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,6 +32,14 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_04_011653) do
     t.string "session_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "learning_logs", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_learning_logs_on_user_id"
   end
 
   create_table "participants", force: :cascade do |t|
@@ -78,6 +86,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_04_011653) do
 
   add_foreign_key "game_rooms", "users", column: "host_user_id"
   add_foreign_key "game_rooms", "word_kits"
+  add_foreign_key "learning_logs", "users"
   add_foreign_key "participants", "game_rooms"
   add_foreign_key "participants", "guests"
   add_foreign_key "participants", "users"
