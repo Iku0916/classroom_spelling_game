@@ -60,6 +60,8 @@ class SelfStudiesController < ApplicationController
 
     if @user && @score > 0
       @user.increment!(:total_score, @score)
+
+      @user.learning_logs.create!(score: @score)
     end
 
     session[:current_score] = 0

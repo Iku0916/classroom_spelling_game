@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :word_kits
   has_many :game_rooms
   has_many :participants
+    has_many :learning_logs, dependent: :destroy
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true

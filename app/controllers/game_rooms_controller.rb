@@ -125,8 +125,19 @@ class GameRoomsController < ApplicationController
 
   def finish
     @game_room = GameRoom.find(params[:id])
+
+    @game_room.participants.each do |participant|
+      if participant.user_id.present?
+        user = User.find(participant.user_id)
+
+        user.increment!(:total_score, participant.score.to_i)
+
+        user.learning_logs.create!(score: participant.score.to_i)
+      end
+    end
+
     @game_room.destroy!
-    redirect_to root_path, success: 'ゲームを終了しました'
+    redirect_to root_path, success: '学習記録を保存してゲームを終了しました'
   end
 
   private
