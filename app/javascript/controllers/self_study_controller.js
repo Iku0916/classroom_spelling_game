@@ -25,6 +25,7 @@ export default class extends Controller {
     this.questionTarget.textContent = current.correct_answer
 
     this.feedbackTarget.textContent = ""
+    this.feedbackTarget.className = "feedback-text"
 
     this.inputContainerTarget.innerHTML = ""
     const wordInputDiv = document.createElement("div")
@@ -52,17 +53,14 @@ export default class extends Controller {
           e.preventDefault()
 
           if (this.awaitingNext) {
-            // --- 判定が出た後にエンターを押した場合 ---
             this.awaitingNext = false
             this.isLocked = false
             this.index = (this.index + 1) % this.questionsValue.length
             this.showQuestion()
           } else {
-            // --- 入力中にエンターを押した場合 ---
             this.submitAnswer()
           }
         } else if (e.key === "Backspace" && e.target.value === "") {
-          // --- バックスペースを押した場合 ---
           const prevInput = wordInputDiv.querySelectorAll('input')[idx - 1]
           if (prevInput) prevInput.focus()
         }
@@ -76,6 +74,14 @@ export default class extends Controller {
   }
 
   async submitAnswer() {
+    if (this.awaitingNext) {
+      this.awaitingNext = false
+      this.isLocked = false
+      this.index = (this.index + 1) % this.questionsValue.length
+      this.showQuestion()
+      return
+    }
+
     if (this.isLocked) return
 
     const current = this.questionsValue[this.index]
@@ -87,7 +93,8 @@ export default class extends Controller {
       this.currentScore++
       this.scoreTarget.textContent = this.currentScore
       this.feedbackTarget.textContent = "正解！🎉 +1ポイント"
-      
+      this.feedbackTarget.className = "feedback-text correct";
+
       await fetch(this.answerUrlValue, {
         method: 'POST',
         headers: {
@@ -106,6 +113,7 @@ export default class extends Controller {
       this.scoreTarget.textContent = this.currentScore
       
       this.feedbackTarget.textContent = `ざんねん…😢 正解は: ${current.word}`
+      this.feedbackTarget.className = "feedback-text incorrect";
       this.isLocked = true
 
       setTimeout(() => {
@@ -119,7 +127,13 @@ export default class extends Controller {
   startTimer() {
     this.interval = setInterval(() => {
       this.remainingTime--
-      this.timerTarget.textContent = this.remainingTime
+      
+      const minutes = Math.floor(this.remainingTime / 60)
+      const seconds = this.remainingTime % 60
+      
+      const displaySeconds = String(seconds).padStart(2, '0')
+      
+      this.timerTarget.textContent = `${minutes}:${displaySeconds}`
 
       if (this.remainingTime <= 0) {
         clearInterval(this.interval)

@@ -17,12 +17,9 @@ Rails.application.routes.draw do
     resources :word_cards, only: [:new, :create, :index, :destroy, :edit, :update]
     resource :self_study, only: [:show, :update] do
       get :new, on: :collection
-      get :play, on: :member
-      get :result, on: :member
-      member do
-        post :answer
-        get :result 
-      end
+      get :play, on: :collection
+      get :result, on: :collection
+      post :answer, on: :collection
     end
   end
   resources :game_rooms, only: [:create, :show, :update] do
