@@ -1,0 +1,184 @@
+@import "simple_calendar";
+
+.total-study-wrapper {
+  max-width: 420px;
+  margin: 0 auto 35px;
+  padding: 22px 30px;
+  background: linear-gradient(to right, #69C9FF, #9285F3);
+  border-radius: 30px;
+  text-align: center;
+  color: white;
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.18);
+  font-family: 'Zen Maru Gothic', sans-serif;
+}
+
+.total-study-wrapper .label {
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  opacity: 0.9;
+}
+
+.total-study-wrapper .time {
+  font-size: 2rem;
+  font-weight: 900;
+  margin-top: 6px;
+}
+
+.calendar-container {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(6px);
+  border-radius: 30px;
+  padding: 35px 40px;
+  margin: 40px auto;
+  max-width: 1200px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  font-family: 'Zen Maru Gothic', sans-serif;
+}
+
+.simple-calendar {
+  border: none;
+
+  .calendar-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #7B5CD6;
+
+    a {
+      text-decoration: none;
+      padding: 8px 22px;
+      border-radius: 50px;
+      background: white;
+      color: #7B5CD6;
+      font-size: 0.8rem;
+      font-weight: bold;
+      box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1);
+      transition: all 0.2s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        background: #f8f8f8;
+      }
+    }
+  }
+
+  table {
+    border-collapse: separate;
+    border-spacing: 14px;
+    table-layout: fixed;
+  }
+
+  th {
+    border: none;
+    color: #7B5CD6;
+    font-weight: 900;
+    font-size: 0.85rem;
+    padding-bottom: 10px;
+  }
+
+  td {
+    height: 90px !important;
+    border: none !important;
+    background: white;
+    border-radius: 20px;
+    position: relative;
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+    }
+
+    &.today {
+      background: linear-gradient(to bottom right, #EDE7FF, #FFFFFF) !important;
+      border: 3px solid #7B5CD6 !important;
+    }
+
+    &.prev-month,
+    &.next-month {
+      opacity: 0.35;
+    }
+
+    > div:first-child {
+      font-weight: 900;
+      font-size: 0.9rem;
+      color: #7B5CD6;
+      margin-bottom: 4px;
+    }
+  }
+}
+
+.daily-score {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;  
+  position: absolute;
+  bottom: 30px;
+  left: 8px;
+  right: 8px;
+  background: linear-gradient(to right, #69C9FF, #9285F3);
+  color: white;
+  border-radius: 16px;
+  font-size: 1rem;
+  font-weight: 900;
+  padding: 6px 8px;
+  text-align: center;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.15);
+}
+
+.total-study-card {
+  max-width: 900px;
+  padding: 25px 40px;
+  margin-top: 100px;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, #69C9FF, #9285F3);
+  border-radius: 30px;
+
+  color: white;
+  text-align: center;
+  font-family: 'Zen Maru Gothic', sans-serif;
+
+  box-shadow: 
+    0 10px 25px rgba(0, 0, 0, 0.15),
+    inset 0 -6px 0 rgba(0, 0, 0, 0.2);
+}
+
+.total-stats-section {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+
+}
+
+.total-study-card {
+  max-width: 500px;
+  width: 100%;
+  padding: 25px 40px;
+  background: linear-gradient(135deg, #69C9FF, #9285F3);
+  border-radius: 30px;
+  color: white;
+  text-align: center;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  box-shadow: 
+    0 10px 25px rgba(0, 0, 0, 0.15),
+    inset 0 -6px 0 rgba(0, 0, 0, 0.2);
+}
+
+.total-study-card .label {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.total-study-card .value {
+  font-size: 2rem;
+  font-weight: 900;
+  white-space: nowrap;
+}

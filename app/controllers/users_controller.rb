@@ -13,6 +13,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    @user = current_user
+
+    @learning_logs = @user.learning_logs.order(created_at: :asc)
+    @score_by_day = @learning_logs.group_by { |log| log.created_at.to_date }
+                                .transform_values { |logs| logs.sum(&:score) }
+  end                 
+
   private
 
   def user_params
