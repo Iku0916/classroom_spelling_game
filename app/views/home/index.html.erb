@@ -26,4 +26,6 @@
       <span>コミュニティ</span>
     <% end %>
   </div>
+
+  <%= render 'users/score_calendar', score_by_day: @score_by_day if logged_in? %>
 </div>

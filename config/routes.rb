@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   delete 'logout', to: 'user_sessions#destroy'
   get 'signup', to: 'users#new'
   post 'signup', to: 'users#create'
+  resource :user, only: [:show]
   resources :participants, only: [:new, :create] do
     member do
       get :personal_result
