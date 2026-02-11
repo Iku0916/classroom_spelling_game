@@ -1,8 +1,11 @@
 <div class="total-stats-section">
   <div class="total-study-card">
     <div class="label">⏱ 累計学習時間</div>
-    <div class="value">12<span>時間</span>45<span>分</span></div>
-  </div>
+      <div class="value">
+        <% time = current_user.total_hours_and_minutes %>
+        <%= "#{time[:hours]}時間#{time[:minutes]}分" %>
+      </div>
+    </div>
 
   <div class="total-study-card">
     <div class="label">Ⓟ 累計獲得ポイント</div>

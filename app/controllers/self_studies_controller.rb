@@ -37,33 +37,31 @@ class SelfStudiesController < ApplicationController
     end
 
     session[:question_index] = index + 1
-    head :ok  # fetch の返事として 200 OK を返す
+    head :ok
   end
 
   def update
-      @word_kit = WordKit.find(params[:word_kit_id])
-      logger.debug "--- updateアクション開始時のセッションスコア: #{session[:current_score]} ---"
-      
-      personal_score = session[:current_score] || 0
-      current_user.increment!(:total_score, personal_score)
+    @word_kit = WordKit.find(params[:word_kit_id])
 
-      session[:current_score] = 0
-      session[:question_index] = 0
+    score = params[:score].to_i
+    minutes = params[:minutes].to_f
 
-      redirect_to result_word_kit_self_study_path(@word_kit, score: personal_score), notice: "お疲れ様！"
-    end
+    current_user.increment!(:total_score, score)
+    current_user.learning_logs.create!(score: score, minutes: minutes)
+
+    session[:current_score] = 0
+    session[:question_index] = 0
+
+    head :ok
+  end
+
+
 
   def result
     @word_kit = WordKit.find(params[:word_kit_id])
     @score = params[:score].to_i
     @total = @word_kit.word_cards.count
     @user = current_user
-
-    if @user && @score > 0
-      @user.increment!(:total_score, @score)
-
-      @user.learning_logs.create!(score: @score)
-    end
 
     session[:current_score] = 0
     session[:question_index] = 0

@@ -142,12 +142,22 @@ export default class extends Controller {
     }, 1000)
   }
 
-  finishGame() {
-    const resultUrl = window.location.href.replace('/play', '/result');
-    const separator = resultUrl.includes('?') ? '&' : '?';
+  async finishGame() {
+    const wordKitId = window.location.pathname.split('/')[2];
+    const updateUrl = `/word_kits/${wordKitId}/self_study`;
 
-    const finalUrl = `${resultUrl}${separator}score=${this.currentScore}`;
-    
-    window.location.href = finalUrl;
+    await fetch(updateUrl, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+      },
+      body: JSON.stringify({
+        score: this.currentScore,
+        minutes: (this.timeLimitValue - this.remainingTime) / 60
+      })
+    });
+
+    window.location.href = `/word_kits/${wordKitId}/self_study/result?score=${this.currentScore}`;
   }
 }
