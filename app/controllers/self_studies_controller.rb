@@ -25,18 +25,19 @@ class SelfStudiesController < ApplicationController
   end
 
   def answer
-    @word_kit = WordKit.find(id: params[:id])
-    @questions = @word_kit.word_cards
-    
-    index = session[:question_index] || 0
-    @current_question = @questions[index]
+    @word_kit = WordKit.find(params[:word_kit_id])
+    cards = @word_kit.word_cards.to_a
 
-    if params[:answer] == @current_question.correct_answer
+    index = session[:question_index] || 0
+    index = index % cards.length
+    current_card = cards[index]
+
+    if params[:answer] == current_card.japanese_translation
       session[:current_score] = (session[:current_score] || 0) + 1
-      logger.debug "--- スコア加算！現在: #{session[:current_score]}点 ---"
     end
 
-    session[:question_index] = ((session[:question_index] || 0) + 1) % @questions.count
+    session[:question_index] = index + 1
+    head :ok  # fetch の返事として 200 OK を返す
   end
 
   def update
