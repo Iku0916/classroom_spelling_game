@@ -32,7 +32,6 @@ export default class extends Controller {
     return this.score
   }
 
-  // ここ！さっきはこの上の「}」でクラスが閉じちゃっていました
   async saveToServer() {
     const token = document.querySelector('meta[name="csrf-token"]')?.content
     const roomId = this.gameRoomIdValue 
