@@ -7,7 +7,7 @@ class User < ApplicationRecord
     has_many :learning_logs, dependent: :destroy
 
   def total_score
-    learning_logs.sum(:score)
+    self[:total_score] || learning_logs.sum(:score)
   end
 
   def total_minutes

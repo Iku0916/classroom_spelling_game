@@ -125,8 +125,12 @@ class GameRoomsController < ApplicationController
 
   def finish
     @game_room = GameRoom.find(params[:id])
+    return unless @game_room.playing?
 
-    @game_room.update!(finished_at: Time.current)
+    @game_room.update!(
+      status: :finished,
+      finished_at: Time.current
+    )
 
     if @game_room.started_at.present?
       duration = @game_room.finished_at - @game_room.started_at
@@ -136,20 +140,23 @@ class GameRoomsController < ApplicationController
     end
 
     @game_room.participants.each do |participant|
-      if participant.user_id.present?
-        user = User.find(participant.user_id)
+      next unless participant.user_id.present?
+      
+      user = User.find(participant.user_id)
+      user.increment!(:total_score, participant.score.to_i)
 
-        user.increment!(:total_score, participant.score.to_i)
-
-        user.learning_logs.create!(
-          score: participant.score.to_i,
-          minutes: minutes
-        )
-      end
+      user.learning_logs.create!(
+        score: participant.score.to_i,
+        minutes: minutes
+      )
     end
 
-    @game_room.destroy!
-    redirect_to root_path, success: '学習記録を保存してゲームを終了しました'
+    ActionCable.server.broadcast(
+      "game_channel_#{@game_room.id}",
+      { type: 'game_finished', message: 'ゲームが終了しました！' }
+    )
+
+    render json: { success: true }
   end
 
   private
