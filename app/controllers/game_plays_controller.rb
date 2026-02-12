@@ -102,22 +102,34 @@ class GamePlaysController < ApplicationController
     
   # ★ スコア更新処理（JavaScript から呼ばれる）
   def update_score
-    Rails.logger.info "=== update_score 開始 ==="
-    Rails.logger.info "受信したスコア: #{params[:score]}"
+    # Rails.logger.info "=== update_score 開始 ==="
+    # Rails.logger.info "受信したスコア: #{params[:score]}"
+    # if @participant.update(score: params[:score])
+    #   Rails.logger.info "👤 participant id: #{@participant&.id}"
+    #   Rails.logger.info "📦 DB保存前 score: #{@participant&.score}"
+    #   Rails.logger.info "✅ スコア保存成功: #{params[:score]}点"
+    #   render json: { 
+    #     success: true, 
+    #     score: @participant.score,
+    #     message: 'スコアを保存しました'
+    #   }
+    # else
+    #   Rails.logger.error "❌ スコア保存失敗"
+    #   render json: { 
+    #     error: 'スコアの保存に失敗しました' 
+    #   }, status: :unprocessable_entity
+    # end
     
-    if @participant.update(score: params[:score])
-      Rails.logger.info "✅ スコア保存成功: #{params[:score]}点"
-      render json: { 
-        success: true, 
-        score: @participant.score,
-        message: 'スコアを保存しました'
-      }
+    new_score = params[:score].to_i
+
+    if new_score > @participant.score
+      @participant.update(score: new_score)
+      Rails.logger.info "✅ スコア更新"
     else
-      Rails.logger.error "❌ スコア保存失敗"
-      render json: { 
-        error: 'スコアの保存に失敗しました' 
-      }, status: :unprocessable_entity
+      Rails.logger.info "⚠️ 古いスコアなので無視"
     end
+
+    render json: { success: true, score: @participant.score }
   end
   
   # ★ ゲーム終了処理（JavaScript から呼ばれる）

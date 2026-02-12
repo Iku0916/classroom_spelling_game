@@ -79,7 +79,7 @@ class GameRoomsController < ApplicationController
 
   def start
     @game_room = GameRoom.find(params[:id])
-    
+
     if request.patch?
 
       # ゲーム時間を秒→分に
@@ -126,13 +126,25 @@ class GameRoomsController < ApplicationController
   def finish
     @game_room = GameRoom.find(params[:id])
 
+    @game_room.update!(finished_at: Time.current)
+
+    if @game_room.started_at.present?
+      duration = @game_room.finished_at - @game_room.started_at
+      minutes = (duration / 60).to_i
+    else
+      minutes = 0
+    end
+
     @game_room.participants.each do |participant|
       if participant.user_id.present?
         user = User.find(participant.user_id)
 
         user.increment!(:total_score, participant.score.to_i)
 
-        user.learning_logs.create!(score: participant.score.to_i)
+        user.learning_logs.create!(
+          score: participant.score.to_i,
+          minutes: minutes
+        )
       end
     end
 

@@ -55,8 +55,6 @@ class SelfStudiesController < ApplicationController
     head :ok
   end
 
-
-
   def result
     @word_kit = WordKit.find(params[:word_kit_id])
     @score = params[:score].to_i
