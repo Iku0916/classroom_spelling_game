@@ -102,24 +102,6 @@ class GamePlaysController < ApplicationController
     
   # ★ スコア更新処理（JavaScript から呼ばれる）
   def update_score
-    # Rails.logger.info "=== update_score 開始 ==="
-    # Rails.logger.info "受信したスコア: #{params[:score]}"
-    # if @participant.update(score: params[:score])
-    #   Rails.logger.info "👤 participant id: #{@participant&.id}"
-    #   Rails.logger.info "📦 DB保存前 score: #{@participant&.score}"
-    #   Rails.logger.info "✅ スコア保存成功: #{params[:score]}点"
-    #   render json: { 
-    #     success: true, 
-    #     score: @participant.score,
-    #     message: 'スコアを保存しました'
-    #   }
-    # else
-    #   Rails.logger.error "❌ スコア保存失敗"
-    #   render json: { 
-    #     error: 'スコアの保存に失敗しました' 
-    #   }, status: :unprocessable_entity
-    # end
-    
     new_score = params[:score].to_i
 
     if new_score > @participant.score
@@ -136,10 +118,31 @@ class GamePlaysController < ApplicationController
   def finish
     Rails.logger.info "=== finish 開始 ==="
     Rails.logger.info "現在のステータス: #{@game_room.status}"
-    
-    if @game_room.playing?
-      @game_room.update!(status: :finished)
-      
+
+    unless @game_room.playing?
+      Rails.logger.warn "⚠️ ゲームは既に終了しています"
+      return render json: { success: false, message: 'ゲームは既に終了しています' }, status: :unprocessable_entity
+    end
+
+    @game_room.update!(
+      status: :finished,
+      finished_at: Time.current
+    )
+
+    minutes = if @game_room.started_at.present?
+                ((@game_room.finished_at - @game_room.started_at) / 60).to_i
+              else
+                0
+              end
+
+    @game_room.participants.each do |participant|
+      next unless participant.user_id.present?
+
+      user = User.find(participant.user_id)
+      user.increment!(:total_score, participant.score.to_i)
+      user.learning_logs.create!(score: participant.score.to_i, minutes: minutes)
+    end
+
       host_redirect_url = overall_result_game_room_game_play_path(@game_room)
       
       # ⭐️ メッセージを送信
@@ -156,13 +159,6 @@ class GamePlaysController < ApplicationController
         message: 'ゲームが終了しました',
         redirect_url: host_redirect_url
       }
-    else
-      Rails.logger.warn "⚠️ ゲームは既に終了しています"
-      render json: { 
-        success: false, 
-        message: 'ゲームは既に終了しています' 
-      }, status: :unprocessable_entity
-    end
   end
   
   private
