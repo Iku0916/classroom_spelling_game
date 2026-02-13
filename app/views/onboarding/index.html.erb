@@ -1,3 +1,4 @@
+<%= javascript_include_tag "onboarding", "data-turbo-track": "reload", defer: true %>
 <div class="onboarding-container">
 
   <div class="slide active">
@@ -6,31 +7,32 @@
     <button class="next-btn">次へ</button>
   </div>
 
-  <%= image_tag "create_game_kit.png" %>
   <div class="slide">
     <h2>ゲームキットを作ろう</h2>
+    <%= image_tag "create_game_kit.png" %>
     <p>自分だけのオリジナル単語帳を作ろう！</p>
     <button class="next-btn">次へ</button>
   </div>
 
-  <%= image_tag "self_study.png" %>
+
   <div class="slide">
     <h2>自習モード</h2>
+    <%= image_tag "self_study.png" %>
     <p>1人でじっくり練習しよう！</p>
     <button class="next-btn">次へ</button>
   </div>
 
-  <%= image_tag "game_code.png" %>
-  <%= image_tag "join_game.png" %>
   <div class="slide">
     <h2>マルチモード</h2>
+    <%= image_tag "game_code.png" %>
+    <%= image_tag "join_game.png" %>
     <p>みんなで対戦！ランキング発表で盛りあがろう！</p>
     <button class="next-btn">次へ</button>
   </div>
 
-  <%= image_tag "learning_log.png" %>
   <div class="slide">
     <h2>カレンダー</h2>
+    <%= image_tag "learning_log.png" %>
     <p>自分の学習記録をを確認しよう！</p>
     <button class="next-btn">次へ</button>
   </div>
