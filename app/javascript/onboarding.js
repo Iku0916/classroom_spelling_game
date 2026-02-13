@@ -7,15 +7,29 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.addEventListener("click", () => {
       slides[current].classList.remove("active");
       current++;
-      if (current >= slides.length) current = slides.length - 1; // 最後で止める
+      if (current >= slides.length) current = slides.length - 1;
       slides[current].classList.add("active");
     });
   });
 
   const startBtn = document.getElementById("start-btn");
-  if(startBtn){
+  if (startBtn) {  // null チェック必須！
     startBtn.addEventListener("click", () => {
-      window.location.href = "/"; // ホームや任意のページに変更
+      fetch("/onboarding/complete", {
+        method: "POST",
+        headers: {
+          "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
+        }
+      }).then(() => {
+        window.location.href = "/";
+      });
     });
   }
 });
+
+const helpBtn = document.getElementById("help-btn");
+if(helpBtn){
+  helpBtn.addEventListener("click", () => {
+    window.location.href = "/onboarding";
+  });
+}

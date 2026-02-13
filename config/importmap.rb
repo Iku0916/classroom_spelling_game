@@ -10,5 +10,6 @@ pin "channels/consumer", to: "channels/consumer.js"
 pin "channels/game_channel", to: "channels/game_channel.js"
 
 pin "game_room", to: "game_room.js"
+pin "onboarding", to: "onboarding.js"
 
 pin_all_from "app/javascript/controllers", under: "controllers"

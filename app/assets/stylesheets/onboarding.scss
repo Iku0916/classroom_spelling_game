@@ -66,3 +66,28 @@
   transform: translateY(-3px) scale(1.03);
   box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
+
+#help-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(145deg, #a97cf0, #7b5cd6);
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25), inset 0 -4px 0 rgba(255,255,255,0.2);
+  z-index: 1000;         
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#help-btn:hover {
+  transform: scale(1.15) rotate(10deg);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.3), inset 0 -4px 0 rgba(255,255,255,0.3);
+}
