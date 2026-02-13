@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "onboarding", to: "onboarding#index"
   get 'users/new'
   get 'users/create'
   get 'home/index'
