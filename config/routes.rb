@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   delete 'logout', to: 'user_sessions#destroy'
   get 'signup', to: 'users#new'
   post 'signup', to: 'users#create'
+  resource :onboarding, only: [:index] do
+    post :complete
+  end
   resource :user, only: [:show]
   resources :participants, only: [:new, :create] do
     member do
