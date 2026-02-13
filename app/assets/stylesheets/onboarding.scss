@@ -1,0 +1,68 @@
+.slide {
+  display: none;
+}
+
+.slide.active {
+  display: block;
+}
+
+.onboarding-container {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  padding: 150px 20px 80px; /* 上余白でヘッダー避ける */
+  text-align: center;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  color: #333; /* 文字は濃いめにして読みやすく */
+}
+
+.slide {
+  display: none;
+  background: #fff; /* 白のカード */
+  border-radius: 25px;
+  padding: 40px 30px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15), 0 4px 4px rgba(0,0,0,0.08); /* ふわっと浮かせる */
+  transition: all 0.5s ease;
+}
+
+.slide.active {
+  display: block;
+}
+
+.slide img {
+  max-width: 60%;
+  height: auto;
+  margin-bottom: 25px;
+  border-radius: 15px;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.15), 0 4px 4px rgba(0,0,0,0.08); /* カードに統一感 */
+}
+
+.slide h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #7B5CD6;
+}
+
+.slide p {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+.next-btn, #start-btn {
+  font-weight: 900;
+  font-size: 1.2rem;
+  padding: 12px 35px;
+  border-radius: 50px;
+  border: 3px solid #7B5CD6;
+  background: linear-gradient(to right, #69C9FF, #9285F3);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15), inset 0 -3px 0 rgba(0,0,0,0.08);
+  transition: all 0.2s ease;
+}
+
+.next-btn:hover, #start-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
