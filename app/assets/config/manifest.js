@@ -3,3 +3,8 @@
 //= link_tree ../../javascript .js
 //= link_tree ../../../vendor/javascript .js
 //= link rails-ujs.js
+//= link create_game_kit.png
+//= link self_study.png
+//= link game_code.png
+//= link join_game.png
+//= link learning_log.png
