@@ -3,6 +3,17 @@
 <div class="edit-page-container">
   <h1 class="word-kit-index">新規キット作成</h1>
 
+  <%= form_with model: @word_kit, local: true do |form| %>
+    <div class="field">
+      <%= form.label :visibility, "公開設定" %>
+      <%= form.select :visibility, WordKit.visibilities.keys.map { |k| [k.humanize, k] } %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  <% end %>
+
   <div class="edit-card-body" data-controller="nested-cards">
     <%= form_with model: @word_kit, local: true do |f| %>
       
