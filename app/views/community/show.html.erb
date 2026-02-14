@@ -1,0 +1,33 @@
+<div class="edit-page-container">
+
+  <h1 class="word-kit-index">
+    <%= @word_kit.name %>
+  </h1>
+
+  <p style="text-align:center; margin-bottom:30px;">
+    by <%= @word_kit.user.name %>
+  </p>
+
+  <div class="copy-btn-area">
+    <%= button_to "自分のキットに追加", copy_word_kit_path(@word_kit), method: :post, class: "copy-btn" %>
+  </div>
+
+  <div class="edit-card-body">
+
+    <label class="edit-section-title">収録単語</label>
+
+    <ul class="kit-list">
+      <% @word_kit.word_cards.each do |card| %>
+        <li class="detail-row">
+          <div class="word-display-group">
+            <div class="word-box en-box"><%= card.english_word %></div>
+            <div class="word-divider"></div>
+            <div class="word-box jp-box"><%= card.japanese_translation %></div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+
+  </div>
+
+</div>

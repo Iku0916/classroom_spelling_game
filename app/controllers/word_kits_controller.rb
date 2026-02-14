@@ -71,6 +71,25 @@ class WordKitsController < ApplicationController
     end
   end
 
+    def copy
+    original = WordKit.find(params[:id])
+
+    copied = original.dup
+    copied.name = "#{original.name} copy"
+    copied.visibility = "private_kit"
+    copied.user = current_user
+    copied.save!
+
+    original.word_cards.each do |card|
+      copied.word_cards.create!(
+        english_word: card.english_word,
+        japanese_translation: card.japanese_translation
+      )
+    end
+
+    redirect_to word_kit_path(copied), notice: "複製しました！"
+  end
+
   private
 
   def word_kit_params
