@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_02_14_001453) do
+ActiveRecord::Schema[7.1].define(version: 2026_02_14_033810) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "word_kit_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "word_kit_id"], name: "index_favorites_on_user_id_and_word_kit_id", unique: true
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+    t.index ["word_kit_id"], name: "index_favorites_on_word_kit_id"
+  end
 
   create_table "game_rooms", force: :cascade do |t|
     t.string "game_code"
@@ -87,6 +97,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_14_001453) do
     t.index ["user_id"], name: "index_word_kits_on_user_id"
   end
 
+  add_foreign_key "favorites", "users"
+  add_foreign_key "favorites", "word_kits"
   add_foreign_key "game_rooms", "users", column: "host_user_id"
   add_foreign_key "game_rooms", "word_kits"
   add_foreign_key "learning_logs", "users"
