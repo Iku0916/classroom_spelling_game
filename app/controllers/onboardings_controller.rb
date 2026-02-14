@@ -1,4 +1,4 @@
-class OnboardingController < ApplicationController
+class OnboardingsController < ApplicationController
   before_action :require_login
   before_action :check_onboarding
 

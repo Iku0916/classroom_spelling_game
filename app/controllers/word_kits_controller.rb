@@ -76,6 +76,7 @@ class WordKitsController < ApplicationController
   def word_kit_params
     params.require(:word_kit).permit(
       :name,
+      :visibility,
       word_cards_attributes: [:id, :english_word, :japanese_translation, :_destroy]
     )
   end
