@@ -1,0 +1,101 @@
+.community-title {
+  text-align: center;
+  margin-bottom: 40px;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  color: #7B5CD6;
+}
+
+.community-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  padding: 20px 40px 60px;
+}
+
+.community-card {
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  border: 3px solid #BEEFFF;
+  transition: 0.2s;
+}
+
+.community-card:hover {
+  transform: translateY(-4px);
+}
+
+.word-list {
+  padding-left: 18px;
+  margin: 0;
+}
+
+.word-list li {
+  margin-bottom: 6px;
+}
+
+.en {
+  font-weight: bold;
+  margin-right: 6px;
+}
+
+.word-preview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px 12px;
+  margin-top: 8px;
+}
+
+.word-item {
+  font-size: 14px;
+  line-height: 1.2;
+  background: rgba(255,255,255,0.7);
+  padding: 4px 6px;
+  border-radius: 8px;
+}
+
+.word-item .en {
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+.word-item .jp {
+  color: #666;
+  font-size: 12px;
+}
+
+.view-more {
+  margin-top: 6px;
+  font-size: 12px;
+}
+
+.view-more a {
+  color: #7B5CD6;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.kit-name {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #2c3e50;
+}
+
+.kit-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.kit-author {
+  font-size: 0.9rem;
+  color: #888;
+  white-space: nowrap;
+  transform: translateY(10px);
+}
+
+.kit-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

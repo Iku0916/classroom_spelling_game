@@ -22,7 +22,7 @@
       <span>ゲームを開く</span>
     <% end %>
 
-    <%= link_to "#", class: "main-button btn-community" do %>
+    <%= link_to (logged_in? ? community_index_path : login_path), class: "main-button btn-community" do %>
       <span>コミュニティ</span>
     <% end %>
   </div>
