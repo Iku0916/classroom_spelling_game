@@ -1,25 +1,27 @@
 <h1 class="community-title">公開キット</h1>
 
-<div class="community-grid">
-  <% @public_word_kits.each do |kit| %>
+<div class="community-container">
+  <div class="community-grid">
+    <% @public_word_kits.each do |kit| %>
 
-    <%= link_to community_kit_path(kit), class: "community-card-link" do %>
-      <div class="community-card">
-        
-        <div class="kit-header">
-          <h2 class="kit-title"><%= kit.name %></h2>
-          <span class="kit-author">by <%= kit.user.name %></span>
-        </div>
+      <%= link_to community_kit_path(kit), class: "community-card-link" do %>
+        <div class="community-card">
+          
+          <div class="kit-header">
+            <h2 class="kit-title"><%= kit.name %></h2>
+            <span class="kit-author">by <%= kit.user.name %></span>
+          </div>
 
-        <div class="word-preview">
-          <% kit.word_cards.limit(6).each do |card| %>
-            <div class="word-item">
-              <span class="en"><%= card.english_word %></span>
-              <span class="jp"><%= card.japanese_translation %></span>
-            </div>
-          <% end %>
+          <div class="word-preview">
+            <% kit.word_cards.limit(6).each do |card| %>
+              <div class="word-item">
+                <span class="en"><%= card.english_word %></span>
+                <span class="jp"><%= card.japanese_translation %></span>
+              </div>
+            <% end %>
+          </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>

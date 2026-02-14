@@ -1,13 +1,17 @@
 .community-title {
-  text-align: center;
-  margin-bottom: 40px;
   font-family: 'Zen Maru Gothic', sans-serif;
-  color: #7B5CD6;
+  margin-top: 30px;
+  text-align: center;
+  color: #2c3e50;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 0px #ffffff;
+  letter-spacing: 0.05em;
 }
 
 .community-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: 1fr;
   gap: 30px;
   padding: 20px 40px 60px;
 }
@@ -19,6 +23,14 @@
   box-shadow: 0 8px 20px rgba(0,0,0,0.08);
   border: 3px solid #BEEFFF;
   transition: 0.2s;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.community-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .community-card:hover {
@@ -44,6 +56,8 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 6px 12px;
   margin-top: 8px;
+  justify-content: center;
+  justify-items: center; 
 }
 
 .word-item {
@@ -83,6 +97,7 @@
 
 .kit-header {
   display: flex;
+  flex-direction: column; 
   align-items: center;
   gap: 20px;
 }
@@ -91,7 +106,7 @@
   font-size: 0.9rem;
   color: #888;
   white-space: nowrap;
-  transform: translateY(10px);
+  transform: translateY(-10px);
 }
 
 .kit-title {
