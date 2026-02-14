@@ -67,7 +67,7 @@
 .edit-section-title {
   color: #2c3e50;
   font-weight: bold;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   font-size: 20px;
   display: block;
 }
@@ -518,4 +518,42 @@
     border-style: solid;
     transform: scale(1.05);
   }
+}
+
+.visibility-toggle {
+  display: flex;
+  gap: 30px;
+  align-items: center; 
+}
+
+.visibility-toggle input[type="radio"] {
+  display: none;
+}
+
+.toggle-btn {
+  display: flex;              /* ← 超重要 */
+  align-items: center;        /* 縦中央 */
+  justify-content: center;    /* 横中央 */
+
+  height: 48px;               /* ← 高さ固定（好きなサイズOK） */
+  padding: 0 28px;            /* 縦padding消す */
+  box-sizing: border-box;
+
+  background: white;
+  color: #7B5CD6;
+  border: 3px solid #BEEFFF;
+  border-radius: 50px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  box-shadow:
+    0 4px 15px rgba(0,0,0,0.1),
+    inset 0 -4px 0 rgba(0,0,0,0.15);
+}
+
+.visibility-toggle input[type="radio"]:checked + .toggle-btn {
+  background: linear-gradient(to right, #69C9FF, #9285F3);
+  color: white;
+  border: 3px solid white;
 }

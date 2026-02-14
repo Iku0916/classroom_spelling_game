@@ -3,20 +3,9 @@
 <div class="edit-page-container">
   <h1 class="word-kit-index">新規キット作成</h1>
 
-  <%= form_with model: @word_kit, local: true do |form| %>
-    <div class="field">
-      <%= form.label :visibility, "公開設定" %>
-      <%= form.select :visibility, WordKit.visibilities.keys.map { |k| [k.humanize, k] } %>
-    </div>
-
-    <div class="actions">
-      <%= form.submit %>
-    </div>
-  <% end %>
-
   <div class="edit-card-body" data-controller="nested-cards">
     <%= form_with model: @word_kit, local: true do |f| %>
-      
+
       <div style="margin-bottom: 30px;">
         <label class="edit-section-title">キット名</label>
         <%= f.text_field :name, class: "input-field", placeholder: "例：1年生 Unit1" %>
@@ -40,9 +29,20 @@
         ＋ 新しい単語を追加
       </button>
 
+        <span class="edit-section-title">公開設定</span>
+
+        <div class="visibility-toggle">
+          <%= f.radio_button :visibility, "private_kit", id: "vis_private" %>
+          <%= f.label :visibility, "🔒 非公開", for: "vis_private", class: "toggle-btn" %>
+
+          <%= f.radio_button :visibility, "public_kit", id: "vis_public" %>
+          <%= f.label :visibility, "🌍 公開", for: "vis_public", class: "toggle-btn" %>
+        </div>
+
       <%= f.submit "キットを作成！", class: "btn-update" %>
+
     <% end %>
-    
+
     <div class="back-link-container">
       <%= link_to "一覧に戻る", word_kits_path, class: "back-link" %>
     </div>
