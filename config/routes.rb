@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'community/index'
+  get "community/:id", to: "community#show", as: :community_kit
   get "onboardings", to: "onboardings#index"
   get 'users/new'
   get 'users/create'
@@ -20,6 +21,9 @@ Rails.application.routes.draw do
     end
   end
   resources :word_kits, only: [:new, :create, :show, :index, :destroy, :edit, :update] do
+    member do
+      post :copy
+    end
     resources :word_cards, only: [:new, :create, :index, :destroy, :edit, :update]
     resource :self_study, only: [:show, :update] do
       get :new, on: :collection

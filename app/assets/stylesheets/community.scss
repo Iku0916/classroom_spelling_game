@@ -99,3 +99,32 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.community-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.copy-btn-area {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.copy-btn {
+  background: white;
+  color: #7B5CD6;
+  border: 3px solid #BEEFFF;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Zen Maru Gothic', sans-serif;
+}
+
+.copy-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  background-color: #f8f8ff;
+}
