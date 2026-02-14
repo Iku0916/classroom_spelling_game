@@ -31,6 +31,15 @@
         ＋ 新しい単語を追加
       </button>
 
+      <label class="edit-section-title">公開設定</label>
+        <div class="visibility-toggle">
+          <%= f.radio_button :visibility, "private_kit", id: "private_kit" %>
+          <%= label_tag "private_kit", "非公開", class: "toggle-btn" %>
+
+          <%= f.radio_button :visibility, "public_kit", id: "public_kit" %>
+          <%= label_tag "public_kit", "公開", class: "toggle-btn" %>
+        </div>
+
       <%= f.submit "更新！", class: "btn-update" %>
     <% end %>
   </div>
