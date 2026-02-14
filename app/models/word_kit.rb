@@ -4,6 +4,9 @@ class WordKit < ApplicationRecord
   has_many :game_rooms, dependent: :destroy
   belongs_to :user
 
+  has_many :favorites
+  has_many :favorited_by_users, through: :favorites, source: :user
+
   enum visibility: { private_kit: 0, public_kit: 1 }
 
   validates :name, presence: { message: "ゲームキット名を入力してください" }

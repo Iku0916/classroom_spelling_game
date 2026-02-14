@@ -4,7 +4,10 @@ class User < ApplicationRecord
   has_many :word_kits
   has_many :game_rooms
   has_many :participants
-    has_many :learning_logs, dependent: :destroy
+  has_many :learning_logs, dependent: :destroy
+
+  has_many :favorites
+  has_many :favorite_word_kits, through: :favorites, source: :word_kit
 
   def total_score
     self[:total_score] || learning_logs.sum(:score)
