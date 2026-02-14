@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'community/index'
   get "onboardings", to: "onboardings#index"
   get 'users/new'
   get 'users/create'
