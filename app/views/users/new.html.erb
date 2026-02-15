@@ -18,7 +18,12 @@
       
       <div class="input-group">
         <%= f.label :password, "パスワード" %>
-        <%= f.password_field :password, placeholder: "6文字以上" %>
+        <%= f.password_field :password, placeholder: "8文字以上" %>
+      </div>
+
+      <div class="input-group">
+        <%= f.label :password_confirmation, "パスワード確認" %>
+        <%= f.password_field :password_confirmation, placeholder: "もう一度入力" %>
       </div>
 
       <div class="auth-actions">

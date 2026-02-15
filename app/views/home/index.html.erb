@@ -5,7 +5,7 @@
 <div class="button-container">
   <div class="button-row row-primary">
     <%= link_to new_participant_path, class: "main-button btn-join" do %>
-      <span>ゲームに参戦する</span>
+      <span>ゲームに参加する</span>
       <%= image_tag "icon_join.png", class: "btn-icon" if false %> <% end %>
 
     <%= link_to (logged_in? ? word_kits_path : login_path), class: "main-button btn-study" do %>
