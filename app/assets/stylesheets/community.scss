@@ -143,3 +143,17 @@
   box-shadow: 0 5px 15px rgba(0,0,0,0.15);
   background-color: #f8f8ff;
 }
+
+.heart-btn i {
+  font-size: 24px;
+  color: red;
+  transition: transform 0.2s;
+}
+
+.heart-btn.active i {
+  color: red;
+}
+
+.heart-btn:hover i {
+  transform: scale(1.2);
+}

@@ -1,0 +1,17 @@
+<div class="community-card">
+  <div class="kit-header">
+    <h2 class="kit-title"><%= kit.name %></h2>
+    <span class="kit-author">by <%= kit.user.name %></span>
+
+    <%= render partial: "favorites/heart_button", locals: { word_kit: kit } %>
+  </div>
+
+  <div class="word-preview">
+    <% kit.word_cards.limit(6).each do |card| %>
+      <div class="word-item">
+        <span class="en"><%= card.english_word %></span>
+        <span class="jp"><%= card.japanese_translation %></span>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -31,6 +31,7 @@ Rails.application.routes.draw do
       get :result, on: :collection
       post :answer, on: :collection
     end
+    resource :favorite, only: [:create, :destroy]
   end
   resources :game_rooms, only: [:create, :show, :update] do
     member do

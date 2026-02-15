@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "favorite_#{@word_kit.id}" do %>
+  <%= render "word_kits/heart_button", word_kit: @word_kit %>
+<% end %>
