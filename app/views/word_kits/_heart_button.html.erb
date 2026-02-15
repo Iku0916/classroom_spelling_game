@@ -1,0 +1,18 @@
+<%= turbo_frame_tag "favorite_#{word_kit.id}" do %>
+  <% favorite = current_user&.favorites&.exists?(word_kit: word_kit) %>
+
+  <%= link_to word_kit_favorite_path(word_kit),
+              data: {
+                turbo_method: (favorite ? :delete : :post),
+                turbo_frame: "favorite_#{word_kit.id}"
+              },
+              class: "heart-btn" do %>
+
+    <% if favorite %>
+      <%= raw(File.read(Rails.root.join("app/assets/images/heart-solid.svg"))) %>
+    <% else %>
+      <%= raw(File.read(Rails.root.join("app/assets/images/heart-regular.svg"))) %>
+    <% end %>
+
+  <% end %>
+<% end %>

@@ -1,0 +1,3 @@
+<%= turbo_frame_tag "favorite_#{word_kit.id}" do %>
+  <%= render partial: "favorites/heart_button", locals: { word_kit: word_kit } %>
+<% end %>
