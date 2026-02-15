@@ -8,3 +8,4 @@
 //= link game_code.png
 //= link join_game.png
 //= link learning_log.png
+//= link vocano_ogp.png
