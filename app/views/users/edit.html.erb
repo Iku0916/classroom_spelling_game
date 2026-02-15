@@ -1,0 +1,39 @@
+<% content_for :title, "ユーザー設定 | Vocano!" %>
+
+<div class="auth-container">
+  <div class="auth-card">
+    <h1 class="auth-title">ユーザー設定</h1>
+
+    <%= form_with model: @user, local: true, class: "auth-form" do |f| %>
+      
+      <div class="input-group">
+        <%= f.label :name, "ニックネーム" %>
+        <%= f.text_field :name, placeholder: "ボカノ" %>
+      </div>
+
+      <div class="input-group">
+        <%= f.label :email, "メールアドレス" %>
+        <%= f.email_field :email, placeholder: "example@vocano.com" %>
+      </div>
+
+      <div class="input-group">
+        <%= f.label :password, "パスワード（変更する場合のみ）" %>
+        <%= f.password_field :password, placeholder: "6文字以上" %>
+      </div>
+
+      <div class="input-group">
+        <%= f.label :password_confirmation, "パスワード確認" %>
+        <%= f.password_field :password_confirmation, placeholder: "もう一度入力" %>
+      </div>
+
+      <div class="auth-actions">
+        <%= f.submit "更新する", class: "btn-main" %>
+      </div>
+
+    <% end %>
+
+    <div class="auth-footer">
+      <%= link_to "トップページに戻る", root_path %>
+    </div>
+  </div>
+</div>
