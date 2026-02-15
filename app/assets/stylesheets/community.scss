@@ -1,3 +1,9 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 .community-title {
   font-family: 'Zen Maru Gothic', sans-serif;
   margin-top: 30px;
@@ -17,20 +23,21 @@
 }
 
 .community-card {
+  position: relative;
   background: white;
   border-radius: 20px;
   padding: 25px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.08);
   border: 3px solid #BEEFFF;
   transition: 0.2s;
-  max-width: 1000px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 .community-container {
-  max-width: 1000px;
+  width: 900px;
   margin: 0 auto;
   padding: 0 20px;
+  box-sizing: border-box;
 }
 
 .community-card:hover {
@@ -156,4 +163,30 @@
 
 .heart-btn:hover i {
   transform: scale(1.2);
+}
+
+.word-kit-card {
+  position: relative;
+  width: 260px;
+  flex-shrink: 0; 
+}
+
+.heart-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+
+  width: 28px;
+  height: 28px;
+}
+
+.heart-btn svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
