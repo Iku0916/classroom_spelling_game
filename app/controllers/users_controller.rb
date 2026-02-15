@@ -21,9 +21,28 @@ class UsersController < ApplicationController
                                 .transform_values { |logs| logs.sum(&:score) }
   end                 
 
+  def edit
+    @user = current_user
+  end
+
+  def update
+    @user = current_user
+
+    if params[:user][:password].blank?
+      params[:user].delete(:password)
+      params[:user].delete(:password_confirmation)
+    end
+
+    if @user.update(user_params)
+      redirect_to root_path, notice: "設定を更新しました！"
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 end

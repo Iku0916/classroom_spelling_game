@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :onboardings, only: [:index] do
     post :complete
   end
-  resource :user, only: [:show]
+  resource :user, only: [:show, :edit, :update]
   resources :participants, only: [:new, :create] do
     member do
       get :personal_result
