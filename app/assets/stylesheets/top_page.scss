@@ -185,3 +185,90 @@ header {
   border-radius: 0;
   box-shadow: none;
 }
+
+/* 以下レスポンジブ対応 */
+
+/* iPhone SE */
+
+@media (max-width: 375px) {
+  header {
+    padding: 5px 8px;
+  }
+
+  header .site-logo img {
+    max-width: 150px;
+  }
+
+  .menu_group a {
+    font-size: 12px;
+  }
+
+  .button-container {
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .button-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .button-row.row-secondary {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .main-button {
+    width: 100%;
+    font-size: 1rem;
+    padding: 12px 0;
+  }
+
+  .total-stats-section {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .calendar-container {
+    overflow-x: auto;
+  }
+
+  .table {
+    width: 100%;
+    min-width: 300px;
+  }
+
+  .menu_group {
+    gap: 8px;
+  }
+
+  .total-stats-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 0 10px;
+  }
+
+  .total-stats-section .total-study-card,
+  .total-stats-section .total-point-card {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    width: 100%;
+    max-width: 300px;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .total-stats-section .label,
+  .total-stats-section .value {
+    margin: 0;
+    line-height: 1.2;
+  }
+}
