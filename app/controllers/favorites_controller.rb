@@ -1,5 +1,12 @@
 class FavoritesController < ApplicationController
-  before_action :set_word_kit
+  before_action :set_word_kit, only: [:create, :destroy]
+
+  def index
+    @favorite_word_kits = current_user
+      .favorites
+      .includes(:word_kit)
+      .map(&:word_kit)
+  end
 
   def create
     favorite = current_user.favorites.find_or_initialize_by(word_kit: @word_kit)

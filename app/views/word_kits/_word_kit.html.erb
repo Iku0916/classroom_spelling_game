@@ -1,0 +1,19 @@
+<div class="community-card">
+  <%= link_to community_kit_path(word_kit), class: "community-card-link" do %>
+    <div class="kit-header">
+      <h2 class="kit-title"><%= word_kit.name %></h2>
+      <span class="kit-author">by <%= word_kit.user.name %></span>
+    </div>
+
+    <div class="word-preview">
+      <% word_kit.word_cards.limit(6).each do |card| %>
+        <div class="word-item">
+          <span class="en"><%= card.english_word %></span>
+          <span class="jp"><%= card.japanese_translation %></span>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= render "word_kits/heart_button", word_kit: word_kit %>
+</div>
