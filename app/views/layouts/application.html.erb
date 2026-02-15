@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta property="og:title" content="Vocano!">
+    <meta property="og:description" content="まずは5分、遊んで学ぶ。生徒の「やりたい！」を引き出す、最高の授業オープニング">
+    <meta property="og:image" content="https://vocano-spelling-game-ver2.onrender.com/vocano_ogp.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<%= request.original_url %>">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Vocano!">
+    <meta name="twitter:description" content="まずは5分、遊んで学ぶ。生徒の「やりたい！」を引き出す、最高の授業オープニング">
+    <meta name="twitter:image" content="https://vocano-spelling-game-ver2.onrender.com/vocano_ogp.png">
     <link rel="icon" href="<%= asset_path('favicon.png') %>" type="image/x-icon">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", media: "all" %>
