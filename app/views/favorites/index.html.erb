@@ -1,0 +1,15 @@
+<h1 class="community-title">お気に入りキット</h1>
+
+<% if @favorite_word_kits.any? %>
+  <div class="community-container">
+    <div class="community-grid">
+
+      <% @favorite_word_kits.each do |kit| %>
+        <%= render "word_kits/word_kit", word_kit: kit %>
+      <% end %>
+
+    </div>
+  </div>
+<% else %>
+  <p class="empty-message">まだお気に入りはありません</p>
+<% end %>
