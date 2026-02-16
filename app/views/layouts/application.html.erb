@@ -23,6 +23,7 @@
   </head>
 
   <body>
+    <div class="page-wrapper">
       <div id="help-btn">?</div>
       <% if logged_in? %>
         <%= render 'shared/header' %>
@@ -60,5 +61,6 @@
         document.addEventListener('turbo:load', () => window.handleFlash());
         document.addEventListener('DOMContentLoaded', () => window.handleFlash());
       </script>
-    </body>
+    </div>
+  </body>
 </html>
