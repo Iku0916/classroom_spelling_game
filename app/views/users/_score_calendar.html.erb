@@ -19,7 +19,7 @@
 
     <% if score_by_day[date] %>
       <div class="daily-score">
-        🎉 <%= score_by_day[date.to_date] %> 🎉
+        <%= score_by_day[date.to_date] %>
       </div>
     <% end %>
   <% end %>

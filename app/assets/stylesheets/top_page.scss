@@ -249,26 +249,32 @@ header {
 
   .total-stats-section {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    padding: 0 10px;
+    gap: 10px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 10px;
+    margin: 30px;
   }
 
-  .total-stats-section .total-study-card,
-  .total-stats-section .total-point-card {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; 
-    width: 100%;
-    max-width: 300px;
-    padding: 20px;
-    box-sizing: border-box;
+  .total-study-card,
+  .total-point-card {
+    flex: 1 1 140px; 
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    max-height: 150px;
   }
-  .total-stats-section .label,
-  .total-stats-section .value {
-    margin: 0;
-    line-height: 1.2;
+
+  .total-study-card .label,
+  .total-point-card .label {
+    font-size: 14px;
+  }
+
+  .total-study-card .value,
+  .total-point-card .value {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 5px;
   }
 }
