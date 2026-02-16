@@ -47,18 +47,16 @@
   font-weight: bold;
 }
 
-/* 1. ページ全体のコンテナ（一覧画面の余白と合わせる） */
 .edit-page-container {
-  max-width: 1000px; /* .kit-listと同じ幅 */
-  margin: 30px auto 40px; /* .word-kit-indexと同じmargin-top */
-  font-family: 'Zen Maru Gothic', sans-serif; /* フォントを統一 */
+  max-width: 1000px;
+  margin: 30px auto 40px;
+  font-family: 'Zen Maru Gothic', sans-serif;
   padding: 0 20px 50px;
 }
 
-/* 2. 編集エリア本体（.kit-cardと同じスタイル） */
 .edit-card-body {
   background: white;
-  border-radius: 24px; /* .kit-cardと統一 */
+  border-radius: 24px;
   padding: 40px;       /* 編集画面なので少しゆったり */
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* 影を統一 */
 }
