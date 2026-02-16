@@ -7,6 +7,17 @@
     max-width: 150px;
   }
 
+  .title-logo {
+    height: auto !important; 
+    width: 100% !important;
+    max-width: 350px !important; 
+    margin: 20px auto !important;
+    transform: none !important;
+    object-fit: contain !important;
+    display: block !important;
+    filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.15)) !important;
+  }
+
   .menu_group a {
     font-size: 12px;
   }

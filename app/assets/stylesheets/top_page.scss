@@ -103,10 +103,9 @@ header {
 
 .title-logo {
   display: block;
-  width: 100%; 
-  max-width: 1000px; 
-  height: 80%;
-  margin: -100px auto -120px; 
+  width: 700px;
+  height: auto !important;
+  margin: -100px auto -120px;
   transform: translateY(-20px); 
   object-fit: contain;
   filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.15)) 
@@ -184,4 +183,97 @@ header {
   padding: 0;
   border-radius: 0;
   box-shadow: none;
+}
+
+/* 以下レスポンジブ対応 */
+
+/* iPhone SE */
+
+@media (max-width: 375px) {
+  header {
+    padding: 5px 8px;
+  }
+
+  header .site-logo img {
+    max-width: 150px;
+  }
+
+  .menu_group a {
+    font-size: 12px;
+  }
+
+  .button-container {
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .button-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .button-row.row-secondary {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .main-button {
+    width: 100%;
+    font-size: 1rem;
+    padding: 12px 0;
+  }
+
+  .total-stats-section {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .calendar-container {
+    overflow-x: auto;
+  }
+
+  .table {
+    width: 100%;
+    min-width: 300px;
+  }
+
+  .menu_group {
+    gap: 8px;
+  }
+
+  .total-stats-section {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 10px;
+    margin: 30px;
+  }
+
+  .total-study-card,
+  .total-point-card {
+    flex: 1 1 140px; 
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    max-height: 150px;
+  }
+
+  .total-study-card .label,
+  .total-point-card .label {
+    font-size: 14px;
+  }
+
+  .total-study-card .value,
+  .total-point-card .value {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 5px;
+  }
 }
