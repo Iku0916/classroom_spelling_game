@@ -96,7 +96,7 @@
   }
 }
 
-/*ゲームキット詳細画面*/
+/* ゲームキット編集画面 */
 @media (max-width: 375px) {
   .edit-page-container {
     width: 100vw !important;
@@ -127,37 +127,50 @@
   }
 
   .detail-row {
-    width: 100% !important;
+    width: 95% !important;
+    max-width: 320px !important;
+    height: auto !important;
+    min-height: 60px !important;
+    margin: 0 auto 12px auto !important; 
+    padding: 12px 15px !important;
     display: flex !important;
     justify-content: center !important;
+    align-items: center !important;
   }
 
   .word-display-group {
     display: flex !important;
     align-items: center !important;
-    justify-content: space-between !important;
-    gap: 5px !important; 
+    justify-content: center !important;
     width: 100% !important;
+    gap: 10px !important;
   }
 
   .word-box {
-    white-space: normal !important; 
-    word-break: break-word !important;
-    overflow-wrap: break-word !important;
-    display: flex !important;
-    flex-direction: column !important; 
-    justify-content: center !important;
-    align-items: center !important;
-    font-size: 15px !important; 
-    line-height: 1.3 !important;
     flex: 1 !important;
-    min-width: 0 !important; 
-    padding: 8px 4px !important;
-    }
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+    word-break: break-word !important;
+  }
+
+  .en-box {
+    text-align: left !important;
+    color: #5D3FD3 !important;
+    font-weight: 600 !important;
+  }
+
+  .jp-box {
+    text-align: left !important;
+    color: #333 !important;
+  }
 
   .word-divider {
-    font-size: 12px !important;
-    color: #ccc;
-    flex-shrink: 0;
+    width: 1px !important;
+    height: 20px !important;
+    background-color: #eee !important;
+    flex-shrink: 0 !important;
   }
 }

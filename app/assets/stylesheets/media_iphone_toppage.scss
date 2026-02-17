@@ -95,4 +95,29 @@
     font-weight: bold;
     margin-top: 5px;
   }
+  .button-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .calendar-container {
+    width: 90% !important;
+    display: flex !important;
+    justify-content: center !important;
+    margin-top: 20px !important;
+
+  }
+
+  .button-row {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    margin-bottom: 15px !important;
+  }
 }

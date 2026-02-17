@@ -1,0 +1,97 @@
+@media (max-width: 375px) {
+  .community-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+    gap: 20px !important;
+  }
+
+  .community-card {
+    width: 95% !important;
+    max-width: 340px !important;
+    margin: 0 auto !important;
+    padding: 15px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    position: relative !important;
+  }
+
+  .word-preview {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+    width: 100% !important;
+    margin-top: 10px !important;
+  }
+
+  .word-item {
+    font-size: 13px !important;
+    text-align: left !important;
+  }
+
+  .heart-btn {
+    position: absolute !important;
+    top: 10px !important;
+    right: 10px !important;
+  }
+
+  .community-container {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+  }
+
+  .community-grid {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 20px !important;
+    padding: 10px 0 !important;
+  }
+
+  .community-card {
+    width: 90% !important;
+    max-width: 350px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box !important;
+  }
+
+  .community-title {
+    width: 100% !important;
+    text-align: center !important;
+    margin: 20px 0 !important;
+  }
+
+  .community-card .kit-title {
+    font-size: 20px !important;
+    margin: 0 !important;
+    font-weight: bold !important;
+    line-height: 1.2 !important;
+  }
+
+  .word-item {
+    font-size: 13px !important;
+    margin-bottom: 4px !important;
+    display: flex !important;
+    gap: 8px !important;
+    align-items: center !important;
+  }
+
+  .word-item .en {
+    font-weight: 600 !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* 3. 日本語（右側）の設定 */
+  .word-item .jp {
+    font-size: 12px !important;
+    flex-shrink: 0 !important;
+  }
+}
