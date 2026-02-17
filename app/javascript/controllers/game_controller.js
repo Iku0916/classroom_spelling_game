@@ -106,7 +106,8 @@ export default class extends Controller {
       this.waitingForNext = true
     } else {
       if (this.hasFeedbackTarget) {
-        this.feedbackTarget.textContent = `ざんねん…😢 -1ポイント 正解は: ${current.word}`
+        // this.feedbackTarget.textContent = `ざんねん…😢 -1ポイント 正解は: ${current.word}`
+        this.feedbackTarget.innerHTML = `ざんねん…😢 -1ポイント <br> 正解は: ${current.word}`;
         // style.color の代わりにクラスをセット
         this.feedbackTarget.className = "feedback-display feedback-incorrect"
       }

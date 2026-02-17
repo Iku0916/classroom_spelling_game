@@ -163,8 +163,132 @@
     align-items: center !important;
   }
 
-  /* 順位ごとの高さの比率（スマホ用） */
   .rank-1 .podium-base { height: 120px !important; }
   .rank-2 .podium-base { height: 80px !important; }
   .rank-3 .podium-base { height: 50px !important; }
+
+  .input-group {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin-bottom: 25px !important;
+  }
+
+  .game-code-input, 
+  .input-field {
+    width: 85% !important;
+    max-width: 280px !important;
+    height: 55px !important;
+    font-size: 1.2rem !important;
+    text-align: center !important;
+    border-radius: 15px !important;
+    margin: 0 auto !important;
+  }
+
+  .game-code-input {
+    font-size: 1.8rem !important;
+    letter-spacing: 4px !important;
+  }
+
+  .lobby-container {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 10px !important;
+    box-sizing: border-box !important;
+  }
+
+  .edit-card-body {
+    width: 92% !important;
+    max-width: 340px !important;
+    margin: 0 auto !important;
+    padding: 20px 15px !important;
+    float: none !important;
+  }
+
+  .waiting-status, .status-box, .tutorial-slider {
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+  }
+
+  .feedback-area {
+    order: 1;
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+    min-height: 1.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 14px !important;
+    font-weight: bold;
+  }
+
+  .feedback-area p {
+    font-size: 20px !important;
+    margin: 0 !important;
+  }
+
+  .word-input-container {
+    order: 2;
+    margin-top: 0 !important;    /* 20pxを0に！ */
+    margin-bottom: 0 !important; /* 40pxを0に！ */
+    padding-top: 0 !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    flex-wrap: wrap;
+  }
+
+  .play-container {
+    width: 340px !important;
+    min-height: 550px !important; 
+    max-height: 550px !important;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    
+    overflow: hidden; 
+    box-sizing: border-box;
+  }
+
+  .question-frame {
+    padding: 10px !important;
+    margin-bottom: 0 !important;
+    height: auto !important;
+    min-height: 100px !important;
+  }
+
+  .question-label {
+    font-size: 12px !important;
+    margin-bottom: 0 !important;
+  }
+
+  .question-text {
+    font-size: 24px !important;
+    margin: 0 !important;
+    line-height: 1.2 !important;
+  }
+
+  .letter-box {
+    width: 40px !important;
+    height: 40px !important; 
+    font-size: 20px !important; 
+    margin: 1px !important;
+  }
+
+  .header-content-inner {
+    padding-top: 15px !important;
+  }
+
+  .game-footer {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
 }
