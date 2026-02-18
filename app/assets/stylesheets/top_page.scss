@@ -147,7 +147,7 @@ header {
 }
 
 .row-primary .main-button {
-  width: 90%;
+  width: 500px;
   height: 85px;
   font-size: 1.5rem;
 }
@@ -189,7 +189,7 @@ header {
 
 /* iPhone SE */
 
-@media (max-width: 375px) {
+@media (max-width: 767px) {
   header {
     padding: 5px 8px;
   }
@@ -215,6 +215,11 @@ header {
     gap: 10px;
   }
 
+  .row-primary .main-button {
+    width: 80%;
+    height: 85px;
+    font-size: 1.5rem;
+  }
   .button-row.row-secondary {
     flex-direction: column;
     align-items: center;
