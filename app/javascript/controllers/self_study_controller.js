@@ -142,22 +142,56 @@ export default class extends Controller {
     }, 1000)
   }
 
+  // async finishGame() {
+  //   const wordKitId = window.location.pathname.split('/')[2];
+  //   const updateUrl = `/word_kits/${wordKitId}/self_study`;
+
+  //   await fetch(updateUrl, {
+  //     method: 'PATCH',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+  //     },
+  //     body: JSON.stringify({
+  //       learning_log: {
+  //         score: this.currentScore,
+  //         minutes: (this.timeLimitValue - this.remainingTime) / 60,
+  //         word_kit_id: wordKitId
+  //       }
+  //     })
+  //   });
+    
+  //   window.location.href = `/word_kits/${wordKitId}/self_study/result?score=${this.currentScore}`;
+
+  //   } catch (error) {
+  //     console.error("エラーが発生しました:", error);
+  //     window.location.href = `/word_kits/${wordKitId}/self_study/result?score=${this.currentScore}`;
+  //   }
   async finishGame() {
     const wordKitId = window.location.pathname.split('/')[2];
     const updateUrl = `/word_kits/${wordKitId}/self_study`;
 
-    await fetch(updateUrl, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
-      },
-      body: JSON.stringify({
-        score: this.currentScore,
-        minutes: (this.timeLimitValue - this.remainingTime) / 60,
-        word_kit_id: wordKitId
-      })
-    });
+    try {
+      const response = await fetch(updateUrl, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+        },
+        body: JSON.stringify({
+          learning_log: {
+            score: this.currentScore,
+            minutes: (this.timeLimitValue - this.remainingTime) / 60,
+            word_kit_id: wordKitId
+          }
+        })
+      });
+
       window.location.href = `/word_kits/${wordKitId}/self_study/result?score=${this.currentScore}`;
+
+    } catch (error) {
+      console.error("通信エラーが発生しました:", error);
+      window.location.href = `/word_kits/${wordKitId}/self_study/result?score=${this.currentScore}`;
+    }
   }
 }

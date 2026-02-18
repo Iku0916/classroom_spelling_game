@@ -42,17 +42,20 @@ class SelfStudiesController < ApplicationController
 
   def update
     @word_kit = WordKit.find(params[:word_kit_id])
-
-    score = params[:score].to_i
-    minutes = params[:minutes].to_f
-
+    log_data = learning_log_params
+    score = log_data[:score].to_i
     current_user.increment!(:total_score, score)
-    current_user.learning_logs.create!(score: score, minutes: minutes)
 
-    session[:current_score] = 0
-    session[:question_index] = 0
+    current_user.learning_logs.create!(
+      score: log_data[:score],
+      minutes: log_data[:minutes],
+      word_kit_id: @word_kit.id
+    )
 
-    redirect_to result_word_kit_self_study_path(@word_kit, score: score, minutes: minutes, word_kit_id: @word_kit.id), status: :see_other
+    render json: { status: 'success' }, status: :ok
+  rescue => e
+    logger.error "保存エラー: #{e.message}"
+    render json: { status: 'error', message: e.message }, status: :internal_server_error
   end
 
   def result
@@ -64,4 +67,11 @@ class SelfStudiesController < ApplicationController
     session[:current_score] = 0
     session[:question_index] = 0
   end
+end
+
+
+private
+
+def learning_log_params
+  params.require(:learning_log).permit(:score, :minutes)
 end
