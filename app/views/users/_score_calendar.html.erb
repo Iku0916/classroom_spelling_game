@@ -17,9 +17,9 @@
   <%= month_calendar do |date| %>
     <div><%= date.day %></div>
 
-    <% if score_by_day[date] %>
+    <% if score_by_day[date.to_date] %>
       <div class="daily-score">
-        <%= score_by_day[date.to_date] %>
+        <%= @score_by_day[date.to_date] %>
       </div>
     <% end %>
   <% end %>
