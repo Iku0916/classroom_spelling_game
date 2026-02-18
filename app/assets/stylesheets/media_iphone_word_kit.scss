@@ -1,6 +1,6 @@
 /*新規キット作成画面*/
 
-@media (max-width: 375px) {
+@media (max-width: 767px) {
   .toggle-btn {
     display: inline-block;
     align-items: center;
@@ -13,7 +13,7 @@
 
 /*ゲームキット一覧画面*/
 
-@media (max-width: 375px) {
+@media (max-width: 767px) {
   body {
     width: 100%;
   }
@@ -97,7 +97,7 @@
 }
 
 /* ゲームキット編集画面 */
-@media (max-width: 375px) {
+@media (max-width: 767px) {
   .edit-page-container {
     width: 100vw !important;
     max-width: 100vw !important;

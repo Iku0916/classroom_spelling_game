@@ -4,7 +4,7 @@ class HomeController < ApplicationController
       @user = current_user
       @learning_logs = @user.learning_logs.order(created_at: :asc)
       
-      @score_by_day = @learning_logs.group_by { |log| log.created_at.to_date }
+      @score_by_day = @learning_logs.group_by { |log| log.created_at.in_time_zone('Tokyo').to_date }
                                     .transform_values { |logs| logs.sum(&:score) }
     else
       @score_by_day = {}

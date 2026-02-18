@@ -154,10 +154,10 @@ export default class extends Controller {
       },
       body: JSON.stringify({
         score: this.currentScore,
-        minutes: (this.timeLimitValue - this.remainingTime) / 60
+        minutes: (this.timeLimitValue - this.remainingTime) / 60,
+        word_kit_id: wordKitId
       })
     });
-
-    window.location.href = `/word_kits/${wordKitId}/self_study/result?score=${this.currentScore}`;
+      window.location.href = `/word_kits/${wordKitId}/self_study/result?score=${this.currentScore}`;
   }
 }

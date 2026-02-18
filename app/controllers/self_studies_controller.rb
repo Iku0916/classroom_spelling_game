@@ -52,7 +52,7 @@ class SelfStudiesController < ApplicationController
     session[:current_score] = 0
     session[:question_index] = 0
 
-    head :ok
+    redirect_to result_word_kit_self_study_path(@word_kit, score: score, minutes: minutes, word_kit_id: @word_kit.id), status: :see_other
   end
 
   def result
