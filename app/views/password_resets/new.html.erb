@@ -1,0 +1,19 @@
+<% content_for :title, "パスワード再設定 | Vocano!" %>
+
+<div class="auth-container">
+  <div class="auth-card">
+    <h1 class="auth-title">パスワード再設定</h1>
+
+      <%= form_with url: password_resets_path do |f| %>
+        <div class="input-group">
+            <%= f.label :email, "メールアドレス" %>
+            <%= f.email_field :email, placeholder: "example@vocano.com", required: true %>
+        </div>
+
+        <div class="auth-actions">
+            <%= f.submit "メールを送信", class: "btn-main" %>
+        </div>
+      <% end %>
+
+  </div>
+</div>

@@ -86,7 +86,11 @@
 /* 下のリンク */
 .auth-footer {
   text-align: center;
+  display: flex;
+  flex-direction: column;
   margin-top: 25px;
+  gap: 8px;
+  padding: 10px;
 }
 
 .auth-footer a {

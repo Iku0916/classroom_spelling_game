@@ -27,4 +27,5 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :password, length: { minimum: 8 }, if: -> { new_record? || changes[:crypted_password] }
   validates :password, confirmation: true, if: -> { password.present? }
+  validates :reset_password_token, uniqueness: true, allow_nil: true
 end
