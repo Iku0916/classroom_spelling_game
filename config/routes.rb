@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'password_resets/create'
+  get 'password_resets/edit'
+  get 'password_resets/update'
   get 'community/index'
   get "community/:id", to: "community#show", as: :community_kit
   get "onboardings", to: "onboardings#index"
@@ -12,6 +15,7 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#new'
   post 'signup', to: 'users#create'
   resources :favorites, only: [:index]
+  resources :password_resets, only: [:new, :create, :edit, :update]
   resources :onboardings, only: [:index] do
     post :complete
   end
@@ -55,7 +59,8 @@ Rails.application.routes.draw do
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
-
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+  
   # Defines the root path route ("/")
   # root "posts#index"
 end
