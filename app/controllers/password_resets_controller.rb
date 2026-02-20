@@ -5,8 +5,9 @@ class PasswordResetsController < ApplicationController
   def create
     @user = User.find_by(email: params[:email])
     if @user
-      @user.generate_reset_password_token! 
-      UserMailer.reset_password_email(@user).deliver_now
+      token = @user.generate_reset_password_token!
+      @user.save!
+      UserMailer.reset_password_email(@user, token).deliver_now
     end
 
     redirect_to login_path, notice: 'メールを送信しました。ご確認ください。'

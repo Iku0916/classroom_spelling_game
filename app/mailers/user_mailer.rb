@@ -1,9 +1,9 @@
 class UserMailer < ApplicationMailer
   default from: 'vocano.spelling.game.info@gmail.com'
 
-  def reset_password_email(user)
-    @user = User.find(user.id)
-    @url = edit_password_reset_url(@user.reset_password_token)
+  def reset_password_email(user, token)
+    @user = user
+    @url = edit_password_reset_url(id: token)
     mail(to: user.email, 
          subject: '【Vocano!】パスワードリセットのご案内')
   end
