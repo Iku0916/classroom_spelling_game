@@ -12,9 +12,9 @@ Rails.application.configure do
     address: "vocano.spelling.game.info@gmail.com",
     port: 587,
     domain: "gmail.com",
-    user_name: ENV["SMTP_USER"]
-    password: ENV["SMTP_PASSWORD"]
-    authentication: "plain"
+    user_name: ENV["SMTP_USER"],
+    password: ENV["SMTP_PASSWORD"],
+    authentication: "plain",
     enable_starttls_auto: true 
   }
   config.action_mailer.default_url_options = { host: "vocano-spelling-game-ver2.onrender.com" }
