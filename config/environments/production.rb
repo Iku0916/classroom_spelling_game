@@ -6,6 +6,17 @@ Rails.application.configure do
   config.hosts << "vocano-spelling-game-ver2.onrender.com"
   # Code is not reloaded between requests.
   config.enable_reloading = false
+
+  config.action_mailer.delivery_methd = :smtp
+  config.action_mailer.smtp_settings = {
+    address: "vocano.spelling.game.info@gmail.com",
+    port: 587,
+    domain: "gmail.com",
+    user_name: ENV["SMTP_USER"]
+    password: ENV["SMTP_PASSWORD"]
+    authentication: "plain"
+    enable_starttls_auto: true 
+  }
   config.action_mailer.default_url_options = { host: "vocano-spelling-game-ver2.onrender.com" }
 
   # Eager load code on boot. This eager loads most of Rails and
