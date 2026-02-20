@@ -7,7 +7,7 @@ Rails.application.configure do
   # Code is not reloaded between requests.
   config.enable_reloading = false
 
-  config.action_mailer.delivery_methd = :smtp
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: "vocano.spelling.game.info@gmail.com",
     port: 587,
