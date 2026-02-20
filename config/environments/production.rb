@@ -6,6 +6,7 @@ Rails.application.configure do
   config.hosts << "vocano-spelling-game-ver2.onrender.com"
   # Code is not reloaded between requests.
   config.enable_reloading = false
+  config.action_mailer.default_url_options = { host: "vocano-spelling-game-ver2.onrender.com" }
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
