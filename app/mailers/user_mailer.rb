@@ -5,6 +5,6 @@ class UserMailer < ApplicationMailer
     @user = User.find(user.id)
     @url = edit_password_reset_url(@user.reset_password_token)
     mail(to: user.email, 
-         subject: 'パスワードリセットのご案内')
+         subject: '【Vocano!】パスワードリセットのご案内')
   end
 end
