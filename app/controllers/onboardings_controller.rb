@@ -2,7 +2,7 @@ class OnboardingsController < ApplicationController
   before_action :require_login
   before_action :check_onboarding
 
-  def index
+  def show
   end
 
   def complete
