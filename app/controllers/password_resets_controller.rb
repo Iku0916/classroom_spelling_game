@@ -7,7 +7,7 @@ class PasswordResetsController < ApplicationController
     if @user
       token = @user.generate_reset_password_token!
       @user.save!
-      UserMailer.reset_password_email(@user, token).deliver_now
+      UserMailer.reset_password_email(@user, @user.reset_password_token).deliver_now
     end
 
     redirect_to login_path, notice: 'メールを送信しました。ご確認ください。'
