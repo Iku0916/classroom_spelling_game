@@ -21,7 +21,7 @@
       </div>
     <% end %>
 
-    <%= link_to "Googleでログイン", auth_at_provider_path(provider: :google), class: "btn btn-outline-primary" %>
+    <%= link_to "Googleでログイン", auth_at_provider_path(provider: :google), data: { turbo: false }, class: "btn btn-outline-primary" %>
 
     <div class="auth-footer">
       <%= link_to "新しくアカウントを作る", signup_path %>
