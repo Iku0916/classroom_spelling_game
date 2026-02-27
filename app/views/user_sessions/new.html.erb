@@ -21,6 +21,8 @@
       </div>
     <% end %>
 
+    <%= link_to "Googleでログイン", auth_at_provider_path(provider: :google), class: "btn btn-outline-primary" %>
+
     <div class="auth-footer">
       <%= link_to "新しくアカウントを作る", signup_path %>
       <%= link_to "パスワードをお忘れの方はこちら", new_password_reset_path %>
