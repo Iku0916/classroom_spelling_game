@@ -28,11 +28,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
-  validates :password, length: { minimum: 8 }, if: -> { new_record? || changes[:crypted_password] }, unless: :external_login?
-  validates :password, confirmation: true, if: -> { password.present? }, unless: :external_login?
-  validates :reset_password_token, uniqueness: true, allow_nil: true
-
-  def external_login?
-    authentications.any?
-  end
+  validates :password, length: { minimum: 8 }, if: -> { new_record? || changes[:crypted_password] }, unless: -> { @external_redirect }
+  validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }, unless: -> { @external_redirect }
+  validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }, unless: -> { @external_redirect }
 end
