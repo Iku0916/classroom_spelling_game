@@ -8,7 +8,7 @@ class UserSessionsController < ApplicationController
       if @user.onboarding_seen
         redirect_to root_path
       else
-        redirect_to onboardings_path
+        redirect_to onboarding_path
       end
     else
       flash.now[:alert] = "メールアドレスかパスワードが違います"
