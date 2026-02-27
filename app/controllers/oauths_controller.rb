@@ -11,7 +11,6 @@ class OauthsController < ApplicationController
       redirect_to root_path, notice: "#{provider.titleize}でログインしました"
     else
       begin
-        # Googleのデータでユーザー作成（パスワードはランダムで自動生成されるよ）
         @user = create_from(provider)
         reset_session
         auto_login(@user)

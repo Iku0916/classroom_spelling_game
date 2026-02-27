@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   post 'signup', to: 'users#create'
   resources :favorites, only: [:index]
   resources :password_resets, only: [:new, :create, :edit, :update]
-  resources :onboardings, only: [:index] do
+  resource :onboarding, only: [:index] do
     post :complete
   end
   resource :user, only: [:show, :edit, :update]
