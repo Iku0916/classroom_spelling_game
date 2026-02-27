@@ -3,7 +3,7 @@ class UserMailer < ApplicationMailer
 
   def reset_password_email(user, token)
     @user = user
-    @url = edit_password_reset_url(id: token)
+    @url = edit_password_reset_url(token)
     mail(to: user.email, 
          subject: '【Vocano!】パスワードリセットのご案内')
   end
