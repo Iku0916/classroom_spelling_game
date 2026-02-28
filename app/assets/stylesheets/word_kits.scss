@@ -76,6 +76,10 @@
   display: block;
 }
 
+.edit-form-group {
+  margin-top: 30px;    /* 上に余白 */
+  margin-bottom: 30px; /* 下に余白 */
+}
 /* 4. 入力フィールド（サイトの雰囲気に合わせる） */
 .input-field {
   width: 100%;
