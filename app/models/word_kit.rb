@@ -6,6 +6,8 @@ class WordKit < ApplicationRecord
 
   has_many :favorites
   has_many :favorited_by_users, through: :favorites, source: :user
+  has_many :word_kit_tags, dependent: :destroy
+  has_many :tags, through: :word_kit_tags
 
   enum visibility: { private_kit: 0, public_kit: 1 }
 
