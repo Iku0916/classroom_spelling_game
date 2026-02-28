@@ -12,4 +12,14 @@ class WordKit < ApplicationRecord
   enum visibility: { private_kit: 0, public_kit: 1 }
 
   validates :name, presence: { message: "ゲームキット名を入力してください" }
+
+  def tag_list=(names)
+    self.tags = names.split(/[、,]/).map(&:strip).uniq.reject(&:empty?).map do |name|
+      Tag.find_or_create_by(name: name)
+    end
+  end
+
+  def tag_list
+    tags.pluck(:name).join(', ')
+  end
 end

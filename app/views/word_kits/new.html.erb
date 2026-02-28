@@ -39,6 +39,19 @@
           <%= f.label :visibility, "🌍 公開", for: "vis_public", class: "toggle-btn" %>
         </div>
 
+      <div class="edit-form-group">
+        <div>
+          <label class="edit-section-title">タグ</label>
+          <%= f.text_field :tag_list, 
+                value: @word_kit.tag_list, 
+                class: "input-field", 
+                placeholder: "例：TOEIC, 旅行, 初心者" %>
+          <p style="font-size: 11px; color: #888; margin-top: 5px; margin-left: 5px;">
+            ※ カンマ（,）または読点（、）で区切って入力してください
+          </p>
+        </div>
+      <div class="edit-form-group">
+
       <%= f.submit "キットを作成！", class: "btn-update" %>
 
     <% end %>
