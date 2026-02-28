@@ -4,7 +4,7 @@ class WordKit < ApplicationRecord
   has_many :game_rooms, dependent: :destroy
   belongs_to :user
 
-  has_many :favorites
+  has_many :favorites, dependent: :destroy
   has_many :favorited_by_users, through: :favorites, source: :user
   has_many :word_kit_tags, dependent: :destroy
   has_many :tags, through: :word_kit_tags
@@ -17,6 +17,8 @@ class WordKit < ApplicationRecord
     self.tags = names.split(/[、,]/).map(&:strip).uniq.reject(&:empty?).map do |name|
       Tag.find_or_create_by(name: name)
     end
+
+    self.updated_at = Time.current
   end
 
   def tag_list

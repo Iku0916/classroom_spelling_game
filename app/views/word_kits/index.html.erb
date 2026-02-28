@@ -9,6 +9,14 @@
         <div class="kit-title-row">
           <h2 class="kit-title"><%= kit.name %></h2>
         </div>
+
+        <% if kit.tags.any? %>
+          <div class="tag-list-row">
+            <% kit.tags.each do |tag| %>
+              <span class="tag-badge-v2"><%= tag.name %></span>
+            <% end %>
+          </div>
+        <% end %>
         
         <div class="kit-action-row">
           <%= button_to game_rooms_path(word_kit_id: kit.id), method: :post, data: { turbo: false }, class: "vocano-btn btn-play" do %>

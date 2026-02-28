@@ -565,3 +565,32 @@
   color: white;
   border: 3px solid white;
 }
+
+.tag-list-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag-badge-v2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  height: 32px;               /* ボタンより少し低め */
+  padding: 0 16px;            /* 横の余白 */
+  
+  background: white;
+  color: #7B5CD6;             /* メインの紫 */
+  border: 2px solid #BEEFFF;  /* 水色の縁取り */
+  border-radius: 50px;        /* カプセル型 */
+  font-weight: 800;           /* 太字でポップに */
+  font-size: 13px;
+  
+  /* ぷっくりさせる影の設定 */
+  box-shadow: 
+    0 2px 8px rgba(0,0,0,0.08),
+    inset 0 -2px 0 rgba(0,0,0,0.1); 
+    
+  white-space: nowrap;
+}
