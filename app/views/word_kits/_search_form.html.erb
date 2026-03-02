@@ -1,6 +1,15 @@
-<div class="search-container">
+<div class="search-section">
   <%= form_with(url: url, method: :get, local: true, class: "search-form") do |f| %>
-    <%= f.text_field :keyword, value: params[:keyword], placeholder: "キーワードで検索...", class: "search-input" %>
+    
+    <%= f.text_field :keyword, 
+          value: params[:keyword], 
+          placeholder: "なにをさがす？（キット名やタグ）", 
+          class: "search-input" %>
+
+    <% if params[:keyword].present? %>
+      <%= link_to "クリア", url, class: "clear-link" %>
+    <% end %>
+
     <%= f.submit "検索", class: "search-button" %>
   <% end %>
 </div>

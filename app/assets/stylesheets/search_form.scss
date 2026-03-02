@@ -1,0 +1,78 @@
+.search-section {
+  margin: 30px auto 40px;
+  display: flex;
+  justify-content: center;
+  font-family: 'Zen Maru Gothic', sans-serif;
+
+  .search-form {
+    display: flex;
+    align-items: center;
+    background: white;
+    height: 65px;
+    padding: 0 10px 0 25px;
+    border-radius: 50px;
+    border: 3px solid #BEEFFF;
+    
+    box-shadow: 
+      0 4px 15px rgba(0,0,0,0.1),
+      inset 0 -4px 0 rgba(0,0,0,0.15); 
+    
+    transition: all 0.3s ease;
+
+    &:focus-within {
+      transform: translateY(-2px);
+      border-color: #69C9FF;
+      box-shadow: 0 6px 20px rgba(105, 201, 255, 0.3);
+    }
+
+    .search-input {
+      border: none;
+      outline: none;
+      width: 350px;
+      height: 100%;
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: #7B5CD6;
+      background: transparent;
+
+      &::placeholder {
+        color: #BEEFFF;
+        text-align: center;
+      }
+    }
+
+    .search-button {
+      background: linear-gradient(to right, #69C9FF, #9285F3);
+      color: white;
+      border: 3px solid white;
+      border-radius: 50px;
+      height: 48px;
+      padding: 0 25px;
+      font-weight: 900;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1);
+      transition: all 0.2s ease;
+      margin-left: 10px;
+
+      &:hover {
+        transform: scale(1.05);
+        filter: brightness(1.1);
+      }
+    }
+
+    .clear-link {
+      margin-right: 15px;
+      color: #7B5CD6;
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 0.9rem;
+      opacity: 0.6;
+
+      &:hover {
+        opacity: 1;
+        color: #e74c3c;
+      }
+    }
+  }
+}

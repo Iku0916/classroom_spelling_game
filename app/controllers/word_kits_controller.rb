@@ -2,14 +2,23 @@ class WordKitsController < ApplicationController
   before_action :require_login
 
   def index
-    @word_kits = current_user.word_kits.order(created_at: :desc)
+    @word_kits = current_user.word_kits.left_outer_joins(:tags)
 
     if params[:keyword].present?
-      @word_kits = @word_kits.left_outer_joins(:tags).where(
-        "word_kits.name LIKE :q OR tags.name LIKE :q",
-        q: "%#{params[:keyword]}%"
-      ).distinct
+      keywords = params[:keyword].split(/[[:space:]]+/)
+
+      conditions = []
+      values = {}
+
+      keywords.each do |word, |
+        @word_kits = @word_kits.where(
+          "word_kits.name LIKE :q OR tags.name LIKE :q",
+          q: "%#{word}%"
+        )
+      end
     end
+
+    @word_kits = @word_kits.distinct.order(created_at: :desc)
   end
 
   def new
