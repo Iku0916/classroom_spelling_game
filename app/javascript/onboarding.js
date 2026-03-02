@@ -1,10 +1,11 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("turbo:load", () => {
   const slides = document.querySelectorAll(".slide");
   const nextBtns = document.querySelectorAll(".next-btn");
   let current = 0;
 
   nextBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
       slides[current].classList.remove("active");
       current++;
       if (current >= slides.length) current = slides.length - 1;
@@ -13,8 +14,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const startBtn = document.getElementById("start-btn");
-  if (startBtn) {  // null チェック必須！
-    startBtn.addEventListener("click", () => {
+  if (startBtn) {
+    startBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      
       fetch("/onboarding/complete", {
         method: "POST",
         headers: {
@@ -25,11 +28,12 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
-});
 
-const helpBtn = document.getElementById("help-btn");
-if(helpBtn){
-  helpBtn.addEventListener("click", () => {
-    window.location.href = "/onboarding";
-  });
-}
+  const helpBtn = document.getElementById("help-btn");
+  if (helpBtn) {
+    helpBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.location.href = "/onboarding?force=true"; 
+    });
+  }
+});
