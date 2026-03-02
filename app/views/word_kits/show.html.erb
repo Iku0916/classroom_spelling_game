@@ -28,8 +28,9 @@
       <% end %>
     </ul>
 
+    <div class="edit-section-title">タグ</div>
     <% if @word_kit.tags.any? %>
-      <div class="tag-list-row">
+      <div class="tag-list-row show-page">
         <% @word_kit.tags.each do |tag| %>
           <span class="tag-badge-v2"><%= tag.name %></span>
         <% end %>
