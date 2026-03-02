@@ -1,0 +1,108 @@
+/* ======================================================
+   1. タイトルとレイアウトの微調整
+   ====================================================== */
+.detail-title {
+  margin-top: 0;
+  margin-bottom: 35px;
+  font-size: 2.5rem;
+  color: #7B5CD6;
+  text-align: center;
+}
+
+/* ======================================================
+   2. 単語リスト (detail-row) のデザイン
+   ====================================================== */
+.edit-page-container .kit-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 40px;
+  width: 100%;
+}
+
+.detail-row {
+  display: flex;
+  align-items: center;
+  padding: 15px 25px;
+  background: #f8f9fa;
+  border-radius: 20px;
+  margin-bottom: 12px;
+  border: 2px solid #ffffff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: translateX(5px);
+    background: #ffffff;
+    border-color: #BEEFFF;
+  }
+}
+
+.word-display-group {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 15px;
+}
+
+.word-box {
+  flex: 1; 
+  font-size: 1.1rem;
+  font-weight: 900;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.en-box {
+  color: #7B5CD6;
+  justify-content: flex-start;
+}
+
+.jp-box {
+  color: #2c3e50;
+  justify-content: flex-start;
+}
+
+.word-divider {
+  color: #bdc3c7;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+/* ======================================================
+   3. タグの並び (Show画面用)
+   ====================================================== */
+.tag-list-row.show-page {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 15px 0 40px;
+  padding: 0 5px;
+
+  .tag-badge-v2 {
+    background: white;
+    color: #7B5CD6;
+    border: 2px solid #BEEFFF;
+    border-radius: 50px;
+    padding: 6px 18px;
+    font-weight: 800;
+    font-size: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+}
+
+/* ======================================================
+   4. アクションエリア (編集ボタンなど)
+   ====================================================== */
+.detail-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+
+  .btn-link.btn-update {
+    width: 100%;
+    max-width: 400px;
+    text-decoration: none;
+    span { color: white; }
+  }
+}
