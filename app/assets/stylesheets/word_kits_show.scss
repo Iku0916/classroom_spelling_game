@@ -22,16 +22,18 @@
 .detail-row {
   display: flex;
   align-items: center;
-  padding: 15px 25px;
-  background: #f8f9fa;
+  padding: 18px 30px;
+  background: #fdfdff;
   border-radius: 20px;
-  margin-bottom: 12px;
-  border: 2px solid #ffffff;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+  margin-bottom: 15px;
+  border: 4px solid #ffffff;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  width: 100%;
+  box-sizing: border-box;
   transition: transform 0.2s;
 
   &:hover {
-    transform: translateX(5px);
+    transform: translateX(8px);
     background: #ffffff;
     border-color: #BEEFFF;
   }
@@ -40,6 +42,7 @@
 .word-display-group {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
   gap: 15px;
 }
