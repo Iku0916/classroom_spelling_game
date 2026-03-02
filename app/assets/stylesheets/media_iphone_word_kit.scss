@@ -1,4 +1,4 @@
-/*新規キット作成画面*/
+
 
 @media (max-width: 767px) {
   .toggle-btn {
@@ -10,8 +10,6 @@
     border-radius: 20px;
   }
 }
-
-/*ゲームキット一覧画面*/
 
 @media (max-width: 767px) {
   body {
@@ -34,11 +32,10 @@
   .word-kit-index {
     display: block !important;
     width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    left: 0;
     text-align: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    position: relative;
-    z-index: 1;
   }
 
   .page-wrapper {
