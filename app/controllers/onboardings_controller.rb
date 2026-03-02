@@ -13,6 +13,8 @@ class OnboardingsController < ApplicationController
   private
 
   def check_onboarding
-    redirect_to root_path if current_user.onboarding_seen
+    if current_user.onboarding_seen && params[:force] != "true"
+      redirect_to root_path
+    end
   end
 end
