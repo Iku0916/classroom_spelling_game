@@ -3,6 +3,13 @@ class WordKitsController < ApplicationController
 
   def index
     @word_kits = current_user.word_kits.order(created_at: :desc)
+
+    if params[:keyword].present?
+      @word_kits = @word_kits.left_outer_joins(:tags).where(
+        "word_kits.name LIKE :q OR tags.name LIKE :q",
+        q: "%#{params[:keyword]}%"
+      ).distinct
+    end
   end
 
   def new

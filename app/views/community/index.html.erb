@@ -1,5 +1,7 @@
 <h1 class="community-title">公開キット</h1>
 
+<%= render 'word_kits/search_form', url: url_for %>
+
 <div class="community-container">
   <div class="community-grid">
     <% @public_word_kits.each do |kit| %>
@@ -8,6 +10,16 @@
       <div class="kit-header">
         <h2 class="kit-title"><%= kit.name %></h2>
         <span class="kit-author">by <%= kit.user.name %></span>
+      </div>
+
+      <div>
+        <% if kit.tags.any? %>
+          <div class="tag-list-row">
+            <% kit.tags.each do |tag| %>
+              <span class="tag-badge-v2"><%= tag.name %></span>
+            <% end %>
+          </div>
+        <% end %>
       </div>
 
       <div class="word-preview">

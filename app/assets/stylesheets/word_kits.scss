@@ -570,6 +570,10 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  margin-bottom: 24px;
+  max-width: 90%;          /* カードの端っこまで行かないように制限 */
+  margin: 0 auto 30px;     /* 上下中央寄せ & 下にしっかり30pxの余白 */
+  padding: 10px 0;
 }
 
 .tag-badge-v2 {
@@ -586,7 +590,6 @@
   border-radius: 50px;        /* カプセル型 */
   font-weight: 800;           /* 太字でポップに */
   font-size: 13px;
-  
   /* ぷっくりさせる影の設定 */
   box-shadow: 
     0 2px 8px rgba(0,0,0,0.08),

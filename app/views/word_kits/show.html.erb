@@ -28,6 +28,14 @@
       <% end %>
     </ul>
 
+    <% if @word_kit.tags.any? %>
+      <div class="tag-list-row">
+        <% @word_kit.tags.each do |tag| %>
+          <span class="tag-badge-v2"><%= tag.name %></span>
+        <% end %>
+      </div>
+    <% end %>
+
     <div class="detail-actions">
       <%= link_to edit_word_kit_path(@word_kit), class: "btn-update btn-link" do %>
         <span>編集する</span>
