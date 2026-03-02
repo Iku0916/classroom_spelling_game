@@ -1,6 +1,10 @@
+/* ======================================================
+   1. BASE & RESET (全体の土台)
+   ====================================================== */
 html, body {
   height: 100%;
   margin: 0;
+  font-family: 'Zen Maru Gothic', sans-serif;
 }
 
 body {
@@ -13,103 +17,83 @@ body {
   padding-top: 100px;
 }
 
+/* ======================================================
+   2. HEADER (画面上部の固定メニュー)
+   ====================================================== */
 header {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   z-index: 1000;
   height: 80px;
-  
   display: flex;
   justify-content: space-between; 
   align-items: center;
   padding: 0 50px;
-
   background-color: #7B5CD6;
   box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2); 
-  font-family: 'Zen Maru Gothic', sans-serif;
+
+  .site-logo {
+    display: flex;
+    align-items: center;
+    margin-left: -20px;
+    filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.15));
+
+    img {
+      height: 300px;
+      width: auto;
+      transition: transform 0.2s;
+      &:hover { transform: scale(1.05); }
+    }
+  }
+
+  .menu_group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    list-style: none;
+    margin: 0;
+    padding-right: 30px;
+
+    a {
+      text-decoration: none;
+      background-color: white;
+      color: #7B5CD6;
+      font-weight: 900;
+      font-size: 0.95rem;
+      padding: 10px 30px;
+      border-radius: 50px;
+      box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        background-color: #f8f8f8;
+      }
+    }
+    
+    .header-heart-link {
+      background: none;
+      padding: 0;
+      box-shadow: none;
+      svg { width: 28px; height: 28px; fill: #333; }
+    }
+  }
 }
 
-.menu_group {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.header-heart-link {
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.header-heart-link svg {
-  width: 100%;
-  height: 100%;
-  fill: #333
-}
-
-.site-logo {
-  display: flex;
-  align-items: center;
-  margin-left: -20px;
-  filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.15)) 
-          drop-shadow(0 4px 4px rgba(0, 0, 0, 0.1));
-}
-
-.site-logo img {
-  height: 300px;
-  width: auto;
-  transition: transform 0.2s;
-}
-
-.site-logo:hover img {
-  transform: scale(1.05);
-}
-
-.menu_group {
-  display: flex;
-  gap: 15px;
-  list-style: none;
-  margin: 0;
-  padding-right: 30px;
-}
-
-.menu_group a {
-  text-decoration: none;
-  background-color: white;
-  color: #7B5CD6;
-  font-weight: 900;
-  font-size: 0.95rem;
-  padding: 10px 30px;
-  border-radius: 50px;
-  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease;
-  white-space: nowrap;
-}
-
-.menu_group a:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  background-color: #f8f8f8;
-}
-
-.menu_group a:active {
-  transform: translateY(1px);
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
-}
-
+/* ======================================================
+   3. MAIN CONTENT (ロゴとメインボタン)
+   ====================================================== */
 .title-logo {
   display: block;
   width: 700px;
+  max-width: 90vw;
   height: auto !important;
   margin: -100px auto -120px;
   transform: translateY(-20px); 
   object-fit: contain;
-  filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.15)) 
-          drop-shadow(0 4px 4px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.15));
 }
 
 .button-container {
@@ -127,6 +111,7 @@ header {
   width: 100%;
 }
 
+/* 共通ボタン設定 */
 .main-button {
   text-decoration: none;
   color: white !important;
@@ -138,147 +123,28 @@ header {
   border-radius: 60px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), inset 0 -4px 0 rgba(0, 0, 0, 0.2);
   transition: all 0.2s ease;
-  font-family: 'Zen Maru Gothic', sans-serif;
+
+  &:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
 }
 
-.main-button:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
+/* ボタンのサイズ・色バリエーション */
 .row-primary .main-button {
-  width: 500px;
-  height: 85px;
-  font-size: 1.5rem;
+  width: 500px; height: 85px; font-size: 1.5rem;
 }
-
 .row-secondary .main-button {
-  width: 240px;
-  height: 65px;
-  font-size: 1.1rem;
-}
-
-.btn-join {
-  background: linear-gradient(to right, #69C9FF, #9285F3); /* 水色〜紫 */
-}
-
-.btn-study {
-  background: linear-gradient(to right, #FFC194, #D685B3); /* オレンジ〜ピンク */
-}
-
-.btn-create, .btn-open, .btn-community {
-  background: white !important;
-  color: #7B5CD6 !important;
-  border: 3px solid #69C9FF;
-}
-
-.row-secondary .main-button {
+  width: 240px; height: 65px; font-size: 1.1rem;
   background: white !important;
   color: #7B5CD6 !important;
   border: 3px solid #BEEFFF; 
 }
 
-.menu_group .header-heart-link {
-  background: none;
-  padding: 0;
-  border-radius: 0;
-  box-shadow: none;
-}
-
-/* 以下レスポンジブ対応 */
-
-/* iPhone SE */
-
-@media (max-width: 767px) {
-  header {
-    padding: 5px 8px;
-  }
-
-  header .site-logo img {
-    max-width: 150px;
-  }
-
-  .menu_group a {
-    font-size: 12px;
-  }
-
-  .button-container {
-    padding: 0 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .button-row {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .row-primary .main-button {
-    width: 80%;
-    height: 85px;
-    font-size: 1.5rem;
-  }
-  .button-row.row-secondary {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .main-button {
-    width: 100%;
-    font-size: 1rem;
-    padding: 12px 0;
-  }
-
-  .total-stats-section {
-    flex-direction: column;
-    gap: 10px;
-    text-align: center;
-  }
-
-  .calendar-container {
-    overflow-x: auto;
-  }
-
-  .table {
-    width: 100%;
-    min-width: 300px;
-  }
-
-  .menu_group {
-    gap: 8px;
-  }
-
-  .total-stats-section {
-    display: flex;
-    gap: 10px;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    padding: 10px;
-    margin: 30px;
-  }
-
-  .total-study-card,
-  .total-point-card {
-    flex: 1 1 140px; 
-    background-color: #f8f8f8;
-    border-radius: 8px;
-    padding: 10px;
-    text-align: center;
-    max-height: 150px;
-  }
-
-  .total-study-card .label,
-  .total-point-card .label {
-    font-size: 14px;
-  }
-
-  .total-study-card .value,
-  .total-point-card .value {
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 5px;
-  }
+.btn-join { background: linear-gradient(to right, #69C9FF, #9285F3); }
+.btn-study { background: linear-gradient(to right, #FFC194, #D685B3); }
+.btn-create, .btn-open, .btn-community {
+  background: white !important;
+  color: #7B5CD6 !important;
+  border: 3px solid #69C9FF;
 }
