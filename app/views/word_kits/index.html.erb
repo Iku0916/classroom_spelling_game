@@ -2,6 +2,8 @@
 
 <h1 class="word-kit-index">ゲームキット一覧</h1>
 
+<%= render 'search_form', url: word_kits_path %>
+
 <div class="kit-container">
   <ul class="kit-list">
     <% @word_kits.each do |kit| %>
