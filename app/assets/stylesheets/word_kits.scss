@@ -569,11 +569,27 @@
 .tag-list-row {
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
   gap: 8px;
-  margin-bottom: 24px;
-  max-width: 90%;          /* カードの端っこまで行かないように制限 */
-  margin: 0 auto 30px;     /* 上下中央寄せ & 下にしっかり30pxの余白 */
+  max-width: 90%;
+  margin: 0 auto 10px;
   padding: 10px 0;
+
+  &.is-list {
+    flex-wrap: nowrap;     /* 絶対に1行に収める！ */
+    overflow: hidden;      /* はみ出たタグは隠す！ */
+    width: 100%;
+    max-width: 900px;      /* コミュニティの長いカードでも、この幅でカット */
+    margin: 0 auto;
+  }
+
+  &.show-page {
+    flex-wrap: wrap;     /* 2段、3段になってもOK！ */
+    overflow: visible;   /* 全部見せる */
+    max-width: 100%;     /* 幅いっぱい使っていいよ */
+    justify-content: flex-start; /* 左詰めにすると見やすいかも */
+  }
 }
 
 .tag-badge-v2 {
@@ -581,19 +597,27 @@
   align-items: center;
   justify-content: center;
   
-  height: 32px;               /* ボタンより少し低め */
-  padding: 0 16px;            /* 横の余白 */
+  height: 32px;
+  padding: 0 16px;
   
   background: white;
-  color: #7B5CD6;             /* メインの紫 */
-  border: 2px solid #BEEFFF;  /* 水色の縁取り */
-  border-radius: 50px;        /* カプセル型 */
-  font-weight: 800;           /* 太字でポップに */
+  color: #7B5CD6;
+  border: 2px solid #BEEFFF;
+  border-radius: 50px;
+  font-weight: 800;
   font-size: 13px;
-  /* ぷっくりさせる影の設定 */
   box-shadow: 
     0 2px 8px rgba(0,0,0,0.08),
     inset 0 -2px 0 rgba(0,0,0,0.1); 
     
   white-space: nowrap;
+}
+
+.tag-dots {
+  color: #7B5CD6;
+  font-weight: 900;
+  font-size: 1.2rem;
+  align-self: center;
+  margin-left: 5px;
+  letter-spacing: 2px;
 }

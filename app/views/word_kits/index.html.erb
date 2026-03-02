@@ -14,8 +14,12 @@
 
         <% if kit.tags.any? %>
           <div class="tag-list-row">
-            <% kit.tags.each do |tag| %>
+            <% kit.tags.first(6).each do |tag| %>
               <span class="tag-badge-v2"><%= tag.name %></span>
+            <% end %>
+
+            <% if kit.tags.count > 6 %>
+              <span class="tag-dots">...</span>
             <% end %>
           </div>
         <% end %>
