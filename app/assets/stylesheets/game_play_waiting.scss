@@ -1,0 +1,95 @@
+/* ======================================================
+   待機画面 (Lobby Waiting) 固有スタイル
+   ====================================================== */
+
+.lobby-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 85vh;
+  width: 100%;
+}
+
+.waiting-status {
+  font-size: 1.6rem;
+  color: #7B5CD6;
+  font-weight: 900;
+  margin-bottom: 30px;
+}
+
+.tutorial-slider {
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto 30px;
+  position: relative;
+}
+
+.slide-container {
+  padding: 10px;
+  text-align: center;
+}
+
+.step-label {
+  display: inline-block;
+  padding: 5px 15px;
+  background: #9285F3;
+  color: white;
+  border-radius: 50px;
+  font-weight: 900;
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+}
+
+.instruction-box {
+  background: #fcfaff;
+  border: 2px dashed #9285F3;
+  border-radius: 15px;
+  padding: 15px;
+  margin-top: 15px;
+  
+  p {
+    margin: 0;
+    font-size: 1rem;
+    color: #444;
+    font-weight: bold;
+    line-height: 1.5;
+  }
+}
+
+.swiper-pagination-bullet-active {
+  background: #7B5CD6 !important;
+}
+
+/* ------------------------------------------------------
+   アニメーション・装飾
+   ------------------------------------------------------ */
+
+.dot-loader {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+
+  .dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #9285F3;
+    animation: poyo-poyo 1.4s infinite ease-in-out both;
+
+    &:nth-child(1) { animation-delay: -0.32s; }
+    &:nth-child(2) { background-color: #FF9F1C; animation-delay: -0.16s; }
+    &:nth-child(3) { animation-delay: 0s; }
+  }
+}
+
+.code-badge {
+  background: #f0f0f0;
+  padding: 10px 25px;
+  border-radius: 50px;
+  font-weight: 900;
+  color: #666;
+  font-size: 0.9rem;
+  display: inline-block;
+}

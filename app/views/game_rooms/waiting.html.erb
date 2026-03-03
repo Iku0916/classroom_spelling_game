@@ -71,13 +71,12 @@
     if (!swiperEl) return;
 
     const swiper = new Swiper(".mySwiper", {
-      // 💡 エフェクトを「slide」に変更（デフォルト）
       effect: "slide", 
       grabCursor: true,
       loop: false,
-      centeredSlides: true, // 中央に配置
-      slidesPerView: 1,     // 1画面に1枚
-      spaceBetween: 20,     // スライド間の隙間
+      centeredSlides: true,
+      slidesPerView: 1,
+      spaceBetween: 20,
       autoplay: { 
         delay: 5000, 
         disableOnInteraction: false 
