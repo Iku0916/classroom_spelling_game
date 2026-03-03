@@ -11,40 +11,44 @@
   data-self-study-answer-url-value="<%= answer_word_kit_self_study_path(@word_kit) %>">
 
   <div class="game-header">
-  <div class="header-content-inner"> <div class="score-badge">
-      <span>SCORE:</span>
-      <span data-self-study-target="score" class="score-number">0</span>
-    </div>
-    <div class="timer-section-small">
-      <span class="timer-icon">🕒</span>
-      <span class="timer-display-mini" data-self-study-target="timer">0:00</span>
+    <div class="header-content-inner"> 
+      <div class="score-badge">
+        <span>SCORE:</span>
+        <span data-self-study-target="score" class="score-number">0</span>
+      </div>
+      <div class="timer-section-small">
+        <span class="timer-icon">🕒</span>
+        <span class="timer-display-mini" data-self-study-target="timer">0:00</span>
+      </div>
     </div>
   </div>
-</div>
 
   <div class="question-frame">
     <p class="question-label">QUESTION</p>
-    <div class="question-text" data-self-study-target="question"></div>
+    <div class="question-text" data-self-study-target="question">
+    </div>
   </div>
 
-  <div class="word-input-container" data-self-study-target="inputContainer"></div>
+  <div class="word-input-container" data-self-study-target="wordInputContainer">
+  </div>
 
   <div class="feedback-area">
     <p class="feedback-text" data-self-study-target="feedback"></p>
   </div>
 
-  <div class="game-footer" style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+  <div class="game-footer">
     <div class="submit-section">
-        <button type="button" class="btn-update" data-action="click->self-study#submitAnswer">
-          OK!
-        </button>
+      <button type="button" class="btn-update" data-action="click->self-study#submitAnswer">
+        OK!
+      </button>
     </div>
 
     <div class="exit-section">
       <button type="button" 
           id="finish-button" 
           class="btn-finish" 
-          data-action="click->self-study#finishGame"> 学習を終了する
+          data-action="click->self-study#finishGame"> 
+        学習を終了する
       </button>
     </div>
   </div>

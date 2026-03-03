@@ -80,7 +80,7 @@ class GameRoomsController < ApplicationController
   def start
     @game_room = GameRoom.find(params[:id])
 
-    if request.patch?
+    if request.patch? || request.post?
 
       # ゲーム時間を秒→分に
       time_limit_in_minutes = params[:time_limit].to_i
