@@ -178,3 +178,84 @@
   25% { transform: translateX(-5px); }
   75% { transform: translateX(5px); }
 }
+
+/* ======================================================
+   Vocano! プレイ画面：中央配置・完成版
+   ====================================================== */
+
+.play-container {
+  // コンテナ全体で中央寄せを徹底する
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 80vh;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+
+  .main-card {
+    background: rgba(255, 255, 255, 0.95);
+    border: 4px solid #ffffff;
+    border-radius: 50px;
+    padding: 50px 30px;
+    
+    // 横幅の指定を整理
+    width: 100%;
+    max-width: 500px; 
+    
+    // これで強制的に中央へ
+    margin: 0 auto !important; 
+    
+    box-shadow: 0 20px 40px rgba(123, 92, 214, 0.15);
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .timer-section {
+    margin: 30px 0;
+
+    .timer-display {
+      font-size: 7rem;
+      font-weight: 950;
+      color: #FF9F1C;
+      line-height: 1;
+      // 文字が横に広がってはみ出さないように
+      width: 100%;
+      display: block;
+    }
+  }
+
+  .vocano-btn.btn-danger {
+    background: #666666 !important;
+    
+    color: #ffffff !important;
+    font-weight: 900 !important;
+    font-size: 1.2rem;
+    
+    border: none;
+    border-radius: 50px;
+    height: 60px;
+    padding: 0 45px;
+    
+    box-shadow: 0 5px 0 #444444;
+    
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.1s;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover {
+      background: #555555 !important;
+      transform: translateY(2px);
+      box-shadow: 0 3px 0 #444444;
+    }
+
+    &:active {
+      transform: translateY(5px);
+      box-shadow: none;
+    }
+  }
+}

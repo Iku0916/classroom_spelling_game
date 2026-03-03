@@ -9,23 +9,24 @@
      data-timer-is-host-value="true"
      data-timer-participant-id-value="<%= @participant&.id || 0 %>">
   
-  <div class="code-badge">
-    ゲームコード: <span><%= @game_room.game_code %></span>
-  </div>
+  <div class="main-card game-play-card">
+    <div class="code-badge">
+      ゲームコード: <span><%= @game_room.game_code %></span>
+    </div>
 
-  <div class="timer-section">
-    <h2 class="timer-label">残り時間</h2>
-    <p id="timer" class="timer-display" data-timer-target="display">
-      --:--
-    </p>
-  </div>
+    <div class="timer-section">
+      <h2 class="timer-label">残り時間</h2>
+      <p id="timer" class="timer-display" data-timer-target="display">
+        --:--
+      </p>
+    </div>
 
-  <div class="action-section">
-    <button type="button" 
-            class="finish-button" 
-            data-action="click->timer#confirmFinish">
-      ゲーム終了!
-    </button>
+    <div class="action-section">
+      <button type="button" 
+              class="finish-button" 
+              data-action="click->timer#confirmFinish">
+        ゲーム終了！
+      </button>
+    </div>
   </div>
-
 </div>

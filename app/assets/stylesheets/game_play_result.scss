@@ -1,137 +1,124 @@
 /* ======================================================
-   結果発表画面 (Game Result) 固有スタイル
+   Vocano! 結果発表：リッチ・3Dスタイル
    ====================================================== */
 
 .result-container {
+  padding-top: 30px;
+  min-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  padding-bottom: 60px;
+  font-family: 'Zen Maru Gothic', sans-serif;
 }
 
-/* ------------------------------------------------------
-   1. スコアカード (自分へのフィードバック)
-   ------------------------------------------------------ */
-.score-card {
-  background: white;
-  width: 90%;
-  max-width: 500px;
-  margin: 0 auto 40px;
-  padding: 40px;
-  border-radius: 40px;
-  border: 4px solid #ffffff;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15), inset 0 -4px 0 rgba(0, 0, 0, 0.15);
-  text-align: center;
-  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
-  .nickname-display {
-    font-size: 1.2rem;
-    color: #7B5CD6;
-    font-weight: 900;
-    margin-bottom: 5px;
-  }
-
-  .score-number {
-    font-size: 8rem !important;
-    font-weight: 900;
-    color: #FF9F1C; 
-    text-shadow: 4px 4px 0px #f0f0f0;
-    line-height: 1;
-  }
-
-  .score-unit {
-    font-size: 2rem;
-    font-weight: 900;
-    color: #FF9F1C;
-    margin-left: 5px;
-  }
+.result-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #7B5CD6;
+  text-shadow: 0 4px 0 rgba(255,255,255,0.8);
+  margin-bottom: 20px;
 }
 
-/* ------------------------------------------------------
-   2. 表彰台 (Podium Section)
-   ------------------------------------------------------ */
 .podium-wrapper {
   display: flex;
   align-items: flex-end;
   justify-content: center;
   gap: 15px;
-  margin: 40px 0;
-  height: 350px;
+  margin: 30px auto 40px;
+  height: 400px;
+}
 
-  .podium-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 130px;
+.podium-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 140px;
+  transition: transform 0.3s ease;
 
-    .player-info {
-      margin-bottom: 12px;
-      text-align: center;
-      animation: bounce 2s infinite ease-in-out;
+  &:hover {
+    transform: translateY(-10px);
+  }
 
-      .nickname {
-        font-weight: 900;
-        font-size: 1rem;
-        color: #333;
-        display: block;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 120px;
-      }
-      .score {
-        color: #7B5CD6;
-        font-weight: 900;
-        font-size: 1.2rem;
-      }
+  .player-info {
+    text-align: center;
+    margin-bottom: 10px;
+    
+    .crown { font-size: 2.5rem; display: block; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1)); }
+    .nickname { font-weight: 900; color: #7B5CD6; font-size: 1.1rem; margin: 5px 0; }
+    .score { 
+      font-weight: 900; color: #FF9F1C; font-size: 1.6rem; 
+      span { font-size: 0.9rem; }
     }
   }
 
   .podium-base {
     width: 100%;
-    border-radius: 20px 20px 0 0;
+    border-radius: 20px 20px 5px 5px;
+    border: 4px solid #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 3px solid #ffffff;
-    box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.1);
-    
+    position: relative;
+
+    box-shadow: inset 0 10px 0 rgba(255,255,255,0.3), 0 15px 30px rgba(0,0,0,0.1);
+
     .rank-num {
-      font-size: 2rem;
-      font-weight: 900;
-      color: white;
+      font-size: 3.5rem;
+      font-weight: 950;
+      color: rgba(255, 255, 255, 0.8);
+      text-shadow: 0 4px 0 rgba(0,0,0,0.1);
     }
   }
 
-  .rank-1 {
-    width: 150px;
-    z-index: 2;
+  &.rank-1 {
+    order: 2;
+    width: 160px;
     .podium-base { 
-      height: 180px; 
-      background: linear-gradient(to bottom, #69C9FF, #9285F3); 
+      height: 220px; 
+      background: linear-gradient(135deg, #69C9FF, #9285F3); 
     }
-    .nickname { font-size: 1.2rem !important; color: #7B5CD6; }
+    .nickname { font-size: 1.4rem; }
   }
 
-  .rank-2 .podium-base { 
-    height: 120px; 
-    background: linear-gradient(to bottom, #FFC194, #D685B3); 
+  &.rank-2 {
+    order: 1;
+    .podium-base { 
+      height: 150px; 
+      background: linear-gradient(135deg, #FFC194, #D685B3); 
+    }
   }
 
-  .rank-3 .podium-base { 
-    height: 80px; 
-    background: #BEEFFF; 
-    border-color: #ffffff;
-    .rank-num { color: #7B5CD6; }
+  &.rank-3 {
+    order: 3;
+    .podium-base { 
+      height: 100px; 
+      background: linear-gradient(135deg, #BEEFFF, #69C9FF); 
+    }
   }
 }
 
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-@keyframes popIn {
-  0% { transform: scale(0.7); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+.back-to-top {
+  text-decoration: none;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to right, #69C9FF, #9285F3);
+  color: white !important;
+  border-radius: 50px;
+  border: 4px solid #ffffff;
+  padding: 15px 50px;
+  font-size: 1.3rem;
+  box-shadow: 0 8px 0 #7B5CD6, 0 15px 25px rgba(0,0,0,0.1);
+  transition: all 0.1s;
+
+  &:hover {
+    transform: translateY(2px);
+    box-shadow: 0 4px 0 #7B5CD6;
+  }
+
+  &:active {
+    transform: translateY(8px);
+    box-shadow: none;
+  }
 }
