@@ -12,7 +12,7 @@
 }
 
 .menu-overlay {
-  display: none; /* 最初は非表示 */
+  display: none;
   position: fixed;
   inset: 0; /* top,right,bottom,left 0 */
   background: rgba(0,0,0,0.5);
@@ -23,11 +23,11 @@
   position: fixed;
   top: 0;
   right: 0;
-  width: 16rem; /* 64pxじゃなく16rem */
+  width: 16rem;
   height: 100%;
   background: white;
   box-shadow: -2px 0 10px rgba(0,0,0,0.2);
-  transform: translateX(100%); /* 初期は右に隠す */
+  transform: translateX(100%);
   transition: transform 0.3s ease;
   z-index: 50;
 }
@@ -60,7 +60,7 @@
   color: #333;
 }
 .menu-link:hover {
-  color: #1e90ff; /* hover時青 */
+  color: #1e90ff;
 }
 .menu-user {
   font-weight: bold;
