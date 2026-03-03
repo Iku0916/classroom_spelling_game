@@ -140,7 +140,7 @@ class GamePlaysController < ApplicationController
 
       user = User.find(participant.user_id)
       user.increment!(:total_score, participant.score.to_i)
-      user.learning_logs.create!(score: participant.score.to_i, minutes: minutes)
+      user.learning_logs.create!(score: participant.score.to_i, minutes: minutes, word_kit_id: @game_room.word_kit_id)
     end
 
       host_redirect_url = overall_result_game_room_game_play_path(@game_room)
