@@ -26,7 +26,7 @@
   </div>
 
   <div class="setup-section">
-    <%= form_with url: start_game_room_path(@game_room), method: :patch, data: { turbo: false }, class: "setup-form" do |f| %>
+    <%= form_with url: start_game_room_path(@game_room), method: :patch, local: true, data: { turbo: false }, class: "setup-form" do |f| %>
       <div class="time-setting">
         <%= f.label :time_limit, '制限時間 (分)' %>
         <%= f.number_field :time_limit, min: 1, max: 60, value: 5, class: "input-field small" %>

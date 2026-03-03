@@ -7,9 +7,6 @@ export default class extends Controller {
   }
 
   connect() {
-    console.log("connected element:", this.element)
-    console.log("questionsValue:", this.questionsValue)
-
     this.questions = this.questionsValue
     this.index = 0
     this.isLocked = false
@@ -27,59 +24,48 @@ export default class extends Controller {
     if (!current) return
 
     if (this.hasFeedbackTarget) {
-        this.feedbackTarget.textContent = ""
-        this.feedbackTarget.className = ""
-      }
+      this.feedbackTarget.textContent = ""
+      this.feedbackTarget.className = "feedback-text"
+    }
 
-    if (this.hasQuestionTarget) this.questionTarget.textContent = current.correct_answer
+    if (this.hasQuestionTarget) {
+      this.questionTarget.textContent = current.correct_answer
+    }
 
-    const oldWordInput = document.querySelector('[data-controller="word-input"]')
-    if (oldWordInput) oldWordInput.remove()
-
-    const wordInputDiv = document.createElement("div")
-    wordInputDiv.setAttribute("data-controller", "word-input")
-    wordInputDiv.className = "word-input-container"
+    this.wordInputContainerTarget.innerHTML = ""
+    
+    const wrapper = document.createElement("div")
+    wrapper.className = "vocano-word-wrapper"
+    wrapper.setAttribute("data-controller", "word-input")
 
     current.word.split("").forEach((char, idx) => {
       const input = document.createElement("input")
       input.type = "text"
       input.maxLength = 1
-      input.className = "letter-box"
+      input.className = "vocano-letter-box" 
       input.setAttribute("data-word-input-target", "letter")
       input.setAttribute("data-index", idx.toString())
-      wordInputDiv.appendChild(input)
+      wrapper.appendChild(input)
     })
 
-    if (this.hasWordInputContainerTarget) {
-      this.wordInputContainerTarget.appendChild(wordInputDiv)
-    } else {
-      console.warn("wordInputContainer target not found")
-    }
-
-    const firstInput = wordInputDiv.querySelector('input')
+    this.wordInputContainerTarget.appendChild(wrapper)
+    const firstInput = wrapper.querySelector('input')
     if (firstInput) firstInput.focus()
   }
 
   submitAnswer(event) {
     if (this.isLocked) return
-
     if (event instanceof KeyboardEvent && event.key !== "Enter") return
     if (event instanceof KeyboardEvent) event.preventDefault()
 
     const wordInputEl = document.querySelector('[data-controller="word-input"]')
-    if (!wordInputEl) {
-      console.warn("word-input controller instance not found")
-      return
-    }
+    if (!wordInputEl) return
 
     const wordInputController = this.application.getControllerForElementAndIdentifier(
       wordInputEl,
       "word-input"
     )
-    if (!wordInputController) {
-      console.warn("word-input controller instance not found")
-      return
-    }
+    if (!wordInputController) return
 
     const userAnswer = wordInputController.getAnswer().trim()
     const current = this.questions[this.index]
@@ -99,17 +85,14 @@ export default class extends Controller {
     if (userAnswer.toLowerCase() === current.word.toLowerCase()) {
       if (this.hasFeedbackTarget) {
         this.feedbackTarget.textContent = "正解！🎉 +1ポイント"
-        // style.color の代わりにクラスをセット
-        this.feedbackTarget.className = "feedback-display feedback-correct"
+        this.feedbackTarget.className = "feedback-text feedback-correct"
       }
       if (scoreController) scoreController.add()
       this.waitingForNext = true
     } else {
       if (this.hasFeedbackTarget) {
-        // this.feedbackTarget.textContent = `ざんねん…😢 -1ポイント 正解は: ${current.word}`
         this.feedbackTarget.innerHTML = `ざんねん…😢 -1ポイント <br> 正解は: ${current.word}`;
-        // style.color の代わりにクラスをセット
-        this.feedbackTarget.className = "feedback-display feedback-incorrect"
+        this.feedbackTarget.className = "feedback-text feedback-incorrect"
       }
       if (scoreController) scoreController.subtract()
       this.isLocked = true
