@@ -10,18 +10,18 @@
   max-width: 900px;
   margin: 0 auto;
   position: relative;
-  padding: 150px 20px 80px; /* 上余白でヘッダー避ける */
+  padding: 150px 20px 80px;
   text-align: center;
   font-family: 'Zen Maru Gothic', sans-serif;
-  color: #333; /* 文字は濃いめにして読みやすく */
+  color: #333;
 }
 
 .slide {
   display: none;
-  background: #fff; /* 白のカード */
+  background: #fff;
   border-radius: 25px;
   padding: 40px 30px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15), 0 4px 4px rgba(0,0,0,0.08); /* ふわっと浮かせる */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15), 0 4px 4px rgba(0,0,0,0.08);
   transition: all 0.5s ease;
 }
 
@@ -34,7 +34,7 @@
   height: auto;
   margin-bottom: 25px;
   border-radius: 15px;
-  box-shadow: 0 8px 15px rgba(0,0,0,0.15), 0 4px 4px rgba(0,0,0,0.08); /* カードに統一感 */
+  box-shadow: 0 8px 15px rgba(0,0,0,0.15), 0 4px 4px rgba(0,0,0,0.08);
 }
 
 .slide h2 {
