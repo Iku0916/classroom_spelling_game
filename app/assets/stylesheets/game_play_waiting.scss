@@ -93,3 +93,171 @@
   font-size: 0.9rem;
   display: inline-block;
 }
+
+/* ======================================================
+   LOBBY / WAITING (色分け・メリハリ強化版)
+   ====================================================== */
+
+.lobby-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  width: 100%;
+  font-family: 'Zen Maru Gothic', sans-serif;
+
+  .code-section {
+    background: rgba(255, 255, 255, 0.95);
+    border: 4px solid #ffffff;
+    border-radius: 40px;
+    
+    // 修正ポイント：高さを固定せず、上下にしっかりパディングを持つ
+    padding: 30px 20px 40px; 
+    margin-bottom: 25px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    
+    // カード自体の横幅を少し広げて、文字が横に渋滞しないようにする
+    width: 90%; 
+    max-width: 500px; 
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .lobby-title {
+      color: #7B5CD6;
+      font-size: 1.4rem;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    /* ゲームコード：見切れないように高さを確保 */
+    .game-code-display {
+      display: block;
+      
+      // 文字サイズを「見切れない最大サイズ」に微調整
+      font-size: 5.5rem; 
+      font-weight: 900;
+      
+      background: linear-gradient(to right, #69C9FF, #9285F3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      
+      // 修正ポイント：文字の下が切れないように line-height を少し広げる
+      line-height: 1.2; 
+      letter-spacing: 6px;
+      margin: 10px 0;
+      
+      // フォントを Vocano! 共通の丸文字系に
+      font-family: 'Zen Maru Gothic', "Arial Black", sans-serif;
+    }
+
+    .code-instruction {
+      color: #888;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-top: 5px;
+    }
+  }
+
+  .participants-section {
+    text-align: center;
+    margin-bottom: 40px;
+
+    .participants-status {
+      font-weight: 900;
+      // 人数は「動いている」情報なので、btn-study系のオレンジでアクセント
+      color: #FF9F1C; 
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      
+      #participants-count {
+        font-size: 1.6rem;
+        margin: 0 4px;
+      }
+    }
+
+    .nickname-grid {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+
+      .nickname-tag {
+        background: white;
+        color: #7B5CD6;
+        border: 2px solid #BEEFFF; // 水色の枠
+        border-radius: 50px;
+        padding: 8px 22px;
+        font-weight: 800;
+        box-shadow: 0 3px 0 #BEEFFF; // ぺたっとした影
+      }
+    }
+  }
+
+  .setup-section {
+    .time-setting {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 30px;
+
+      label {
+        font-weight: 900;
+        color: #9285F3; // ラベルは少し明るい紫
+        font-size: 1rem;
+      }
+
+      .input-field.small {
+        width: 140px;
+        padding: 12px;
+        background: #fcfaff;
+        border: 3px solid #BEEFFF;
+        border-radius: 20px;
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 900;
+        color: #7B5CD6;
+        outline: none;
+        transition: border-color 0.2s;
+
+        &:focus {
+          border-color: #69C9FF;
+          background: white;
+        }
+      }
+    }
+  }
+}
+
+/* ボタンは共通の vocano-btn ルールを維持 */
+.btn-update {
+  text-decoration: none;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 60px;
+  border: 4px solid #ffffff;
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.1), inset 0 -4px 0 rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  cursor: pointer;
+  height: 65px;
+  padding: 0 50px;
+  font-size: 1.4rem;
+
+  background: linear-gradient(to right, #69C9FF, #9285F3);
+  color: white !important;
+  min-width: 260px;
+
+  &:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+}
