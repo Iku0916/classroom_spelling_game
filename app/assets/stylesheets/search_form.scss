@@ -79,33 +79,33 @@
 
 @media (max-width: 767px) {
   .search-form {
-    display: flex;         /* 横に並べる */
-    align-items: center;   /* 縦の真ん中 */
+    display: flex;
+    align-items: center;
     width: 100%;
-    max-width: 100%;      /* カプセル自体の最大幅 */
-    margin: 0 auto;        /* カプセル自体を画面の真ん中に */
+    max-width: 100%;
+    margin: 0 auto;
     
     background: white;
     border-radius: 50px;
-    padding: 5px 5px 5px 20px; /* 左側にゆとりを作る */
+    padding: 5px 5px 5px 20px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     box-sizing: border-box;
 
     .search-input {
-      flex: 1;             /* 【超重要】これでボタン以外の隙間を全部埋める！ */
-      width: 100%;         /* 念のため */
+      flex: 1;
+      width: 100%;
       border: none !important;
       outline: none !important;
       background: transparent !important;
       font-size: 16px;
-      padding: 0;          /* 余計な余白を消す */
+      padding: 0;
     }
 
     .search-button {
-      flex-shrink: 0;      /* ボタンが潰れないように固定 */
-      height: 44px;        /* ボタンの高さを整える */
+      flex-shrink: 0;
+      height: 44px;
       padding: 0 25px;
-      border-radius: 50px;  /* 入力欄との隙間 */
+      border-radius: 50px;
     }
   }
 }

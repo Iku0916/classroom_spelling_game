@@ -112,12 +112,10 @@
     border: 4px solid #ffffff;
     border-radius: 40px;
     
-    // 修正ポイント：高さを固定せず、上下にしっかりパディングを持つ
     padding: 30px 20px 40px; 
     margin-bottom: 25px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     
-    // カード自体の横幅を少し広げて、文字が横に渋滞しないようにする
     width: 90%; 
     max-width: 500px; 
     
@@ -133,11 +131,9 @@
       margin-bottom: 10px;
     }
 
-    /* ゲームコード：見切れないように高さを確保 */
     .game-code-display {
       display: block;
       
-      // 文字サイズを「見切れない最大サイズ」に微調整
       font-size: 5.5rem; 
       font-weight: 900;
       
@@ -145,12 +141,10 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       
-      // 修正ポイント：文字の下が切れないように line-height を少し広げる
       line-height: 1.2; 
       letter-spacing: 6px;
       margin: 10px 0;
       
-      // フォントを Vocano! 共通の丸文字系に
       font-family: 'Zen Maru Gothic', "Arial Black", sans-serif;
     }
 
@@ -168,7 +162,6 @@
 
     .participants-status {
       font-weight: 900;
-      // 人数は「動いている」情報なので、btn-study系のオレンジでアクセント
       color: #FF9F1C; 
       font-size: 1.2rem;
       margin-bottom: 20px;
@@ -190,11 +183,11 @@
       .nickname-tag {
         background: white;
         color: #7B5CD6;
-        border: 2px solid #BEEFFF; // 水色の枠
+        border: 2px solid #BEEFFF;
         border-radius: 50px;
         padding: 8px 22px;
         font-weight: 800;
-        box-shadow: 0 3px 0 #BEEFFF; // ぺたっとした影
+        box-shadow: 0 3px 0 #BEEFFF;
       }
     }
   }
@@ -209,7 +202,7 @@
 
       label {
         font-weight: 900;
-        color: #9285F3; // ラベルは少し明るい紫
+        color: #9285F3;
         font-size: 1rem;
       }
 
@@ -235,7 +228,6 @@
   }
 }
 
-/* ボタンは共通の vocano-btn ルールを維持 */
 .btn-update {
   text-decoration: none;
   font-weight: 900;
