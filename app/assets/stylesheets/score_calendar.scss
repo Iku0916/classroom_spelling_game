@@ -194,6 +194,8 @@
 
 @media (max-width: 767px) {
   .calendar-container {
+    width: 92% !important;
+    margin: 20px auto !important;
     padding: 20px 10px;
     margin: 20px auto;
   }
