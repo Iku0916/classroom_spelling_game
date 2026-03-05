@@ -39,9 +39,13 @@
         <% end %>
       </div>
 
-      <%= yield %>
-      
+      <main class="main-content">
+        <%= yield %>
+      </main>
+    </div>
+
       <%= render 'shared/footer' %>
+  
       <script>
         // 1. 関数の二重定義を防ぐために、windowオブジェクトに持たせる
         window.handleFlash = window.handleFlash || (() => {
