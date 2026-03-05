@@ -109,3 +109,26 @@
     span { color: white; }
   }
 }
+
+@media (max-width: 768px) {
+  .detail-row {
+    padding: 15px 20px;
+  }
+
+  .word-display-group {
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+  }
+
+  .word-box {
+    text-align: center;
+    width: 100%;
+    font-size: 1.1rem;
+    white-space: normal;
+  }
+
+  .word-divider {
+    display: none; 
+  }
+}
