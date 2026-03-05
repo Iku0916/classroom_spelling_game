@@ -59,25 +59,23 @@ header {
       background-color: white;
       color: #7B5CD6;
       font-weight: 900;
-      font-size: 0.95rem;
-      padding: 10px 30px;
+      font-size: 0.85rem; // 少し小さめに設定
+      padding: 8px 20px;   // 上下左右の余白を少し削ってコンパクトに
       border-radius: 50px;
-      box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1);
+      
+      // ★可愛さのポイント：太めの枠線とぷっくりシャドウ
+      border: 3px solid #BEEFFF; 
+      box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1), inset 0 -3px 0 rgba(0, 0, 0, 0.1);
+      
       transition: all 0.2s ease;
       white-space: nowrap;
 
       &:hover {
         transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        background-color: #f8f8f8;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        background-color: #fdfdff;
+        border-color: #69C9FF; // ホバーで枠線の色を変えると動的な感じが出るよ
       }
-    }
-    
-    .header-heart-link {
-      background: none;
-      padding: 0;
-      box-shadow: none;
-      svg { width: 28px; height: 28px; fill: #333; }
     }
   }
 }
@@ -145,4 +143,227 @@ header {
   background: white !important;
   color: #7B5CD6 !important;
   border: 3px solid #69C9FF;
+}
+
+/* ===========================================
+   PC・共通：統計カードをボタン風にする
+   =========================================== */
+.total-stats-section {
+  display: flex !important;
+  justify-content: center !important; /* 横並びにする */
+  align-items: center !important;
+  gap: 20px !important;
+  margin: 30px auto !important;
+  width: 100% !important;
+
+  .total-study-card, .total-point-card {
+    /* PCでは少し横長に */
+    width: 300px !important; 
+    height: 100px !important;
+    border-radius: 30px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    
+    /* ★ぷくっと感（白フチと影） */
+    border: 3px solid #FFFFFF !important;
+    box-shadow: 0 6px 0 rgba(0,0,0,0.1) !important;
+
+    .label, .value {
+      color: #fff !important;
+      margin: 0 !important;
+    }
+    .label { font-size: 1rem !important; }
+    .value { font-size: 1.6rem !important; font-weight: bold !important; }
+  }
+}
+
+/* ===========================================
+   PC・共通：ヘッダーの整列とロゴの範囲
+   =========================================== */
+header.header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0 20px !important;
+
+  .site-logo {
+    width: fit-content !important; /* クリック範囲を絞る */
+    height: auto !important;
+    img {
+      width: 150px !important; /* PCサイズに調整 */
+      height: auto !important;
+    }
+  }
+
+  /* 右側のハートとメニュー */
+  .menu_group {
+    display: flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+
+    .header-heart-link {
+      width: 40px !important;
+      height: 40px !important;
+      background: #fff !important;
+      border: 2px solid #BEEFFF !important;
+      border-radius: 50% !important;
+      position: relative !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+
+      svg {
+        width: 22px !important;
+        height: 22px !important;
+        fill: #FF5C8A !important;
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+      }
+    }
+  }
+}
+
+/* -------------------------------------------
+     スマホ用メディアクエリ
+     ------------------------------------------- */
+@media (max-width: 768px) {
+  
+  header.header {
+    height: 60px !important;
+    padding: 0 10px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+
+    .site-logo {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      
+      width: fit-content !important; 
+      height: auto !important;
+      overflow: hidden !important;
+
+      img {
+        width: 200px !important;
+        height: 200px !important;
+        object-fit: contain !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+    }
+
+    .menu_group {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-end !important;
+      flex: 1 !important;
+      gap: 12px !important;
+      padding: 0 15px !important;
+
+      .header-heart-link {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 38px !important;
+        height: 38px !important;
+        margin: 0 0 0 auto !important;
+        background-color: #fff !important;
+        border: 2px solid #BEEFFF !important;
+        border-radius: 50% !important;
+        flex-shrink: 0 !important;
+        position: relative !important; 
+        overflow: hidden !important;
+        z-index: 5 !important;
+
+        svg {
+          position: absolute !important;
+          top: 50% !important;
+          left: 50% !important;
+          transform: translate(-50%, -50%) !important;
+          
+          width: 20px !important;
+          height: 20px !important;
+          fill: #FF5C8A !important;
+          
+          display: block !important;
+          pointer-events: none !important;
+        }
+      }
+
+      .header-right {
+        display: flex !important;
+        align-items: center !important; 
+        gap: 12px !important;
+        margin-top: -3px !important; 
+      }
+
+      .hamburger-btn {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        position: static !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: transparent !important;
+        border: none !important;
+      }
+    }
+  }
+
+/* -------------------------------------------
+     統計カード
+     ------------------------------------------- */
+  .total-stats-section {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 15px !important;
+    width: 100% !important;
+    margin-top: 30px !important;
+    padding-top: 0 !important;
+
+    .total-study-card, .total-point-card {
+      width: 90% !important;
+      height: 120px !important; 
+      min-height: 120px !important;
+      max-height: 120px !important; 
+      background-color: white;
+      padding: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important; 
+      align-items: center !important;
+      border-radius: 30px !important;
+      border: 3px solid #FFFFFF !important;
+      box-shadow: 0 6px 0 rgba(0,0,0,0.1) !important;
+
+      .label, .value {
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+    }
+  }
+
+  .title-logo {
+    width: 80% !important;
+    margin: -20px auto -40px !important;
+  }
+
+  .row-primary .main-button {
+    width: 46% !important;
+    height: 60px !important;
+    font-size: 0.9rem !important;
+  }
+
+  .row-secondary .main-button {
+    width: 31% !important;
+    height: 45px !important;
+    font-size: 0.7rem !important;
+    margin-bottom: 5px !important;
+  }
 }
