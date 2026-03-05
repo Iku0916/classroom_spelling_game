@@ -185,3 +185,87 @@
     &:hover { text-decoration: underline; }
   }
 }
+
+.edit-form-group {
+  margin-bottom: 30px;
+
+  .input-hint {
+    font-size: 0.75rem;
+    color: #9285F3;
+    margin: 8px 0 0 10px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* ======================================================
+   スマホ用
+   ====================================================== */
+
+@media (max-width: 768px) {
+  .edit-card-body {
+    padding: 20px;
+    border-radius: 30px;
+  }
+
+  .card-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 15px;
+
+    label {
+      text-align: right;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 5px;
+      margin-top: 5px;
+      font-size: 14px;
+    }
+  }
+
+  .visibility-toggle {
+    flex-direction: column;
+    gap: 10px;
+    
+    .toggle-btn {
+      justify-content: center;
+      width: 100%;
+    }
+  }
+
+  .btn-update {
+    font-size: 1.2rem;
+    height: 70px;
+  }
+
+  .card-row input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+  }
+
+  .edit-card-body {
+    padding: 20px 15px !important; 
+    border-radius: 30px;
+  }
+
+  .edit-section-title {
+    margin-top: 15px; 
+  }
+
+  .edit-form-group {
+    margin-bottom: 30px;
+
+    .input-hint {
+      font-size: 0.57rem;
+      color: #9285F3;
+      margin: 8px 0 0 10px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+    }
+  }
+}
