@@ -128,3 +128,91 @@
   text-decoration: none;
   margin: 40px auto;
 }
+
+/* -------------------------------------------
+   スマホ用
+   ------------------------------------------- */
+@media (max-width: 768px) {
+  .kit-action-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+  }
+
+  .kit-action-row form {
+    grid-column: 1 / 4;
+    width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .kit-action-row .btn-play,
+  .kit-action-row .btn-study {
+    grid-column: 1 / 4;
+    width: 100% !important;
+    height: 60px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+  }
+
+  .kit-action-row .btn-sub,
+  .kit-action-row .btn-danger {
+    height: 45px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-top: 8px;
+  }
+
+  .tag-list-row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    width: 100% !important;
+    padding: 0 10px !important;
+  }
+
+  .tag-badge-v2 {
+    font-size: 0.75rem !important;
+    padding: 4px 10px !important;
+    border-width: 1.5px !important;
+    border-radius: 50px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    white-space: nowrap !important;
+  }
+
+  .search-section .search-form {
+    height: 60px !important;
+    width: 90%;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 10px 0 20px !important; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important; 
+    box-sizing: border-box !important;
+  }
+
+  .search-section .search-form input[type="text"] {
+    height: 40px !important;
+    line-height: 40px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 0.8rem !important;
+    background: transparent !important;
+    border: none !important;
+  }
+
+  .search-section .search-form .search-button {
+    height: 38px !important;
+    margin: 0 !important;
+    padding: 0 20px !important;
+    font-size: 0.9rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    vertical-align: middle !important;
+  }
+}
