@@ -197,3 +197,61 @@
   font-size: 18px;
   color: #888;
 }
+
+/* -------------------------------------------
+   スマホ用 (公開キット一覧)
+   ------------------------------------------- */
+
+@media (max-width: 768px) {
+  .community-title {
+    font-size: 1.8rem;
+    margin-top: 20px;
+  }
+
+  .community-container {
+    width: 100%;
+    padding: 0 15px;
+  }
+
+  .community-grid {
+    grid-template-columns: 1fr;
+    padding: 10px 0 40px;
+    gap: 20px;
+  }
+
+  .community-card {
+    padding: 20px 15px;
+    border-width: 2px;
+  }
+
+  .kit-header {
+    gap: 10px;
+    
+    .kit-title {
+      font-size: 1.2rem;
+    }
+    
+    .kit-author {
+      transform: none;
+      margin-bottom: 5px;
+    }
+  }
+
+  .word-preview {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-top: 15px;
+  }
+
+  .word-item {
+    font-size: 13px;
+    width: 100%;
+    text-align: center;
+    padding: 6px;
+  }
+
+  .search-section .search-form {
+    width: 95% !important;
+    margin: 0 auto;
+  }
+}
