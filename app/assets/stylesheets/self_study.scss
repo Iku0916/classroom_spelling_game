@@ -96,3 +96,76 @@
     opacity: 0.8;
   }
 }
+
+.feedback-area {
+  width: 100% !important;
+  text-align: center !important;
+  margin: 10px 0 !important;
+  padding: 5px !important;
+  min-height: 30px !important;
+  box-sizing: border-box !important;
+}
+
+/* -------------------------------------------
+   自習モード: メディアクエリ調整
+   ------------------------------------------- */
+@media (max-width: 768px) {
+  .play-container {
+    width: 90% !important;
+    max-width: 500px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    padding-bottom: 40px !important;
+  }
+
+  .game-header {
+    margin-top: 20px !important;
+    width: 90% !important;
+  }
+
+  .game-footer {
+    width: 100% !important;
+    margin-bottom: 30px !important;
+  }
+
+  .question-frame,
+  .word-input-container {
+    width: 95% !important;
+  }
+
+  .header-content-inner {
+    width: 100% !important;
+    padding: 10px 20px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+  }
+
+  .word-input-container {
+    width: 95% !important;
+    gap: 4px !important;
+  }
+
+  .word-input-container input,
+  .word-input-container .input-box {
+    width: 32px !important;
+    height: 38px !important;
+    font-size: 1.2rem !important;
+  }
+
+  .feedback-area {
+    width: 100% !important;
+    text-align: center !important;
+    margin: 10px 0 !important;
+    padding: 5px !important;
+    min-height: 30px !important;
+    box-sizing: border-box !important;
+  }
+
+  .feedback-text {
+    font-size: 1.5rem !important;
+    margin: 0 !important;
+  }
+}
