@@ -17,7 +17,9 @@
       </div>
 
       <div class="input-group">
-        <%= f.label :password, "パスワード（変更する場合のみ）" %>
+        <%= f.label :password do %>
+          パスワード<span class="label-note">（変更する場合のみ）</span>
+        <% end %>
         <%= f.password_field :password, placeholder: "8文字以上" %>
       </div>
 
