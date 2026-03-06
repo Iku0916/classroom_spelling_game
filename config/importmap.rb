@@ -13,3 +13,4 @@ pin "game_room", to: "game_room.js"
 pin "onboarding", to: "onboarding.js"
 
 pin_all_from "app/javascript/controllers", under: "controllers"
+pin "swiper", to: "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"

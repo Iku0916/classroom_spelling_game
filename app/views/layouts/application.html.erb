@@ -20,6 +20,8 @@
     <%= stylesheet_link_tag "application", media: "all" %>
     <%= stylesheet_link_tag "footer", media: "all" %>
     <%= javascript_importmap_tags %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   </head>
 
   <body>
@@ -35,7 +37,6 @@
         <% flash.each do |type, message| %>
           <div class="flash <%= type %>">
             <%= message %>
-          </div>
         <% end %>
       </div>
 
@@ -47,7 +48,6 @@
       <%= render 'shared/footer' %>
   
       <script>
-        // 1. 関数の二重定義を防ぐために、windowオブジェクトに持たせる
         window.handleFlash = window.handleFlash || (() => {
           const flashMessages = document.querySelectorAll('.flash');
           
@@ -60,10 +60,6 @@
             }, 3000);
           });
         });
-
-        // 2. Turboでの遷移時と初回読み込み時の両方で実行
-        document.addEventListener('turbo:load', () => window.handleFlash());
-        document.addEventListener('DOMContentLoaded', () => window.handleFlash());
       </script>
     </div>
   </body>
