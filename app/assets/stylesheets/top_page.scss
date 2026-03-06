@@ -366,4 +366,36 @@ header.header {
     font-size: 0.7rem !important;
     margin-bottom: 5px !important;
   }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+
+    .site-logo {
+      img {
+        height: 170px;
+        width: auto;
+      }
+    }
+
+    .menu_group {
+      display: flex;
+      gap: 10px;
+
+      a {
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 14px;
+        padding: 8px 16px;
+        border-radius: 20px;
+        transition: opacity 0.3s;
+
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+  }
 }
