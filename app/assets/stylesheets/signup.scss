@@ -122,3 +122,15 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .input-group label {
+    font-size: 0.9rem;
+
+    .label-note {
+      font-size: 0.8rem;
+      margin-left: 2px;
+      display: inline;
+    }
+  }
+}

@@ -1,133 +1,133 @@
-/* 1. 全体背景とフォントの設定 */
+  /* -------------------------------------------
+   Vocano! 規約ページ専用スタイル
+   ------------------------------------------- */
+
 body {
-  font-family: 'Zen Maru Gothic', sans-serif;
   margin: 0;
-  padding: 40px 20px;
-  
-  
-  /* ポイント：画像パスをルート（/）から指定する */
+  padding: 0;
+  font-family: 'Zen Maru Gothic', sans-serif !important;
   background-image: url("/background.png") !important;
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  
-  /* 万が一画像が読み込めない時のためのバックアップ色（Vocano紫の薄い版） */
-  background-color: #f3f0ff; 
-  
   min-height: 100vh;
+  color: #2c3e50;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  align-items: flex-start;
 }
 
-/* 2. メインコンテンツのカード（auth-cardに寄せたスタイル） */
 .container {
-  background-color: rgba(255, 255, 255, 0.95); /* 少しだけ透明にして背景を馴染ませる */
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 50px;
-  border-radius: 40px; /* Vocano!らしい大きな丸み */
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-  border: 6px solid #f0f0f0;
+  max-width: 850px;
+  width: 95%;
+  margin: 50px auto;
+  padding: 40px;
+  background: #ffffff;
+  border-radius: 30px;
+  border: 3px solid #BEEFFF;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  line-height: 1.8;
   box-sizing: border-box;
 }
 
-/* 3. タイトルエリア */
 h1 {
-  color: #7B5CD6;
   text-align: center;
   font-size: 2.2rem;
-  font-weight: 900;
+  font-weight: 600;
+  color: #7B5CD6;
+  margin-top: 0;
   margin-bottom: 10px;
-  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
+  text-shadow: 2px 2px 0px #ffffff;
 }
 
 .date {
   text-align: right;
-  color: #888;
-  font-weight: 700;
   font-size: 0.9rem;
+  color: #888;
   margin-bottom: 40px;
 }
 
-/* 4. 各セクションの装飾（auth-titleの雰囲気を継承） */
-h2 {
-  color: #ffffff;
-  background: #7B5CD6;
-  display: inline-block;
-  padding: 8px 25px;
-  border-radius: 15px;
-  font-size: 1.2rem;
-  font-weight: 800;
-  margin-top: 40px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 0 #5e44a8; /* 立体的なボタン風 */
+section {
+  margin-bottom: 35px;
 }
 
-/* 5. 本文・リストの調整 */
-p, li {
+h2 {
+  font-size: 1.3rem;
   font-weight: 500;
+  color: #7B5CD6;
+  border-bottom: 2px dashed #BEEFFF;
+  padding-bottom: 5px;
   margin-bottom: 15px;
+  display: inline-block;
+}
+
+p {
+  margin: 0 0 12px 0;
+  font-size: 1rem;
 }
 
 ul {
-  padding-left: 20px;
-  list-style-type: none;
+  padding-left: 25px;
+  margin-bottom: 15px;
 }
 
-ul li::before {
-  content: "●";
-  color: #7B5CD6;
-  display: inline-block;
-  width: 1.2em;
-  margin-left: -1.2em;
-  font-size: 0.8em;
+ul li {
+  margin-bottom: 10px;
+  list-style-type: disc;
 }
 
-/* 6. お問い合わせセクション等の強調 */
 strong {
   color: #7B5CD6;
-  font-weight: 900;
 }
 
-/* 7. 下部リンクボタン（auth-actionsのボタンに寄せたスタイル） */
 .footer-nav {
-  margin-top: 60px;
   text-align: center;
-  border-top: 3px dashed #eee; /* 可愛い点線区切り */
+  margin-top: 50px;
   padding-top: 30px;
+  border-top: 2px solid #f0f0f0;
 }
 
 .footer-nav a {
   display: inline-block;
+  background: white;
+  color: #7B5CD6;
+  border: 3px solid #BEEFFF;
   padding: 12px 40px;
-  background-color: #6a5acd;
-  color: white;
-  text-decoration: none;
   border-radius: 50px;
   font-weight: 900;
-  font-size: 1.1rem;
-  box-shadow: 0 5px 0 #483d8b;
+  text-decoration: none;
   transition: all 0.2s ease;
+  font-family: 'Zen Maru Gothic', sans-serif;
 }
 
 .footer-nav a:hover {
-  transform: translateY(-3px);
-  background-color: #7B5CD6;
-  box-shadow: 0 8px 15px rgba(106, 90, 205, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  background-color: #f8f8ff;
 }
 
-.footer-nav a:active {
-  transform: translateY(2px);
-  box-shadow: 0 2px 0 #483d8b;
-}
-
-/* スマホ対応 */
-@media (max-width: 600px) {
+/* -------------------------------------------
+   スマホ用レスポンシブ (max-width: 768px)
+   ------------------------------------------- */
+@media (max-width: 768px) {
   .container {
+    margin: 20px auto;
     padding: 30px 20px;
-    border-radius: 25px;
+    border-radius: 20px;
   }
-  h1 { font-size: 1.8rem; }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  section h2 {
+    font-size: 1.15rem;
+  }
+
+  p, li {
+    font-size: 0.9rem;
+  }
+
+  .footer-nav a {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 0;
+  }
 }
