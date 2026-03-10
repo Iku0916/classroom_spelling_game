@@ -10,9 +10,10 @@
 }
 
 .flash {
-  pointer-events: auto;
   margin-bottom: 15px;
-  padding: 18px 40px;
+  padding: 30px 60px;
+  min-height: 80px;
+  font-size: 1.5rem;
   border-radius: 50px;
   
   font-family: 'Zen Maru Gothic', sans-serif !important;
@@ -52,4 +53,23 @@
 .flash.fade-out {
   opacity: 0;
   transform: scale(0.9) translateY(-20px);
+}
+
+@media screen and (max-width: 768px) {
+  .flash-message-container {
+    position: fixed !important;
+    top: 20px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 10000 !important;
+    width: 90% !important;
+    pointer-events: none !important;
+  }
+
+  .flash {
+    pointer-events: none !important;
+    margin-bottom: 10px !important;
+    padding: 12px 20px !important;
+    font-size: 0.9rem !important;
+  }
 }

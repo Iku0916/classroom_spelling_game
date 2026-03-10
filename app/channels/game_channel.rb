@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GameChannel < ApplicationCable::Channel
   def subscribed
     game_room_id = params[:game_room_id]
@@ -6,6 +8,6 @@ class GameChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-    Rails.logger.info "❌ GameChannel unsubscribed"
+    Rails.logger.info '❌ GameChannel unsubscribed'
   end
 end

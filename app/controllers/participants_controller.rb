@@ -1,14 +1,15 @@
+# frozen_string_literal: true
+
 class ParticipantsController < ApplicationController
-  def new
-  end
+  def new; end
 
   def create
     @game_room = GameRoom.find_by(game_code: params[:game_code])
 
     unless @game_room
-      flash[:alert] = "無効なゲームコードです"
+      flash[:alert] = '無効なゲームコードです'
       redirect_to participants_path
-      return  # ← ここを別の行に分ける
+      return # ← ここを別の行に分ける
     end
 
     if current_user
@@ -24,10 +25,10 @@ class ParticipantsController < ApplicationController
       # ゲストユーザーの場合
       guest = Guest.create!(session_token: SecureRandom.urlsafe_base64)
       session[:guest_id] = guest.id
-      
+
       Rails.logger.debug "=== Guest 作成: #{guest.id} ==="
       Rails.logger.debug "=== session[:guest_id] に保存: #{session[:guest_id]} ==="
-      
+
       @participant = @game_room.participants.build(
         guest: guest,
         nickname: params[:nickname].presence || "ゲスト#{guest.id}",
@@ -51,7 +52,7 @@ class ParticipantsController < ApplicationController
       )
       Rails.logger.info "📡 ホスト側にブロードキャスト: game_channel_#{@game_room.id}"
 
-      redirect_to waiting_game_room_path(@game_room), notice: "ゲームに参加しました"
+      redirect_to waiting_game_room_path(@game_room), notice: 'ゲームに参加しました'
     else
       Rails.logger.error "❌ 参加者作成失敗: #{@participant.errors.full_messages}"
       flash[:alert] = "参加に失敗しました: #{@participant.errors.full_messages.join(', ')}"

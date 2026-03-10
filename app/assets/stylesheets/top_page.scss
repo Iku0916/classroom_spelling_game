@@ -59,11 +59,9 @@ header {
       background-color: white;
       color: #7B5CD6;
       font-weight: 900;
-      font-size: 0.85rem; // 少し小さめに設定
-      padding: 8px 20px;   // 上下左右の余白を少し削ってコンパクトに
+      font-size: 0.85rem;
+      padding: 8px 20px;
       border-radius: 50px;
-      
-      // ★可愛さのポイント：太めの枠線とぷっくりシャドウ
       border: 3px solid #BEEFFF; 
       box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1), inset 0 -3px 0 rgba(0, 0, 0, 0.1);
       
@@ -74,7 +72,7 @@ header {
         transform: translateY(-2px);
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
         background-color: #fdfdff;
-        border-color: #69C9FF; // ホバーで枠線の色を変えると動的な感じが出るよ
+        border-color: #69C9FF;
       }
     }
   }
@@ -150,7 +148,7 @@ header {
    =========================================== */
 .total-stats-section {
   display: flex !important;
-  justify-content: center !important; /* 横並びにする */
+  justify-content: center !important;
   align-items: center !important;
   gap: 20px !important;
   margin: 30px auto !important;
@@ -231,7 +229,45 @@ header.header {
      スマホ用メディアクエリ
      ------------------------------------------- */
 @media (max-width: 768px) {
-  
+  html, body {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: hidden !important;
+  }
+
+  .page-wrapper {
+    display: block !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    margin-top: 60px !important;
+    padding: 100px 10px 20px 10px !important;
+    box-sizing: border-box !important;
+  }
+
+  .page-wrapper > *:first-child {
+    margin-top: 100px !important;
+  }
+
+  .search-section, 
+  .search-section .search-form {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+  }
+
+  .kit-action-row {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+
+  .page-wrapper * {
+    max-width: 100% !important;
+  }
+
   header.header {
     height: 60px !important;
     padding: 0 10px !important;
@@ -355,7 +391,7 @@ header.header {
   }
 
   .row-primary .main-button {
-    width: 46% !important;
+    width: 160px !important;
     height: 60px !important;
     font-size: 0.9rem !important;
   }

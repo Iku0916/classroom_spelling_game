@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   def new
     @user = User.new
@@ -5,7 +7,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    
+
     if @user.save
       redirect_to login_path, notice: '新規登録が完了しました！'
     else
@@ -18,8 +20,8 @@ class UsersController < ApplicationController
 
     @learning_logs = @user.learning_logs.order(created_at: :asc)
     @score_by_day = @learning_logs.group_by { |log| log.created_at.in_time_zone('Tokyo').to_date }
-                                .transform_values { |logs| logs.sum(&:score) }
-  end                 
+                                  .transform_values { |logs| logs.sum(&:score) }
+  end
 
   def edit
     @user = current_user
@@ -34,7 +36,7 @@ class UsersController < ApplicationController
     end
 
     if @user.update(user_params)
-      redirect_to root_path, notice: "設定を更新しました！"
+      redirect_to root_path, notice: '設定を更新しました！'
     else
       render :edit, status: :unprocessable_entity
     end

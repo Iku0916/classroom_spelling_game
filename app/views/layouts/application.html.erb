@@ -33,34 +33,19 @@
         <%= render 'shared/before_login_header' %>
       <% end %>
 
-      <div class="flash-message-container">
-        <% flash.each do |type, message| %>
-          <div class="flash <%= type %>">
-            <%= message %>
-        <% end %>
-      </div>
-
       <main class="main-content">
         <%= yield %>
       </main>
-    </div>
 
       <%= render 'shared/footer' %>
-  
-      <script>
-        window.handleFlash = window.handleFlash || (() => {
-          const flashMessages = document.querySelectorAll('.flash');
-          
-          flashMessages.forEach(message => {
-            setTimeout(() => {
-              message.classList.add('fade-out');
-              setTimeout(() => {
-                message.remove();
-              }, 500);
-            }, 3000);
-          });
-        });
-      </script>
+    </div>
+
+    <div class="flash-message-container">
+      <% flash.each do |type, message| %>
+        <div class="flash <%= type %>">
+          <%= message %>
+        </div>
+      <% end %>
     </div>
   </body>
 </html>

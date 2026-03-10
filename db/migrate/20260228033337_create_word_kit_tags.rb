@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateWordKitTags < ActiveRecord::Migration[7.1]
   def change
     create_table :word_kit_tags do |t|
@@ -7,6 +9,6 @@ class CreateWordKitTags < ActiveRecord::Migration[7.1]
       t.timestamps
     end
 
-    add_index :word_kit_tags, [:word_kit_id, :tag_id], unique: true
+    add_index :word_kit_tags, %i[word_kit_id tag_id], unique: true
   end
 end

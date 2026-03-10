@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
@@ -28,7 +30,15 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
-  validates :password, length: { minimum: 8 }, if: -> { new_record? || changes[:crypted_password] }, unless: -> { @external_redirect }
-  validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }, unless: -> { @external_redirect }
-  validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }, unless: -> { @external_redirect }
+  validates :password, length: { minimum: 8 }, if: -> { new_record? || changes[:crypted_password] }, unless: lambda {
+    @external_redirect
+  }
+  validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }, unless: lambda {
+    @external_redirect
+  }
+  validates :password_confirmation, presence: true, if: lambda {
+    new_record? || changes[:crypted_password]
+  }, unless: lambda {
+       @external_redirect
+     }
 end

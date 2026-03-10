@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SelfStudiesController < ApplicationController
   def new
     @word_kit = WordKit.find(params[:word_kit_id])
@@ -6,17 +8,17 @@ class SelfStudiesController < ApplicationController
   def play
     @word_kit = WordKit.find_by(id: params[:word_kit_id])
     minutes = params[:time_limit_minutes].to_f
-    @time_limit = (minutes > 0 ? minutes : 1) * 60
+    @time_limit = (minutes.positive? ? minutes : 1) * 60
 
     @questions = @word_kit.word_cards.map do |word|
-        {
-          word: word.english_word,
-          correct_answer: word.japanese_translation
-        }
+      {
+        word: word.english_word,
+        correct_answer: word.japanese_translation
+      }
     end
 
     if @word_kit.nil?
-      redirect_to word_kits_path, alert: "ゲームキットが見つかりませんでした"
+      redirect_to word_kits_path, alert: 'ゲームキットが見つかりませんでした'
       return
     end
 
@@ -29,12 +31,10 @@ class SelfStudiesController < ApplicationController
     cards = @word_kit.word_cards.to_a
 
     index = session[:question_index] || 0
-    index = index % cards.length
+    index %= cards.length
     current_card = cards[index]
 
-    if params[:answer] == current_card.japanese_translation
-      session[:current_score] = (session[:current_score] || 0) + 1
-    end
+    session[:current_score] = (session[:current_score] || 0) + 1 if params[:answer] == current_card.japanese_translation
 
     session[:question_index] = index + 1
     head :ok
@@ -53,7 +53,7 @@ class SelfStudiesController < ApplicationController
     )
 
     render json: { status: 'success' }, status: :ok
-  rescue => e
+  rescue StandardError => e
     logger.error "保存エラー: #{e.message}"
     render json: { status: 'error', message: e.message }, status: :internal_server_error
   end
@@ -68,9 +68,6 @@ class SelfStudiesController < ApplicationController
     session[:question_index] = 0
   end
 end
-
-
-private
 
 def learning_log_params
   params.require(:learning_log).permit(:score, :minutes)

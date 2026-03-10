@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateWordKits < ActiveRecord::Migration[7.1]
   def change
     create_table :word_kits do |t|
