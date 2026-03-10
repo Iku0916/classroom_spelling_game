@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class WordKit < ApplicationRecord
   has_many :word_cards, dependent: :destroy
   accepts_nested_attributes_for :word_cards, allow_destroy: true, reject_if: :all_blank
@@ -12,7 +14,7 @@ class WordKit < ApplicationRecord
 
   enum visibility: { private_kit: 0, public_kit: 1 }
 
-  validates :name, presence: { message: "ゲームキット名を入力してください" }
+  validates :name, presence: { message: 'ゲームキット名を入力してください' }
 
   def tag_list=(names)
     self.tags = names.split(/[、,]/).map(&:strip).uniq.reject(&:empty?).map do |name|

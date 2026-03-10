@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class WordKitsController < ApplicationController
   before_action :require_login
 
@@ -7,12 +9,9 @@ class WordKitsController < ApplicationController
     if params[:keyword].present?
       keywords = params[:keyword].split(/[[:space:]]+/)
 
-      conditions = []
-      values = {}
-
-      keywords.each do |word, |
+      keywords.each do |word,|
         @word_kits = @word_kits.where(
-          "word_kits.name LIKE :q OR tags.name LIKE :q",
+          'word_kits.name LIKE :q OR tags.name LIKE :q',
           q: "%#{word}%"
         )
       end
@@ -30,7 +29,7 @@ class WordKitsController < ApplicationController
     @word_kit = current_user.word_kits.build(word_kit_params)
 
     if @word_kit.save
-        redirect_to word_kits_path, notice: "キットを作成しました"
+      redirect_to word_kits_path, notice: 'キットを作成しました'
     else
       render :new, status: :unprocessable_entity
     end
@@ -40,7 +39,7 @@ class WordKitsController < ApplicationController
     @word_kit = current_user.word_kits.find(params[:id])
 
     if @word_kit.destroy
-      redirect_to word_kits_path, notice: "ゲームキットを削除しました"
+      redirect_to word_kits_path, notice: 'ゲームキットを削除しました'
     else
       redirect_to word_kits_path
     end
@@ -56,7 +55,7 @@ class WordKitsController < ApplicationController
     @word_kit = @game_room.word_kit
     @questions = @word_kit.word_cards
 
-    Rails.logger.debug "=== Game Room Debug ==="
+    Rails.logger.debug '=== Game Room Debug ==='
     Rails.logger.debug "Questions count: #{@questions.count}"
     Rails.logger.debug "Questions: #{@questions.inspect}"
 
@@ -66,7 +65,7 @@ class WordKitsController < ApplicationController
   end
 
   def edit
-     @word_kit = current_user.word_kits.find(params[:id])
+    @word_kit = current_user.word_kits.find(params[:id])
   end
 
   def update
@@ -76,7 +75,7 @@ class WordKitsController < ApplicationController
 
     has_changes = @word_kit.changed? || @word_kit.word_cards.any? { |c| c.changed? || c.marked_for_destruction? }
 
-    if !has_changes
+    unless has_changes
       redirect_to word_kits_path, notice: '変更はありませんでした'
       return
     end
@@ -87,12 +86,12 @@ class WordKitsController < ApplicationController
     end
   end
 
-    def copy
+  def copy
     original = WordKit.find(params[:id])
 
     copied = original.dup
     copied.name = "#{original.name} copy"
-    copied.visibility = "private_kit"
+    copied.visibility = 'private_kit'
     copied.user = current_user
     copied.save!
 
@@ -103,7 +102,7 @@ class WordKitsController < ApplicationController
       )
     end
 
-    redirect_to word_kit_path(copied), notice: "複製しました！"
+    redirect_to word_kit_path(copied), notice: '複製しました！'
   end
 
   private
@@ -113,7 +112,7 @@ class WordKitsController < ApplicationController
       :name,
       :visibility,
       :tag_list,
-      word_cards_attributes: [:id, :english_word, :japanese_translation, :_destroy]
+      word_cards_attributes: %i[id english_word japanese_translation _destroy]
     )
   end
 end

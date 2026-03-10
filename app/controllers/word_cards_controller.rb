@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class WordCardsController < ApplicationController
   before_action :require_login
   before_action :set_word_kit

@@ -110,13 +110,28 @@
    自習モード: メディアクエリ調整
    ------------------------------------------- */
 @media (max-width: 768px) {
-  .play-container {
-    width: 90% !important;
-    max-width: 500px !important;
-    margin: 0 auto !important;
+  .voca-main-container,
+  .lobby-container,
+  .play-container,
+  .score-card,
+  .code-section {
+    margin: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  main.main-content {
+    display: block !important;
+    margin: 0 !important;
     padding: 0 !important;
-    box-sizing: border-box !important;
-    padding-bottom: 40px !important;
+    padding-top: 40px !important;
+  }
+
+  .play-container {
+    display: flex !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    width: 100% !important;
   }
 
   .game-header {
@@ -124,9 +139,23 @@
     width: 90% !important;
   }
 
-  .game-footer {
+  .play-container .submit-section .btn-update {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 54px !important; 
     width: 100% !important;
-    margin-bottom: 30px !important;
+    font-size: 1.2rem !important;
+    border-radius: 30px !important;
+    margin-bottom: 20px;
+
+    padding: 0 !important;
+  }
+
+  .play-container .submit-section {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
   }
 
   .question-frame,

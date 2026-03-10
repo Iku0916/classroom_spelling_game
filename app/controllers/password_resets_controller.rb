@@ -1,11 +1,12 @@
-class PasswordResetsController < ApplicationController
+# frozen_string_literal: true
 
+class PasswordResetsController < ApplicationController
   def new; end
 
   def create
     @user = User.find_by(email: params[:email])
     if @user
-      token = @user.generate_reset_password_token!
+      @user.generate_reset_password_token!
       @user.save!
       UserMailer.reset_password_email(@user, @user.reset_password_token).deliver_now
     end

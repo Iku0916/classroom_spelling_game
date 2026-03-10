@@ -106,7 +106,7 @@
     all: unset;
     width: 50px;
     height: 65px;
-    border: 3px solid #BEEFFF !important; /* 強制的に当てる */
+    border: 3px solid #BEEFFF !important;
     border-radius: 12px;
     background: white;
     text-align: center;
@@ -199,15 +199,9 @@
     border: 4px solid #ffffff;
     border-radius: 50px;
     padding: 50px 30px;
-    
-    // 横幅の指定を整理
     width: 100%;
     max-width: 500px; 
-    
-    // これで強制的に中央へ
     margin: 0 auto !important; 
-    
-    box-shadow: 0 20px 40px rgba(123, 92, 214, 0.15);
     text-align: center;
     box-sizing: border-box;
   }
@@ -216,13 +210,12 @@
     margin: 30px 0;
 
     .timer-display {
-      font-size: 7rem;
-      font-weight: 950;
-      color: #FF9F1C;
-      line-height: 1;
-      // 文字が横に広がってはみ出さないように
-      width: 100%;
-      display: block;
+      background: linear-gradient(to right, #ffb88c, #de6262);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 7.5rem !important; 
+      font-weight: 800;
+      margin: 10px 0;
     }
   }
 
@@ -257,5 +250,48 @@
       transform: translateY(5px);
       box-shadow: none;
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .game-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: auto !important;
+    flex-shrink: 0;
+  }
+
+  .submit-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .btn-update {
+    width: 200px !important;
+    height: 60px !important;
+    flex: none; 
+  }
+
+  .main-card {
+    overflow: hidden; 
+    padding: 20px;
+  }
+
+  #timer.timer-display {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center;
+    align-items: center;
+    
+    /* これが今回の特効薬！ */
+    font-size: 23vw !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 }

@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 class CommunityController < ApplicationController
   def index
-    @public_word_kits = WordKit.where(visibility: "public_kit").left_outer_joins(:tags)
+    @public_word_kits = WordKit.where(visibility: 'public_kit').left_outer_joins(:tags)
 
     if params[:keyword].present?
       keywords = params[:keyword].split(/[[:space:]]+/)
-      
+
       keywords.each do |word|
         @public_word_kits = @public_word_kits.where(
-          "word_kits.name LIKE :q OR tags.name LIKE :q",
+          'word_kits.name LIKE :q OR tags.name LIKE :q',
           q: "%#{word}%"
         )
       end

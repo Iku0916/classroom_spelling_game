@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 class OnboardingsController < ApplicationController
   before_action :require_login
   before_action :check_onboarding
 
-  def show
-  end
+  def show; end
 
   def complete
     current_user.update(onboarding_seen: true)
@@ -13,8 +14,8 @@ class OnboardingsController < ApplicationController
   private
 
   def check_onboarding
-    if current_user.onboarding_seen && params[:force] != "true"
-      redirect_to root_path
-    end
+    return unless current_user.onboarding_seen && params[:force] != 'true'
+
+    redirect_to root_path
   end
 end

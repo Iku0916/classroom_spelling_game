@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChangeIsReadyDefaultInParticipants < ActiveRecord::Migration[7.1]
   def change
     change_column_default :participants, :is_ready, from: nil, to: false

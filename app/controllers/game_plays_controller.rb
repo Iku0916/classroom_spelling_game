@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GamePlaysController < ApplicationController
   before_action :set_game_room
   before_action :set_participant, except: [:finish]
@@ -5,15 +7,15 @@ class GamePlaysController < ApplicationController
 
   # ゲームプレイ画面の表示
   def show
-    Rails.logger.info "=== GamePlay show 開始 ==="
+    Rails.logger.info '=== GamePlay show 開始 ==='
     Rails.logger.info "participant: #{@participant.id}, is_host: #{@is_host}"
-    
+
     # 参加者のみアクセス可能
     if @is_host
       redirect_to game_room_path(@game_room), alert: 'ホストはこの画面にアクセスできません'
       return
     end
-    
+
     @word_kit = @game_room.word_kit
     @word_cards = @word_kit.word_cards
     @total_questions = @word_cards.count
@@ -23,10 +25,10 @@ class GamePlaysController < ApplicationController
         id: card.id,
         word: card.english_word,
         correct_answer: card.japanese_translation,
-        incorrect_answers: []  # ← nil の場合は空配列
+        incorrect_answers: [] # ← nil の場合は空配列
       }
     end
-    
+
     @current_question = @questions.first
 
     Rails.logger.info "📊 問題データ: #{@questions.inspect}"
@@ -36,24 +38,22 @@ class GamePlaysController < ApplicationController
   def update
     # 必要に応じて実装
   end
-  
+
   # 回答処理
   def answer
     @word_kit = @game_room.word_kit
     @questions = @word_kit.word_cards
     @current_question = @questions[session[:question_index]]
-    
+
     # 正誤判定
     is_correct = params[:answer] == @current_question.correct_answer
-    
+
     # スコア更新
-    if is_correct
-      @participant.increment!(:score)
-    end
-    
+    @participant.increment!(:score) if is_correct
+
     # 次の問題へ
     session[:question_index] = (session[:question_index] || 0) + 1
-    
+
     # 全問終了チェック
     if session[:question_index] >= @questions.count
       redirect_to result_game_room_game_play_path(@game_room)
@@ -61,66 +61,66 @@ class GamePlaysController < ApplicationController
       redirect_to game_room_game_play_path(@game_room)
     end
   end
-  
+
   # 結果表示
   def overall_result
-    Rails.logger.info "=== overall_result 開始 ==="
+    Rails.logger.info '=== overall_result 開始 ==='
 
     if @is_host
-    # ホスト用: 全体結果を表示
+      # ホスト用: 全体結果を表示
       @participants = @game_room.participants.includes(:user, :guest).order(score: :desc)
       @total_questions = @game_room.word_kit.word_cards.count
       @top_players = @participants.order(score: :desc).limit(3)
-      Rails.logger.info "ホスト用の全体結果表示"
+      Rails.logger.info 'ホスト用の全体結果表示'
       render :overall_result
     else
       # 参加者用: 個人結果にリダイレクト
-      Rails.logger.info "参加者用: personal_result にリダイレクト"
+      Rails.logger.info '参加者用: personal_result にリダイレクト'
       redirect_to personal_result_game_room_game_play_path(@game_room)
     end
   end
 
   def personal_result
-    Rails.logger.info "=== personal_result 開始 ==="
+    Rails.logger.info '=== personal_result 開始 ==='
 
     # @participant が存在しない場合
     unless @participant
       redirect_to root_path, alert: '参加者情報が見つかりません'
       return
     end
-    
+
     # スコアと問題数を取得
     @score = @participant.score
     @total_questions = @game_room.word_kit.word_cards.count
-    
+
     # 正解率を計算（オプション）
-    @correct_rate = @total_questions > 0 ? (@score.to_f / @total_questions * 100).round(1) : 0
-    
+    @correct_rate = @total_questions.positive? ? (@score.to_f / @total_questions * 100).round(1) : 0
+
     Rails.logger.info "スコア: #{@score} / #{@total_questions}"
     Rails.logger.info "正解率: #{@correct_rate}%"
   end
-    
+
   # ★ スコア更新処理（JavaScript から呼ばれる）
   def update_score
     new_score = params[:score].to_i
 
     if new_score > @participant.score
       @participant.update(score: new_score)
-      Rails.logger.info "✅ スコア更新"
+      Rails.logger.info '✅ スコア更新'
     else
-      Rails.logger.info "⚠️ 古いスコアなので無視"
+      Rails.logger.info '⚠️ 古いスコアなので無視'
     end
 
     render json: { success: true, score: @participant.score }
   end
-  
+
   # ★ ゲーム終了処理（JavaScript から呼ばれる）
   def finish
-    Rails.logger.info "=== finish 開始 ==="
+    Rails.logger.info '=== finish 開始 ==='
     Rails.logger.info "現在のステータス: #{@game_room.status}"
 
     unless @game_room.playing?
-      Rails.logger.warn "⚠️ ゲームは既に終了しています"
+      Rails.logger.warn '⚠️ ゲームは既に終了しています'
       return render json: { success: false, message: 'ゲームは既に終了しています' }, status: :unprocessable_entity
     end
 
@@ -143,58 +143,58 @@ class GamePlaysController < ApplicationController
       user.learning_logs.create!(score: participant.score.to_i, minutes: minutes, word_kit_id: @game_room.word_kit_id)
     end
 
-      host_redirect_url = overall_result_game_room_game_play_path(@game_room)
-      
-      # ⭐️ メッセージを送信
-      ActionCable.server.broadcast(
-        "game_channel_#{@game_room.id}",
-        {
-          type: 'game_finished',
-          message: 'ゲームが終了しました！',
-        }
-      )
-      Rails.logger.info "✅ ゲーム終了成功"
-      render json: { 
-        success: true, 
-        message: 'ゲームが終了しました',
-        redirect_url: host_redirect_url
+    host_redirect_url = overall_result_game_room_game_play_path(@game_room)
+
+    # ⭐️ メッセージを送信
+    ActionCable.server.broadcast(
+      "game_channel_#{@game_room.id}",
+      {
+        type: 'game_finished',
+        message: 'ゲームが終了しました！'
       }
+    )
+    Rails.logger.info '✅ ゲーム終了成功'
+    render json: {
+      success: true,
+      message: 'ゲームが終了しました',
+      redirect_url: host_redirect_url
+    }
   end
-  
+
   private
-  
+
   # GameRoom を取得
   def set_game_room
     @game_room = GameRoom.find(params[:game_room_id])
     Rails.logger.debug "=== GameRoom 取得: #{@game_room.id} ==="
   rescue ActiveRecord::RecordNotFound
-    Rails.logger.error "=== GameRoom が見つかりません ==="
+    Rails.logger.error '=== GameRoom が見つかりません ==='
     redirect_to root_path, alert: 'ゲームルームが見つかりません'
   end
-  
+
   # Participant を取得
   def set_participant
-    Rails.logger.debug "=== set_participant 開始 ==="
+    Rails.logger.debug '=== set_participant 開始 ==='
     Rails.logger.debug "current_user: #{current_user&.id}"
     Rails.logger.debug "host_user: #{@game_room.host_user&.id}"
-    
+
     # ホストかどうかの判定
     @is_host = current_user && current_user == @game_room.host_user
-    
+
     # ホストの場合は overall_result のみ許可
     if @is_host
-      Rails.logger.debug "=== ホストがアクセス ==="
-      
+      Rails.logger.debug '=== ホストがアクセス ==='
+
       # overall_result 以外はアクセス不可
       unless %w[overall_result finish].include?(action_name)
         redirect_to game_room_path(@game_room), alert: 'ホストはゲームに参加できません'
         return
       end
-      
+
       @participant = nil
       return
     end
-    
+
     # 参加者の処理
     if current_user
       @participant = @game_room.participants.find_by(user_id: current_user.id)
@@ -215,16 +215,16 @@ class GamePlaysController < ApplicationController
       end
       return
     end
-    
+
     Rails.logger.debug "=== Participant 取得成功: #{@participant.id} ==="
   end
 
   def authorize_host
-    unless current_user && current_user == @game_room.host_user
-      respond_to do |format|
-        format.html { redirect_to root_path, alert: 'ホストのみがこの操作を行えます' }
-        format.json { render json: { error: 'ホストのみがこの操作を行えます' }, status: :forbidden }
-      end
+    return if current_user && current_user == @game_room.host_user
+
+    respond_to do |format|
+      format.html { redirect_to root_path, alert: 'ホストのみがこの操作を行えます' }
+      format.json { render json: { error: 'ホストのみがこの操作を行えます' }, status: :forbidden }
     end
   end
 end

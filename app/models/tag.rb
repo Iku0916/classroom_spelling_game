@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Tag < ApplicationRecord
   has_many :word_kit_tags, dependent: :destroy
   has_many :word_kits, through: :word_kit_tags

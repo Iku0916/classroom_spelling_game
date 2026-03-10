@@ -4,7 +4,7 @@
 
 .lobby-container {
   .waiting-status {
-    color: #7b4df5 !important; /* メインカラーの紫 */
+    color: #7b4df5 !important;
     font-weight: 800 !important;
   }
 
@@ -306,10 +306,8 @@
 @media (max-width: 768px) {
   .page-wrapper {
     width: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
+    display: block !important;
+    padding: 0 10px !important;
     box-sizing: border-box !important;
   }
 
@@ -319,7 +317,7 @@
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    padding: 0 20px !important;
+    padding: 0 5px !important;
     box-sizing: border-box !important;
   }
 

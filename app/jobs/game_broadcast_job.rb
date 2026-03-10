@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GameBroadcastJob < ApplicationJob
   queue_as :default
 
@@ -12,7 +14,7 @@ class GameBroadcastJob < ApplicationJob
     @game_room.update(status: :playing)
     GameBroadcastJob.perform_later(
       @game_room.id,
-      { url: game_room_answer_path(@game_room, @answer)}
+      { url: game_room_answer_path(@game_room, @answer) }
     )
   end
 end
