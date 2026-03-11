@@ -5,7 +5,6 @@ export default class extends Controller {
   static values = { gameRoomId: Number }
 
   connect() {
-    console.log("✅ score コントローラー接続成功") 
     this.score = 0
     this.scoreSaved = false
     this.gameFinished = false
@@ -48,9 +47,7 @@ export default class extends Controller {
         },
         body: JSON.stringify({ score: this.score })
       })
-      console.log(`📡 スコア同期中... (${this.score}点)`)
     } catch (err) {
-      console.error("Score sync error:", err)
     }
   }
 }
