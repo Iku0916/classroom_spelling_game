@@ -27,7 +27,6 @@ module ApplicationCable
           expires: 1.year.from_now,
           httponly: true
         }
-        logger.info "=== 新しいゲストユーザーを作成: id=#{guest.id} ==="
       end
 
       guest
