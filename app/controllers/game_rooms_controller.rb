@@ -98,6 +98,14 @@ class GameRoomsController < ApplicationController
     end
   end
 
+  def next_step_url(index, total_count, game_room)
+    if index >= total_count
+      Rails.application.routes.url_helpers.result_game_room_game_play_path(game_room)
+    else
+      Rails.application.routes.url_helpers.game_room_game_play_path(game_room)
+    end
+  end
+
   def waiting
     @game_room = GameRoom.find(params[:id])
   end

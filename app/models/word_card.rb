@@ -12,4 +12,8 @@ class WordCard < ApplicationRecord
       japanese: japanese_translation
     }
   end
+
+  def to_question
+    { id: id, word: english_word, correct_answer: japanese_translation, incorrect_answers: [] }
+  end
 end
