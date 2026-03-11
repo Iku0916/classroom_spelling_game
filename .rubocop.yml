@@ -1,0 +1,12 @@
+Style/Documentation:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'config/routes.rb'
+    - 'config/environments/*.rb'
+    - 'db/schema.rb'
+    - 'bin/bundle'
+
+Layout/LineLength:
+  Max: 140
