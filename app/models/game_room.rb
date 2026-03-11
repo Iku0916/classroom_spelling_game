@@ -50,4 +50,76 @@ class GameRoom < ApplicationRecord
 
     next_step_url(session[:question_index], word_cards.count, self)
   end
+
+  def self.build_with_host(user, word_kit_id)
+    new(
+      host_user: user,
+      game_code: SecureRandom.random_number(10**6).to_s.rjust(6, '0'),
+      status: :waiting,
+      time_limit: 300,
+      word_kit_id: word_kit_id
+    )
+  end
+
+  def broadcast_participant_joined(participant)
+    ActionCable.server.broadcast(
+      "game_room_#{id}",
+      {
+        type: 'participant_joined',
+        participant: { id: participant.id, nickname: participant.nickname, is_ready: participant.is_ready },
+        participants_count: participants.count
+      }
+    )
+  end
+
+  def start_game!(minutes)
+    seconds = minutes.to_i * 60
+    update!(status: 'playing', time_limit: seconds, started_at: Time.current)
+
+    broadcast_game_start
+  end
+
+  def ready_participants?
+    participants.where(is_ready: true).exists?
+  end
+
+  def broadcast_game_start
+    ActionCable.server.broadcast(
+      "game_channel_#{id}",
+      {
+        type: 'game_start',
+        message: 'ゲームが始まりました',
+        redirect_url: Rails.application.routes.url_helpers.game_room_game_play_path(self)
+      }
+    )
+  end
+
+  def finish_game!
+    return unless playing?
+
+    update!(status: :finished, finished_at: Time.current)
+
+    process_results
+    broadcast_finish
+  end
+
+  private
+
+  def process_results
+    minutes = ((finished_at - (started_at || finished_at)) / 60).to_i
+
+    participants.each do |p|
+      next unless p.user_id.present?
+
+      p.user.increment!(:total_score, p.score.to_i)
+      p.user.learning_logs.create!(score: p.score.to_i, minutes: minutes)
+    end
+  end
+
+  def broadcast_finish
+    ActionCable.server.broadcast(
+      "game_channel_#{id}",
+      { type: 'game_finished', message: 'ゲームが終了しました！' }
+    )
+  end
 end
