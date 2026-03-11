@@ -11,15 +11,7 @@ class GameRoomsController < ApplicationController
       time_limit: 300,
       word_kit_id: params[:word_kit_id]
     )
-
-    # デバッグ用のログを追加
-    Rails.logger.debug '===== GameRoom Attributes ====='
-    Rails.logger.debug "@game_room.attributes: #{@game_room.attributes.inspect}"
-    Rails.logger.debug "@game_room.valid?: #{@game_room.valid?}"
-
     unless @game_room.valid?
-      Rails.logger.debug '===== Validation Errors ====='
-      Rails.logger.debug "@game_room.errors.full_messages: #{@game_room.errors.full_messages}"
     end
 
     if @game_room.save
@@ -28,8 +20,6 @@ class GameRoomsController < ApplicationController
       )
       redirect_to game_room_path(@game_room), notice: 'ゲームルームを作成しました'
     else
-      Rails.logger.debug '===== Save Failed ====='
-      Rails.logger.debug "@game_room.errors: #{@game_room.errors.full_messages}"
       flash[:alert] = 'ゲームルームの作成に失敗しました'
       redirect_to word_kits_path
     end
@@ -46,7 +36,6 @@ class GameRoomsController < ApplicationController
     )
 
     if participant.save
-      Rails.logger.info "✅ 参加者保存成功: #{participant.nickname}"
 
       ActionCable.server.broadcast(
         "game_room_#{@game_room.id}",
@@ -84,19 +73,13 @@ class GameRoomsController < ApplicationController
 
     if request.patch? || request.post?
 
-      # ゲーム時間を秒→分に
       time_limit_in_minutes = params[:time_limit].to_i
       time_limit_in_seconds = time_limit_in_minutes * 60
-
-      # ゲーム開始処理
       @game_room.update(status: 'playing', time_limit: time_limit_in_seconds, started_at: Time.current)
 
-      # 準備完了している参加者がいるかチェック
       if @game_room.participants.where(is_ready: true).exists?
         @game_room.word_kit
 
-        Rails.logger.debug '=== ブロードキャスト実行 ==='
-        # 参加者には game_plays#show へのリダイレクトURLを送る
         ActionCable.server.broadcast(
           "game_channel_#{@game_room.id}",
           {
@@ -105,19 +88,13 @@ class GameRoomsController < ApplicationController
             redirect_url: game_room_game_play_path(@game_room)
           }
         )
-        Rails.logger.debug '=== ブロードキャスト完了 ==='
-
-        # ホスト自身は start (GET) にリダイレクト
         redirect_to start_game_room_path(@game_room), status: :see_other
       else
-        # 参加者がいない場合
         redirect_to game_room_path(@game_room), alert: '準備完了の参加者がいません'
       end
 
     elsif request.get?
-      # ホストのゲーム画面表示
       @questions = @game_room.word_kit.word_cards
-      # start.html.erb が表示される
     end
   end
 
