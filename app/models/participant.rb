@@ -35,6 +35,24 @@ class Participant < ApplicationRecord
     ((score.to_f / total) * 100).round(1)
   end
 
+  def self.build_for_game(game_room, params, current_user, session)
+    if current_user
+      game_room.participants.build(
+        user: current_user,
+        nickname: params[:nickname].presence || current_user.name || "プレイヤー#{current_user.id}",
+        is_ready: true, score: 0
+      )
+    else
+      guest = Guest.create!(session_token: SecureRandom.urlsafe_base64)
+      session[:guest_id] = guest.id
+      game_room.participants.build(
+        guest: guest,
+        nickname: params[:nickname].presence || "ゲスト#{guest.id}",
+        is_ready: true, score: 0
+      )
+    end
+  end
+
   private
 
   def either_user_or_guest_present
