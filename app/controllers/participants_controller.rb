@@ -5,48 +5,14 @@ class ParticipantsController < ApplicationController
 
   def create
     @game_room = GameRoom.find_by(game_code: params[:game_code])
+    return redirect_to participants_path, alert: '無効なゲームコードです' unless @game_room
 
-    unless @game_room
-      flash[:alert] = '無効なゲームコードです'
-      redirect_to participants_path
-      return
-    end
-
-    if current_user
-      @participant = @game_room.participants.build(
-        user: current_user,
-        nickname: params[:nickname].presence || current_user.name || "プレイヤー#{current_user.id}",
-        is_ready: true,
-        score: 0
-      )
-    else
-      guest = Guest.create!(session_token: SecureRandom.urlsafe_base64)
-      session[:guest_id] = guest.id
-
-      @participant = @game_room.participants.build(
-        guest: guest,
-        nickname: params[:nickname].presence || "ゲスト#{guest.id}",
-        is_ready: true,
-        score: 0
-      )
-    end
+    @participant = Participant.build_for_game(@game_room, params, current_user, session)
 
     if @participant.save
-      ActionCable.server.broadcast(
-        "game_channel_#{@game_room.id}",
-        {
-          type: 'participant_joined',
-          participant: {
-            id: @participant.id,
-            nickname: @participant.nickname
-          },
-          participants_count: @game_room.participants.count
-        }
-      )
-      redirect_to waiting_game_room_path(@game_room), notice: 'ゲームに参加しました'
+      handle_successful_join
     else
-      flash[:alert] = "参加に失敗しました: #{@participant.errors.full_messages.join(', ')}"
-      redirect_to new_participant_path
+      handle_failed_join
     end
   end
 
@@ -55,5 +21,27 @@ class ParticipantsController < ApplicationController
     @game_room = @participant.game_room
     @my_rank = @game_room.participants.where('score > ?', @participant.score).count + 1
     @total_participants = @game_room.participants.count
+  end
+
+  private
+
+  def handle_successful_join
+    broadcast_join(@participant)
+    redirect_to waiting_game_room_path(@game_room), notice: 'ゲームに参加しました'
+  end
+
+  def handle_failed_join
+    redirect_to new_participant_path, alert: "参加に失敗しました: #{@participant.errors.full_messages.join(', ')}"
+  end
+
+  def broadcast_join(participant)
+    ActionCable.server.broadcast(
+      "game_channel_#{participant.game_room_id}",
+      {
+        type: 'participant_joined',
+        participant: { id: participant.id, nickname: participant.nickname },
+        participants_count: participant.game_room.participants.count
+      }
+    )
   end
 end
