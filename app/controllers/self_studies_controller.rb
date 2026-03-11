@@ -54,7 +54,6 @@ class SelfStudiesController < ApplicationController
 
     render json: { status: 'success' }, status: :ok
   rescue StandardError => e
-    logger.error "保存エラー: #{e.message}"
     render json: { status: 'error', message: e.message }, status: :internal_server_error
   end
 
