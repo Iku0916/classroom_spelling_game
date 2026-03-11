@@ -43,9 +43,11 @@ class GamePlaysController < ApplicationController
   def update_score
     new_score = params[:score].to_i
 
-    @participant.update(score: new_score) if new_score > @participant.score
-
-    render json: { success: true, score: @participant.score }
+    if @participant.update(score: new_score)
+      render json: { success: true, score: @participant.score }
+    else
+      render json: { success: false, error: '更新失敗' }, status: :unprocessable_entity
+    end
   end
 
   def finish
