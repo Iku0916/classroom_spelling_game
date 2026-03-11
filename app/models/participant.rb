@@ -22,6 +22,19 @@ class Participant < ApplicationRecord
     user_id.present? && game_room.host_user_id == user_id
   end
 
+  def submit_answer(correct_answer, user_answer)
+    is_correct = (user_answer == correct_answer)
+    increment!(:score) if is_correct
+    is_correct
+  end
+
+  def correct_rate
+    total = game_room.word_kit.word_cards.count
+    return 0 if total.zero?
+
+    ((score.to_f / total) * 100).round(1)
+  end
+
   private
 
   def either_user_or_guest_present

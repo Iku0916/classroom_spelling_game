@@ -36,6 +36,12 @@ export default class extends Controller {
     }, 1000)
   }
 
+  confirmFinish() {
+    if (confirm("ゲームを終了しますか？")) {
+      this.callFinish()
+    }
+  }
+
   setupActionCable() {
     this.channel = createConsumer().subscriptions.create(
       { channel: "GameChannel", game_room_id: this.gameRoomIdValue },

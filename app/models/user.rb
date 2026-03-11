@@ -28,6 +28,15 @@ class User < ApplicationRecord
     { hours: h, minutes: m }
   end
 
+  def record_learning_result(score, minutes, word_kit_id)
+    increment!(:total_score, score.to_i)
+    learning_logs.create!(
+      score: score.to_i,
+      minutes: minutes,
+      word_kit_id: word_kit_id
+    )
+  end
+
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
   validates :password, length: { minimum: 8 }, if: -> { new_record? || changes[:crypted_password] }, unless: lambda {
