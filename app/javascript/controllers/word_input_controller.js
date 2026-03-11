@@ -12,7 +12,6 @@ export default class extends Controller {
 
   onInput(event, idx) {
     const input = event.target
-    // 入力したら次の入力欄に移動
     if (input.value.length >= 1 && idx < this.letterTargets.length - 1) {
       this.letterTargets[idx + 1].focus()
     }
@@ -21,12 +20,10 @@ export default class extends Controller {
   onBackspace(event, idx) {
     const input = event.target
     if (event.key === "Backspace" && idx > 0 && input.value === "") {
-      // 前の入力欄に戻る
       this.letterTargets[idx - 1].focus()
     }
   }
 
-  // もしsubmit時に文字列まとめて取得したい場合
   getAnswer() {
     return this.letterTargets.map(input => input.value).join("")
   }
