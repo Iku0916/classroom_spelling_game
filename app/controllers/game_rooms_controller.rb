@@ -4,51 +4,22 @@ class GameRoomsController < ApplicationController
   before_action :require_login, except: %i[join show waiting]
 
   def create
-    @game_room = GameRoom.new(
-      host_user: current_user,
-      game_code: SecureRandom.random_number(10**6).to_s.rjust(6, '0'),
-      status: :waiting,
-      time_limit: 300,
-      word_kit_id: params[:word_kit_id]
-    )
-    unless @game_room.valid?
-    end
+    @game_room = GameRoom.build_with_host(current_user, params[:word_kit_id])
 
     if @game_room.save
-      @game_room.participants.create!(
-        user_id: current_user&.id
-      )
+      @game_room.participants.create!(user_id: current_user&.id)
       redirect_to game_room_path(@game_room), notice: 'ゲームルームを作成しました'
     else
-      flash[:alert] = 'ゲームルームの作成に失敗しました'
-      redirect_to word_kits_path
+      redirect_to word_kits_path, alert: 'ゲームルームの作成に失敗しました'
     end
   end
 
   def join
     @game_room = GameRoom.find(params[:id])
-
-    participant = @game_room.participants.build(
-      user_id: current_user&.id,
-      guest_id: current_guest&.id,
-      nickname: params[:nickname] || current_user&.name || 'ゲスト',
-      is_ready: false
-    )
+    participant = @game_room.participants.build(participant_params)
 
     if participant.save
-
-      ActionCable.server.broadcast(
-        "game_room_#{@game_room.id}",
-        {
-          type: 'participant_joined',
-          participant: {
-            id: participant.id,
-            nickname: participant.nickname,
-            is_ready: participant.is_ready
-          },
-          participants_count: @game_room.participants.count
-        }
-      )
+      @game_room.broadcast_participant_joined(participant)
       redirect_to waiting_game_room_path(@game_room), notice: '参加しました!'
     else
       redirect_to game_room_path(@game_room), alert: '参加に失敗しました'
@@ -71,30 +42,16 @@ class GameRoomsController < ApplicationController
   def start
     @game_room = GameRoom.find(params[:id])
 
-    if request.patch? || request.post?
-
-      time_limit_in_minutes = params[:time_limit].to_i
-      time_limit_in_seconds = time_limit_in_minutes * 60
-      @game_room.update(status: 'playing', time_limit: time_limit_in_seconds, started_at: Time.current)
-
-      if @game_room.participants.where(is_ready: true).exists?
-        @game_room.word_kit
-
-        ActionCable.server.broadcast(
-          "game_channel_#{@game_room.id}",
-          {
-            type: 'game_start',
-            message: 'ゲームが始まりました',
-            redirect_url: game_room_game_play_path(@game_room)
-          }
-        )
-        redirect_to start_game_room_path(@game_room), status: :see_other
-      else
-        redirect_to game_room_path(@game_room), alert: '準備完了の参加者がいません'
-      end
-
-    elsif request.get?
+    if request.get?
       @questions = @game_room.word_kit.word_cards
+      return
+    end
+
+    if @game_room.ready_participants?
+      @game_room.start_game!(params[:time_limit])
+      redirect_to start_game_room_path(@game_room), status: :see_other
+    else
+      redirect_to game_room_path(@game_room), alert: '準備完了の参加者がいません'
     end
   end
 
@@ -112,36 +69,7 @@ class GameRoomsController < ApplicationController
 
   def finish
     @game_room = GameRoom.find(params[:id])
-    return unless @game_room.playing?
-
-    @game_room.update!(
-      status: :finished,
-      finished_at: Time.current
-    )
-
-    if @game_room.started_at.present?
-      duration = @game_room.finished_at - @game_room.started_at
-      minutes = (duration / 60).to_i
-    else
-      minutes = 0
-    end
-
-    @game_room.participants.each do |participant|
-      next unless participant.user_id.present?
-
-      user = User.find(participant.user_id)
-      user.increment!(:total_score, participant.score.to_i)
-
-      user.learning_logs.create!(
-        score: participant.score.to_i,
-        minutes: minutes
-      )
-    end
-
-    ActionCable.server.broadcast(
-      "game_channel_#{@game_room.id}",
-      { type: 'game_finished', message: 'ゲームが終了しました！' }
-    )
+    @game_room.finish_game!
 
     render json: { success: true }
   end
