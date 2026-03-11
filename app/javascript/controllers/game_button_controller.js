@@ -1,6 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="game-button"
 export default class extends Controller {
   connect() {const button = document.getElementById("button")
   console.log('button:', button);
