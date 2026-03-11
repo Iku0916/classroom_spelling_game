@@ -27,8 +27,7 @@ class GamePlaysController < ApplicationController
     @current_question = @questions.first
   end
 
-  def update
-  end
+  def update; end
 
   def answer
     @word_kit = @game_room.word_kit
@@ -74,17 +73,13 @@ class GamePlaysController < ApplicationController
   def update_score
     new_score = params[:score].to_i
 
-    if new_score > @participant.score
-      @participant.update(score: new_score)
-    end
+    @participant.update(score: new_score) if new_score > @participant.score
 
     render json: { success: true, score: @participant.score }
   end
 
   def finish
-    unless @game_room.playing?
-      return render json: { success: false, message: 'ゲームは既に終了しています' }, status: :unprocessable_entity
-    end
+    return render json: { success: false, message: 'ゲームは既に終了しています' }, status: :unprocessable_entity unless @game_room.playing?
 
     @game_room.update!(
       status: :finished,
@@ -154,17 +149,17 @@ class GamePlaysController < ApplicationController
       return
     end
 
-    unless @participant
-      respond_to do |format|
-        format.html { redirect_to root_path, alert: 'このゲームに参加していません' }
-        format.json { render json: { error: 'このゲームに参加していません' }, status: :forbidden }
-      end
-      return
+    return if @participant
+
+    respond_to do |format|
+      format.html { redirect_to root_path, alert: 'このゲームに参加していません' }
+      format.json { render json: { error: 'このゲームに参加していません' }, status: :forbidden }
     end
+    nil
   end
 
   def authorize_host
-    return if current_user && current_user == @game_room.host_user
+    return if current_user == @game_room.host_user
 
     respond_to do |format|
       format.html { redirect_to root_path, alert: 'ホストのみがこの操作を行えます' }
