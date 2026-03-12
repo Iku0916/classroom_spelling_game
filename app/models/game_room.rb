@@ -103,17 +103,23 @@ class GameRoom < ApplicationRecord
     broadcast_finish
   end
 
+  def process_results
+    minutes = calculate_duration_in_minutes
+    participants.each { |p| process_participant_result(p, minutes) }
+  end
+
   private
 
-  def process_results
-    minutes = ((finished_at - (started_at || finished_at)) / 60).to_i
+  def calculate_duration_in_minutes
+    ((finished_at - (started_at || finished_at)) / 60).to_i
+  end
 
-    participants.each do |p|
-      next unless p.user_id.present?
+  def process_participant_result(participant, minutes)
+    return unless participant.user_id.present?
 
-      p.user.increment!(:total_score, p.score.to_i)
-      p.user.learning_logs.create!(score: p.score.to_i, minutes: minutes)
-    end
+    user = participant.user
+    user.increment!(:total_score, participant.score.to_i)
+    user.learning_logs.create!(score: participant.score.to_i, minutes: minutes)
   end
 
   def broadcast_finish
