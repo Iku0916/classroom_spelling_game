@@ -20,11 +20,41 @@ class WordKit < ApplicationRecord
     self.tags = names.split(/[、,]/).map(&:strip).uniq.reject(&:empty?).map do |name|
       Tag.find_or_create_by(name: name)
     end
-
-    self.updated_at = Time.current
   end
 
   def tag_list
     tags.pluck(:name).join(', ')
+  end
+
+  def duplicate_for(user)
+    new_kit = dup
+    new_kit.assign_attributes(
+      name: "#{name} copy",
+      visibility: 'private_kit',
+      user: user
+    )
+
+    word_cards.each do |card|
+      new_kit.word_cards.build(
+        english_word: card.english_word,
+        japanese_translation: card.japanese_translation
+      )
+    end
+    new_kit
+  end
+
+  def changed_with_contents?
+    return true if changed?
+
+    return true if word_cards.any? { |c| c.new_record? || c.changed? || c.marked_for_destruction? }
+
+    false
+  end
+
+  def tags_changed?(new_tag_string)
+    current_tags = tags.pluck(:name).sort
+    new_tags = new_tag_string.to_s.split(/[、,]/).map(&:strip).reject(&:empty?).uniq.sort
+
+    current_tags != new_tags
   end
 end
