@@ -1,0 +1,16 @@
+ja:
+  activerecord:
+    models:
+      user: "ユーザー"
+    attributes:
+      user:
+        password: "パスワード"
+        password_confirmation: "パスワード確認"
+    errors:
+      models:
+        user:
+          attributes:
+            password:
+              too_short: "は8文字以上で入力してください"
+            password_confirmation:
+              blank: "を入力してください"

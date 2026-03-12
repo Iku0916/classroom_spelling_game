@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 class ParticipantsController < ApplicationController
-  def new; end
+  def new
+    @participant = Participant.new
+  end
 
   def create
-    @game_room = GameRoom.find_by(game_code: params[:game_code])
-    return redirect_to participants_path, alert: '無効なゲームコードです' unless @game_room
+    @game_room = find_game_room(params[:game_code])
+    return unless @game_room
 
     @participant = Participant.build_for_game(@game_room, params, current_user, session)
 
@@ -30,10 +32,6 @@ class ParticipantsController < ApplicationController
     redirect_to waiting_game_room_path(@game_room), notice: 'ゲームに参加しました'
   end
 
-  def handle_failed_join
-    redirect_to new_participant_path, alert: "参加に失敗しました: #{@participant.errors.full_messages.join(', ')}"
-  end
-
   def broadcast_join(participant)
     ActionCable.server.broadcast(
       "game_channel_#{participant.game_room_id}",
@@ -43,5 +41,20 @@ class ParticipantsController < ApplicationController
         participants_count: participant.game_room.participants.count
       }
     )
+  end
+
+  def find_game_room(code)
+    room = GameRoom.find_by(game_code: code)
+    return room if room
+
+    flash.now[:alert] = '無効なゲームコードです'
+    @participant = Participant.new
+    render :new, status: :unprocessable_entity
+    nil
+  end
+
+  def handle_failed_join
+    flash.now[:alert] = '参加に失敗しました'
+    render :new, status: :unprocessable_entity
   end
 end

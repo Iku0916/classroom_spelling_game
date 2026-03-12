@@ -5,8 +5,9 @@
 
   <div class="edit-card-body">
 
-    <%= form_with url: participants_path, method: :post, local: true, class: "setup-form" do |f| %>
-      
+    <%= form_with url: participants_path, method: :post, local: true, novalidate: true, class: "setup-form" do |f| %>
+      <%= render 'shared/error_messages', object: @participant %>
+
       <div class="input-group">
         <label class="edit-section-title">ゲームコード</label>
         <%= f.text_field :game_code, 
@@ -18,7 +19,6 @@
       <div class="input-group" style="margin-top: 30px;">
         <label class="edit-section-title">ニックネーム</label>
         <%= f.text_field :nickname, 
-            required: true, 
             value: current_user ? current_user.name : "", 
             class: "input-field", 
             placeholder: "名前を入力してね" %>

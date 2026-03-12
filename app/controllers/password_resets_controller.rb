@@ -39,7 +39,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def handle_update_failure
-    flash.now[:danger] = 'パスワード変更を失敗しました。'
+    flash.now[:alert] = 'パスワード変更を失敗しました。'
     render :edit, status: :unprocessable_entity
   end
 end

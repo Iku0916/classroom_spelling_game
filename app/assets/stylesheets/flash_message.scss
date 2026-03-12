@@ -44,6 +44,41 @@
   text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
 }
 
+.field_with_errors {
+  display: contents;
+
+  input, textarea, select {
+    border: 2px solid #ff4d4d !important;
+    background-color: #fff0f0;
+  }
+}
+
+.alert {
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-weight: bold;
+}
+
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  border-radius: 30px;
+}
+
+.alert-danger ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.alert-danger li {
+  margin-bottom: 5px;
+}
+
 @keyframes bounceIn {
   0% { transform: scale(0.5); opacity: 0; }
   70% { transform: scale(1.1); }
@@ -71,5 +106,12 @@
     margin-bottom: 10px !important;
     padding: 12px 20px !important;
     font-size: 0.9rem !important;
+  }
+
+  .alert-danger {
+    font-size: 0.60rem !important;
+    padding: 15px !important;
+    width: 100% !important;
+    min-width: unset !important;
   }
 }
