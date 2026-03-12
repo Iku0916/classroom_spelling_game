@@ -2,6 +2,7 @@
 
 class WordKitsController < ApplicationController
   before_action :require_login
+  before_action :set_word_kit, only: %i[destroy show edit update]
 
   def index
     @word_kits = current_user.word_kits.left_outer_joins(:tags)
@@ -64,16 +65,11 @@ class WordKitsController < ApplicationController
   end
 
   def update
-    @word_kit = current_user.word_kits.find(params[:id])
-
+    tags_modified = @word_kit.tags_changed?(params[:word_kit][:tag_list])
     @word_kit.assign_attributes(word_kit_params)
 
-    has_changes = @word_kit.changed? || @word_kit.word_cards.any? { |c| c.changed? || c.marked_for_destruction? }
+    return redirect_to word_kits_path, notice: '変更はありませんでした' unless tags_modified || @word_kit.changed_with_contents?
 
-    unless has_changes
-      redirect_to word_kits_path, notice: '変更はありませんでした'
-      return
-    end
     if @word_kit.save
       redirect_to word_kits_path, notice: '更新しました'
     else
@@ -83,24 +79,20 @@ class WordKitsController < ApplicationController
 
   def copy
     original = WordKit.find(params[:id])
+    @copied_kit = original.duplicate_for(current_user)
 
-    copied = original.dup
-    copied.name = "#{original.name} copy"
-    copied.visibility = 'private_kit'
-    copied.user = current_user
-    copied.save!
-
-    original.word_cards.each do |card|
-      copied.word_cards.create!(
-        english_word: card.english_word,
-        japanese_translation: card.japanese_translation
-      )
+    if @copied_kit.save
+      redirect_to word_kit_path(@copied_kit), notice: '複製しました！'
+    else
+      redirect_to word_kits_path, alert: '複製に失敗しました'
     end
-
-    redirect_to word_kit_path(copied), notice: '複製しました！'
   end
 
   private
+
+  def set_word_kit
+    @word_kit = current_user.word_kits.find(params[:id])
+  end
 
   def word_kit_params
     params.require(:word_kit).permit(
