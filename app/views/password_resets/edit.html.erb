@@ -9,6 +9,7 @@
                   method: :patch,
                   data: { turbo: false },
                   class: "auth-form" do |f| %>
+    <%= render 'shared/error_messages', object: @user %>
 
       <div class="input-group">
         <%= f.label :email, "メールアドレス" %>
@@ -16,7 +17,7 @@
       </div>
 
       <div class="input-group">
-        <%= f.label :password, "新しいパスワード" %>
+        <%= f.label :password, "新しいパスワード(8文字以上)" %>
         <%= f.password_field :password, placeholder: "••••••••" %>
       </div>
 
