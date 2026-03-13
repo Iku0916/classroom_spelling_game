@@ -11,7 +11,7 @@
       <div class="input-group">
         <label class="edit-section-title">ゲームコード</label>
         <%= f.text_field :game_code, 
-            class: "input-field game-code-input", 
+            class: "input-field game-code-input #{'error-border' if @error_occurred}", 
             placeholder: "000000", 
             maxlength: 6 %>
       </div>
