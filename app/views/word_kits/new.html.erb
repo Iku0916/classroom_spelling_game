@@ -3,6 +3,8 @@
 <div class="edit-page-container">
   <h1 class="word-kit-index">新規キット作成</h1>
 
+  <%= render 'shared/word_kit_errors', object: @word_kit %>
+
   <div class="edit-card-body" data-controller="nested-cards">
     <%= form_with model: @word_kit, local: true do |f| %>
 
