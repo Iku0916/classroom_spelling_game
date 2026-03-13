@@ -13,3 +13,8 @@ Layout/LineLength:
 
 Metrics/MethodLength:
   Max: 20
+
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'vendor/**/*'
