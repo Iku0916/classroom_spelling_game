@@ -4,13 +4,16 @@ ja:
       user: "ユーザー"
     attributes:
       user:
+        name: "ニックネーム"
+        email: "メールアドレス"
         password: "パスワード"
         password_confirmation: "パスワード確認"
     errors:
+      messages:
+        blank: "を入力してください"
+        too_short: "は%{count}文字以上で入力してください"
       models:
         user:
           attributes:
-            password:
-              too_short: "は8文字以上で入力してください"
-            password_confirmation:
-              blank: "を入力してください"
+            name:
+              blank: "は%{attribute}を入力してください"

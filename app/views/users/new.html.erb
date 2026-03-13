@@ -4,6 +4,8 @@
   <div class="auth-card">
     <h1 class="auth-title">新規登録</h1>
 
+    <%= render 'shared/error_messages', object: @user %>
+
     <div class="social-login">
       <%= link_to auth_at_provider_path(:google), class: "gsi-material-button" do %>
         <div class="gsi-material-button-state"></div>
