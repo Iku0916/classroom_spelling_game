@@ -4,6 +4,10 @@
   <div class="auth-card">
     <h1 class="auth-title">ログイン</h1>
 
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <% end %>
+
     <div class="social-login">
       <%= link_to auth_at_provider_path(:google), class: "gsi-material-button" do %>
         <div class="gsi-material-button-state"></div>
@@ -29,12 +33,12 @@
 
       <div class="input-group">
         <%= f.label :email, "メールアドレス" %>
-        <%= f.email_field :email, placeholder: "example@vocano.com" %>
+        <%= f.email_field :email, value: params[:email], placeholder: "example@vocano.com", class: ("is-invalid" if flash.now[:alert]) %>
       </div>
 
       <div class="input-group">
         <%= f.label :password, "パスワード" %>
-        <%= f.password_field :password, placeholder: "••••••••" %>
+        <%= f.password_field :password, placeholder: "••••••••", class: ("is-invalid" if flash.now[:alert]) %>
       </div>
 
       <div class="auth-actions">
