@@ -48,6 +48,7 @@ class ParticipantsController < ApplicationController
     return room if room
 
     flash.now[:alert] = '無効なゲームコードです'
+    @error_occurred = true
     @participant = Participant.new
     render :new, status: :unprocessable_entity
     nil
