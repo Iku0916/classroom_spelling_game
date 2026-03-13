@@ -8,6 +8,11 @@ ja:
         email: "メールアドレス"
         password: "パスワード"
         password_confirmation: "パスワード確認"
+      word_kit:
+        name: ""
+      word_card:
+        english_word: ""
+        japanese_translation: ""
     errors:
       messages:
         blank: "を入力してください"
