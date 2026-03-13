@@ -8,6 +8,12 @@ class FavoritesController < ApplicationController
                           .favorites
                           .includes(:word_kit)
                           .map(&:word_kit)
+
+    return unless params[:keyword].present?
+
+    @favorite_word_kits = @favorite_word_kits.select do |kit|
+      kit.name.include?(params[:keyword])
+    end
   end
 
   def create

@@ -2,6 +2,10 @@
 
 <h1 class="community-title">お気に入りキット</h1>
 
+<div class="search-container" style="text-align: center; margin-bottom: 20px;">
+  <%= render 'word_kits/search_form', url: favorites_path %>
+</div>
+
 <% if @favorite_word_kits.any? %>
   <div class="community-container">
     <div class="community-grid">
