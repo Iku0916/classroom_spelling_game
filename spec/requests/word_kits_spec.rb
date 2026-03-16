@@ -75,4 +75,25 @@ RSpec.describe 'WordKits', type: :request do
       expect(response).to redirect_to(word_kits_path)
     end
   end
+
+  describe 'アクセス制御' do
+    let(:me) { User.create!(name: '自分', email: 'me@example.com', password: 'password', password_confirmation: 'password') }
+    let(:other_user) { User.create!(name: '他人', email: 'other@example.com', password: 'password', password_confirmation: 'password') }
+    let(:private_kit) { other_user.word_kits.create!(name: 'ひみつ', visibility: 'private_kit') }
+
+    # 1. ログインしていない場合
+    it '未ログイン状態で他人のキットにアクセスすると、一覧画面へリダイレクトされること' do
+      get word_kit_path(private_kit)
+      
+      expect(response).to redirect_to(word_kits_path)
+    end
+
+    it 'ログインしていても他人のキットにはアクセスできず、一覧へ戻されること' do
+      post login_path, params: { email: me.email, password: 'password' }
+
+      get word_kit_path(private_kit)
+
+      expect(response).to redirect_to(word_kits_path)
+    end
+  end
 end
