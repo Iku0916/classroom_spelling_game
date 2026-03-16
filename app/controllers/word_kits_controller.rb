@@ -91,7 +91,11 @@ class WordKitsController < ApplicationController
   private
 
   def set_word_kit
-    @word_kit = current_user.word_kits.find(params[:id])
+    @word_kit = WordKit.find(params[:id])
+
+    unless @word_kit.user == current_user
+      redirect_to word_kits_path, alert: '他人のキットにはアクセスできません'
+    end
   end
 
   def word_kit_params

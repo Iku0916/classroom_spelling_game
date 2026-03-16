@@ -61,4 +61,26 @@ RSpec.describe WordKit, type: :model do
       expect(word_kit.tag_list).to eq('Ruby, Rails')
     end
   end
+
+  describe '#changed_with_contents?' do
+    it '何も変更していないときは false を返すこと' do
+      expect(word_kit.changed_with_contents?).to be false
+    end
+
+    it '名前を変更したときは true を返すこと' do
+      word_kit.name = '名前変更'
+      expect(word_kit.changed_with_contents?).to be true
+    end
+
+    it '新しい単語カードを追加したときは true を返すこと' do
+      word_kit.word_cards.build(english_word: 'cat', japanese_translation: '猫')
+      expect(word_kit.changed_with_contents?).to be true
+    end
+
+    it '登録済みの単語カードを更新したときは true を返すこと' do
+      card = word_kit.word_cards.create!(english_word: 'dog', japanese_translation: '犬')
+      card.english_word = 'puppy'
+      expect(word_kit.changed_with_contents?).to be true
+    end
+  end
 end
