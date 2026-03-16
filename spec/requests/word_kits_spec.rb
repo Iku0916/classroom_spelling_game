@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'WordKits', type: :request do
   let(:user) { User.create!(name: 'イクちゃん', email: 'test@example.com', password: 'password', password_confirmation: 'password') }
+  let(:other_user) { User.create!(name: '他人', email: 'other@example.com', password: 'password', password_confirmation: 'password') }
 
   before do
     post login_path, params: { email: user.email, password: 'password' }
@@ -77,23 +78,19 @@ RSpec.describe 'WordKits', type: :request do
   end
 
   describe 'アクセス制御' do
-    let(:me) { User.create!(name: '自分', email: 'me@example.com', password: 'password', password_confirmation: 'password') }
     let(:other_user) { User.create!(name: '他人', email: 'other@example.com', password: 'password', password_confirmation: 'password') }
     let(:private_kit) { other_user.word_kits.create!(name: 'ひみつ', visibility: 'private_kit') }
 
-    # 1. ログインしていない場合
-    it '未ログイン状態で他人のキットにアクセスすると、一覧画面へリダイレクトされること' do
+    it '未ログイン状態で他人のキットにアクセスすると、404が返ること' do
       get word_kit_path(private_kit)
       
-      expect(response).to redirect_to(word_kits_path)
+      expect(response).to have_http_status(:not_found)
     end
 
-    it 'ログインしていても他人のキットにはアクセスできず、一覧へ戻されること' do
-      post login_path, params: { email: me.email, password: 'password' }
-
+    it 'ログインしていても他人のキットにはアクセスできず、404が返ること' do
       get word_kit_path(private_kit)
 
-      expect(response).to redirect_to(word_kits_path)
+      expect(response).to have_http_status(:not_found)
     end
   end
 end
