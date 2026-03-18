@@ -25,6 +25,8 @@ class PasswordResetsController < ApplicationController
     @user = User.load_from_reset_password_token(@token)
     return not_authenticated if @user.blank?
 
+    @user.password_confirmation = user_params[:password_confirmation]
+
     if @user.change_password(user_params[:password])
       redirect_to login_path, notice: 'パスワードを変更しました。'
     else
