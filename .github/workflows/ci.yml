@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: postgres:15
+        env:
+          POSTGRES_USER: ikku
+          POSTGRES_PASSWORD: ikku193
+          POSTGRES_DB: app_test
+        ports:
+          - 5432:5432
+        options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: postgresql://ikku:ikku193@localhost:5432/app_test
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Rubyのセットアップ
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      - name: データベースのセットアップ
+        run: bundle exec rails db:schema:load
+
+      - name: RuboCopの実行
+        run: bundle exec rubocop
+
+      - name: RSpecの実行
+        run: bundle exec rspec
