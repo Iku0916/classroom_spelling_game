@@ -1,196 +1,190 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
-RSpec.describe GameRoom, type: :model do
-  let(:host_user) do
-    User.create!(name: 'ホスト', email: 'host@example.com', password: 'password', password_confirmation: 'password')
+RSpec.describe 'GameRooms', type: :request do
+  let(:user) do
+    User.create!(name: 'イクちゃん', email: 'test@example.com', password: 'password', password_confirmation: 'password')
   end
 
-  let(:player_user) do
-    User.create!(name: 'プレイヤー', email: 'player@example.com', password: 'password', password_confirmation: 'password')
-  end
-
-  let(:word_kit) { WordKit.create!(name: 'テストキット', user: host_user) }
+  let(:word_kit) { WordKit.create!(name: 'テストキット', user: user) }
 
   let(:game_room) do
     GameRoom.create!(
       word_kit: word_kit,
-      host_user: host_user,
+      host_user: user,
       status: :waiting,
       game_code: SecureRandom.random_number(10**6).to_s.rjust(6, '0'),
       time_limit: 300
     )
   end
 
-  let(:participant) do
-    Participant.create!(
-      game_room: game_room,
-      user: player_user,
-      nickname: 'プレイヤー',
-      score: 10,
-      is_ready: true
-    )
-  end
+  before { post login_path, params: { email: user.email, password: 'password' } }
 
-  describe 'バリデーション' do
-    it '有効なゲームルームであること' do
-      expect(game_room).to be_valid
-    end
-
-    it 'game_codeが重複していると無効であること' do
-      duplicate = GameRoom.new(
-        word_kit: word_kit,
-        host_user: host_user,
-        status: :waiting,
-        game_code: game_room.game_code,
-        time_limit: 300
-      )
-      expect(duplicate).not_to be_valid
-    end
-
-    it 'time_limitが60未満だと無効であること' do
-      game_room.time_limit = 59
-      expect(game_room).not_to be_valid
-    end
-
-    it 'time_limitが3600超だと無効であること' do
-      game_room.time_limit = 3601
-      expect(game_room).not_to be_valid
-    end
-  end
-
-  describe '.build_with_host' do
-    it 'ホストユーザーが設定されること' do
-      room = GameRoom.build_with_host(host_user, word_kit.id)
-      expect(room.host_user).to eq(host_user)
-    end
-
-    it 'statusがwaitingであること' do
-      room = GameRoom.build_with_host(host_user, word_kit.id)
-      expect(room.status).to eq('waiting')
-    end
-
-    it 'game_codeが6桁であること' do
-      room = GameRoom.build_with_host(host_user, word_kit.id)
-      expect(room.game_code.length).to eq(6)
-    end
-  end
-
-  describe '#find_participant' do
-    context 'ユーザーで検索するとき' do
-      it '対応する参加者を返すこと' do
-        participant
-        expect(game_room.find_participant(player_user, nil)).to eq(participant)
+  describe 'POST #create' do
+    context '有効なword_kit_idのとき' do
+      it 'GameRoomが作成されること' do
+        expect {
+          post game_rooms_path, params: { word_kit_id: word_kit.id }
+        }.to change(GameRoom, :count).by(1)
       end
 
-      it '存在しないユーザーの場合はnilを返すこと' do
-        other_user = User.create!(name: '他人', email: 'other@example.com', password: 'password', password_confirmation: 'password')
-        expect(game_room.find_participant(other_user, nil)).to be_nil
+      it 'game_room_pathにリダイレクトされること' do
+        post game_rooms_path, params: { word_kit_id: word_kit.id }
+        expect(response).to redirect_to(game_room_path(GameRoom.last))
+      end
+
+      it '「ゲームルームを作成しました」と表示されること' do
+        post game_rooms_path, params: { word_kit_id: word_kit.id }
+        expect(flash[:notice]).to eq('ゲームルームを作成しました')
+      end
+
+      it 'ホストがParticipantとして登録されること' do
+        expect {
+          post game_rooms_path, params: { word_kit_id: word_kit.id }
+        }.to change(Participant, :count).by(1)
       end
     end
 
-    context 'ゲストで検索するとき' do
-      it '対応する参加者を返すこと' do
-        guest = Guest.create!(session_token: SecureRandom.urlsafe_base64)
-        guest_participant = Participant.create!(
-          game_room: game_room,
-          guest: guest,
-          nickname: 'ゲスト',
-          score: 0,
-          is_ready: true
-        )
-        expect(game_room.find_participant(nil, guest)).to eq(guest_participant)
+    context '無効なword_kit_idのとき' do
+      it 'GameRoomが作成されないこと' do
+        expect {
+          post game_rooms_path, params: { word_kit_id: 99999 }
+        }.not_to change(GameRoom, :count)
+      end
+
+      it 'word_kits_pathにリダイレクトされること' do
+        post game_rooms_path, params: { word_kit_id: 99999 }
+        expect(response).to redirect_to(word_kits_path)
+      end
+
+      it '「ゲームルームの作成に失敗しました」と表示されること' do
+        post game_rooms_path, params: { word_kit_id: 99999 }
+        expect(flash[:alert]).to eq('ゲームルームの作成に失敗しました')
       end
     end
   end
 
-  describe '#ranking' do
-    it 'スコアの高い順に返すこと' do
-      p1 = Participant.create!(game_room: game_room, user: player_user, nickname: 'P1', score: 10, is_ready: true)
-      other_user = User.create!(name: '他', email: 'other@example.com', password: 'password', password_confirmation: 'password')
-      p2 = Participant.create!(game_room: game_room, user: other_user, nickname: 'P2', score: 5, is_ready: true)
-      expect(game_room.ranking.to_a).to eq([p1, p2])
+  describe 'GET #show' do
+    it '200 OKを返すこと' do
+      get game_room_path(game_room)
+      expect(response).to have_http_status(:ok)
     end
   end
 
-  describe '#top_players' do
-    it '指定した人数だけ返すこと' do
-      3.times do |i|
-        u = User.create!(name: "ユーザー#{i}", email: "user#{i}@example.com", password: 'password', password_confirmation: 'password')
-        Participant.create!(game_room: game_room, user: u, nickname: "P#{i}", score: i, is_ready: true)
-      end
-      expect(game_room.top_players(2).count).to eq(2)
+  describe 'GET #waiting' do
+    it '200 OKを返すこと' do
+      get waiting_game_room_path(game_room)
+      expect(response).to have_http_status(:ok)
     end
   end
 
-  describe '#ready_participants?' do
+  describe 'GET #start' do
+    it '200 OKを返すこと' do
+      get start_game_room_path(game_room)
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
+  describe 'PATCH #start' do
     context '準備完了の参加者がいるとき' do
-      it 'trueを返すこと' do
-        participant
-        expect(game_room.ready_participants?).to be true
+      before do
+        Participant.create!(game_room: game_room, user: user, nickname: 'ホスト', score: 0, is_ready: true)
+      end
+
+      it 'ゲームが開始されること' do
+        patch start_game_room_path(game_room), params: { time_limit: 5 }
+        expect(game_room.reload.status).to eq('playing')
+      end
+
+      it 'start_game_room_pathにリダイレクトされること' do
+        patch start_game_room_path(game_room), params: { time_limit: 5 }
+        expect(response).to redirect_to(start_game_room_path(game_room))
       end
     end
 
     context '準備完了の参加者がいないとき' do
-      it 'falseを返すこと' do
-        Participant.create!(game_room: game_room, user: player_user, nickname: 'P', score: 0, is_ready: false)
-        expect(game_room.ready_participants?).to be false
+      before do
+        Participant.create!(game_room: game_room, user: user, nickname: 'ホスト', score: 0, is_ready: false)
+      end
+
+      it 'game_room_pathにリダイレクトされること' do
+        patch start_game_room_path(game_room), params: { time_limit: 5 }
+        expect(response).to redirect_to(game_room_path(game_room))
+      end
+
+      it '「準備完了の参加者がいません」と表示されること' do
+        patch start_game_room_path(game_room), params: { time_limit: 5 }
+        expect(flash[:alert]).to eq('準備完了の参加者がいません')
       end
     end
   end
 
-  describe '#start_game!' do
-    it 'statusがplayingになること' do
-      game_room.start_game!(5)
-      expect(game_room.reload.status).to eq('playing')
+  describe 'POST #join' do
+    context '有効なパラメータのとき' do
+      it 'Participantが作成されること' do
+        expect {
+          post join_game_room_path(game_room), params: { participant: { nickname: '参加者', user_id: user.id } }
+        }.to change(Participant, :count).by(1)
+      end
+
+      it 'waiting_game_room_pathにリダイレクトされること' do
+        post join_game_room_path(game_room), params: { participant: { nickname: '参加者', user_id: user.id } }
+        expect(response).to redirect_to(waiting_game_room_path(game_room))
+      end
     end
 
-    it 'time_limitが分から秒に変換されること' do
-      game_room.start_game!(5)
-      expect(game_room.reload.time_limit).to eq(300)
-    end
-
-    it 'started_atが設定されること' do
-      game_room.start_game!(5)
-      expect(game_room.reload.started_at).not_to be_nil
+    context '無効なパラメータのとき' do
+      it 'game_room_pathにリダイレクトされること' do
+        post join_game_room_path(game_room), params: { participant: { nickname: '' } }
+        expect(response).to redirect_to(game_room_path(game_room))
+      end
     end
   end
 
-  describe '#finish_game!' do
+  describe 'PATCH #update' do
+    it 'time_limitが更新されること' do
+      patch game_room_path(game_room), params: { game_room: { time_limit: 600 } }
+      expect(game_room.reload.time_limit).to eq(600)
+    end
+
+    it 'game_room_pathにリダイレクトされること' do
+      patch game_room_path(game_room), params: { game_room: { time_limit: 600 } }
+      expect(response).to redirect_to(game_room_path(game_room))
+    end
+  end
+
+  describe 'DELETE #finish' do
     context 'ゲームがplayingのとき' do
       before { game_room.update!(status: :playing, started_at: Time.current) }
 
-      it 'statusがfinishedになること' do
-        game_room.finish_game!
+      it 'ゲームがfinishedになること' do
+        delete finish_game_room_path(game_room)
         expect(game_room.reload.status).to eq('finished')
       end
 
-      it 'finished_atが設定されること' do
-        game_room.finish_game!
-        expect(game_room.reload.finished_at).not_to be_nil
-      end
-    end
-
-    context 'ゲームがplayingでないとき' do
-      it 'statusが変わらないこと' do
-        game_room.finish_game!
-        expect(game_room.reload.status).to eq('waiting')
+      it 'success: trueを返すこと' do
+        delete finish_game_room_path(game_room)
+        json = JSON.parse(response.body)
+        expect(json['success']).to be true
       end
     end
   end
 
-  describe '#complete_game!' do
-    before { game_room.update!(status: :playing, started_at: Time.current) }
+  describe '未ログイン時のアクセス制御' do
+    before { delete logout_path }
 
-    it 'statusがfinishedになること' do
-      game_room.complete_game!
-      expect(game_room.reload.status).to eq('finished')
+    it 'createにアクセスするとlogin_pathにリダイレクトされること' do
+      post game_rooms_path, params: { word_kit_id: word_kit.id }
+      expect(response).to redirect_to(login_path)
     end
 
-    it 'finished_atが設定されること' do
-      game_room.complete_game!
-      expect(game_room.reload.finished_at).not_to be_nil
+    it 'showには未ログインでもアクセスできること' do
+      get game_room_path(game_room)
+      expect(response).to have_http_status(:ok)
+    end
+
+    it 'waitingには未ログインでもアクセスできること' do
+      get waiting_game_room_path(game_room)
+      expect(response).to have_http_status(:ok)
     end
   end
 end
