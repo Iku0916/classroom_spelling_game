@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["question", "wordInputContainer", "timer", "score", "feedback"]
+  static targets = ["question", "wordInputContainer", "timer", "score", "feedback", "progressBar", "progressBarFill"]
   static values = { 
     questions: Array, 
     timeLimit: Number,
@@ -114,10 +114,25 @@ export default class extends Controller {
       
       this.isLocked = true
 
+      if (this.hasProgressBarTarget) {
+        this.progressBarTarget.style.display = "block"
+        this.progressBarFillTarget.style.width = "100%"
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            this.progressBarFillTarget.style.width = "0%"
+          })
+        })
+      }
+
       setTimeout(() => {
         this.index = (this.index + 1) % this.questionsValue.length
         this.showQuestion()
         this.isLocked = false
+
+        if (this.hasProgressBarTarget) {
+          this.progressBarTarget.style.display = "none"
+          this.progressBarFillTarget.style.width = "100%"
+        }
       }, 3000)
     }
   }
