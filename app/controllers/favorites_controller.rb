@@ -40,6 +40,6 @@ class FavoritesController < ApplicationController
   private
 
   def set_word_kit
-    @word_kit = WordKit.find(params[:word_kit_id])
+    @word_kit = WordKit.find_by!(uuid: params[:word_kit_uuid])
   end
 end

@@ -31,7 +31,8 @@ class WordKit < ApplicationRecord
     new_kit.assign_attributes(
       name: "#{name} copy",
       visibility: 'private_kit',
-      user: user
+      user: user,
+      uuid: nil
     )
 
     word_cards.each do |card|
@@ -56,5 +57,9 @@ class WordKit < ApplicationRecord
     new_tags = new_tag_string.to_s.split(/[、,]/).map(&:strip).reject(&:empty?).uniq.sort
 
     current_tags != new_tags
+  end
+
+  def to_param
+    uuid
   end
 end
