@@ -16,6 +16,11 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#new'
   post 'signup', to: 'users#create'
   resources :favorites, only: [:index]
+  resources :learning_logs, only: [] do
+    collection do
+      post :answer
+    end
+  end
   resources :password_resets, only: %i[new create edit update]
   resource :onboarding, only: [:show] do
     post :complete
