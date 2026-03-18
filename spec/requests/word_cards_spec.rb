@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'WordCards', type: :request do
@@ -49,9 +51,9 @@ RSpec.describe 'WordCards', type: :request do
   describe 'DELETE #destroy' do
     it '単語カードが削除されること' do
       word_card
-      expect {
+      expect do
         delete word_kit_word_card_path(word_kit, word_card)
-      }.to change(WordCard, :count).by(-1)
+      end.to change(WordCard, :count).by(-1)
     end
 
     it 'edit_word_kit_pathにリダイレクトされること' do

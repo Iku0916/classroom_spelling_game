@@ -48,9 +48,9 @@ RSpec.describe 'Participants', type: :request do
 
       context '有効なゲームコードを入力したとき' do
         it 'Participantが作成されること' do
-          expect {
+          expect do
             post participants_path, params: { game_code: game_room.game_code, nickname: 'テスト参加者' }
-          }.to change(Participant, :count).by(1)
+          end.to change(Participant, :count).by(1)
         end
 
         it 'waitingページにリダイレクトされること' do
@@ -61,9 +61,9 @@ RSpec.describe 'Participants', type: :request do
 
       context '無効なゲームコードを入力したとき' do
         it 'Participantが作成されないこと' do
-          expect {
+          expect do
             post participants_path, params: { game_code: '999999', nickname: 'テスト参加者' }
-          }.not_to change(Participant, :count)
+          end.not_to change(Participant, :count)
         end
 
         it 'newテンプレートを再表示すること' do
@@ -81,15 +81,15 @@ RSpec.describe 'Participants', type: :request do
     context 'ゲストとして参加するとき' do
       context '有効なゲームコードを入力したとき' do
         it 'Participantが作成されること' do
-          expect {
+          expect do
             post participants_path, params: { game_code: game_room.game_code, nickname: 'ゲスト参加者' }
-          }.to change(Participant, :count).by(1)
+          end.to change(Participant, :count).by(1)
         end
 
         it 'Guestレコードが作成されること' do
-          expect {
+          expect do
             post participants_path, params: { game_code: game_room.game_code, nickname: 'ゲスト参加者' }
-          }.to change(Guest, :count).by(1)
+          end.to change(Guest, :count).by(1)
         end
 
         it 'waitingページにリダイレクトされること' do

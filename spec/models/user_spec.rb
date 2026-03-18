@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
@@ -11,7 +13,7 @@ RSpec.describe User, type: :model do
     it '名前がなければ無効であること' do
       user.name = nil
       user.valid?
-      expect(user.errors[:name]).to include("はニックネームを入力してください")
+      expect(user.errors[:name]).to include('はニックネームを入力してください')
     end
 
     it 'メールアドレスが重複していたら無効であること' do
@@ -41,9 +43,9 @@ RSpec.describe User, type: :model do
     let(:word_kit) { WordKit.create(name: 'テストキット', user: user) }
 
     it '学習結果を記録すると、total_scoreが加算されログが作られること' do
-      expect {
+      expect do
         user.record_learning_result(100, 30, word_kit.id)
-      }.to change(user, :total_score).by(100).and change(LearningLog, :count).by(1)
+      end.to change(user, :total_score).by(100).and change(LearningLog, :count).by(1)
     end
 
     it 'total_hours_and_minutesが正しい時間を返すこと' do

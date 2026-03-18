@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'SelfStudies', type: :request do
@@ -32,7 +34,7 @@ RSpec.describe 'SelfStudies', type: :request do
     end
 
     it '存在しないword_kitにアクセスすると word_kits_path にリダイレクトされること' do
-      get play_word_kit_self_study_path(word_kit_id: 99999)
+      get play_word_kit_self_study_path(word_kit_id: 99_999)
       expect(response).to redirect_to(word_kits_path)
     end
   end
@@ -66,24 +68,24 @@ RSpec.describe 'SelfStudies', type: :request do
   describe '学習ログの保存' do
     context '有効なパラメータのとき' do
       it 'LearningLogが作成されること' do
-        expect {
+        expect do
           patch word_kit_self_study_path(word_kit),
-               params: { learning_log: { score: 2, minutes: 5 } }
-        }.to change(LearningLog, :count).by(1)
+                params: { learning_log: { score: 2, minutes: 5 } }
+        end.to change(LearningLog, :count).by(1)
       end
 
       it 'success ステータスを返すこと' do
         patch word_kit_self_study_path(word_kit),
-             params: { learning_log: { score: 2, minutes: 5 } }
+              params: { learning_log: { score: 2, minutes: 5 } }
         json = JSON.parse(response.body)
         expect(json['status']).to eq('success')
       end
 
       it 'ユーザーのtotal_scoreが増えること' do
-        expect {
+        expect do
           patch word_kit_self_study_path(word_kit),
-               params: { learning_log: { score: 2, minutes: 5 } }
-        }.to change { user.reload.total_score }.by(2)
+                params: { learning_log: { score: 2, minutes: 5 } }
+        end.to change { user.reload.total_score }.by(2)
       end
     end
   end

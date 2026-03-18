@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'ユーザー', type: :request do
@@ -31,9 +33,9 @@ RSpec.describe 'ユーザー', type: :request do
       end
 
       it 'Userが作成されること' do
-        expect {
+        expect do
           post signup_path, params: valid_params
-        }.to change(User, :count).by(1)
+        end.to change(User, :count).by(1)
       end
 
       it 'ログインページにリダイレクトされること' do
@@ -49,9 +51,9 @@ RSpec.describe 'ユーザー', type: :request do
 
     context '無効なパラメータのとき' do
       it 'Userが作成されないこと' do
-        expect {
+        expect do
           post signup_path, params: { user: { name: '', email: '', password: 'password', password_confirmation: 'password' } }
-        }.not_to change(User, :count)
+        end.not_to change(User, :count)
       end
 
       it 'サインアップフォームを再表示すること' do

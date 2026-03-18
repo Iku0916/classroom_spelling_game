@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'WordKits', type: :request do
@@ -58,15 +60,15 @@ RSpec.describe 'WordKits', type: :request do
 
     context '有効なパラメータのとき' do
       it 'WordKitが作成されること' do
-        expect {
+        expect do
           post word_kits_path, params: valid_params
-        }.to change(WordKit, :count).by(1)
+        end.to change(WordKit, :count).by(1)
       end
 
       it 'WordCardも一緒に作成されること' do
-        expect {
+        expect do
           post word_kits_path, params: valid_params
-        }.to change(WordCard, :count).by(2)
+        end.to change(WordCard, :count).by(2)
       end
 
       it 'word_kits_pathにリダイレクトされること' do
@@ -77,9 +79,9 @@ RSpec.describe 'WordKits', type: :request do
 
     context '無効なパラメータのとき' do
       it 'WordKitが作成されないこと' do
-        expect {
+        expect do
           post word_kits_path, params: { word_kit: { name: '' } }
-        }.not_to change(WordKit, :count)
+        end.not_to change(WordKit, :count)
       end
 
       it 'newテンプレートを再表示すること' do
@@ -143,9 +145,9 @@ RSpec.describe 'WordKits', type: :request do
             }
           }
         }
-        expect {
+        expect do
           patch word_kit_path(word_kit), params: params
-        }.to change(WordCard, :count).by(-1)
+        end.to change(WordCard, :count).by(-1)
       end
     end
 
@@ -164,9 +166,9 @@ RSpec.describe 'WordKits', type: :request do
 
   describe 'DELETE #destroy' do
     it 'WordKitが削除されること' do
-      expect {
+      expect do
         delete word_kit_path(word_kit)
-      }.to change(WordKit, :count).by(-1)
+      end.to change(WordKit, :count).by(-1)
     end
 
     it 'word_kits_pathにリダイレクトされること' do
@@ -186,9 +188,9 @@ RSpec.describe 'WordKits', type: :request do
     end
 
     it '複製されたWordKitが作成されること' do
-      expect {
+      expect do
         post copy_word_kit_path(word_kit)
-      }.to change(WordKit, :count).by(1)
+      end.to change(WordKit, :count).by(1)
     end
 
     it '複製されたキットの名前に「copy」が含まれること' do

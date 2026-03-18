@@ -65,7 +65,7 @@ RSpec.describe 'GamePlays', type: :request do
       before { post login_path, params: { email: host_user.email, password: 'password' } }
 
       it 'root_pathにリダイレクトされること' do
-        get game_room_game_play_path(id: 99999, game_room_id: 99999)
+        get game_room_game_play_path(id: 99_999, game_room_id: 99_999)
         expect(response).to redirect_to(root_path)
       end
     end
@@ -103,7 +103,6 @@ RSpec.describe 'GamePlays', type: :request do
         expect(response).to have_http_status(:ok)
       end
     end
-
 
     context '参加者としてアクセスしたとき' do
       before do
