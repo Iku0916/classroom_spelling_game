@@ -89,6 +89,36 @@
           null
         ]
       },
+      "/app/app/channels/game_channel.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          2,
+          2,
+          2,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/app/app/channels/application_cable/channel.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          0,
+          null,
+          null,
+          null
+        ]
+      },
       "/app/app/models/learning_log.rb": {
         "lines": [
           null,
@@ -252,7 +282,7 @@
           1,
           null,
           1,
-          684,
+          690,
           null,
           null
         ]
@@ -1371,20 +1401,6 @@
           null
         ]
       },
-      "/app/app/channels/application_cable/channel.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {}
-      },
       "/app/app/channels/application_cable/connection.rb": {
         "lines": [
           null,
@@ -1411,24 +1427,6 @@
           null,
           0,
           0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {}
-      },
-      "/app/app/channels/game_channel.rb": {
-        "lines": [
-          null,
-          null,
           0,
           0,
           0,
@@ -1514,6 +1512,6 @@
         "branches": {}
       }
     },
-    "timestamp": 1773824249
+    "timestamp": 1773824703
   }
 }
