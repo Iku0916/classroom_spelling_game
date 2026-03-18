@@ -57,8 +57,7 @@ class WordKitsController < ApplicationController
     @current_question = @questions[@current_index]
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     tags_modified = @word_kit.tags_changed?(params[:word_kit][:tag_list])

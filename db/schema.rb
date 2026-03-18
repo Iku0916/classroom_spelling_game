@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,142 +12,142 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_03_18_103148) do
+ActiveRecord::Schema[7.1].define(version: 20_260_318_103_148) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "authentications", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.string "provider", null: false
-    t.string "uid", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["provider", "uid"], name: "index_authentications_on_provider_and_uid"
-    t.index ["user_id"], name: "index_authentications_on_user_id"
+  create_table 'authentications', force: :cascade do |t|
+    t.integer 'user_id', null: false
+    t.string 'provider', null: false
+    t.string 'uid', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index %w[provider uid], name: 'index_authentications_on_provider_and_uid'
+    t.index ['user_id'], name: 'index_authentications_on_user_id'
   end
 
-  create_table "favorites", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "word_kit_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id", "word_kit_id"], name: "index_favorites_on_user_id_and_word_kit_id", unique: true
-    t.index ["user_id"], name: "index_favorites_on_user_id"
-    t.index ["word_kit_id"], name: "index_favorites_on_word_kit_id"
+  create_table 'favorites', force: :cascade do |t|
+    t.bigint 'user_id', null: false
+    t.bigint 'word_kit_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index %w[user_id word_kit_id], name: 'index_favorites_on_user_id_and_word_kit_id', unique: true
+    t.index ['user_id'], name: 'index_favorites_on_user_id'
+    t.index ['word_kit_id'], name: 'index_favorites_on_word_kit_id'
   end
 
-  create_table "game_rooms", force: :cascade do |t|
-    t.string "game_code"
-    t.integer "status"
-    t.datetime "started_at"
-    t.datetime "finished_at"
-    t.integer "time_limit"
-    t.bigint "word_kit_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "host_user_id"
-    t.index ["host_user_id"], name: "index_game_rooms_on_host_user_id"
-    t.index ["word_kit_id"], name: "index_game_rooms_on_word_kit_id"
+  create_table 'game_rooms', force: :cascade do |t|
+    t.string 'game_code'
+    t.integer 'status'
+    t.datetime 'started_at'
+    t.datetime 'finished_at'
+    t.integer 'time_limit'
+    t.bigint 'word_kit_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.bigint 'host_user_id'
+    t.index ['host_user_id'], name: 'index_game_rooms_on_host_user_id'
+    t.index ['word_kit_id'], name: 'index_game_rooms_on_word_kit_id'
   end
 
-  create_table "guests", force: :cascade do |t|
-    t.string "session_token"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'guests', force: :cascade do |t|
+    t.string 'session_token'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  create_table "learning_logs", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.integer "score"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "minutes"
-    t.bigint "word_kit_id"
-    t.index ["user_id"], name: "index_learning_logs_on_user_id"
-    t.index ["word_kit_id"], name: "index_learning_logs_on_word_kit_id"
+  create_table 'learning_logs', force: :cascade do |t|
+    t.bigint 'user_id', null: false
+    t.integer 'score'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.integer 'minutes'
+    t.bigint 'word_kit_id'
+    t.index ['user_id'], name: 'index_learning_logs_on_user_id'
+    t.index ['word_kit_id'], name: 'index_learning_logs_on_word_kit_id'
   end
 
-  create_table "participants", force: :cascade do |t|
-    t.string "nickname", null: false
-    t.integer "score", default: 0
-    t.boolean "is_ready", default: false, null: false
-    t.bigint "game_room_id", null: false
-    t.bigint "guest_id"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["game_room_id"], name: "index_participants_on_game_room_id"
-    t.index ["guest_id"], name: "index_participants_on_guest_id"
-    t.index ["user_id"], name: "index_participants_on_user_id"
+  create_table 'participants', force: :cascade do |t|
+    t.string 'nickname', null: false
+    t.integer 'score', default: 0
+    t.boolean 'is_ready', default: false, null: false
+    t.bigint 'game_room_id', null: false
+    t.bigint 'guest_id'
+    t.bigint 'user_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['game_room_id'], name: 'index_participants_on_game_room_id'
+    t.index ['guest_id'], name: 'index_participants_on_guest_id'
+    t.index ['user_id'], name: 'index_participants_on_user_id'
   end
 
-  create_table "tags", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'tags', force: :cascade do |t|
+    t.string 'name'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "email", null: false
-    t.string "crypted_password"
-    t.string "salt"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "total_score"
-    t.boolean "onboarding_seen"
-    t.string "reset_password_token"
-    t.datetime "reset_password_token_expires_at"
-    t.datetime "reset_password_email_sent_at"
-    t.integer "access_count_to_reset_password_page", default: 0
-    t.string "remember_me_token"
-    t.datetime "remember_me_token_expires_at"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["remember_me_token"], name: "index_users_on_remember_me_token"
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  create_table 'users', force: :cascade do |t|
+    t.string 'name', null: false
+    t.string 'email', null: false
+    t.string 'crypted_password'
+    t.string 'salt'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.integer 'total_score'
+    t.boolean 'onboarding_seen'
+    t.string 'reset_password_token'
+    t.datetime 'reset_password_token_expires_at'
+    t.datetime 'reset_password_email_sent_at'
+    t.integer 'access_count_to_reset_password_page', default: 0
+    t.string 'remember_me_token'
+    t.datetime 'remember_me_token_expires_at'
+    t.index ['email'], name: 'index_users_on_email', unique: true
+    t.index ['remember_me_token'], name: 'index_users_on_remember_me_token'
+    t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
   end
 
-  create_table "word_cards", force: :cascade do |t|
-    t.string "english_word"
-    t.string "japanese_translation"
-    t.bigint "word_kit_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["word_kit_id"], name: "index_word_cards_on_word_kit_id"
+  create_table 'word_cards', force: :cascade do |t|
+    t.string 'english_word'
+    t.string 'japanese_translation'
+    t.bigint 'word_kit_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['word_kit_id'], name: 'index_word_cards_on_word_kit_id'
   end
 
-  create_table "word_kit_tags", force: :cascade do |t|
-    t.bigint "word_kit_id", null: false
-    t.bigint "tag_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["tag_id"], name: "index_word_kit_tags_on_tag_id"
-    t.index ["word_kit_id", "tag_id"], name: "index_word_kit_tags_on_word_kit_id_and_tag_id", unique: true
-    t.index ["word_kit_id"], name: "index_word_kit_tags_on_word_kit_id"
+  create_table 'word_kit_tags', force: :cascade do |t|
+    t.bigint 'word_kit_id', null: false
+    t.bigint 'tag_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['tag_id'], name: 'index_word_kit_tags_on_tag_id'
+    t.index %w[word_kit_id tag_id], name: 'index_word_kit_tags_on_word_kit_id_and_tag_id', unique: true
+    t.index ['word_kit_id'], name: 'index_word_kit_tags_on_word_kit_id'
   end
 
-  create_table "word_kits", force: :cascade do |t|
-    t.string "name"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "visibility", default: 0, null: false
-    t.string "uuid", default: -> { "gen_random_uuid()" }, null: false
-    t.index ["user_id"], name: "index_word_kits_on_user_id"
-    t.index ["uuid"], name: "index_word_kits_on_uuid", unique: true
+  create_table 'word_kits', force: :cascade do |t|
+    t.string 'name'
+    t.bigint 'user_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.integer 'visibility', default: 0, null: false
+    t.string 'uuid', default: -> { 'gen_random_uuid()' }, null: false
+    t.index ['user_id'], name: 'index_word_kits_on_user_id'
+    t.index ['uuid'], name: 'index_word_kits_on_uuid', unique: true
   end
 
-  add_foreign_key "favorites", "users"
-  add_foreign_key "favorites", "word_kits"
-  add_foreign_key "game_rooms", "users", column: "host_user_id"
-  add_foreign_key "game_rooms", "word_kits"
-  add_foreign_key "learning_logs", "users"
-  add_foreign_key "learning_logs", "word_kits"
-  add_foreign_key "participants", "game_rooms"
-  add_foreign_key "participants", "guests"
-  add_foreign_key "participants", "users"
-  add_foreign_key "word_cards", "word_kits"
-  add_foreign_key "word_kit_tags", "tags"
-  add_foreign_key "word_kit_tags", "word_kits"
-  add_foreign_key "word_kits", "users"
+  add_foreign_key 'favorites', 'users'
+  add_foreign_key 'favorites', 'word_kits'
+  add_foreign_key 'game_rooms', 'users', column: 'host_user_id'
+  add_foreign_key 'game_rooms', 'word_kits'
+  add_foreign_key 'learning_logs', 'users'
+  add_foreign_key 'learning_logs', 'word_kits'
+  add_foreign_key 'participants', 'game_rooms'
+  add_foreign_key 'participants', 'guests'
+  add_foreign_key 'participants', 'users'
+  add_foreign_key 'word_cards', 'word_kits'
+  add_foreign_key 'word_kit_tags', 'tags'
+  add_foreign_key 'word_kit_tags', 'word_kits'
+  add_foreign_key 'word_kits', 'users'
 end
