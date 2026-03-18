@@ -31,7 +31,7 @@ Rails.application.routes.draw do
       get :personal_result
     end
   end
-  resources :word_kits, only: %i[new create show index destroy edit update] do
+  resources :word_kits, only: %i[new create show index destroy edit update], param: :uuid do
     member do
       post :copy
     end

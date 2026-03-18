@@ -2,7 +2,7 @@
 
 class WordKitsController < ApplicationController
   before_action :require_login
-  before_action :set_word_kit, only: %i[destroy show edit update]
+  before_action :set_word_kit, only: %i[destroy show edit update copy]
 
   def index
     @word_kits = current_user.word_kits.left_outer_joins(:tags)
@@ -37,8 +37,6 @@ class WordKitsController < ApplicationController
   end
 
   def destroy
-    @word_kit = current_user.word_kits.find(params[:id])
-
     if @word_kit.destroy
       redirect_to word_kits_path, notice: 'ゲームキットを削除しました'
     else
@@ -47,7 +45,6 @@ class WordKitsController < ApplicationController
   end
 
   def show
-    @word_kit = current_user.word_kits.find(params[:id])
     @questions = @word_kit.word_cards
   end
 
@@ -61,7 +58,6 @@ class WordKitsController < ApplicationController
   end
 
   def edit
-    @word_kit = current_user.word_kits.find(params[:id])
   end
 
   def update
@@ -78,8 +74,7 @@ class WordKitsController < ApplicationController
   end
 
   def copy
-    original = WordKit.find(params[:id])
-    @copied_kit = original.duplicate_for(current_user)
+    @copied_kit = @word_kit.duplicate_for(current_user)
 
     if @copied_kit.save
       redirect_to word_kit_path(@copied_kit), notice: '複製しました！'
@@ -91,7 +86,7 @@ class WordKitsController < ApplicationController
   private
 
   def set_word_kit
-    @word_kit = current_user.word_kits.find(params[:id])
+    @word_kit = current_user.word_kits.find_by!(uuid: params[:uuid])
   end
 
   def word_kit_params

@@ -34,7 +34,7 @@ RSpec.describe 'SelfStudies', type: :request do
     end
 
     it '存在しないword_kitにアクセスすると word_kits_path にリダイレクトされること' do
-      get play_word_kit_self_study_path(word_kit_id: 99_999)
+      get play_word_kit_self_study_path(word_kit_uuid: 'invalid-uuid')
       expect(response).to redirect_to(word_kits_path)
     end
   end
