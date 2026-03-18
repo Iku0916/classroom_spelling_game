@@ -8,7 +8,7 @@ class Participant < ApplicationRecord
   validates :nickname, presence: true
   validate :either_user_or_guest_present
 
-  before_validation :set_default_nuckname, on: :create
+  before_validation :set_default_nickname, on: :create
 
   def player
     user || guest
@@ -63,7 +63,7 @@ class Participant < ApplicationRecord
     end
   end
 
-  def set_default_nuckname
+  def set_default_nickname
     return if nickname.present?
 
     self.nickname = if user
