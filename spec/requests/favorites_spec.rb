@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'お気に入り', type: :request do
@@ -50,16 +52,16 @@ RSpec.describe 'お気に入り', type: :request do
 
   describe 'お気に入り登録' do
     it 'お気に入りが作成されること' do
-      expect {
+      expect do
         post word_kit_favorite_path(word_kit)
-      }.to change(Favorite, :count).by(1)
+      end.to change(Favorite, :count).by(1)
     end
 
     it '同じキットを2回登録しても重複しないこと' do
       post word_kit_favorite_path(word_kit)
-      expect {
+      expect do
         post word_kit_favorite_path(word_kit)
-      }.not_to change(Favorite, :count)
+      end.not_to change(Favorite, :count)
     end
 
     it 'リダイレクトされること' do
@@ -72,9 +74,9 @@ RSpec.describe 'お気に入り', type: :request do
     before { user.favorites.create!(word_kit: word_kit) }
 
     it 'お気に入りが削除されること' do
-      expect {
+      expect do
         delete word_kit_favorite_path(word_kit)
-      }.to change(Favorite, :count).by(-1)
+      end.to change(Favorite, :count).by(-1)
     end
 
     it 'リダイレクトされること' do

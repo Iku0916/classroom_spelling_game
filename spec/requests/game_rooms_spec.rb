@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'GameRooms', type: :request do
@@ -22,9 +24,9 @@ RSpec.describe 'GameRooms', type: :request do
   describe 'POST #create' do
     context '有効なword_kit_idのとき' do
       it 'GameRoomが作成されること' do
-        expect {
+        expect do
           post game_rooms_path, params: { word_kit_id: word_kit.id }
-        }.to change(GameRoom, :count).by(1)
+        end.to change(GameRoom, :count).by(1)
       end
 
       it 'game_room_pathにリダイレクトされること' do
@@ -38,26 +40,26 @@ RSpec.describe 'GameRooms', type: :request do
       end
 
       it 'ホストがParticipantとして登録されること' do
-        expect {
+        expect do
           post game_rooms_path, params: { word_kit_id: word_kit.id }
-        }.to change(Participant, :count).by(1)
+        end.to change(Participant, :count).by(1)
       end
     end
 
     context '無効なword_kit_idのとき' do
       it 'GameRoomが作成されないこと' do
-        expect {
-          post game_rooms_path, params: { word_kit_id: 99999 }
-        }.not_to change(GameRoom, :count)
+        expect do
+          post game_rooms_path, params: { word_kit_id: 99_999 }
+        end.not_to change(GameRoom, :count)
       end
 
       it 'word_kits_pathにリダイレクトされること' do
-        post game_rooms_path, params: { word_kit_id: 99999 }
+        post game_rooms_path, params: { word_kit_id: 99_999 }
         expect(response).to redirect_to(word_kits_path)
       end
 
       it '「ゲームルームの作成に失敗しました」と表示されること' do
-        post game_rooms_path, params: { word_kit_id: 99999 }
+        post game_rooms_path, params: { word_kit_id: 99_999 }
         expect(flash[:alert]).to eq('ゲームルームの作成に失敗しました')
       end
     end
@@ -121,9 +123,9 @@ RSpec.describe 'GameRooms', type: :request do
   describe 'POST #join' do
     context '有効なパラメータのとき' do
       it 'Participantが作成されること' do
-        expect {
+        expect do
           post join_game_room_path(game_room), params: { participant: { nickname: '参加者', user_id: user.id } }
-        }.to change(Participant, :count).by(1)
+        end.to change(Participant, :count).by(1)
       end
 
       it 'waiting_game_room_pathにリダイレクトされること' do

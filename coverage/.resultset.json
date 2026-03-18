@@ -89,6 +89,45 @@
           null
         ]
       },
+      "/app/app/channels/application_cable/connection.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          5,
+          null,
+          null,
+          1,
+          null,
+          1,
+          5,
+          1,
+          null,
+          null,
+          null,
+          1,
+          4,
+          4,
+          null,
+          4,
+          2,
+          2,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          4,
+          null,
+          null,
+          null
+        ]
+      },
       "/app/app/channels/game_channel.rb": {
         "lines": [
           null,
@@ -113,7 +152,6 @@
           1,
           1,
           1,
-          0,
           null,
           null,
           null
@@ -282,7 +320,7 @@
           1,
           null,
           1,
-          690,
+          693,
           null,
           null
         ]
@@ -382,6 +420,26 @@
           6,
           null,
           6,
+          null,
+          null
+        ]
+      },
+      "/app/app/models/guest.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          13,
           null,
           null
         ]
@@ -517,26 +575,6 @@
           null,
           null,
           null,
-          null,
-          null
-        ]
-      },
-      "/app/app/models/guest.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          1,
-          9,
           null,
           null
         ]
@@ -1401,46 +1439,6 @@
           null
         ]
       },
-      "/app/app/channels/application_cable/connection.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {}
-      },
       "/app/app/controllers/oauths_controller.rb": {
         "lines": [
           null,
@@ -1512,6 +1510,6 @@
         "branches": {}
       }
     },
-    "timestamp": 1773824703
+    "timestamp": 1773825410
   }
 }

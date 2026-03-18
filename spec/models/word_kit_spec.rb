@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe WordKit, type: :model do
@@ -21,11 +23,11 @@ RSpec.describe WordKit, type: :model do
       kit = WordKit.create(name: '消えるキット', user: user)
       expect { kit.destroy }.to change(WordKit, :count).by(-1)
     end
-    
+
     it 'WordKitに紐付くWordCardも一緒に削除されること' do
       kit = WordKit.create(name: 'カード付きキット', user: user)
       kit.word_cards.create(english_word: 'test', japanese_translation: 'テスト')
-      
+
       expect { kit.destroy }.to change(WordCard, :count).by(-1)
     end
   end
@@ -50,14 +52,14 @@ RSpec.describe WordKit, type: :model do
     it 'tag_list= でカンマ区切りのタグを保存できること' do
       word_kit.tag_list = 'Ruby, Rails, RSpec'
       word_kit.save
-      
-      expect(word_kit.tags.pluck(:name)).to match_array(['Ruby', 'Rails', 'RSpec'])
+
+      expect(word_kit.tags.pluck(:name)).to match_array(%w[Ruby Rails RSpec])
     end
 
     it 'tag_list でタグ名がカンマ区切りで取得できること' do
       word_kit.tags.create(name: 'Ruby')
       word_kit.tags.create(name: 'Rails')
-      
+
       expect(word_kit.tag_list).to eq('Ruby, Rails')
     end
   end

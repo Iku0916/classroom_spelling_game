@@ -7,6 +7,7 @@ Metrics/BlockLength:
     - 'config/environments/*.rb'
     - 'db/schema.rb'
     - 'bin/bundle'
+    - 'spec/**/*'
 
 Layout/LineLength:
   Max: 140
@@ -18,3 +19,6 @@ AllCops:
   Exclude:
     - 'bin/**/*'
     - 'vendor/**/*'
+
+Naming/VariableNumber:
+  Enabled: false

@@ -167,9 +167,9 @@ RSpec.describe Participant, type: :model do
       end
 
       it 'スコアが1増えること' do
-        expect {
+        expect do
           participant.submit_answer('apple', 'apple')
-        }.to change { participant.reload.score }.by(1)
+        end.to change { participant.reload.score }.by(1)
       end
     end
 
@@ -179,9 +179,9 @@ RSpec.describe Participant, type: :model do
       end
 
       it 'スコアが変わらないこと' do
-        expect {
+        expect do
           participant.submit_answer('apple', 'orange')
-        }.not_to change { participant.reload.score }
+        end.not_to(change { participant.reload.score })
       end
     end
   end

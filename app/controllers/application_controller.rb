@@ -15,7 +15,6 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_guest
 
-
   def render_404
     render file: Rails.root.join('public/404.html'), status: :not_found, layout: false
   end

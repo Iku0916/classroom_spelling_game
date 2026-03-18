@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe '新規ユーザー登録', type: :system do
@@ -5,12 +7,12 @@ RSpec.describe '新規ユーザー登録', type: :system do
 
   it '必要項目を入力して登録できること' do
     visit signup_path
-    
+
     fill_in 'ニックネーム', with: 'イクちゃん'
     fill_in 'メールアドレス', with: 'test@example.com'
     fill_in 'パスワード', with: 'password'
     fill_in 'パスワード確認', with: 'password'
-    
+
     click_button '新規登録'
 
     expect(page).to have_content('新規登録が完了しました！')
@@ -19,12 +21,12 @@ RSpec.describe '新規ユーザー登録', type: :system do
 
   it '名前を空欄にすると登録できないこと' do
     visit signup_path
-    
+
     fill_in 'ニックネーム', with: ''
     fill_in 'メールアドレス', with: 'test@example.com'
     fill_in 'パスワード', with: 'password'
     fill_in 'パスワード確認', with: 'password'
-    
+
     click_button '新規登録'
 
     expect(page).to have_content('を入力してください')
@@ -40,6 +42,6 @@ RSpec.describe '新規ユーザー登録', type: :system do
     click_link 'ログアウト'
     expect(page).to have_content('ログアウトしました')
 
-    expect(current_path).to eq(root_path) 
+    expect(current_path).to eq(root_path)
   end
 end

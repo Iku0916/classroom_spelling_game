@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe LearningLog, type: :model do
@@ -13,10 +15,10 @@ RSpec.describe LearningLog, type: :model do
 
   describe '学習記録の保存とスコア計算' do
     it 'record_learning_resultを呼ぶとスコアが加算され、ログが作成されること' do
-      expect {
+      expect do
         user.record_learning_result(50, 20, word_kit.id)
-      }.to change { user.reload.total_score }.by(50)
-       .and change(LearningLog, :count).by(1)
+      end.to change { user.reload.total_score }.by(50)
+                                               .and change(LearningLog, :count).by(1)
     end
   end
 end
