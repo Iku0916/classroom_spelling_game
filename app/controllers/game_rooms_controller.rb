@@ -79,4 +79,8 @@ class GameRoomsController < ApplicationController
   def game_room_params
     params.require(:game_room).permit(:time_limit, :status)
   end
+
+  def participant_params
+    params.require(:participant).permit(:nickname, :user_id, :guest_id, :is_ready, :score)
+  end
 end
