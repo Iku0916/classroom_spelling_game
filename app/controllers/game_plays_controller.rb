@@ -95,7 +95,7 @@ class GamePlaysController < ApplicationController
     return if handle_host_access
 
     @participant = @game_room.find_participant(current_user, current_guest)
-    render_unauthorized('このゲームに参加していません') unless @participant
+    redirect_to root_path, alert: 'このゲームに参加していません' unless @participant
   end
 
   def authorize_host
