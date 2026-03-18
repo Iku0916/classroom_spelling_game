@@ -14,8 +14,8 @@ jobs:
       db:
         image: postgres:15
         env:
-          POSTGRES_USER: ikku
-          POSTGRES_PASSWORD: ikku193
+          POSTGRES_USER: ${{ secrets.DB_USERNAME }}
+          POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
           POSTGRES_DB: app_test
         ports:
           - 5432:5432
@@ -23,7 +23,7 @@ jobs:
 
     env:
       RAILS_ENV: test
-      DATABASE_URL: postgresql://ikku:ikku193@localhost:5432/app_test
+      DATABASE_URL: postgresql://${{ secrets.DB_USERNAME }}:${{ secrets.DB_PASSWORD }}@localhost:5432/app_test
 
     steps:
       - uses: actions/checkout@v4
