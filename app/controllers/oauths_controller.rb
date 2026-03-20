@@ -14,10 +14,9 @@ class OauthsController < ApplicationController
       redirect_to root_path, notice: "#{provider.titleize}でログインしました"
     else
       @user = create_from(provider)
-
       if @user.persisted?
         auto_login(@user)
-        redirect_to root_path, notice: "#{provider.titleize}でログインしました"
+        redirect_to onboarding_path, notice: "#{provider.titleize}で登録しました"
       else
         redirect_to login_path, alert: '保存失敗'
       end
