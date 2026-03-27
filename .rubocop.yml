@@ -22,3 +22,7 @@ AllCops:
 
 Naming/VariableNumber:
   Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - 'db/schema.rb'
