@@ -15,8 +15,8 @@ RSpec.describe '新規ユーザー登録', type: :system do
 
     click_button '新規登録'
 
-    expect(page).to have_content('新規登録が完了しました！')
-    expect(current_path).to eq(login_path)
+    expect(page).to have_content('新規登録・ログインが完了しました！')
+    expect(current_path).to eq(onboarding_path)
   end
 
   it '名前を空欄にすると登録できないこと' do

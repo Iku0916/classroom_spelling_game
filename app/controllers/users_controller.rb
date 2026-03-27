@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
     if @user.save
       auto_login(@user)
-      redirect_to root_path, notice: '新規登録・ログインが完了しました！'
+      redirect_to onboarding_path, notice: '新規登録・ログインが完了しました！'
     else
       render :new, status: :unprocessable_entity
     end

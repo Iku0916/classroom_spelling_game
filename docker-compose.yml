@@ -32,6 +32,11 @@ services:
     volumes:
       - redis_data:/data
 
+  chrome:
+    image: seleniarm/standalone-chromium:latest
+    ports:
+      - "4444:4444"
+
 volumes:
   postgres_data:
   redis_data:

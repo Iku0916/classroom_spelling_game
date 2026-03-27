@@ -38,14 +38,14 @@ RSpec.describe 'ユーザー', type: :request do
         end.to change(User, :count).by(1)
       end
 
-      it 'ログインページにリダイレクトされること' do
+      it '新規登録後、自動的にログインされること' do
         post signup_path, params: valid_params
-        expect(response).to redirect_to(login_path)
+        expect(response).to redirect_to(onboarding_path)
       end
 
-      it '「新規登録が完了しました！」と表示されること' do
+      it '「新規登録・ログインが完了しました！」と表示されること' do
         post signup_path, params: valid_params
-        expect(flash[:notice]).to eq('新規登録が完了しました！')
+        expect(flash[:notice]).to eq('新規登録・ログインが完了しました！')
       end
     end
 
