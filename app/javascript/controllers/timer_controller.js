@@ -20,7 +20,7 @@ export default class extends Controller {
     }
     
     const startTime = new Date(this.startedAtValue).getTime()
-    const elapsed = Math.floor((Date.now() - startTime) / 1000)
+    const elapsed = Math.max(0, Math.floor((Date.now() - startTime) / 1000))
     let remaining = Math.max(0, this.timeLimitValue - elapsed)
 
     this.updateDisplay(remaining)
