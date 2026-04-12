@@ -19,6 +19,6 @@ class CommunityController < ApplicationController
   end
 
   def show
-    @word_kit = WordKit.find(params[:id])
+    @word_kit = WordKit.find_by!(uuid: params[:id])
   end
 end
