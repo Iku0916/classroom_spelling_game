@@ -2,7 +2,8 @@
 
 class WordKitsController < ApplicationController
   before_action :require_login
-  before_action :set_word_kit, only: %i[destroy show edit update copy]
+  before_action :set_word_kit, only: %i[destroy show edit update]
+  before_action :set_any_word_kit, only: %i[copy]
 
   def index
     @word_kits = current_user.word_kits.left_outer_joins(:tags)
@@ -86,6 +87,10 @@ class WordKitsController < ApplicationController
 
   def set_word_kit
     @word_kit = current_user.word_kits.find_by!(uuid: params[:uuid])
+  end
+
+  def set_any_word_kit
+    @word_kit = WordKit.find_by!(uuid: params[:uuid])
   end
 
   def word_kit_params
