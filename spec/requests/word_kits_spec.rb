@@ -183,30 +183,32 @@ RSpec.describe 'WordKits', type: :request do
   end
 
   describe 'POST #copy' do
+    let!(:public_kit) { WordKit.create!(name: '公開キット', user: other_user, visibility: 'public_kit') }
+
     before do
-      word_kit.word_cards.create!(english_word: 'apple', japanese_translation: 'りんご')
+      public_kit.word_cards.create!(english_word: 'apple', japanese_translation: 'りんご')
     end
 
     it '複製されたWordKitが作成されること' do
       expect do
-        post copy_word_kit_path(word_kit)
+        post copy_word_kit_path(public_kit)
       end.to change(WordKit, :count).by(1)
     end
 
     it '複製されたキットの名前に「copy」が含まれること' do
-      post copy_word_kit_path(word_kit)
+      post copy_word_kit_path(public_kit)
       copied = WordKit.last
       expect(copied.name).to include('copy')
     end
 
     it '複製されたキットはprivate_kitになること' do
-      post copy_word_kit_path(word_kit)
+      post copy_word_kit_path(public_kit)
       copied = WordKit.last
       expect(copied.visibility).to eq('private_kit')
     end
 
     it '複製されたキットのページにリダイレクトされること' do
-      post copy_word_kit_path(word_kit)
+      post copy_word_kit_path(public_kit)
       copied = WordKit.last
       expect(response).to redirect_to(word_kit_path(copied))
     end
