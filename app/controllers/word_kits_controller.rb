@@ -90,7 +90,7 @@ class WordKitsController < ApplicationController
   end
 
   def set_any_word_kit
-    @word_kit = WordKit.find_by!(uuid: params[:uuid])
+    @word_kit = WordKit.find_by!(uuid: params[:uuid], visibility: 'public_kit')
   end
 
   def word_kit_params
