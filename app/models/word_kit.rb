@@ -41,6 +41,9 @@ class WordKit < ApplicationRecord
         japanese_translation: card.japanese_translation
       )
     end
+
+    new_kit.tags = tags
+
     new_kit
   end
 
