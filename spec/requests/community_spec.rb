@@ -50,7 +50,7 @@ RSpec.describe 'コミュニティ', type: :request do
 
   describe 'コミュニティ詳細の表示' do
     it '200 OKを返すこと' do
-      get community_kit_path(public_kit.id)
+      get community_kit_path(public_kit.uuid)
       expect(response).to have_http_status(:ok)
     end
   end
