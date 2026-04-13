@@ -205,39 +205,25 @@ https://github.com/user-attachments/assets/2c87ee18-4204-444d-a5ea-aca79834b017
 
 # 技術構成
 
-### 開発環境
-- Ruby: 3.1.4
-- Ruby on Rails: 7.1.x
-- PostgreSQL: 15.x
-- Redis: 7.2
-- Docker Compose
+## バックエンド
+- Ruby 3.1.4 / Ruby on Rails 7.1.x
+- PostgreSQL 15.x
+- Redis 7.2
+- ActionCable（WebSocketによるリアルタイム同期）
 
+## フロントエンド
+- HTML / SCSS / JavaScript
+- Hotwire（Turbo + Stimulus）
 
-### フロントエンド
-- HTML/CSS/JavaScript
-- Hotwire (Turbo + Stimulus)
+## 主要Gem
+- `sorcery` 0.16.3 − ユーザー認証
+- `turbo-rails` 2.0.x − Turbo
+- `stimulus-rails` 1.3.x − Stimulus
+- `redis` 5.3.0 − ActionCableバックエンド
 
-
-### バックエンド
-- Ruby on Rails 7.1.x
- - ActionCable: 出題・解答のリアルタイム同期(WebSocket)
- - Active Record: ORM
-
-
-### 主要なGem
-- `sorcery` (0.16.3): ユーザー認証
-- `redis` (5.3.0): ActionCableのバックエンド
-- Hotwire関連:
- - `turbo-rails` (2.0.x): Turbo
- - `stimulus-rails` (1.3.x): Stimulus
-
-
-### インフラ・デプロイ
-- **開発環境**: Docker Compose
-- **本番環境**: Render
- - PostgreSQL (データベース)
- - Redis (ActionCable)
-
+## インフラ
+- 開発環境: Docker Compose
+- 本番環境: Render
 
 ## 画面遷移図
 
@@ -245,4 +231,4 @@ Figmaリンク: https://www.figma.com/design/d4Vw6WwzAUt5smYt8GRwJv/classroom_sp
 
 ## ER図
 
-[![Image from Gyazo](https://i.gyazo.com/9292e602a1fae04a5e90b345fdc73f51.png)](https://gyazo.com/9292e602a1fae04a5e90b345fdc73f51)
+[![Image from Gyazo](https://i.gyazo.com/681f2051ed6f572f28bab2a9eaa8fc8b.png)](https://gyazo.com/681f2051ed6f572f28bab2a9eaa8fc8b)
