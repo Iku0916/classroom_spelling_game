@@ -227,7 +227,7 @@ https://github.com/user-attachments/assets/2c87ee18-4204-444d-a5ea-aca79834b017
 
 ## 画面遷移図
 
-Figmaリンク: https://www.figma.com/design/d4Vw6WwzAUt5smYt8GRwJv/classroom_spelling_game?node-id=0-1&t=uoGWpn7thXe80Wx9-1
+Figmaリンク: https://www.figma.com/design/SwN1tGqSU9vSm4KwPUoKie/Vocano--%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?node-id=0-1&t=mtIKnYG5juTqK7Kr-1
 
 ## ER図
 
